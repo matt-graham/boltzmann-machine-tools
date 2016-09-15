@@ -17,12 +17,12 @@ import sys
 parser = argparse.ArgumentParser(
     description='Boltzmann machine tools setup')
 parser.add_argument('-debug', action='store_true', default=False,
-                    help='Export GDB debug information when compiling')
+                    help='Export GDB debug information when compiling.')
 parser.add_argument('-use-cython', action='store_true', default=False,
-                    help='Use Cython to compile from .pyx files')
+                    help='Use Cython to compile from .pyx files.')
 parser.add_argument('-use-gcc-opts', action='store_true', default=False,
                     help='Use GCC compiler optimisations for quicker but '
-                         'less safe mathematical operations')
+                         'less safe mathematical operations.')
 parser.add_argument('-use-cython-opts', action='store_true', default=False,
                     help='Add extra Cython compile directives for quicker '
                          'but less safe array access. Requires -use-cython '
@@ -108,10 +108,17 @@ if args.use_cython:
                             compiler_directives=compiler_directives,
                             gdb_debug=args.debug)
 
+packages = [
+    'bmtools', 
+    'bmtools.exact', 
+    'bmtools.mcmc', 
+    'bmtools.relaxations'
+]
+
 setup(
     name='bmtools',
     author='Matt Graham',
     description='Boltzmann machine tools',
-    packages=['bmtools'],
+    packages=packages,
     ext_modules=ext_modules,
 )
