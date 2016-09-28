@@ -113,13 +113,13 @@ def calculate_moments_parallel(double[:, :] weights, double[:] biases,
         over all threads will be written to first entry. If not
         specified (or either of first_moms or second_moms not specidied) new
         array allocated and returned.
-    first_moms : double[:], optional
+    first_moms : double[:, :], optional
         Allocated array to use in parallel first moment calculation. Should
         have shape (n_thread, n_unit). Final value accumulated
         over all threads will be written to first element. If not specified
         (or either of norm_consts or second_moms not specified) new array
         allocated and first entry returned.
-    second_moms : double[:], optional
+    second_moms : double[:, :, :], optional
         Allocated array to use in parallel second moment calculation. Should
         have shape (n_thread, n_unit, n_unit). Final values accumulated over
         all threads will be written to first entry. If not specified (or
@@ -198,6 +198,102 @@ def calculate_moments_parallel(double[:, :] weights, double[:] biases,
     # only return values if not all arrays update in place
     if not all_in_place:
         return norm_consts[0], first_moms[0], second_moms[0]
+
+
+def calculate_probs_parallel(
+        double[:, :] weights, double[:] biases, bint force=False,
+        int n_thread=2,):
+    """Calculate BM distribution probabilities using parallel implementation.
+
+    Calculates the probabilities of all signed binary states in according to a
+    Boltzmann machine invariant distribution specified by the provided weight
+    and bias parameters. Calculation is done by exahustive iteration over the
+    2**n_unit state space so should only be attempted for moderate
+    dimensionalities. Calculations are done in parallel using a specified number
+    of thread each iterating across an equal partition of the state space.
+
+    Parameters
+    ----------
+    weights : double[:, :]
+        Matrix of weight parameters. Should be symmetric and zero-diagonal.
+    biases : double[:]
+        Vector of bias parameters.
+    force : bool (bint)
+        Flag to override forced exit when number of units is more than 20
+        due to large size of state space.
+    n_thread : int
+        Number of parallel threads to use.
+
+    Returns
+    -------
+    probs : double[:]
+        Array of normalised probabilities for all states.
+    norm_const : double
+        Sum of unnormalised probability terms across all states.
+    """
+    cdef int t
+    cdef int n_unit = weights.shape[0]
+    cdef int n_state = 2 ** n_unit
+    if n_thread <= 0:
+        raise ValueError('Number of threads must be > 0')
+    if n_unit > 20 and not force:
+        raise ValueError('Size of state space ({0}) very large. Set '
+                         'force=True if you want to force calculation.'
+                         .format(n_state))
+    cdef state_t[:, :] states = array(
+        shape=(n_thread, n_unit), itemsize=sizeof(state_t), format=state_t_code)
+    cdef double[:] norm_consts = array(shape=(n_thread,),
+        itemsize=sizeof(double), format='d')
+    cdef double[:] probs = array(
+        shape=(n_state,), itemsize=sizeof(double), format='d'
+    )
+    # partition state space in to equal sized sections to allocate to
+    # different parallel threads
+    cdef int[:] intervals = array(
+            shape=(n_thread+1,), itemsize=sizeof(int), format='i')
+    for t in range(n_thread):
+        intervals[t] = <int>(t * <float>(n_state) / n_thread)
+    intervals[n_thread] = n_state
+    # parallel loop over partitions of state space, with each thread
+    # calculating probabilities for its assigned states into thread-specific
+    # slice of probs array
+    for t in prange(n_thread, nogil=True, schedule='static', chunksize=1,
+                    num_threads=n_thread):
+        norm_consts[t] = 0.
+        calc_unnormed_probs_for_state_range(
+            weights, biases, states[t], &norm_consts[t],
+            probs[intervals[t]:intervals[t+1]],
+            intervals[t], intervals[t+1])
+    # accumulate normalisation constant terms calculated by each individual
+    # thread to get overall value
+    for t in range(1, n_thread):
+        norm_consts[0] += norm_consts[t]
+    # normalise probabilities by dividing through by normalisation constant
+    # in parallel over multiple threads
+    for t in prange(n_thread, nogil=True, schedule='static', chunksize=1,
+                    num_threads=n_thread):
+        normalise_probabilities(probs[intervals[t]:intervals[t+1]],
+                                norm_consts[0])
+    return probs, norm_consts[0]
+
+
+def update_state_from_int_enum(int int_enum, state_t[:] state):
+    """Sets a state array to correspond to a given integer state enumeration.
+
+    Params
+    ------
+    int_enum : int
+        Integer enumeration of a binary state space. The encoding is big-endian,
+        that the most significant bit of the integer ID determines the first
+        element of the binary state.
+    state : state_t[:]
+        Binary state array to populate. Will hold signed-binary state
+        corresponding to `int_enum` after function returns.
+    """
+    cdef int i
+    for i in range(state.shape[0]):
+        state[i] = (int_enum % 2) * 2 - 1
+        int_enum = int_enum // 2
 
 
 def log_likelihood(state_t[:, :] data, double[:,:] weights,
@@ -294,13 +390,42 @@ def log_likelihood(state_t[:, :] data, double[:,:] weights,
     return log_lik
 
 
+cdef void calc_unnormed_probs_for_state_range(
+        double[:, :] weights, double[:] biases, state_t[:] state,
+        double* norm_const, double[:] probs,
+        int start_state_index, int end_state_index) nogil:
+    """
+    Calculates the unnormalised probabilities for a portion of the state space
+    corresponding to a contiguous range of state integer indices.
+    """
+    cdef int k = start_state_index
+    cdef int i
+    for i in range(weights.shape[0]):
+        if k & 1 == 1:
+            state[i] = 1
+        else:
+            state[i] = -1
+        k >>= 1
+    for i in range(end_state_index - start_state_index):
+        probs[i] = exp(energy(state, weights, biases))
+        norm_const[0] += probs[i]
+        next_state(state, start_state_index + i + 1)
+
+
+cdef void normalise_probabilities(double[:] probs, double norm_const) nogil:
+    """Divides an array of probabilities by a normalisation constant."""
+    cdef int i
+    for i in range(probs.shape[0]):
+        probs[i] /= norm_const
+
+
 cdef void accum_moments_for_state_range(
         double[:, :] weights, double[:] biases, state_t[:] state,
         double* norm_const, double[:] first_mom, double[:, :] second_mom,
         int start_state_index, int end_state_index) nogil:
     """
     Accumulate the moment values for a portion of the state space
-    corresponding to a contigous range of state integer indices.
+    corresponding to a contiguous range of state integer indices.
     """
     cdef double prob = 0.
     cdef int k = start_state_index
