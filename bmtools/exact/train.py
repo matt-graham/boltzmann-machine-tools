@@ -1,7 +1,5 @@
-"""
-=========================
-Bolzmann machine training
-=========================
+# -*- coding: utf-8 -*-
+"""Boltzmann machine training.
 
 Functions for 'exact' maximum likelihood training of Boltzmann machine models
 (exact in the sense that the expectations required to compute the
@@ -11,14 +9,14 @@ Due to the exact moment calculations this is only viable for small models.
 Moments can be calculated in parallel over multiple threads using OpenMP.
 """
 
-__authors__ = 'Matt Graham'
-__copyright__ = 'Copyright 2015, Matt Graham'
-__license__ = 'MIT'
-
 import time
 import os
+import logging
 import numpy as np
 import moments as mom
+
+
+logger = logging.getLogger(__name__)
 
 
 def train_boltzmann_machine(data, n_step, step_size_func, n_hidden=None,
@@ -34,10 +32,12 @@ def train_boltzmann_machine(data, n_step, step_size_func, n_hidden=None,
         else:
             raise ValueError('Number of hidden units not specified and no '
                              'weight matrix or bias vector to infer from.')
-    print('Training Boltzmann machine with:'
-          '\n    {0} hidden units'
-          '\n    {1} visible units'.format(n_hidden, n_visible))
-    print('------------')
+    logger.info(
+        'Training Boltzmann machine with:\n'
+        '  {0} hidden units\n'
+        '  {1} visible units'.format(n_hidden, n_visible)
+    )
+    logger.info('------------')
     n_unit = n_hidden + n_visible
     log_liks = np.empty(n_step) * np.nan
     W, b = set_init_params(W_init, b_init, n_unit, W_scale, b_scale, seed)
@@ -45,8 +45,7 @@ def train_boltzmann_machine(data, n_step, step_size_func, n_hidden=None,
     W_hh, W_hv, W_vh, W_vv, b_h, b_v = partition_params(W, b, n_hidden)
     dW = np.empty((n_unit, n_unit), dtype=np.double)
     db = np.empty(n_unit, dtype=np.double)
-    dW_hh, dW_hv, dW_vh, dW_vv, db_h, db_v = partition_params(dW, db,
-                                                              n_hidden)
+    dW_hh, dW_hv, dW_vh, dW_vv, db_h, db_v = partition_params(dW, db, n_hidden)
     # allocate arrays for inplace moment accumulation updates
     # arrays needed for each thread in parallel updates however overall
     # results accumulated in to first slice
@@ -57,26 +56,27 @@ def train_boltzmann_machine(data, n_step, step_size_func, n_hidden=None,
     second_mom_h = np.empty((n_thread, n_hidden, n_hidden), dtype=np.double)
     second_mom_hv = np.empty((n_thread, n_unit, n_unit), dtype=np.double)
     if save_dir is not None:
-        save_dir = os.path.join(save_dir,
-                                time.strftime('train_bm_%Y-%m-%d_%H-%M-%S'))
+        save_dir = os.path.join(
+            save_dir, a=time.strftime('train_bm_%Y-%m-%d_%H-%M-%S'))
         os.makedirs(save_dir)
-        log_file  = os.path.join(save_dir, 'log.txt')
+        log_file = os.path.join(save_dir, 'log.txt')
         max_log_lik = -np.inf
     for i in range(n_step):
-        print('Starting iteration {0}...'.format(i))
+        logger.info('Starting iteration {0}...'.format(i))
         iter_start_time = time.time()
         # set log likelihood and update arrays to zero ready for accum
         log_lik = 0.
         dW *= 0.
         db *= 0.
         # calculate positive phase statistics
-        print('    Starting calculation of positive phase statistics...')
+        logger.info('  Starting calculation of positive phase statistics...')
         pp_start_time = time.time()
         for v in data:
             c = b_h + W_hv.dot(v)
-            mom.calculate_moments_parallel(W_hh, c, True, n_thread,
-                                           norm_const_h, first_mom_h,
-                                           second_mom_h)
+            mom.calculate_moments_parallel(
+                W_hh, c, True, n_thread, norm_const_h, first_mom_h,
+                second_mom_h
+            )
             dW_vv += v[:, None] * v[None, :]
             dW_hh += second_mom_h[0]
             dW_hv += first_mom_h[0, :, None] * v[None, :]
@@ -85,15 +85,15 @@ def train_boltzmann_machine(data, n_step, step_size_func, n_hidden=None,
             log_lik += v.dot(0.5*W_vv.dot(v)+b_v) + np.log(norm_const_h[0])
         # make sure weight update is symmetric
         dW_vh += dW_hv.T
-        print('    Finished in {0}s.'.format(time.time() - pp_start_time))
+        logger.info('  Finished in {0}s.'.format(time.time() - pp_start_time))
         # calculate negative phase statistics
-        print('    Starting calculation of negative phase statistics...')
+        logger.info('  Starting calculation of negative phase statistics...')
         np_start_time = time.time()
         mom.calculate_moments_parallel(W, b, True, n_thread, norm_const_hv,
                                        first_mom_hv, second_mom_hv)
-        print('    Finished in {0}s.'.format(time.time() - np_start_time))
+        logger.info('  Finished in {0}s.'.format(time.time() - np_start_time))
         # add negative phase terms to parameter updates
-        dW /=  n_data
+        dW /= n_data
         dW -= second_mom_hv[0]
         db /= n_data
         db -= first_mom_hv[0]
@@ -109,9 +109,11 @@ def train_boltzmann_machine(data, n_step, step_size_func, n_hidden=None,
         step_size = step_size_func(i)
         W += step_size * dW
         b += step_size * db
-        print('Iteration {0} completed in {1}s. New NLL: {2}.'
-              .format(i, time.time() - iter_start_time, -log_lik))
-        print('------------')
+        logger.info(
+            'Iteration {0} completed in {1}s. New NLL: {2}.'
+            .format(i, time.time() - iter_start_time, -log_lik)
+        )
+        logger.info('------------')
         # save latest parameter values to disk if save directory specified
         if save_dir:
             np.save(os.path.join(save_dir, 'W_current.npy'), W)
@@ -201,8 +203,6 @@ def check_grad(weights, biases, data, n_thread, h=1e-5):
     print('Calculated biases gradient dL/db:\n{0}'.format(db))
     print('FD approximated biases gradient dL/db:\n{0}'.format(db_fd))
     print('Diff between calculated and approx:\n{0}'.format(db - db_fd))
-    #max_weight_diff = abs(dW-dW_fd).max()
-    #max_weight_diff = abs(db-db_fd).max()
 
 
 def set_init_params(W_init, b_init, n_unit, W_scale, b_scale, seed):

@@ -1,15 +1,10 @@
 # -*- coding: utf-8 -*-
-"""
-Unit tests for Boltzmann machine moment calculation code
-"""
-
-__authors__ = 'Matt Graham'
-__copyright__ = 'Copyright 2015, Matt Graham'
-__license__ = 'MIT'
+"""Unit tests for Boltzmann machine moment calculation code."""
 
 import itertools as it
 import numpy as np
 import bmtools.exact.moments as mom
+import bmtools.exact.likelihood as lik
 
 
 def calculate_bm_moments_test_1():
@@ -23,21 +18,20 @@ def calculate_bm_moments_test_1():
         mom.calculate_moments_sequential(W, b))
     # calculate moments using parallel Cython code, 1 thread
     norm_const_p1, expc_s_p1, expc_ss_p1 = (
-        mom.calculate_moments_parallel(W, b, n_thread=1))
+        mom.calculate_moments_parallel(W, b, num_threads=1))
     # calculate moments using parallel Cython code, 2 threads
     norm_const_p2, expc_s_p2, expc_ss_p2 = (
-        mom.calculate_moments_parallel(W, b, n_thread=2))
+        mom.calculate_moments_parallel(W, b, num_threads=2))
     # calculate moments using parallel Cython code, 4 threads
     norm_const_p4, expc_s_p4, expc_ss_p4 = (
-        mom.calculate_moments_parallel(W, b, n_thread=4))
+        mom.calculate_moments_parallel(W, b, num_threads=4))
     # calculate moments using parallel Cython code, in place updates
     norm_const_ip = np.empty(1)
     expc_s_ip = np.empty((1, 3))
     expc_ss_ip = np.empty((1, 3, 3))
-    mom.calculate_moments_parallel(W, b, n_thread=1,
-                                   norm_consts=norm_const_ip,
-                                   first_moms=expc_s_ip,
-                                   second_moms=expc_ss_ip)
+    mom.calculate_moments_parallel(
+        W, b, num_threads=1, norm_consts=norm_const_ip,
+        first_moms=expc_s_ip, second_moms=expc_ss_ip)
     assert np.allclose(norm_const, norm_const_sq), (
         'Normalisation constant calculated using sequential code incorrect')
     assert np.allclose(expc_s, expc_s_sq), (
@@ -83,9 +77,9 @@ def calculate_bm_moments_test_2():
                 log_liks[j] += ps[i]
     log_liks = np.log(log_liks)
     log_liks -= np.log(ps.sum())
-    log_liks_p1 = mom.log_likelihood(data, W, b, n_thread=1)
-    log_liks_p2 = mom.log_likelihood(data, W, b, n_thread=2)
-    log_liks_p4 = mom.log_likelihood(data, W, b, n_thread=4)
+    log_liks_p1 = lik.log_likelihood(data, W, b, num_threads=1)
+    log_liks_p2 = lik.log_likelihood(data, W, b, num_threads=2)
+    log_liks_p4 = lik.log_likelihood(data, W, b, num_threads=4)
     assert np.allclose(log_liks, log_liks_p1), (
         'Log likelihood calculation (1 thread) incorrect')
     assert np.allclose(log_liks, log_liks_p2), (
@@ -108,7 +102,7 @@ def calc_first_and_second_moments(ps, n_unit):
 
 
 def calc_3_unit_probs(W, b):
-   return np.array([
+    return np.array([
         np.exp(+W[0, 1] + W[0, 2] + W[1, 2] - b[0] - b[1] - b[2]),
         np.exp(+W[0, 1] - W[0, 2] - W[1, 2] - b[0] - b[1] + b[2]),
         np.exp(-W[0, 1] + W[0, 2] - W[1, 2] - b[0] + b[1] - b[2]),
