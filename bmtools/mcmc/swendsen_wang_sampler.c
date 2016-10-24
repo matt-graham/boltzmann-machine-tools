@@ -7,6 +7,8 @@
             "/home/matt/Projects/sampling/samplers/randomkit.h"
         ], 
         "extra_compile_args": [
+            "-O3", 
+            "-ffast-math", 
             "-fopenmp"
         ]
     }, 
@@ -604,14 +606,14 @@ typedef volatile __pyx_atomic_int_type __pyx_atomic_int;
 #endif
 
 
-/* "bmtools/mcmc/swendsen_wang_sampler.pxd":24
- * cimport samplers.randomkit_wrapper as rk
+/* "bmtools/exact/helpers.pxd":7
+ * """
  * 
  * ctypedef signed char state_t             # <<<<<<<<<<<<<<
+ * cdef char* state_t_code
  * 
- * cdef extern from 'math.h':
  */
-typedef signed char __pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t;
+typedef signed char __pyx_t_7bmtools_5exact_7helpers_state_t;
 
 /*--- Type declarations ---*/
 struct __pyx_obj_8samplers_17randomkit_wrapper_RandomKit;
@@ -623,7 +625,7 @@ struct __pyx_memoryviewslice_obj;
 struct __pyx_ctuple_int__and_int;
 typedef struct __pyx_ctuple_int__and_int __pyx_ctuple_int__and_int;
 
-/* "bmtools/mcmc/swendsen_wang_sampler.pyx":41
+/* "bmtools/mcmc/swendsen_wang_sampler.pyx":37
  *         """ Allocate memory for various internal state memory views. """
  *         cdef tuple shape_1 = (self.n_unit,)
  *         cdef tuple shape_2 = (self.n_unit, self.n_unit)             # <<<<<<<<<<<<<<
@@ -649,8 +651,8 @@ struct __pyx_obj_8samplers_17randomkit_wrapper_RandomKit {
 };
 
 
-/* "bmtools/mcmc/swendsen_wang_sampler.pxd":29
- *     double exp(double x)
+/* "bmtools/mcmc/swendsen_wang_sampler.pxd":18
+ * 
  * 
  * cdef class SwendsenWangSampler:             # <<<<<<<<<<<<<<
  * 
@@ -780,8 +782,8 @@ struct __pyx_vtabstruct_array {
 static struct __pyx_vtabstruct_array *__pyx_vtabptr_array;
 
 
-/* "bmtools/mcmc/swendsen_wang_sampler.pyx":24
- * from cython.view cimport array
+/* "bmtools/mcmc/swendsen_wang_sampler.pyx":20
+ *     double exp(double x)
  * 
  * cdef class SwendsenWangSampler:             # <<<<<<<<<<<<<<
  * 
@@ -1267,10 +1269,10 @@ static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dsds_d
 static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_ds_double(PyObject *);
 
 /* ObjectToMemviewSlice.proto */
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t(PyObject *);
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_7bmtools_5exact_7helpers_state_t(PyObject *);
 
 /* ObjectToMemviewSlice.proto */
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t(PyObject *);
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_7bmtools_5exact_7helpers_state_t(PyObject *);
 
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
@@ -1282,8 +1284,8 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_signed__char(signed char value);
 
 /* MemviewDtypeToObject.proto */
-static CYTHON_INLINE PyObject *__pyx_memview_get_nn___pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t(const char *itemp);
-static CYTHON_INLINE int __pyx_memview_set_nn___pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t(const char *itemp, PyObject *obj);
+static CYTHON_INLINE PyObject *__pyx_memview_get_nn___pyx_t_7bmtools_5exact_7helpers_state_t(const char *itemp);
+static CYTHON_INLINE int __pyx_memview_set_nn___pyx_t_7bmtools_5exact_7helpers_state_t(const char *itemp, PyObject *obj);
 
 /* MemviewSliceCopyTemplate.proto */
 static __Pyx_memviewslice
@@ -1325,6 +1327,9 @@ static PyObject *__Pyx_ImportModule(const char *name);
 /* TypeImport.proto */
 static PyTypeObject *__Pyx_ImportType(const char *module_name, const char *class_name, size_t size, int strict);
 
+/* VoidPtrImport.proto */
+static int __Pyx_ImportVoidPtr(PyObject *module, const char *name, void **p, const char *sig);
+
 /* InitStrings.proto */
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
@@ -1349,6 +1354,10 @@ static PyObject *__pyx_memoryviewslice_assign_item_from_object(struct __pyx_memo
 
 /* Module declarations from 'samplers.randomkit_wrapper' */
 static PyTypeObject *__pyx_ptype_8samplers_17randomkit_wrapper_RandomKit = 0;
+
+/* Module declarations from 'bmtools.exact.helpers' */
+static char **__pyx_vp_7bmtools_5exact_7helpers_state_t_code = 0;
+#define __pyx_v_7bmtools_5exact_7helpers_state_t_code (*__pyx_vp_7bmtools_5exact_7helpers_state_t_code)
 
 /* Module declarations from 'cython.view' */
 
@@ -1398,7 +1407,7 @@ static void __pyx_memoryview_refcount_objects_in_slice(char *, Py_ssize_t *, Py_
 static void __pyx_memoryview_slice_assign_scalar(__Pyx_memviewslice *, int, size_t, void *, int); /*proto*/
 static void __pyx_memoryview__slice_assign_scalar(char *, Py_ssize_t *, Py_ssize_t *, int, size_t, void *); /*proto*/
 static __Pyx_TypeInfo __Pyx_TypeInfo_double = { "double", NULL, sizeof(double), { 0 }, 0, 'R', 0, 0 };
-static __Pyx_TypeInfo __Pyx_TypeInfo_nn___pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t = { "state_t", NULL, sizeof(__pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t), { 0 }, 0, IS_UNSIGNED(__pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t) ? 'U' : 'I', IS_UNSIGNED(__pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t), 0 };
+static __Pyx_TypeInfo __Pyx_TypeInfo_nn___pyx_t_7bmtools_5exact_7helpers_state_t = { "state_t", NULL, sizeof(__pyx_t_7bmtools_5exact_7helpers_state_t), { 0 }, 0, IS_UNSIGNED(__pyx_t_7bmtools_5exact_7helpers_state_t) ? 'U' : 'I', IS_UNSIGNED(__pyx_t_7bmtools_5exact_7helpers_state_t), 0 };
 static __Pyx_TypeInfo __Pyx_TypeInfo_int = { "int", NULL, sizeof(int), { 0 }, 0, IS_UNSIGNED(int) ? 'U' : 'I', IS_UNSIGNED(int), 0 };
 #define __Pyx_MODULE_NAME "bmtools.mcmc.swendsen_wang_sampler"
 int __pyx_module_is_main_bmtools__mcmc__swendsen_wang_sampler = 0;
@@ -1417,7 +1426,6 @@ static const char __pyx_k_c[] = "c";
 static const char __pyx_k_d[] = "d";
 static const char __pyx_k_i[] = "i";
 static const char __pyx_k_id[] = "id";
-static const char __pyx_k_MIT[] = "MIT";
 static const char __pyx_k_obj[] = "obj";
 static const char __pyx_k_base[] = "base";
 static const char __pyx_k_main[] = "__main__";
@@ -1444,22 +1452,18 @@ static const char __pyx_k_import[] = "__import__";
 static const char __pyx_k_name_2[] = "__name__";
 static const char __pyx_k_struct[] = "struct";
 static const char __pyx_k_unpack[] = "unpack";
-static const char __pyx_k_authors[] = "__authors__";
 static const char __pyx_k_fortran[] = "fortran";
-static const char __pyx_k_license[] = "__license__";
 static const char __pyx_k_memview[] = "memview";
 static const char __pyx_k_samples[] = "samples";
 static const char __pyx_k_weights[] = "weights";
 static const char __pyx_k_Ellipsis[] = "Ellipsis";
 static const char __pyx_k_itemsize[] = "itemsize";
 static const char __pyx_k_TypeError[] = "TypeError";
-static const char __pyx_k_copyright[] = "__copyright__";
 static const char __pyx_k_enumerate[] = "enumerate";
 static const char __pyx_k_IndexError[] = "IndexError";
 static const char __pyx_k_ValueError[] = "ValueError";
 static const char __pyx_k_init_state[] = "init_state";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
-static const char __pyx_k_Matt_Graham[] = "Matt Graham";
 static const char __pyx_k_MemoryError[] = "MemoryError";
 static const char __pyx_k_get_samples[] = "get_samples";
 static const char __pyx_k_pyx_getbuffer[] = "__pyx_getbuffer";
@@ -1473,11 +1477,10 @@ static const char __pyx_k_MemoryView_of_r_at_0x_x[] = "<MemoryView of %r at 0x%x
 static const char __pyx_k_contiguous_and_indirect[] = "<contiguous and indirect>";
 static const char __pyx_k_Cannot_index_with_type_s[] = "Cannot index with type '%s'";
 static const char __pyx_k_Invalid_shape_in_axis_d_d[] = "Invalid shape in axis %d: %d.";
-static const char __pyx_k_Copyright_2015_Matt_Graham[] = "Copyright 2015, Matt Graham";
 static const char __pyx_k_itemsize_0_for_cython_array[] = "itemsize <= 0 for cython.array";
 static const char __pyx_k_unable_to_allocate_array_data[] = "unable to allocate array data.";
 static const char __pyx_k_strided_and_direct_or_indirect[] = "<strided and direct or indirect>";
-static const char __pyx_k_Swendsen_Wang_Boltzmann_machine[] = "\n=======================================\nSwendsen-Wang Boltzmann machine sampler\n=======================================\n\nWrapper class implementing Swendsen-Wang algorithm (spin-cluster method) for\nMCMC sampling from a Boltzmann machine distribution (~Ising spin model).\n\nReferences\n----------\n\n> Swendsen, R. H., and Wang, J.-S. (1987), \n> Nonuniversal critical dynamics in Monte Carlo simulations, \n> Phys. Rev. Lett., 58(2):86\342\200\22388.\n\n";
+static const char __pyx_k_Swendsen_Wang_Boltzmann_machine[] = "Swendsen-Wang Boltzmann machine sampler.\n\nWrapper class implementing Swendsen-Wang algorithm (spin-cluster method) for\nMCMC sampling from a Boltzmann machine distribution (~Ising spin model).\n\nReferences\n----------\n> Swendsen, R. H., and Wang, J.-S. (1987),\n> Nonuniversal critical dynamics in Monte Carlo simulations,\n> Phys. Rev. Lett., 58(2):86\342\200\22388.\n";
 static const char __pyx_k_Buffer_view_does_not_expose_stri[] = "Buffer view does not expose strides";
 static const char __pyx_k_Can_only_create_a_buffer_that_is[] = "Can only create a buffer that is contiguous in memory.";
 static const char __pyx_k_Empty_shape_tuple_for_cython_arr[] = "Empty shape tuple for cython.array";
@@ -1491,15 +1494,12 @@ static PyObject *__pyx_n_s_ASCII;
 static PyObject *__pyx_kp_s_Buffer_view_does_not_expose_stri;
 static PyObject *__pyx_kp_s_Can_only_create_a_buffer_that_is;
 static PyObject *__pyx_kp_s_Cannot_index_with_type_s;
-static PyObject *__pyx_kp_s_Copyright_2015_Matt_Graham;
 static PyObject *__pyx_n_s_Ellipsis;
 static PyObject *__pyx_kp_s_Empty_shape_tuple_for_cython_arr;
 static PyObject *__pyx_n_s_IndexError;
 static PyObject *__pyx_kp_s_Indirect_dimensions_not_supporte;
 static PyObject *__pyx_kp_s_Invalid_mode_expected_c_or_fortr;
 static PyObject *__pyx_kp_s_Invalid_shape_in_axis_d_d;
-static PyObject *__pyx_n_s_MIT;
-static PyObject *__pyx_kp_s_Matt_Graham;
 static PyObject *__pyx_n_s_MemoryError;
 static PyObject *__pyx_kp_s_MemoryView_of_r_at_0x_x;
 static PyObject *__pyx_kp_s_MemoryView_of_r_object;
@@ -1509,7 +1509,6 @@ static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_kp_s_Unable_to_convert_item_to_object;
 static PyObject *__pyx_n_s_ValueError;
 static PyObject *__pyx_n_s_allocate_buffer;
-static PyObject *__pyx_n_s_authors;
 static PyObject *__pyx_n_s_base;
 static PyObject *__pyx_n_s_biases;
 static PyObject *__pyx_n_s_c;
@@ -1517,7 +1516,6 @@ static PyObject *__pyx_n_u_c;
 static PyObject *__pyx_n_s_class;
 static PyObject *__pyx_kp_s_contiguous_and_direct;
 static PyObject *__pyx_kp_s_contiguous_and_indirect;
-static PyObject *__pyx_n_s_copyright;
 static PyObject *__pyx_n_s_d;
 static PyObject *__pyx_n_s_dtype_is_object;
 static PyObject *__pyx_n_s_encode;
@@ -1535,7 +1533,6 @@ static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_init_state;
 static PyObject *__pyx_n_s_itemsize;
 static PyObject *__pyx_kp_s_itemsize_0_for_cython_array;
-static PyObject *__pyx_n_s_license;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_memview;
 static PyObject *__pyx_n_s_mode;
@@ -1624,7 +1621,7 @@ static PyObject *__pyx_tuple__16;
 static PyObject *__pyx_tuple__17;
 static PyObject *__pyx_tuple__18;
 
-/* "bmtools/mcmc/swendsen_wang_sampler.pyx":26
+/* "bmtools/mcmc/swendsen_wang_sampler.pyx":22
  * cdef class SwendsenWangSampler:
  * 
  *     def __init__(SwendsenWangSampler self, double[:, :] weights,             # <<<<<<<<<<<<<<
@@ -1662,16 +1659,16 @@ static int __pyx_pw_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_biases)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 1); __PYX_ERR(0, 26, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 1); __PYX_ERR(0, 22, __pyx_L3_error)
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_seed)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 2); __PYX_ERR(0, 26, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, 2); __PYX_ERR(0, 22, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 26, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 22, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -1680,13 +1677,13 @@ static int __pyx_pw_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
     }
-    __pyx_v_weights = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(values[0]); if (unlikely(!__pyx_v_weights.memview)) __PYX_ERR(0, 26, __pyx_L3_error)
-    __pyx_v_biases = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[1]); if (unlikely(!__pyx_v_biases.memview)) __PYX_ERR(0, 27, __pyx_L3_error)
-    __pyx_v_seed = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_seed == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 27, __pyx_L3_error)
+    __pyx_v_weights = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(values[0]); if (unlikely(!__pyx_v_weights.memview)) __PYX_ERR(0, 22, __pyx_L3_error)
+    __pyx_v_biases = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[1]); if (unlikely(!__pyx_v_biases.memview)) __PYX_ERR(0, 23, __pyx_L3_error)
+    __pyx_v_seed = __Pyx_PyInt_As_long(values[2]); if (unlikely((__pyx_v_seed == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 23, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 26, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 22, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("bmtools.mcmc.swendsen_wang_sampler.SwendsenWangSampler.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1716,7 +1713,7 @@ static int __pyx_pf_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
   PyObject *__pyx_t_10 = NULL;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":29
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":25
  *                  double[:] biases, long seed):
  *         cdef int i, j
  *         self.n_unit = weights.shape[0]             # <<<<<<<<<<<<<<
@@ -1725,7 +1722,7 @@ static int __pyx_pf_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
  */
   __pyx_v_self->n_unit = (__pyx_v_weights.shape[0]);
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":30
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":26
  *         cdef int i, j
  *         self.n_unit = weights.shape[0]
  *         self.weights = weights             # <<<<<<<<<<<<<<
@@ -1736,7 +1733,7 @@ static int __pyx_pf_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
   __PYX_INC_MEMVIEW(&__pyx_v_weights, 0);
   __pyx_v_self->weights = __pyx_v_weights;
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":31
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":27
  *         self.n_unit = weights.shape[0]
  *         self.weights = weights
  *         self.biases = biases             # <<<<<<<<<<<<<<
@@ -1747,7 +1744,7 @@ static int __pyx_pf_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
   __PYX_INC_MEMVIEW(&__pyx_v_biases, 0);
   __pyx_v_self->biases = __pyx_v_biases;
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":32
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":28
  *         self.weights = weights
  *         self.biases = biases
  *         self.allocate_arrays()             # <<<<<<<<<<<<<<
@@ -1756,7 +1753,7 @@ static int __pyx_pf_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
  */
   ((struct __pyx_vtabstruct_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler *)__pyx_v_self->__pyx_vtab)->allocate_arrays(__pyx_v_self);
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":33
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":29
  *         self.biases = biases
  *         self.allocate_arrays()
  *         for i in range(self.n_unit):             # <<<<<<<<<<<<<<
@@ -1767,7 +1764,7 @@ static int __pyx_pf_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":34
+    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":30
  *         self.allocate_arrays()
  *         for i in range(self.n_unit):
  *             for j in range(i):             # <<<<<<<<<<<<<<
@@ -1778,7 +1775,7 @@ static int __pyx_pf_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
     for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
       __pyx_v_j = __pyx_t_4;
 
-      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":35
+      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":31
  *         for i in range(self.n_unit):
  *             for j in range(i):
  *                 self.bond_probs[i, j] = 1 - exp(-abs(weights[i, j]) * 2.)             # <<<<<<<<<<<<<<
@@ -1793,21 +1790,21 @@ static int __pyx_pf_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
     }
   }
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":36
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":32
  *             for j in range(i):
  *                 self.bond_probs[i, j] = 1 - exp(-abs(weights[i, j]) * 2.)
  *         self.rng = rk.RandomKit(seed)             # <<<<<<<<<<<<<<
  * 
  *     cdef void allocate_arrays(SwendsenWangSampler self):
  */
-  __pyx_t_9 = __Pyx_PyInt_From_long(__pyx_v_seed); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyInt_From_long(__pyx_v_seed); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 32, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_10 = PyTuple_New(1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_t_10 = PyTuple_New(1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 32, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_GIVEREF(__pyx_t_9);
   PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_9);
   __pyx_t_9 = 0;
-  __pyx_t_9 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_8samplers_17randomkit_wrapper_RandomKit), __pyx_t_10, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_8samplers_17randomkit_wrapper_RandomKit), __pyx_t_10, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 32, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
   __Pyx_GIVEREF(__pyx_t_9);
@@ -1816,7 +1813,7 @@ static int __pyx_pf_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
   __pyx_v_self->rng = ((struct __pyx_obj_8samplers_17randomkit_wrapper_RandomKit *)__pyx_t_9);
   __pyx_t_9 = 0;
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":26
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":22
  * cdef class SwendsenWangSampler:
  * 
  *     def __init__(SwendsenWangSampler self, double[:, :] weights,             # <<<<<<<<<<<<<<
@@ -1839,7 +1836,7 @@ static int __pyx_pf_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
   return __pyx_r;
 }
 
-/* "bmtools/mcmc/swendsen_wang_sampler.pyx":38
+/* "bmtools/mcmc/swendsen_wang_sampler.pyx":34
  *         self.rng = rk.RandomKit(seed)
  * 
  *     cdef void allocate_arrays(SwendsenWangSampler self):             # <<<<<<<<<<<<<<
@@ -1864,16 +1861,16 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
   __Pyx_memviewslice __pyx_t_8 = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_RefNannySetupContext("allocate_arrays", 0);
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":40
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":36
  *     cdef void allocate_arrays(SwendsenWangSampler self):
  *         """ Allocate memory for various internal state memory views. """
  *         cdef tuple shape_1 = (self.n_unit,)             # <<<<<<<<<<<<<<
  *         cdef tuple shape_2 = (self.n_unit, self.n_unit)
  *         cdef Py_ssize_t d_size = sizeof(double)
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->n_unit); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->n_unit); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
@@ -1881,18 +1878,18 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
   __pyx_v_shape_1 = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":41
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":37
  *         """ Allocate memory for various internal state memory views. """
  *         cdef tuple shape_1 = (self.n_unit,)
  *         cdef tuple shape_2 = (self.n_unit, self.n_unit)             # <<<<<<<<<<<<<<
  *         cdef Py_ssize_t d_size = sizeof(double)
  *         cdef Py_ssize_t s_size = sizeof(state_t)
  */
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_self->n_unit); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_self->n_unit); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->n_unit); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->n_unit); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
@@ -1903,7 +1900,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
   __pyx_v_shape_2 = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":42
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":38
  *         cdef tuple shape_1 = (self.n_unit,)
  *         cdef tuple shape_2 = (self.n_unit, self.n_unit)
  *         cdef Py_ssize_t d_size = sizeof(double)             # <<<<<<<<<<<<<<
@@ -1912,16 +1909,16 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
  */
   __pyx_v_d_size = (sizeof(double));
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":43
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":39
  *         cdef tuple shape_2 = (self.n_unit, self.n_unit)
  *         cdef Py_ssize_t d_size = sizeof(double)
  *         cdef Py_ssize_t s_size = sizeof(state_t)             # <<<<<<<<<<<<<<
  *         cdef Py_ssize_t i_size = sizeof(int)
  *         self.bond_probs = array(shape=shape_2, itemsize=d_size, format='d')
  */
-  __pyx_v_s_size = (sizeof(__pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t));
+  __pyx_v_s_size = (sizeof(__pyx_t_7bmtools_5exact_7helpers_state_t));
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":44
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":40
  *         cdef Py_ssize_t d_size = sizeof(double)
  *         cdef Py_ssize_t s_size = sizeof(state_t)
  *         cdef Py_ssize_t i_size = sizeof(int)             # <<<<<<<<<<<<<<
@@ -1930,163 +1927,185 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
  */
   __pyx_v_i_size = (sizeof(int));
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":45
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":41
  *         cdef Py_ssize_t s_size = sizeof(state_t)
  *         cdef Py_ssize_t i_size = sizeof(int)
  *         self.bond_probs = array(shape=shape_2, itemsize=d_size, format='d')             # <<<<<<<<<<<<<<
  *         self.flip_probs = array(shape=shape_1, itemsize=d_size, format='d')
  *         self.cluster_biases = array(shape=shape_1, itemsize=d_size, format='d')
  */
-  __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_shape, __pyx_v_shape_2) < 0) __PYX_ERR(0, 45, __pyx_L1_error)
-  __pyx_t_1 = PyInt_FromSsize_t(__pyx_v_d_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_shape, __pyx_v_shape_2) < 0) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_1 = PyInt_FromSsize_t(__pyx_v_d_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_itemsize, __pyx_t_1) < 0) __PYX_ERR(0, 45, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_itemsize, __pyx_t_1) < 0) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 45, __pyx_L1_error)
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(__pyx_t_1);
-  if (unlikely(!__pyx_t_4.memview)) __PYX_ERR(0, 45, __pyx_L1_error)
+  if (unlikely(!__pyx_t_4.memview)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __PYX_XDEC_MEMVIEW(&__pyx_v_self->bond_probs, 0);
   __pyx_v_self->bond_probs = __pyx_t_4;
   __pyx_t_4.memview = NULL;
   __pyx_t_4.data = NULL;
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":46
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":42
  *         cdef Py_ssize_t i_size = sizeof(int)
  *         self.bond_probs = array(shape=shape_2, itemsize=d_size, format='d')
  *         self.flip_probs = array(shape=shape_1, itemsize=d_size, format='d')             # <<<<<<<<<<<<<<
  *         self.cluster_biases = array(shape=shape_1, itemsize=d_size, format='d')
- *         self.bonds_state = array(shape=shape_2, itemsize=s_size, format='c')
+ *         self.bonds_state = array(
  */
-  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_shape, __pyx_v_shape_1) < 0) __PYX_ERR(0, 46, __pyx_L1_error)
-  __pyx_t_3 = PyInt_FromSsize_t(__pyx_v_d_size); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 46, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_shape, __pyx_v_shape_1) < 0) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_3 = PyInt_FromSsize_t(__pyx_v_d_size); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_itemsize, __pyx_t_3) < 0) __PYX_ERR(0, 46, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_itemsize, __pyx_t_3) < 0) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 46, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 46, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(__pyx_t_3);
-  if (unlikely(!__pyx_t_5.memview)) __PYX_ERR(0, 46, __pyx_L1_error)
+  if (unlikely(!__pyx_t_5.memview)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __PYX_XDEC_MEMVIEW(&__pyx_v_self->flip_probs, 0);
   __pyx_v_self->flip_probs = __pyx_t_5;
   __pyx_t_5.memview = NULL;
   __pyx_t_5.data = NULL;
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":47
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":43
  *         self.bond_probs = array(shape=shape_2, itemsize=d_size, format='d')
  *         self.flip_probs = array(shape=shape_1, itemsize=d_size, format='d')
  *         self.cluster_biases = array(shape=shape_1, itemsize=d_size, format='d')             # <<<<<<<<<<<<<<
- *         self.bonds_state = array(shape=shape_2, itemsize=s_size, format='c')
- *         self.units_state = array(shape=shape_1, itemsize=s_size, format='c')
+ *         self.bonds_state = array(
+ *             shape=shape_2, itemsize=s_size, format=state_t_code)
  */
-  __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_shape, __pyx_v_shape_1) < 0) __PYX_ERR(0, 47, __pyx_L1_error)
-  __pyx_t_1 = PyInt_FromSsize_t(__pyx_v_d_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_shape, __pyx_v_shape_1) < 0) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_1 = PyInt_FromSsize_t(__pyx_v_d_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_itemsize, __pyx_t_1) < 0) __PYX_ERR(0, 47, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_itemsize, __pyx_t_1) < 0) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 47, __pyx_L1_error)
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(__pyx_t_1);
-  if (unlikely(!__pyx_t_5.memview)) __PYX_ERR(0, 47, __pyx_L1_error)
+  if (unlikely(!__pyx_t_5.memview)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __PYX_XDEC_MEMVIEW(&__pyx_v_self->cluster_biases, 0);
   __pyx_v_self->cluster_biases = __pyx_t_5;
   __pyx_t_5.memview = NULL;
   __pyx_t_5.data = NULL;
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":48
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":45
+ *         self.cluster_biases = array(shape=shape_1, itemsize=d_size, format='d')
+ *         self.bonds_state = array(
+ *             shape=shape_2, itemsize=s_size, format=state_t_code)             # <<<<<<<<<<<<<<
+ *         self.units_state = array(
+ *             shape=shape_1, itemsize=s_size, format=state_t_code)
+ */
+  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_shape, __pyx_v_shape_2) < 0) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_3 = PyInt_FromSsize_t(__pyx_v_s_size); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_itemsize, __pyx_t_3) < 0) __PYX_ERR(0, 45, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyBytes_FromString(__pyx_v_7bmtools_5exact_7helpers_state_t_code); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_format, __pyx_t_3) < 0) __PYX_ERR(0, 45, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":44
  *         self.flip_probs = array(shape=shape_1, itemsize=d_size, format='d')
  *         self.cluster_biases = array(shape=shape_1, itemsize=d_size, format='d')
- *         self.bonds_state = array(shape=shape_2, itemsize=s_size, format='c')             # <<<<<<<<<<<<<<
- *         self.units_state = array(shape=shape_1, itemsize=s_size, format='c')
- *         self.clusters = array(shape=shape_1, itemsize=i_size, format='i')
+ *         self.bonds_state = array(             # <<<<<<<<<<<<<<
+ *             shape=shape_2, itemsize=s_size, format=state_t_code)
+ *         self.units_state = array(
  */
-  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_shape, __pyx_v_shape_2) < 0) __PYX_ERR(0, 48, __pyx_L1_error)
-  __pyx_t_3 = PyInt_FromSsize_t(__pyx_v_s_size); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 48, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_itemsize, __pyx_t_3) < 0) __PYX_ERR(0, 48, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_format, __pyx_n_s_c) < 0) __PYX_ERR(0, 48, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t(__pyx_t_3);
-  if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_7bmtools_5exact_7helpers_state_t(__pyx_t_3);
+  if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __PYX_XDEC_MEMVIEW(&__pyx_v_self->bonds_state, 0);
   __pyx_v_self->bonds_state = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":49
- *         self.cluster_biases = array(shape=shape_1, itemsize=d_size, format='d')
- *         self.bonds_state = array(shape=shape_2, itemsize=s_size, format='c')
- *         self.units_state = array(shape=shape_1, itemsize=s_size, format='c')             # <<<<<<<<<<<<<<
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":47
+ *             shape=shape_2, itemsize=s_size, format=state_t_code)
+ *         self.units_state = array(
+ *             shape=shape_1, itemsize=s_size, format=state_t_code)             # <<<<<<<<<<<<<<
  *         self.clusters = array(shape=shape_1, itemsize=i_size, format='i')
  * 
  */
-  __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_shape, __pyx_v_shape_1) < 0) __PYX_ERR(0, 49, __pyx_L1_error)
-  __pyx_t_1 = PyInt_FromSsize_t(__pyx_v_s_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_shape, __pyx_v_shape_1) < 0) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_1 = PyInt_FromSsize_t(__pyx_v_s_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_itemsize, __pyx_t_1) < 0) __PYX_ERR(0, 49, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_itemsize, __pyx_t_1) < 0) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_format, __pyx_n_s_c) < 0) __PYX_ERR(0, 49, __pyx_L1_error)
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBytes_FromString(__pyx_v_7bmtools_5exact_7helpers_state_t_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_format, __pyx_t_1) < 0) __PYX_ERR(0, 47, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":46
+ *         self.bonds_state = array(
+ *             shape=shape_2, itemsize=s_size, format=state_t_code)
+ *         self.units_state = array(             # <<<<<<<<<<<<<<
+ *             shape=shape_1, itemsize=s_size, format=state_t_code)
+ *         self.clusters = array(shape=shape_1, itemsize=i_size, format='i')
+ */
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t(__pyx_t_1);
-  if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_7bmtools_5exact_7helpers_state_t(__pyx_t_1);
+  if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __PYX_XDEC_MEMVIEW(&__pyx_v_self->units_state, 0);
   __pyx_v_self->units_state = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":50
- *         self.bonds_state = array(shape=shape_2, itemsize=s_size, format='c')
- *         self.units_state = array(shape=shape_1, itemsize=s_size, format='c')
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":48
+ *         self.units_state = array(
+ *             shape=shape_1, itemsize=s_size, format=state_t_code)
  *         self.clusters = array(shape=shape_1, itemsize=i_size, format='i')             # <<<<<<<<<<<<<<
  * 
  *     cdef void sample_bonds_given_units(SwendsenWangSampler self):
  */
-  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_shape, __pyx_v_shape_1) < 0) __PYX_ERR(0, 50, __pyx_L1_error)
-  __pyx_t_3 = PyInt_FromSsize_t(__pyx_v_i_size); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 50, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_shape, __pyx_v_shape_1) < 0) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_3 = PyInt_FromSsize_t(__pyx_v_i_size); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_itemsize, __pyx_t_3) < 0) __PYX_ERR(0, 50, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_itemsize, __pyx_t_3) < 0) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_format, __pyx_n_s_i) < 0) __PYX_ERR(0, 50, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 50, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_format, __pyx_n_s_i) < 0) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_int(__pyx_t_3);
-  if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 50, __pyx_L1_error)
+  if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __PYX_XDEC_MEMVIEW(&__pyx_v_self->clusters, 0);
   __pyx_v_self->clusters = __pyx_t_8;
   __pyx_t_8.memview = NULL;
   __pyx_t_8.data = NULL;
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":38
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":34
  *         self.rng = rk.RandomKit(seed)
  * 
  *     cdef void allocate_arrays(SwendsenWangSampler self):             # <<<<<<<<<<<<<<
@@ -2112,7 +2131,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
   __Pyx_RefNannyFinishContext();
 }
 
-/* "bmtools/mcmc/swendsen_wang_sampler.pyx":52
+/* "bmtools/mcmc/swendsen_wang_sampler.pyx":50
  *         self.clusters = array(shape=shape_1, itemsize=i_size, format='i')
  * 
  *     cdef void sample_bonds_given_units(SwendsenWangSampler self):             # <<<<<<<<<<<<<<
@@ -2123,7 +2142,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
 static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler_sample_bonds_given_units(struct __pyx_obj_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler *__pyx_v_self) {
   int __pyx_v_i;
   int __pyx_v_j;
-  __pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t __pyx_v_bond_mask;
+  __pyx_t_7bmtools_5exact_7helpers_state_t __pyx_v_bond_mask;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
   int __pyx_t_2;
@@ -2139,7 +2158,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
   Py_ssize_t __pyx_t_12;
   __Pyx_RefNannySetupContext("sample_bonds_given_units", 0);
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":55
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":53
  *         cdef int i, j
  *         cdef state_t bond_mask
  *         for i in range(self.n_unit):             # <<<<<<<<<<<<<<
@@ -2150,7 +2169,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":56
+    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":54
  *         cdef state_t bond_mask
  *         for i in range(self.n_unit):
  *             for j in range(i):             # <<<<<<<<<<<<<<
@@ -2161,7 +2180,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
     for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
       __pyx_v_j = __pyx_t_4;
 
-      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":57
+      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":55
  *         for i in range(self.n_unit):
  *             for j in range(i):
  *                 bond_mask = (self.units_state[i] * self.units_state[j] *             # <<<<<<<<<<<<<<
@@ -2171,7 +2190,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
       __pyx_t_5 = __pyx_v_i;
       __pyx_t_6 = __pyx_v_j;
 
-      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":58
+      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":56
  *             for j in range(i):
  *                 bond_mask = (self.units_state[i] * self.units_state[j] *
  *                              self.weights[i, j] > 0.)             # <<<<<<<<<<<<<<
@@ -2181,16 +2200,16 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
       __pyx_t_7 = __pyx_v_i;
       __pyx_t_8 = __pyx_v_j;
 
-      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":57
+      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":55
  *         for i in range(self.n_unit):
  *             for j in range(i):
  *                 bond_mask = (self.units_state[i] * self.units_state[j] *             # <<<<<<<<<<<<<<
  *                              self.weights[i, j] > 0.)
  *                 self.bonds_state[i, j] = (
  */
-      __pyx_v_bond_mask = ((((*((__pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t *) ( /* dim=0 */ (__pyx_v_self->units_state.data + __pyx_t_5 * __pyx_v_self->units_state.strides[0]) ))) * (*((__pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t *) ( /* dim=0 */ (__pyx_v_self->units_state.data + __pyx_t_6 * __pyx_v_self->units_state.strides[0]) )))) * (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_self->weights.data + __pyx_t_7 * __pyx_v_self->weights.strides[0]) ) + __pyx_t_8 * __pyx_v_self->weights.strides[1]) )))) > 0.);
+      __pyx_v_bond_mask = ((((*((__pyx_t_7bmtools_5exact_7helpers_state_t *) ( /* dim=0 */ (__pyx_v_self->units_state.data + __pyx_t_5 * __pyx_v_self->units_state.strides[0]) ))) * (*((__pyx_t_7bmtools_5exact_7helpers_state_t *) ( /* dim=0 */ (__pyx_v_self->units_state.data + __pyx_t_6 * __pyx_v_self->units_state.strides[0]) )))) * (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_self->weights.data + __pyx_t_7 * __pyx_v_self->weights.strides[0]) ) + __pyx_t_8 * __pyx_v_self->weights.strides[1]) )))) > 0.);
 
-      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":60
+      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":58
  *                              self.weights[i, j] > 0.)
  *                 self.bonds_state[i, j] = (
  *                     self.rng.uniform() < self.bond_probs[i, j]) * bond_mask             # <<<<<<<<<<<<<<
@@ -2200,7 +2219,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
       __pyx_t_9 = __pyx_v_i;
       __pyx_t_10 = __pyx_v_j;
 
-      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":59
+      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":57
  *                 bond_mask = (self.units_state[i] * self.units_state[j] *
  *                              self.weights[i, j] > 0.)
  *                 self.bonds_state[i, j] = (             # <<<<<<<<<<<<<<
@@ -2209,11 +2228,11 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
  */
       __pyx_t_11 = __pyx_v_i;
       __pyx_t_12 = __pyx_v_j;
-      *((__pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_self->bonds_state.data + __pyx_t_11 * __pyx_v_self->bonds_state.strides[0]) ) + __pyx_t_12 * __pyx_v_self->bonds_state.strides[1]) )) = ((((struct __pyx_vtabstruct_8samplers_17randomkit_wrapper_RandomKit *)__pyx_v_self->rng->__pyx_vtab)->uniform(__pyx_v_self->rng) < (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_self->bond_probs.data + __pyx_t_9 * __pyx_v_self->bond_probs.strides[0]) ) + __pyx_t_10 * __pyx_v_self->bond_probs.strides[1]) )))) * __pyx_v_bond_mask);
+      *((__pyx_t_7bmtools_5exact_7helpers_state_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_self->bonds_state.data + __pyx_t_11 * __pyx_v_self->bonds_state.strides[0]) ) + __pyx_t_12 * __pyx_v_self->bonds_state.strides[1]) )) = ((((struct __pyx_vtabstruct_8samplers_17randomkit_wrapper_RandomKit *)__pyx_v_self->rng->__pyx_vtab)->uniform(__pyx_v_self->rng) < (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_self->bond_probs.data + __pyx_t_9 * __pyx_v_self->bond_probs.strides[0]) ) + __pyx_t_10 * __pyx_v_self->bond_probs.strides[1]) )))) * __pyx_v_bond_mask);
     }
   }
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":52
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":50
  *         self.clusters = array(shape=shape_1, itemsize=i_size, format='i')
  * 
  *     cdef void sample_bonds_given_units(SwendsenWangSampler self):             # <<<<<<<<<<<<<<
@@ -2225,7 +2244,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
   __Pyx_RefNannyFinishContext();
 }
 
-/* "bmtools/mcmc/swendsen_wang_sampler.pyx":62
+/* "bmtools/mcmc/swendsen_wang_sampler.pyx":60
  *                     self.rng.uniform() < self.bond_probs[i, j]) * bond_mask
  * 
  *     cdef void sample_units_given_bonds(SwendsenWangSampler self):             # <<<<<<<<<<<<<<
@@ -2246,7 +2265,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
   Py_ssize_t __pyx_t_8;
   __Pyx_RefNannySetupContext("sample_units_given_bonds", 0);
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":64
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":62
  *     cdef void sample_units_given_bonds(SwendsenWangSampler self):
  *         cdef int i
  *         for i in range(self.n_unit):             # <<<<<<<<<<<<<<
@@ -2257,7 +2276,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":65
+    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":63
  *         cdef int i
  *         for i in range(self.n_unit):
  *             self.cluster_biases[i] = 2 * self.biases[i] * self.units_state[i]             # <<<<<<<<<<<<<<
@@ -2267,10 +2286,10 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
     __pyx_t_3 = __pyx_v_i;
     __pyx_t_4 = __pyx_v_i;
     __pyx_t_5 = __pyx_v_i;
-    *((double *) ( /* dim=0 */ (__pyx_v_self->cluster_biases.data + __pyx_t_5 * __pyx_v_self->cluster_biases.strides[0]) )) = ((2.0 * (*((double *) ( /* dim=0 */ (__pyx_v_self->biases.data + __pyx_t_3 * __pyx_v_self->biases.strides[0]) )))) * (*((__pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t *) ( /* dim=0 */ (__pyx_v_self->units_state.data + __pyx_t_4 * __pyx_v_self->units_state.strides[0]) ))));
+    *((double *) ( /* dim=0 */ (__pyx_v_self->cluster_biases.data + __pyx_t_5 * __pyx_v_self->cluster_biases.strides[0]) )) = ((2.0 * (*((double *) ( /* dim=0 */ (__pyx_v_self->biases.data + __pyx_t_3 * __pyx_v_self->biases.strides[0]) )))) * (*((__pyx_t_7bmtools_5exact_7helpers_state_t *) ( /* dim=0 */ (__pyx_v_self->units_state.data + __pyx_t_4 * __pyx_v_self->units_state.strides[0]) ))));
   }
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":66
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":64
  *         for i in range(self.n_unit):
  *             self.cluster_biases[i] = 2 * self.biases[i] * self.units_state[i]
  *         self.sample_flip_states_given_bonds()             # <<<<<<<<<<<<<<
@@ -2279,7 +2298,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
  */
   ((struct __pyx_vtabstruct_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler *)__pyx_v_self->__pyx_vtab)->sample_flip_states_given_bonds(__pyx_v_self);
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":67
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":65
  *             self.cluster_biases[i] = 2 * self.biases[i] * self.units_state[i]
  *         self.sample_flip_states_given_bonds()
  *         for i in range(self.n_unit):             # <<<<<<<<<<<<<<
@@ -2290,7 +2309,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":68
+    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":66
  *         self.sample_flip_states_given_bonds()
  *         for i in range(self.n_unit):
  *             if self.flip_probs[i] > 0.:             # <<<<<<<<<<<<<<
@@ -2301,7 +2320,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
     __pyx_t_7 = (((*((double *) ( /* dim=0 */ (__pyx_v_self->flip_probs.data + __pyx_t_6 * __pyx_v_self->flip_probs.strides[0]) ))) > 0.) != 0);
     if (__pyx_t_7) {
 
-      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":69
+      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":67
  *         for i in range(self.n_unit):
  *             if self.flip_probs[i] > 0.:
  *                 self.units_state[i] *= -1             # <<<<<<<<<<<<<<
@@ -2309,9 +2328,9 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
  *     cpdef get_samples(SwendsenWangSampler self, state_t[:, :] samples,
  */
       __pyx_t_8 = __pyx_v_i;
-      *((__pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t *) ( /* dim=0 */ (__pyx_v_self->units_state.data + __pyx_t_8 * __pyx_v_self->units_state.strides[0]) )) *= -1;
+      *((__pyx_t_7bmtools_5exact_7helpers_state_t *) ( /* dim=0 */ (__pyx_v_self->units_state.data + __pyx_t_8 * __pyx_v_self->units_state.strides[0]) )) *= -1;
 
-      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":68
+      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":66
  *         self.sample_flip_states_given_bonds()
  *         for i in range(self.n_unit):
  *             if self.flip_probs[i] > 0.:             # <<<<<<<<<<<<<<
@@ -2321,7 +2340,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
     }
   }
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":62
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":60
  *                     self.rng.uniform() < self.bond_probs[i, j]) * bond_mask
  * 
  *     cdef void sample_units_given_bonds(SwendsenWangSampler self):             # <<<<<<<<<<<<<<
@@ -2333,7 +2352,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
   __Pyx_RefNannyFinishContext();
 }
 
-/* "bmtools/mcmc/swendsen_wang_sampler.pyx":71
+/* "bmtools/mcmc/swendsen_wang_sampler.pyx":69
  *                 self.units_state[i] *= -1
  * 
  *     cpdef get_samples(SwendsenWangSampler self, state_t[:, :] samples,             # <<<<<<<<<<<<<<
@@ -2368,13 +2387,13 @@ static PyObject *__pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSa
   if (unlikely(__pyx_skip_dispatch)) ;
   /* Check if overridden in Python */
   else if (unlikely(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dictoffset != 0)) {
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get_samples); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get_samples); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)__pyx_pw_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler_3get_samples)) {
       __Pyx_XDECREF(__pyx_r);
-      __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_v_samples, 2, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 71, __pyx_L1_error)
+      __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_v_samples, 2, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_7bmtools_5exact_7helpers_state_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_7bmtools_5exact_7helpers_state_t, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 69, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_init_state, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t, 0);; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 71, __pyx_L1_error)
+      __pyx_t_4 = __pyx_memoryview_fromslice(__pyx_v_init_state, 1, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_7bmtools_5exact_7helpers_state_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_7bmtools_5exact_7helpers_state_t, 0);; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 69, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_INCREF(__pyx_t_1);
       __pyx_t_5 = __pyx_t_1; __pyx_t_6 = NULL;
@@ -2389,7 +2408,7 @@ static PyObject *__pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSa
           __pyx_t_7 = 1;
         }
       }
-      __pyx_t_8 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 71, __pyx_L1_error)
+      __pyx_t_8 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 69, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       if (__pyx_t_6) {
         __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -2400,7 +2419,7 @@ static PyObject *__pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSa
       PyTuple_SET_ITEM(__pyx_t_8, 1+__pyx_t_7, __pyx_t_4);
       __pyx_t_3 = 0;
       __pyx_t_4 = 0;
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_8, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_8, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 69, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -2412,7 +2431,7 @@ static PyObject *__pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSa
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   }
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":74
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":72
  *                       state_t[:] init_state):
  *         cdef int i, s
  *         cdef int n_sample = samples.shape[0]             # <<<<<<<<<<<<<<
@@ -2421,7 +2440,7 @@ static PyObject *__pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSa
  */
   __pyx_v_n_sample = (__pyx_v_samples.shape[0]);
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":75
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":73
  *         cdef int i, s
  *         cdef int n_sample = samples.shape[0]
  *         if init_state is None:             # <<<<<<<<<<<<<<
@@ -2431,7 +2450,7 @@ static PyObject *__pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSa
   __pyx_t_9 = ((((PyObject *) __pyx_v_init_state.memview) == Py_None) != 0);
   if (__pyx_t_9) {
 
-    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":76
+    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":74
  *         cdef int n_sample = samples.shape[0]
  *         if init_state is None:
  *             for i in range(self.n_unit):             # <<<<<<<<<<<<<<
@@ -2442,7 +2461,7 @@ static PyObject *__pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSa
     for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
       __pyx_v_i = __pyx_t_11;
 
-      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":77
+      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":75
  *         if init_state is None:
  *             for i in range(self.n_unit):
  *                 self.units_state[i] = 2 * (self.rng.uniform() > 0.5) - 1             # <<<<<<<<<<<<<<
@@ -2450,10 +2469,10 @@ static PyObject *__pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSa
  *             self.units_state[:] = init_state
  */
       __pyx_t_12 = __pyx_v_i;
-      *((__pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t *) ( /* dim=0 */ (__pyx_v_self->units_state.data + __pyx_t_12 * __pyx_v_self->units_state.strides[0]) )) = ((2 * (((struct __pyx_vtabstruct_8samplers_17randomkit_wrapper_RandomKit *)__pyx_v_self->rng->__pyx_vtab)->uniform(__pyx_v_self->rng) > 0.5)) - 1);
+      *((__pyx_t_7bmtools_5exact_7helpers_state_t *) ( /* dim=0 */ (__pyx_v_self->units_state.data + __pyx_t_12 * __pyx_v_self->units_state.strides[0]) )) = ((2 * (((struct __pyx_vtabstruct_8samplers_17randomkit_wrapper_RandomKit *)__pyx_v_self->rng->__pyx_vtab)->uniform(__pyx_v_self->rng) > 0.5)) - 1);
     }
 
-    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":75
+    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":73
  *         cdef int i, s
  *         cdef int n_sample = samples.shape[0]
  *         if init_state is None:             # <<<<<<<<<<<<<<
@@ -2463,7 +2482,7 @@ static PyObject *__pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSa
     goto __pyx_L3;
   }
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":79
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":77
  *                 self.units_state[i] = 2 * (self.rng.uniform() > 0.5) - 1
  *         else:
  *             self.units_state[:] = init_state             # <<<<<<<<<<<<<<
@@ -2471,11 +2490,11 @@ static PyObject *__pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSa
  *         for s in range(1, n_sample):
  */
   /*else*/ {
-    if (unlikely(__pyx_memoryview_copy_contents(__pyx_v_init_state, __pyx_v_self->units_state, 1, 1, 0) < 0)) __PYX_ERR(0, 79, __pyx_L1_error)
+    if (unlikely(__pyx_memoryview_copy_contents(__pyx_v_init_state, __pyx_v_self->units_state, 1, 1, 0) < 0)) __PYX_ERR(0, 77, __pyx_L1_error)
   }
   __pyx_L3:;
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":80
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":78
  *         else:
  *             self.units_state[:] = init_state
  *         samples[0, :] = self.units_state             # <<<<<<<<<<<<<<
@@ -2495,7 +2514,7 @@ static PyObject *__pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSa
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 80, __pyx_L1_error)
+        __PYX_ERR(0, 78, __pyx_L1_error)
     }
         __pyx_t_14.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -2504,11 +2523,11 @@ __pyx_t_14.shape[0] = __pyx_v_samples.shape[1];
 __pyx_t_14.strides[0] = __pyx_v_samples.strides[1];
     __pyx_t_14.suboffsets[0] = -1;
 
-if (unlikely(__pyx_memoryview_copy_contents(__pyx_t_13, __pyx_t_14, 1, 1, 0) < 0)) __PYX_ERR(0, 80, __pyx_L1_error)
+if (unlikely(__pyx_memoryview_copy_contents(__pyx_t_13, __pyx_t_14, 1, 1, 0) < 0)) __PYX_ERR(0, 78, __pyx_L1_error)
   __PYX_XDEC_MEMVIEW(&__pyx_t_14, 1);
   __PYX_XDEC_MEMVIEW(&__pyx_t_13, 1);
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":81
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":79
  *             self.units_state[:] = init_state
  *         samples[0, :] = self.units_state
  *         for s in range(1, n_sample):             # <<<<<<<<<<<<<<
@@ -2519,7 +2538,7 @@ if (unlikely(__pyx_memoryview_copy_contents(__pyx_t_13, __pyx_t_14, 1, 1, 0) < 0
   for (__pyx_t_11 = 1; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
     __pyx_v_s = __pyx_t_11;
 
-    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":82
+    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":80
  *         samples[0, :] = self.units_state
  *         for s in range(1, n_sample):
  *             self.sample_bonds_given_units()             # <<<<<<<<<<<<<<
@@ -2528,7 +2547,7 @@ if (unlikely(__pyx_memoryview_copy_contents(__pyx_t_13, __pyx_t_14, 1, 1, 0) < 0
  */
     ((struct __pyx_vtabstruct_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler *)__pyx_v_self->__pyx_vtab)->sample_bonds_given_units(__pyx_v_self);
 
-    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":83
+    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":81
  *         for s in range(1, n_sample):
  *             self.sample_bonds_given_units()
  *             self.sample_units_given_bonds()             # <<<<<<<<<<<<<<
@@ -2537,7 +2556,7 @@ if (unlikely(__pyx_memoryview_copy_contents(__pyx_t_13, __pyx_t_14, 1, 1, 0) < 0
  */
     ((struct __pyx_vtabstruct_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler *)__pyx_v_self->__pyx_vtab)->sample_units_given_bonds(__pyx_v_self);
 
-    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":84
+    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":82
  *             self.sample_bonds_given_units()
  *             self.sample_units_given_bonds()
  *             samples[s, :] = self.units_state             # <<<<<<<<<<<<<<
@@ -2557,7 +2576,7 @@ if (unlikely(__pyx_memoryview_copy_contents(__pyx_t_13, __pyx_t_14, 1, 1, 0) < 0
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 84, __pyx_L1_error)
+        __PYX_ERR(0, 82, __pyx_L1_error)
     }
         __pyx_t_15.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -2566,12 +2585,12 @@ __pyx_t_15.shape[0] = __pyx_v_samples.shape[1];
 __pyx_t_15.strides[0] = __pyx_v_samples.strides[1];
     __pyx_t_15.suboffsets[0] = -1;
 
-if (unlikely(__pyx_memoryview_copy_contents(__pyx_t_13, __pyx_t_15, 1, 1, 0) < 0)) __PYX_ERR(0, 84, __pyx_L1_error)
+if (unlikely(__pyx_memoryview_copy_contents(__pyx_t_13, __pyx_t_15, 1, 1, 0) < 0)) __PYX_ERR(0, 82, __pyx_L1_error)
     __PYX_XDEC_MEMVIEW(&__pyx_t_15, 1);
     __PYX_XDEC_MEMVIEW(&__pyx_t_13, 1);
   }
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":71
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":69
  *                 self.units_state[i] *= -1
  * 
  *     cpdef get_samples(SwendsenWangSampler self, state_t[:, :] samples,             # <<<<<<<<<<<<<<
@@ -2630,11 +2649,11 @@ static PyObject *__pyx_pw_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangS
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_init_state)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("get_samples", 1, 2, 2, 1); __PYX_ERR(0, 71, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("get_samples", 1, 2, 2, 1); __PYX_ERR(0, 69, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_samples") < 0)) __PYX_ERR(0, 71, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_samples") < 0)) __PYX_ERR(0, 69, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2642,12 +2661,12 @@ static PyObject *__pyx_pw_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangS
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_samples = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t(values[0]); if (unlikely(!__pyx_v_samples.memview)) __PYX_ERR(0, 71, __pyx_L3_error)
-    __pyx_v_init_state = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t(values[1]); if (unlikely(!__pyx_v_init_state.memview)) __PYX_ERR(0, 72, __pyx_L3_error)
+    __pyx_v_samples = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_7bmtools_5exact_7helpers_state_t(values[0]); if (unlikely(!__pyx_v_samples.memview)) __PYX_ERR(0, 69, __pyx_L3_error)
+    __pyx_v_init_state = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_7bmtools_5exact_7helpers_state_t(values[1]); if (unlikely(!__pyx_v_init_state.memview)) __PYX_ERR(0, 70, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("get_samples", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 71, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("get_samples", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 69, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("bmtools.mcmc.swendsen_wang_sampler.SwendsenWangSampler.get_samples", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2666,7 +2685,7 @@ static PyObject *__pyx_pf_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangS
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("get_samples", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler_get_samples(__pyx_v_self, __pyx_v_samples, __pyx_v_init_state, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler_get_samples(__pyx_v_self, __pyx_v_samples, __pyx_v_init_state, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2685,7 +2704,7 @@ static PyObject *__pyx_pf_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangS
   return __pyx_r;
 }
 
-/* "bmtools/mcmc/swendsen_wang_sampler.pyx":86
+/* "bmtools/mcmc/swendsen_wang_sampler.pyx":84
  *             samples[s, :] = self.units_state
  * 
  *     cdef int find_cluster_root(SwendsenWangSampler self, int i):             # <<<<<<<<<<<<<<
@@ -2703,7 +2722,7 @@ static int __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler_
   Py_ssize_t __pyx_t_5;
   __Pyx_RefNannySetupContext("find_cluster_root", 0);
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":98
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":96
  *             Index of unit to find cluster root index for.
  *         """
  *         if self.clusters[i] < 0:             # <<<<<<<<<<<<<<
@@ -2714,7 +2733,7 @@ static int __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler_
   __pyx_t_2 = (((*((int *) ( /* dim=0 */ (__pyx_v_self->clusters.data + __pyx_t_1 * __pyx_v_self->clusters.strides[0]) ))) < 0) != 0);
   if (__pyx_t_2) {
 
-    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":99
+    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":97
  *         """
  *         if self.clusters[i] < 0:
  *             return i             # <<<<<<<<<<<<<<
@@ -2724,7 +2743,7 @@ static int __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler_
     __pyx_r = __pyx_v_i;
     goto __pyx_L0;
 
-    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":98
+    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":96
  *             Index of unit to find cluster root index for.
  *         """
  *         if self.clusters[i] < 0:             # <<<<<<<<<<<<<<
@@ -2733,7 +2752,7 @@ static int __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler_
  */
   }
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":103
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":101
  *             # if non-root entry make sure points directly at root rather than
  *             # requiring multiple hops for quicker future access
  *             self.clusters[i] = self.find_cluster_root(self.clusters[i])             # <<<<<<<<<<<<<<
@@ -2745,7 +2764,7 @@ static int __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler_
     __pyx_t_4 = __pyx_v_i;
     *((int *) ( /* dim=0 */ (__pyx_v_self->clusters.data + __pyx_t_4 * __pyx_v_self->clusters.strides[0]) )) = ((struct __pyx_vtabstruct_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler *)__pyx_v_self->__pyx_vtab)->find_cluster_root(__pyx_v_self, (*((int *) ( /* dim=0 */ (__pyx_v_self->clusters.data + __pyx_t_3 * __pyx_v_self->clusters.strides[0]) ))));
 
-    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":104
+    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":102
  *             # requiring multiple hops for quicker future access
  *             self.clusters[i] = self.find_cluster_root(self.clusters[i])
  *             return self.clusters[i]             # <<<<<<<<<<<<<<
@@ -2757,7 +2776,7 @@ static int __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler_
     goto __pyx_L0;
   }
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":86
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":84
  *             samples[s, :] = self.units_state
  * 
  *     cdef int find_cluster_root(SwendsenWangSampler self, int i):             # <<<<<<<<<<<<<<
@@ -2771,7 +2790,7 @@ static int __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler_
   return __pyx_r;
 }
 
-/* "bmtools/mcmc/swendsen_wang_sampler.pyx":106
+/* "bmtools/mcmc/swendsen_wang_sampler.pyx":104
  *             return self.clusters[i]
  * 
  *     cdef void construct_clusters_and_update_biases(SwendsenWangSampler self):             # <<<<<<<<<<<<<<
@@ -2808,7 +2827,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
   Py_ssize_t __pyx_t_19;
   __Pyx_RefNannySetupContext("construct_clusters_and_update_biases", 0);
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":116
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":114
  *         # clusters initialised with all units to being in singleton clusters
  *         # i.e. all entries set to -1
  *         for i in range(self.n_unit):             # <<<<<<<<<<<<<<
@@ -2819,7 +2838,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":117
+    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":115
  *         # i.e. all entries set to -1
  *         for i in range(self.n_unit):
  *             self.clusters[i] = -1             # <<<<<<<<<<<<<<
@@ -2830,7 +2849,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
     *((int *) ( /* dim=0 */ (__pyx_v_self->clusters.data + __pyx_t_3 * __pyx_v_self->clusters.strides[0]) )) = -1;
   }
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":119
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":117
  *             self.clusters[i] = -1
  *         # loop over lower diagonal of bond states matrix
  *         for i in range(1, self.n_unit):             # <<<<<<<<<<<<<<
@@ -2841,7 +2860,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
   for (__pyx_t_2 = 1; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":120
+    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":118
  *         # loop over lower diagonal of bond states matrix
  *         for i in range(1, self.n_unit):
  *             for j in range(i):             # <<<<<<<<<<<<<<
@@ -2852,7 +2871,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
     for (__pyx_t_5 = 0; __pyx_t_5 < __pyx_t_4; __pyx_t_5+=1) {
       __pyx_v_j = __pyx_t_5;
 
-      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":122
+      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":120
  *             for j in range(i):
  *                 # skip if bond inactive
  *                 if self.bonds_state[i, j] == 0:             # <<<<<<<<<<<<<<
@@ -2861,10 +2880,10 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
  */
       __pyx_t_6 = __pyx_v_i;
       __pyx_t_7 = __pyx_v_j;
-      __pyx_t_8 = (((*((__pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_self->bonds_state.data + __pyx_t_6 * __pyx_v_self->bonds_state.strides[0]) ) + __pyx_t_7 * __pyx_v_self->bonds_state.strides[1]) ))) == 0) != 0);
+      __pyx_t_8 = (((*((__pyx_t_7bmtools_5exact_7helpers_state_t *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_self->bonds_state.data + __pyx_t_6 * __pyx_v_self->bonds_state.strides[0]) ) + __pyx_t_7 * __pyx_v_self->bonds_state.strides[1]) ))) == 0) != 0);
       if (__pyx_t_8) {
 
-        /* "bmtools/mcmc/swendsen_wang_sampler.pyx":123
+        /* "bmtools/mcmc/swendsen_wang_sampler.pyx":121
  *                 # skip if bond inactive
  *                 if self.bonds_state[i, j] == 0:
  *                     continue             # <<<<<<<<<<<<<<
@@ -2873,7 +2892,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
  */
         goto __pyx_L7_continue;
 
-        /* "bmtools/mcmc/swendsen_wang_sampler.pyx":122
+        /* "bmtools/mcmc/swendsen_wang_sampler.pyx":120
  *             for j in range(i):
  *                 # skip if bond inactive
  *                 if self.bonds_state[i, j] == 0:             # <<<<<<<<<<<<<<
@@ -2882,7 +2901,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
  */
       }
 
-      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":125
+      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":123
  *                     continue
  *                 # get cluster root indices for two units
  *                 root_i = self.find_cluster_root(i)             # <<<<<<<<<<<<<<
@@ -2891,7 +2910,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
  */
       __pyx_v_root_i = ((struct __pyx_vtabstruct_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler *)__pyx_v_self->__pyx_vtab)->find_cluster_root(__pyx_v_self, __pyx_v_i);
 
-      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":126
+      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":124
  *                 # get cluster root indices for two units
  *                 root_i = self.find_cluster_root(i)
  *                 root_j = self.find_cluster_root(j)             # <<<<<<<<<<<<<<
@@ -2900,7 +2919,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
  */
       __pyx_v_root_j = ((struct __pyx_vtabstruct_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler *)__pyx_v_self->__pyx_vtab)->find_cluster_root(__pyx_v_self, __pyx_v_j);
 
-      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":128
+      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":126
  *                 root_j = self.find_cluster_root(j)
  *                 # if not already in same cluster (i.e. same root) merge
  *                 if root_i != root_j:             # <<<<<<<<<<<<<<
@@ -2910,7 +2929,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
       __pyx_t_8 = ((__pyx_v_root_i != __pyx_v_root_j) != 0);
       if (__pyx_t_8) {
 
-        /* "bmtools/mcmc/swendsen_wang_sampler.pyx":132
+        /* "bmtools/mcmc/swendsen_wang_sampler.pyx":130
  *                     root_small, root_large =  (
  *                         (root_i, root_j)
  *                         if self.clusters[root_i] > self.clusters[root_j]             # <<<<<<<<<<<<<<
@@ -2921,7 +2940,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
         __pyx_t_11 = __pyx_v_root_j;
         if ((((*((int *) ( /* dim=0 */ (__pyx_v_self->clusters.data + __pyx_t_10 * __pyx_v_self->clusters.strides[0]) ))) > (*((int *) ( /* dim=0 */ (__pyx_v_self->clusters.data + __pyx_t_11 * __pyx_v_self->clusters.strides[0]) )))) != 0)) {
 
-          /* "bmtools/mcmc/swendsen_wang_sampler.pyx":131
+          /* "bmtools/mcmc/swendsen_wang_sampler.pyx":129
  *                     # establish which of the two clusters is larger
  *                     root_small, root_large =  (
  *                         (root_i, root_j)             # <<<<<<<<<<<<<<
@@ -2933,7 +2952,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
           __pyx_t_9 = __pyx_t_12;
         } else {
 
-          /* "bmtools/mcmc/swendsen_wang_sampler.pyx":133
+          /* "bmtools/mcmc/swendsen_wang_sampler.pyx":131
  *                         (root_i, root_j)
  *                         if self.clusters[root_i] > self.clusters[root_j]
  *                         else (root_j, root_i)             # <<<<<<<<<<<<<<
@@ -2945,7 +2964,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
           __pyx_t_9 = __pyx_t_12;
         }
 
-        /* "bmtools/mcmc/swendsen_wang_sampler.pyx":131
+        /* "bmtools/mcmc/swendsen_wang_sampler.pyx":129
  *                     # establish which of the two clusters is larger
  *                     root_small, root_large =  (
  *                         (root_i, root_j)             # <<<<<<<<<<<<<<
@@ -2957,7 +2976,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
         __pyx_v_root_small = __pyx_t_13;
         __pyx_v_root_large = __pyx_t_14;
 
-        /* "bmtools/mcmc/swendsen_wang_sampler.pyx":137
+        /* "bmtools/mcmc/swendsen_wang_sampler.pyx":135
  *                     # add bias of smaller cluster to larger
  *                     self.cluster_biases[root_large] += (
  *                         self.cluster_biases[root_small])             # <<<<<<<<<<<<<<
@@ -2966,7 +2985,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
  */
         __pyx_t_15 = __pyx_v_root_small;
 
-        /* "bmtools/mcmc/swendsen_wang_sampler.pyx":136
+        /* "bmtools/mcmc/swendsen_wang_sampler.pyx":134
  *                     )
  *                     # add bias of smaller cluster to larger
  *                     self.cluster_biases[root_large] += (             # <<<<<<<<<<<<<<
@@ -2976,7 +2995,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
         __pyx_t_16 = __pyx_v_root_large;
         *((double *) ( /* dim=0 */ (__pyx_v_self->cluster_biases.data + __pyx_t_16 * __pyx_v_self->cluster_biases.strides[0]) )) += (*((double *) ( /* dim=0 */ (__pyx_v_self->cluster_biases.data + __pyx_t_15 * __pyx_v_self->cluster_biases.strides[0]) )));
 
-        /* "bmtools/mcmc/swendsen_wang_sampler.pyx":139
+        /* "bmtools/mcmc/swendsen_wang_sampler.pyx":137
  *                         self.cluster_biases[root_small])
  *                     # add size of smaller cluster to larger
  *                     self.clusters[root_large] += self.clusters[root_small]             # <<<<<<<<<<<<<<
@@ -2987,7 +3006,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
         __pyx_t_18 = __pyx_v_root_large;
         *((int *) ( /* dim=0 */ (__pyx_v_self->clusters.data + __pyx_t_18 * __pyx_v_self->clusters.strides[0]) )) += (*((int *) ( /* dim=0 */ (__pyx_v_self->clusters.data + __pyx_t_17 * __pyx_v_self->clusters.strides[0]) )));
 
-        /* "bmtools/mcmc/swendsen_wang_sampler.pyx":141
+        /* "bmtools/mcmc/swendsen_wang_sampler.pyx":139
  *                     self.clusters[root_large] += self.clusters[root_small]
  *                     # redirect pointer of smaller cluster to larger
  *                     self.clusters[root_small] = root_large             # <<<<<<<<<<<<<<
@@ -2997,7 +3016,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
         __pyx_t_19 = __pyx_v_root_small;
         *((int *) ( /* dim=0 */ (__pyx_v_self->clusters.data + __pyx_t_19 * __pyx_v_self->clusters.strides[0]) )) = __pyx_v_root_large;
 
-        /* "bmtools/mcmc/swendsen_wang_sampler.pyx":128
+        /* "bmtools/mcmc/swendsen_wang_sampler.pyx":126
  *                 root_j = self.find_cluster_root(j)
  *                 # if not already in same cluster (i.e. same root) merge
  *                 if root_i != root_j:             # <<<<<<<<<<<<<<
@@ -3009,7 +3028,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
     }
   }
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":106
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":104
  *             return self.clusters[i]
  * 
  *     cdef void construct_clusters_and_update_biases(SwendsenWangSampler self):             # <<<<<<<<<<<<<<
@@ -3021,7 +3040,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
   __Pyx_RefNannyFinishContext();
 }
 
-/* "bmtools/mcmc/swendsen_wang_sampler.pyx":143
+/* "bmtools/mcmc/swendsen_wang_sampler.pyx":141
  *                     self.clusters[root_small] = root_large
  * 
  *     cdef void calc_flip_probs_and_sample(SwendsenWangSampler self):             # <<<<<<<<<<<<<<
@@ -3046,7 +3065,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
   Py_ssize_t __pyx_t_11;
   __Pyx_RefNannySetupContext("calc_flip_probs_and_sample", 0);
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":145
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":143
  *     cdef void calc_flip_probs_and_sample(SwendsenWangSampler self):
  *         cdef int i, root
  *         for i in range(self.n_unit):             # <<<<<<<<<<<<<<
@@ -3057,7 +3076,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":146
+    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":144
  *         cdef int i, root
  *         for i in range(self.n_unit):
  *             self.flip_probs[i] = -2.             # <<<<<<<<<<<<<<
@@ -3068,7 +3087,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
     *((double *) ( /* dim=0 */ (__pyx_v_self->flip_probs.data + __pyx_t_3 * __pyx_v_self->flip_probs.strides[0]) )) = -2.;
   }
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":148
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":146
  *             self.flip_probs[i] = -2.
  *         # loop across all units and set flip probability and sample cluster state
  *         for i in range(self.n_unit):             # <<<<<<<<<<<<<<
@@ -3079,7 +3098,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":149
+    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":147
  *         # loop across all units and set flip probability and sample cluster state
  *         for i in range(self.n_unit):
  *             root = self.find_cluster_root(i)             # <<<<<<<<<<<<<<
@@ -3088,7 +3107,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
  */
     __pyx_v_root = ((struct __pyx_vtabstruct_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler *)__pyx_v_self->__pyx_vtab)->find_cluster_root(__pyx_v_self, __pyx_v_i);
 
-    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":151
+    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":149
  *             root = self.find_cluster_root(i)
  *             # check if probability of root calculated yet
  *             if self.flip_probs[root] == -2.:             # <<<<<<<<<<<<<<
@@ -3099,7 +3118,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
     __pyx_t_5 = (((*((double *) ( /* dim=0 */ (__pyx_v_self->flip_probs.data + __pyx_t_4 * __pyx_v_self->flip_probs.strides[0]) ))) == -2.) != 0);
     if (__pyx_t_5) {
 
-      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":153
+      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":151
  *             if self.flip_probs[root] == -2.:
  *                 self.flip_probs[root] = (
  *                     1. / (1. + exp(-self.cluster_biases[root])))             # <<<<<<<<<<<<<<
@@ -3108,7 +3127,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
  */
       __pyx_t_6 = __pyx_v_root;
 
-      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":152
+      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":150
  *             # check if probability of root calculated yet
  *             if self.flip_probs[root] == -2.:
  *                 self.flip_probs[root] = (             # <<<<<<<<<<<<<<
@@ -3118,7 +3137,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
       __pyx_t_7 = __pyx_v_root;
       *((double *) ( /* dim=0 */ (__pyx_v_self->flip_probs.data + __pyx_t_7 * __pyx_v_self->flip_probs.strides[0]) )) = (1. / (1. + exp((-(*((double *) ( /* dim=0 */ (__pyx_v_self->cluster_biases.data + __pyx_t_6 * __pyx_v_self->cluster_biases.strides[0]) )))))));
 
-      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":156
+      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":154
  *                 # sample flip sign and multiply by probability
  *                 self.flip_probs[root] *= 2 * (self.rng.uniform() <
  *                                               self.flip_probs[root]) - 1             # <<<<<<<<<<<<<<
@@ -3127,7 +3146,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
  */
       __pyx_t_8 = __pyx_v_root;
 
-      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":155
+      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":153
  *                     1. / (1. + exp(-self.cluster_biases[root])))
  *                 # sample flip sign and multiply by probability
  *                 self.flip_probs[root] *= 2 * (self.rng.uniform() <             # <<<<<<<<<<<<<<
@@ -3137,7 +3156,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
       __pyx_t_9 = __pyx_v_root;
       *((double *) ( /* dim=0 */ (__pyx_v_self->flip_probs.data + __pyx_t_9 * __pyx_v_self->flip_probs.strides[0]) )) *= ((2 * (((struct __pyx_vtabstruct_8samplers_17randomkit_wrapper_RandomKit *)__pyx_v_self->rng->__pyx_vtab)->uniform(__pyx_v_self->rng) < (*((double *) ( /* dim=0 */ (__pyx_v_self->flip_probs.data + __pyx_t_8 * __pyx_v_self->flip_probs.strides[0]) ))))) - 1);
 
-      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":151
+      /* "bmtools/mcmc/swendsen_wang_sampler.pyx":149
  *             root = self.find_cluster_root(i)
  *             # check if probability of root calculated yet
  *             if self.flip_probs[root] == -2.:             # <<<<<<<<<<<<<<
@@ -3146,7 +3165,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
  */
     }
 
-    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":158
+    /* "bmtools/mcmc/swendsen_wang_sampler.pyx":156
  *                                               self.flip_probs[root]) - 1
  *             # propagate (signed) probability to all units in cluster
  *             self.flip_probs[i] = self.flip_probs[root]             # <<<<<<<<<<<<<<
@@ -3158,7 +3177,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
     *((double *) ( /* dim=0 */ (__pyx_v_self->flip_probs.data + __pyx_t_11 * __pyx_v_self->flip_probs.strides[0]) )) = (*((double *) ( /* dim=0 */ (__pyx_v_self->flip_probs.data + __pyx_t_10 * __pyx_v_self->flip_probs.strides[0]) )));
   }
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":143
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":141
  *                     self.clusters[root_small] = root_large
  * 
  *     cdef void calc_flip_probs_and_sample(SwendsenWangSampler self):             # <<<<<<<<<<<<<<
@@ -3170,7 +3189,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
   __Pyx_RefNannyFinishContext();
 }
 
-/* "bmtools/mcmc/swendsen_wang_sampler.pyx":160
+/* "bmtools/mcmc/swendsen_wang_sampler.pyx":158
  *             self.flip_probs[i] = self.flip_probs[root]
  * 
  *     cdef void sample_flip_states_given_bonds(SwendsenWangSampler self):             # <<<<<<<<<<<<<<
@@ -3182,7 +3201,7 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("sample_flip_states_given_bonds", 0);
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":164
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":162
  *         Compute unit flip state samples and probabilities given bond states.
  *         """
  *         self.construct_clusters_and_update_biases()             # <<<<<<<<<<<<<<
@@ -3190,14 +3209,14 @@ static void __pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler
  */
   ((struct __pyx_vtabstruct_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler *)__pyx_v_self->__pyx_vtab)->construct_clusters_and_update_biases(__pyx_v_self);
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":165
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":163
  *         """
  *         self.construct_clusters_and_update_biases()
  *         self.calc_flip_probs_and_sample()             # <<<<<<<<<<<<<<
  */
   ((struct __pyx_vtabstruct_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler *)__pyx_v_self->__pyx_vtab)->calc_flip_probs_and_sample(__pyx_v_self);
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":160
+  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":158
  *             self.flip_probs[i] = self.flip_probs[root]
  * 
  *     cdef void sample_flip_states_given_bonds(SwendsenWangSampler self):             # <<<<<<<<<<<<<<
@@ -15606,15 +15625,12 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Buffer_view_does_not_expose_stri, __pyx_k_Buffer_view_does_not_expose_stri, sizeof(__pyx_k_Buffer_view_does_not_expose_stri), 0, 0, 1, 0},
   {&__pyx_kp_s_Can_only_create_a_buffer_that_is, __pyx_k_Can_only_create_a_buffer_that_is, sizeof(__pyx_k_Can_only_create_a_buffer_that_is), 0, 0, 1, 0},
   {&__pyx_kp_s_Cannot_index_with_type_s, __pyx_k_Cannot_index_with_type_s, sizeof(__pyx_k_Cannot_index_with_type_s), 0, 0, 1, 0},
-  {&__pyx_kp_s_Copyright_2015_Matt_Graham, __pyx_k_Copyright_2015_Matt_Graham, sizeof(__pyx_k_Copyright_2015_Matt_Graham), 0, 0, 1, 0},
   {&__pyx_n_s_Ellipsis, __pyx_k_Ellipsis, sizeof(__pyx_k_Ellipsis), 0, 0, 1, 1},
   {&__pyx_kp_s_Empty_shape_tuple_for_cython_arr, __pyx_k_Empty_shape_tuple_for_cython_arr, sizeof(__pyx_k_Empty_shape_tuple_for_cython_arr), 0, 0, 1, 0},
   {&__pyx_n_s_IndexError, __pyx_k_IndexError, sizeof(__pyx_k_IndexError), 0, 0, 1, 1},
   {&__pyx_kp_s_Indirect_dimensions_not_supporte, __pyx_k_Indirect_dimensions_not_supporte, sizeof(__pyx_k_Indirect_dimensions_not_supporte), 0, 0, 1, 0},
   {&__pyx_kp_s_Invalid_mode_expected_c_or_fortr, __pyx_k_Invalid_mode_expected_c_or_fortr, sizeof(__pyx_k_Invalid_mode_expected_c_or_fortr), 0, 0, 1, 0},
   {&__pyx_kp_s_Invalid_shape_in_axis_d_d, __pyx_k_Invalid_shape_in_axis_d_d, sizeof(__pyx_k_Invalid_shape_in_axis_d_d), 0, 0, 1, 0},
-  {&__pyx_n_s_MIT, __pyx_k_MIT, sizeof(__pyx_k_MIT), 0, 0, 1, 1},
-  {&__pyx_kp_s_Matt_Graham, __pyx_k_Matt_Graham, sizeof(__pyx_k_Matt_Graham), 0, 0, 1, 0},
   {&__pyx_n_s_MemoryError, __pyx_k_MemoryError, sizeof(__pyx_k_MemoryError), 0, 0, 1, 1},
   {&__pyx_kp_s_MemoryView_of_r_at_0x_x, __pyx_k_MemoryView_of_r_at_0x_x, sizeof(__pyx_k_MemoryView_of_r_at_0x_x), 0, 0, 1, 0},
   {&__pyx_kp_s_MemoryView_of_r_object, __pyx_k_MemoryView_of_r_object, sizeof(__pyx_k_MemoryView_of_r_object), 0, 0, 1, 0},
@@ -15624,7 +15640,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Unable_to_convert_item_to_object, __pyx_k_Unable_to_convert_item_to_object, sizeof(__pyx_k_Unable_to_convert_item_to_object), 0, 0, 1, 0},
   {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
   {&__pyx_n_s_allocate_buffer, __pyx_k_allocate_buffer, sizeof(__pyx_k_allocate_buffer), 0, 0, 1, 1},
-  {&__pyx_n_s_authors, __pyx_k_authors, sizeof(__pyx_k_authors), 0, 0, 1, 1},
   {&__pyx_n_s_base, __pyx_k_base, sizeof(__pyx_k_base), 0, 0, 1, 1},
   {&__pyx_n_s_biases, __pyx_k_biases, sizeof(__pyx_k_biases), 0, 0, 1, 1},
   {&__pyx_n_s_c, __pyx_k_c, sizeof(__pyx_k_c), 0, 0, 1, 1},
@@ -15632,7 +15647,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_class, __pyx_k_class, sizeof(__pyx_k_class), 0, 0, 1, 1},
   {&__pyx_kp_s_contiguous_and_direct, __pyx_k_contiguous_and_direct, sizeof(__pyx_k_contiguous_and_direct), 0, 0, 1, 0},
   {&__pyx_kp_s_contiguous_and_indirect, __pyx_k_contiguous_and_indirect, sizeof(__pyx_k_contiguous_and_indirect), 0, 0, 1, 0},
-  {&__pyx_n_s_copyright, __pyx_k_copyright, sizeof(__pyx_k_copyright), 0, 0, 1, 1},
   {&__pyx_n_s_d, __pyx_k_d, sizeof(__pyx_k_d), 0, 0, 1, 1},
   {&__pyx_n_s_dtype_is_object, __pyx_k_dtype_is_object, sizeof(__pyx_k_dtype_is_object), 0, 0, 1, 1},
   {&__pyx_n_s_encode, __pyx_k_encode, sizeof(__pyx_k_encode), 0, 0, 1, 1},
@@ -15650,7 +15664,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_init_state, __pyx_k_init_state, sizeof(__pyx_k_init_state), 0, 0, 1, 1},
   {&__pyx_n_s_itemsize, __pyx_k_itemsize, sizeof(__pyx_k_itemsize), 0, 0, 1, 1},
   {&__pyx_kp_s_itemsize_0_for_cython_array, __pyx_k_itemsize_0_for_cython_array, sizeof(__pyx_k_itemsize_0_for_cython_array), 0, 0, 1, 0},
-  {&__pyx_n_s_license, __pyx_k_license, sizeof(__pyx_k_license), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_memview, __pyx_k_memview, sizeof(__pyx_k_memview), 0, 0, 1, 1},
   {&__pyx_n_s_mode, __pyx_k_mode, sizeof(__pyx_k_mode), 0, 0, 1, 1},
@@ -15681,7 +15694,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 29, __pyx_L1_error)
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(1, 131, __pyx_L1_error)
   __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(1, 146, __pyx_L1_error)
   __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(1, 149, __pyx_L1_error)
@@ -15924,7 +15937,8 @@ PyMODINIT_FUNC PyInit_swendsen_wang_sampler(void)
 #endif
 {
   PyObject *__pyx_t_1 = NULL;
-  static PyThread_type_lock __pyx_t_2[8];
+  PyObject *__pyx_t_2 = NULL;
+  static PyThread_type_lock __pyx_t_3[8];
   __Pyx_RefNannyDeclarations
   #if CYTHON_REFNANNY
   __Pyx_RefNanny = __Pyx_RefNannyImportAPI("refnanny");
@@ -16014,10 +16028,10 @@ PyMODINIT_FUNC PyInit_swendsen_wang_sampler(void)
   __pyx_vtable_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler.construct_clusters_and_update_biases = (void (*)(struct __pyx_obj_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler *))__pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler_construct_clusters_and_update_biases;
   __pyx_vtable_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler.calc_flip_probs_and_sample = (void (*)(struct __pyx_obj_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler *))__pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler_calc_flip_probs_and_sample;
   __pyx_vtable_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler.sample_flip_states_given_bonds = (void (*)(struct __pyx_obj_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler *))__pyx_f_7bmtools_4mcmc_21swendsen_wang_sampler_19SwendsenWangSampler_sample_flip_states_given_bonds;
-  if (PyType_Ready(&__pyx_type_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler) < 0) __PYX_ERR(0, 24, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
   __pyx_type_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler.tp_print = 0;
-  if (__Pyx_SetVtable(__pyx_type_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler.tp_dict, __pyx_vtabptr_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler) < 0) __PYX_ERR(0, 24, __pyx_L1_error)
-  if (PyObject_SetAttrString(__pyx_m, "SwendsenWangSampler", (PyObject *)&__pyx_type_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler) < 0) __PYX_ERR(0, 24, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler.tp_dict, __pyx_vtabptr_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "SwendsenWangSampler", (PyObject *)&__pyx_type_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
   __pyx_ptype_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler = &__pyx_type_7bmtools_4mcmc_21swendsen_wang_sampler_SwendsenWangSampler;
   __pyx_vtabptr_array = &__pyx_vtable_array;
   __pyx_vtable_array.get_memview = (PyObject *(*)(struct __pyx_array_obj *))__pyx_array_get_memview;
@@ -16053,48 +16067,24 @@ PyMODINIT_FUNC PyInit_swendsen_wang_sampler(void)
   __pyx_ptype_8samplers_17randomkit_wrapper_RandomKit = __Pyx_ImportType("samplers.randomkit_wrapper", "RandomKit", sizeof(struct __pyx_obj_8samplers_17randomkit_wrapper_RandomKit), 1); if (unlikely(!__pyx_ptype_8samplers_17randomkit_wrapper_RandomKit)) __PYX_ERR(2, 25, __pyx_L1_error)
   __pyx_vtabptr_8samplers_17randomkit_wrapper_RandomKit = (struct __pyx_vtabstruct_8samplers_17randomkit_wrapper_RandomKit*)__Pyx_GetVtable(__pyx_ptype_8samplers_17randomkit_wrapper_RandomKit->tp_dict); if (unlikely(!__pyx_vtabptr_8samplers_17randomkit_wrapper_RandomKit)) __PYX_ERR(2, 25, __pyx_L1_error)
   /*--- Variable import code ---*/
+  __pyx_t_1 = __Pyx_ImportModule("bmtools.exact.helpers"); if (!__pyx_t_1) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_ImportVoidPtr(__pyx_t_1, "state_t_code", (void **)&__pyx_vp_7bmtools_5exact_7helpers_state_t_code, "char *") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  Py_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   /*--- Function import code ---*/
   /*--- Execution code ---*/
   #if defined(__Pyx_Generator_USED) || defined(__Pyx_Coroutine_USED)
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":18
- * """
- * 
- * __authors__ = 'Matt Graham'             # <<<<<<<<<<<<<<
- * __copyright__ = 'Copyright 2015, Matt Graham'
- * __license__ = 'MIT'
- */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_authors, __pyx_kp_s_Matt_Graham) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
-
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":19
- * 
- * __authors__ = 'Matt Graham'
- * __copyright__ = 'Copyright 2015, Matt Graham'             # <<<<<<<<<<<<<<
- * __license__ = 'MIT'
- * 
- */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_copyright, __pyx_kp_s_Copyright_2015_Matt_Graham) < 0) __PYX_ERR(0, 19, __pyx_L1_error)
-
-  /* "bmtools/mcmc/swendsen_wang_sampler.pyx":20
- * __authors__ = 'Matt Graham'
- * __copyright__ = 'Copyright 2015, Matt Graham'
- * __license__ = 'MIT'             # <<<<<<<<<<<<<<
- * 
- * from cython.view cimport array
- */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_license, __pyx_n_s_MIT) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
-
   /* "bmtools/mcmc/swendsen_wang_sampler.pyx":1
- * """             # <<<<<<<<<<<<<<
- * =======================================
- * Swendsen-Wang Boltzmann machine sampler
+ * # -*- coding: utf-8 -*-             # <<<<<<<<<<<<<<
+ * """Swendsen-Wang Boltzmann machine sampler.
+ * 
  */
-  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_1) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "View.MemoryView":207
  *         info.obj = self
@@ -16103,10 +16093,10 @@ PyMODINIT_FUNC PyInit_swendsen_wang_sampler(void)
  * 
  *     def __dealloc__(array self):
  */
-  __pyx_t_1 = __pyx_capsule_create(((void *)(&__pyx_array_getbuffer)), ((char *)"getbuffer(obj, view, flags)")); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 207, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_array_type->tp_dict, __pyx_n_s_pyx_getbuffer, __pyx_t_1) < 0) __PYX_ERR(1, 207, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_2 = __pyx_capsule_create(((void *)(&__pyx_array_getbuffer)), ((char *)"getbuffer(obj, view, flags)")); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 207, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_array_type->tp_dict, __pyx_n_s_pyx_getbuffer, __pyx_t_2) < 0) __PYX_ERR(1, 207, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_array_type);
 
   /* "View.MemoryView":282
@@ -16116,12 +16106,12 @@ PyMODINIT_FUNC PyInit_swendsen_wang_sampler(void)
  * cdef strided = Enum("<strided and direct>") # default
  * cdef indirect = Enum("<strided and indirect>")
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__14, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 282, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__14, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 282, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_XGOTREF(generic);
-  __Pyx_DECREF_SET(generic, __pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_1);
-  __pyx_t_1 = 0;
+  __Pyx_DECREF_SET(generic, __pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_2);
+  __pyx_t_2 = 0;
 
   /* "View.MemoryView":283
  * 
@@ -16130,12 +16120,12 @@ PyMODINIT_FUNC PyInit_swendsen_wang_sampler(void)
  * cdef indirect = Enum("<strided and indirect>")
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__15, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 283, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__15, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 283, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_XGOTREF(strided);
-  __Pyx_DECREF_SET(strided, __pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_1);
-  __pyx_t_1 = 0;
+  __Pyx_DECREF_SET(strided, __pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_2);
+  __pyx_t_2 = 0;
 
   /* "View.MemoryView":284
  * cdef generic = Enum("<strided and direct or indirect>")
@@ -16144,12 +16134,12 @@ PyMODINIT_FUNC PyInit_swendsen_wang_sampler(void)
  * 
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__16, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 284, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__16, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 284, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_XGOTREF(indirect);
-  __Pyx_DECREF_SET(indirect, __pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_1);
-  __pyx_t_1 = 0;
+  __Pyx_DECREF_SET(indirect, __pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_2);
+  __pyx_t_2 = 0;
 
   /* "View.MemoryView":287
  * 
@@ -16158,12 +16148,12 @@ PyMODINIT_FUNC PyInit_swendsen_wang_sampler(void)
  * cdef indirect_contiguous = Enum("<contiguous and indirect>")
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__17, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 287, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__17, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 287, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_XGOTREF(contiguous);
-  __Pyx_DECREF_SET(contiguous, __pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_1);
-  __pyx_t_1 = 0;
+  __Pyx_DECREF_SET(contiguous, __pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_2);
+  __pyx_t_2 = 0;
 
   /* "View.MemoryView":288
  * 
@@ -16172,12 +16162,12 @@ PyMODINIT_FUNC PyInit_swendsen_wang_sampler(void)
  * 
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__18, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 288, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__18, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 288, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_XGOTREF(indirect_contiguous);
-  __Pyx_DECREF_SET(indirect_contiguous, __pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_1);
-  __pyx_t_1 = 0;
+  __Pyx_DECREF_SET(indirect_contiguous, __pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_2);
+  __pyx_t_2 = 0;
 
   /* "View.MemoryView":312
  * 
@@ -16195,15 +16185,15 @@ PyMODINIT_FUNC PyInit_swendsen_wang_sampler(void)
  *     PyThread_allocate_lock(),
  *     PyThread_allocate_lock(),
  */
-  __pyx_t_2[0] = PyThread_allocate_lock();
-  __pyx_t_2[1] = PyThread_allocate_lock();
-  __pyx_t_2[2] = PyThread_allocate_lock();
-  __pyx_t_2[3] = PyThread_allocate_lock();
-  __pyx_t_2[4] = PyThread_allocate_lock();
-  __pyx_t_2[5] = PyThread_allocate_lock();
-  __pyx_t_2[6] = PyThread_allocate_lock();
-  __pyx_t_2[7] = PyThread_allocate_lock();
-  memcpy(&(__pyx_memoryview_thread_locks[0]), __pyx_t_2, sizeof(__pyx_memoryview_thread_locks[0]) * (8));
+  __pyx_t_3[0] = PyThread_allocate_lock();
+  __pyx_t_3[1] = PyThread_allocate_lock();
+  __pyx_t_3[2] = PyThread_allocate_lock();
+  __pyx_t_3[3] = PyThread_allocate_lock();
+  __pyx_t_3[4] = PyThread_allocate_lock();
+  __pyx_t_3[5] = PyThread_allocate_lock();
+  __pyx_t_3[6] = PyThread_allocate_lock();
+  __pyx_t_3[7] = PyThread_allocate_lock();
+  memcpy(&(__pyx_memoryview_thread_locks[0]), __pyx_t_3, sizeof(__pyx_memoryview_thread_locks[0]) * (8));
 
   /* "View.MemoryView":535
  *         info.obj = self
@@ -16212,10 +16202,10 @@ PyMODINIT_FUNC PyInit_swendsen_wang_sampler(void)
  * 
  * 
  */
-  __pyx_t_1 = __pyx_capsule_create(((void *)(&__pyx_memoryview_getbuffer)), ((char *)"getbuffer(obj, view, flags)")); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 535, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_memoryview_type->tp_dict, __pyx_n_s_pyx_getbuffer, __pyx_t_1) < 0) __PYX_ERR(1, 535, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_2 = __pyx_capsule_create(((void *)(&__pyx_memoryview_getbuffer)), ((char *)"getbuffer(obj, view, flags)")); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 535, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_memoryview_type->tp_dict, __pyx_n_s_pyx_getbuffer, __pyx_t_2) < 0) __PYX_ERR(1, 535, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_memoryview_type);
 
   /* "View.MemoryView":981
@@ -16225,10 +16215,10 @@ PyMODINIT_FUNC PyInit_swendsen_wang_sampler(void)
  * 
  * 
  */
-  __pyx_t_1 = __pyx_capsule_create(((void *)(&__pyx_memoryview_getbuffer)), ((char *)"getbuffer(obj, view, flags)")); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 981, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_memoryviewslice_type->tp_dict, __pyx_n_s_pyx_getbuffer, __pyx_t_1) < 0) __PYX_ERR(1, 981, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_2 = __pyx_capsule_create(((void *)(&__pyx_memoryview_getbuffer)), ((char *)"getbuffer(obj, view, flags)")); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 981, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_memoryviewslice_type->tp_dict, __pyx_n_s_pyx_getbuffer, __pyx_t_2) < 0) __PYX_ERR(1, 981, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_memoryviewslice_type);
 
   /* "View.MemoryView":1391
@@ -16244,6 +16234,7 @@ PyMODINIT_FUNC PyInit_swendsen_wang_sampler(void)
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
   if (__pyx_m) {
     if (__pyx_d) {
       __Pyx_AddTraceback("init bmtools.mcmc.swendsen_wang_sampler", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -18612,7 +18603,7 @@ __pyx_fail:
     }
 
 /* ObjectToMemviewSlice */
-        static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t(PyObject *obj) {
+        static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_7bmtools_5exact_7helpers_state_t(PyObject *obj) {
     __Pyx_memviewslice result = { 0, 0, { 0 }, { 0 }, { 0 } };
     __Pyx_BufFmt_StackElem stack[1];
     int axes_specs[] = { (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_STRIDED), (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_STRIDED) };
@@ -18623,7 +18614,7 @@ __pyx_fail:
     }
     retcode = __Pyx_ValidateAndInit_memviewslice(axes_specs, 0,
                                                  PyBUF_RECORDS, 2,
-                                                 &__Pyx_TypeInfo_nn___pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t, stack,
+                                                 &__Pyx_TypeInfo_nn___pyx_t_7bmtools_5exact_7helpers_state_t, stack,
                                                  &result, obj);
     if (unlikely(retcode == -1))
         goto __pyx_fail;
@@ -18635,7 +18626,7 @@ __pyx_fail:
 }
 
 /* ObjectToMemviewSlice */
-        static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t(PyObject *obj) {
+        static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_7bmtools_5exact_7helpers_state_t(PyObject *obj) {
     __Pyx_memviewslice result = { 0, 0, { 0 }, { 0 }, { 0 } };
     __Pyx_BufFmt_StackElem stack[1];
     int axes_specs[] = { (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_STRIDED) };
@@ -18646,7 +18637,7 @@ __pyx_fail:
     }
     retcode = __Pyx_ValidateAndInit_memviewslice(axes_specs, 0,
                                                  PyBUF_RECORDS, 1,
-                                                 &__Pyx_TypeInfo_nn___pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t, stack,
+                                                 &__Pyx_TypeInfo_nn___pyx_t_7bmtools_5exact_7helpers_state_t, stack,
                                                  &result, obj);
     if (unlikely(retcode == -1))
         goto __pyx_fail;
@@ -18739,14 +18730,14 @@ __pyx_fail:
 }
 
 /* MemviewDtypeToObject */
-        static CYTHON_INLINE PyObject *__pyx_memview_get_nn___pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t(const char *itemp) {
-    return (PyObject *) __Pyx_PyInt_From_signed__char(*(__pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t *) itemp);
+        static CYTHON_INLINE PyObject *__pyx_memview_get_nn___pyx_t_7bmtools_5exact_7helpers_state_t(const char *itemp) {
+    return (PyObject *) __Pyx_PyInt_From_signed__char(*(__pyx_t_7bmtools_5exact_7helpers_state_t *) itemp);
 }
-static CYTHON_INLINE int __pyx_memview_set_nn___pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t(const char *itemp, PyObject *obj) {
-    __pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t value = __Pyx_PyInt_As_signed__char(obj);
+static CYTHON_INLINE int __pyx_memview_set_nn___pyx_t_7bmtools_5exact_7helpers_state_t(const char *itemp, PyObject *obj) {
+    __pyx_t_7bmtools_5exact_7helpers_state_t value = __Pyx_PyInt_As_signed__char(obj);
     if ((value == (signed char)-1) && PyErr_Occurred())
         return 0;
-    *(__pyx_t_7bmtools_4mcmc_21swendsen_wang_sampler_state_t *) itemp = value;
+    *(__pyx_t_7bmtools_5exact_7helpers_state_t *) itemp = value;
     return 1;
 }
 
@@ -19676,6 +19667,55 @@ bad:
     Py_XDECREF(py_module);
     Py_XDECREF(result);
     return NULL;
+}
+#endif
+
+/* VoidPtrImport */
+        #ifndef __PYX_HAVE_RT_ImportVoidPtr
+#define __PYX_HAVE_RT_ImportVoidPtr
+static int __Pyx_ImportVoidPtr(PyObject *module, const char *name, void **p, const char *sig) {
+    PyObject *d = 0;
+    PyObject *cobj = 0;
+    d = PyObject_GetAttrString(module, (char *)"__pyx_capi__");
+    if (!d)
+        goto bad;
+    cobj = PyDict_GetItemString(d, name);
+    if (!cobj) {
+        PyErr_Format(PyExc_ImportError,
+            "%.200s does not export expected C variable %.200s",
+                PyModule_GetName(module), name);
+        goto bad;
+    }
+#if PY_VERSION_HEX >= 0x02070000
+    if (!PyCapsule_IsValid(cobj, sig)) {
+        PyErr_Format(PyExc_TypeError,
+            "C variable %.200s.%.200s has wrong signature (expected %.500s, got %.500s)",
+             PyModule_GetName(module), name, sig, PyCapsule_GetName(cobj));
+        goto bad;
+    }
+    *p = PyCapsule_GetPointer(cobj, sig);
+#else
+    {const char *desc, *s1, *s2;
+    desc = (const char *)PyCObject_GetDesc(cobj);
+    if (!desc)
+        goto bad;
+    s1 = desc; s2 = sig;
+    while (*s1 != '\0' && *s1 == *s2) { s1++; s2++; }
+    if (*s1 != *s2) {
+        PyErr_Format(PyExc_TypeError,
+            "C variable %.200s.%.200s has wrong signature (expected %.500s, got %.500s)",
+             PyModule_GetName(module), name, sig, desc);
+        goto bad;
+    }
+    *p = PyCObject_AsVoidPtr(cobj);}
+#endif
+    if (!(*p))
+        goto bad;
+    Py_DECREF(d);
+    return 0;
+bad:
+    Py_XDECREF(d);
+    return -1;
 }
 #endif
 

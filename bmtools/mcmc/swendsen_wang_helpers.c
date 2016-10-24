@@ -7,6 +7,8 @@
             "bmtools/mcmc/randomkit.h"
         ], 
         "extra_compile_args": [
+            "-O3", 
+            "-ffast-math", 
             "-fopenmp"
         ]
     }, 
@@ -507,7 +509,6 @@ static const char *__pyx_f[] = {
   "bmtools/mcmc/swendsen_wang_helpers.pyx",
   "stringsource",
   "bmtools/mcmc/randomkit_wrapper.pxd",
-  "bmtools/mcmc/shared_defs.pxd",
 };
 /* MemviewSliceStruct.proto */
 struct __pyx_memoryview_obj;
@@ -605,15 +606,6 @@ typedef volatile __pyx_atomic_int_type __pyx_atomic_int;
 #endif
 
 
-/* "bmtools/mcmc/shared_defs.pxd":18
- * # values (-1/+1). Also specify a type code for use in initialising
- * # cython arrays with this type.
- * ctypedef signed char state_t             # <<<<<<<<<<<<<<
- * cdef char* state_t_code = 'c'
- * #ctypedef int state_t
- */
-typedef signed char __pyx_t_7bmtools_4mcmc_21swendsen_wang_helpers_state_t;
-
 /*--- Type declarations ---*/
 struct __pyx_obj_7bmtools_4mcmc_17randomkit_wrapper_RandomKit;
 struct __pyx_array_obj;
@@ -623,7 +615,7 @@ struct __pyx_memoryviewslice_obj;
 struct __pyx_ctuple_int__and_int;
 typedef struct __pyx_ctuple_int__and_int __pyx_ctuple_int__and_int;
 
-/* "bmtools/mcmc/swendsen_wang_helpers.pyx":105
+/* "bmtools/mcmc/swendsen_wang_helpers.pyx":101
  *                 # establish which of the two clusters is larger
  *                 root_small, root_large =  (
  *                     (root_i, root_j)             # <<<<<<<<<<<<<<
@@ -635,8 +627,8 @@ struct __pyx_ctuple_int__and_int {
   int f1;
 };
 
-/* "randomkit_wrapper.pxd":26
- *     long rk_interval(unsigned long maximum, rk_state *state)
+/* "randomkit_wrapper.pxd":21
+ * 
  * 
  * cdef class RandomKit:             # <<<<<<<<<<<<<<
  *     cdef rk_state *state
@@ -727,8 +719,8 @@ struct __pyx_memoryviewslice_obj {
 
 
 
-/* "randomkit_wrapper.pxd":26
- *     long rk_interval(unsigned long maximum, rk_state *state)
+/* "randomkit_wrapper.pxd":21
+ * 
  * 
  * cdef class RandomKit:             # <<<<<<<<<<<<<<
  *     cdef rk_state *state
@@ -1299,7 +1291,6 @@ static PyTypeObject *__pyx_array_type = 0;
 static PyTypeObject *__pyx_MemviewEnum_type = 0;
 static PyTypeObject *__pyx_memoryview_type = 0;
 static PyTypeObject *__pyx_memoryviewslice_type = 0;
-static char *__pyx_v_7bmtools_4mcmc_21swendsen_wang_helpers_state_t_code;
 static PyObject *generic = 0;
 static PyObject *strided = 0;
 static PyObject *indirect = 0;
@@ -1363,7 +1354,6 @@ static const char __pyx_k_c[] = "c";
 static const char __pyx_k_d[] = "d";
 static const char __pyx_k_i[] = "i";
 static const char __pyx_k_id[] = "id";
-static const char __pyx_k_MIT[] = "MIT";
 static const char __pyx_k_obj[] = "obj";
 static const char __pyx_k_rng[] = "rng";
 static const char __pyx_k_base[] = "base";
@@ -1390,20 +1380,16 @@ static const char __pyx_k_import[] = "__import__";
 static const char __pyx_k_name_2[] = "__name__";
 static const char __pyx_k_struct[] = "struct";
 static const char __pyx_k_unpack[] = "unpack";
-static const char __pyx_k_authors[] = "__authors__";
 static const char __pyx_k_fortran[] = "fortran";
-static const char __pyx_k_license[] = "__license__";
 static const char __pyx_k_memview[] = "memview";
 static const char __pyx_k_Ellipsis[] = "Ellipsis";
 static const char __pyx_k_clusters[] = "clusters";
 static const char __pyx_k_itemsize[] = "itemsize";
 static const char __pyx_k_TypeError[] = "TypeError";
-static const char __pyx_k_copyright[] = "__copyright__";
 static const char __pyx_k_enumerate[] = "enumerate";
 static const char __pyx_k_IndexError[] = "IndexError";
 static const char __pyx_k_ValueError[] = "ValueError";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
-static const char __pyx_k_Matt_Graham[] = "Matt Graham";
 static const char __pyx_k_MemoryError[] = "MemoryError";
 static const char __pyx_k_bond_states[] = "bond_states";
 static const char __pyx_k_pyx_getbuffer[] = "__pyx_getbuffer";
@@ -1417,10 +1403,8 @@ static const char __pyx_k_MemoryView_of_r_at_0x_x[] = "<MemoryView of %r at 0x%x
 static const char __pyx_k_contiguous_and_indirect[] = "<contiguous and indirect>";
 static const char __pyx_k_Cannot_index_with_type_s[] = "Cannot index with type '%s'";
 static const char __pyx_k_Invalid_shape_in_axis_d_d[] = "Invalid shape in axis %d: %d.";
-static const char __pyx_k_Copyright_2015_Matt_Graham[] = "Copyright 2015, Matt Graham";
 static const char __pyx_k_itemsize_0_for_cython_array[] = "itemsize <= 0 for cython.array";
 static const char __pyx_k_unable_to_allocate_array_data[] = "unable to allocate array data.";
-static const char __pyx_k_Swendsen_Wang_helper_functions[] = "\n==============================\nSwendsen-Wang helper functions\n==============================\n\nCython implementations of helpers for performing clustering and flip\nprobability calculation on a Boltzmann machine / Ising model augmented with\nbond variables for use in a Swendsen-Wang sampling scheme.\n\nCode is largely a direct port of MATLAB/C code by Iain Murray at\n    http://homepages.inf.ed.ac.uk/imurray2/code/swendsen_wang/\nThis adapted code for performing the clustering from:\n     A fast Monte Carlo algorithm for site or bond percolation\n     M. E. J. Newman and R. M. Ziff\n     arXiv:cond-mat/0101295 v2 8th April 2001\n\nI have changed naming to suit python conventions and also to reflect my\nattempts to understand what code is doing (also explained in comments) - no\nguarantees here that this is a particularly sensible or even wholly accurate\ndescription of the original intention of the algorithm.\n\nThis implementation makes no assumptions about the connectivity of units (i.e.\nit assumes full connectivity) or strength of connections - more efficient\nimplementations could be made to exploit known structure to the connectivity.\nSee also comments in Iain's code on this issue.\n";
 static const char __pyx_k_strided_and_direct_or_indirect[] = "<strided and direct or indirect>";
 static const char __pyx_k_Buffer_view_does_not_expose_stri[] = "Buffer view does not expose strides";
 static const char __pyx_k_Can_only_create_a_buffer_that_is[] = "Can only create a buffer that is contiguous in memory.";
@@ -1428,6 +1412,7 @@ static const char __pyx_k_Empty_shape_tuple_for_cython_arr[] = "Empty shape tupl
 static const char __pyx_k_Indirect_dimensions_not_supporte[] = "Indirect dimensions not supported";
 static const char __pyx_k_Invalid_mode_expected_c_or_fortr[] = "Invalid mode, expected 'c' or 'fortran', got %s";
 static const char __pyx_k_Out_of_bounds_on_buffer_access_a[] = "Out of bounds on buffer access (axis %d)";
+static const char __pyx_k_Swendsen_Wang_helper_functions_C[] = "Swendsen-Wang helper functions.\n\nCython implementations of helpers for performing clustering and flip\nprobability calculation on a Boltzmann machine / Ising model augmented with\nbond variables for use in a Swendsen-Wang sampling scheme.\n\nCode is largely a direct port of MATLAB/C code by Iain Murray at\n    http://homepages.inf.ed.ac.uk/imurray2/code/swendsen_wang/\nThis adapted code for performing the clustering from:\n     A fast Monte Carlo algorithm for site or bond percolation\n     M. E. J. Newman and R. M. Ziff\n     arXiv:cond-mat/0101295 v2 8th April 2001\n\nI have changed naming to suit python conventions and also to reflect my\nattempts to understand what code is doing (also explained in comments) - no\nguarantees here that this is a particularly sensible or even wholly accurate\ndescription of the original intention of the algorithm.\n\nThis implementation makes no assumptions about the connectivity of units (i.e.\nit assumes full connectivity) or strength of connections - more efficient\nimplementations could be made to exploit known structure to the connectivity.\nSee also comments in Iain's code on this issue.\n";
 static const char __pyx_k_Unable_to_convert_item_to_object[] = "Unable to convert item to object";
 static const char __pyx_k_biases_must_be_1D_array_with_len[] = "biases must be 1D array with length matching bond_states";
 static const char __pyx_k_bond_states_array_must_be_a_squa[] = "bond_states array must be a square matrix";
@@ -1437,15 +1422,12 @@ static PyObject *__pyx_n_s_ASCII;
 static PyObject *__pyx_kp_s_Buffer_view_does_not_expose_stri;
 static PyObject *__pyx_kp_s_Can_only_create_a_buffer_that_is;
 static PyObject *__pyx_kp_s_Cannot_index_with_type_s;
-static PyObject *__pyx_kp_s_Copyright_2015_Matt_Graham;
 static PyObject *__pyx_n_s_Ellipsis;
 static PyObject *__pyx_kp_s_Empty_shape_tuple_for_cython_arr;
 static PyObject *__pyx_n_s_IndexError;
 static PyObject *__pyx_kp_s_Indirect_dimensions_not_supporte;
 static PyObject *__pyx_kp_s_Invalid_mode_expected_c_or_fortr;
 static PyObject *__pyx_kp_s_Invalid_shape_in_axis_d_d;
-static PyObject *__pyx_n_s_MIT;
-static PyObject *__pyx_kp_s_Matt_Graham;
 static PyObject *__pyx_n_s_MemoryError;
 static PyObject *__pyx_kp_s_MemoryView_of_r_at_0x_x;
 static PyObject *__pyx_kp_s_MemoryView_of_r_object;
@@ -1455,7 +1437,6 @@ static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_kp_s_Unable_to_convert_item_to_object;
 static PyObject *__pyx_n_s_ValueError;
 static PyObject *__pyx_n_s_allocate_buffer;
-static PyObject *__pyx_n_s_authors;
 static PyObject *__pyx_n_s_base;
 static PyObject *__pyx_n_s_biases;
 static PyObject *__pyx_kp_s_biases_must_be_1D_array_with_len;
@@ -1467,7 +1448,6 @@ static PyObject *__pyx_n_s_class;
 static PyObject *__pyx_n_s_clusters;
 static PyObject *__pyx_kp_s_contiguous_and_direct;
 static PyObject *__pyx_kp_s_contiguous_and_indirect;
-static PyObject *__pyx_n_s_copyright;
 static PyObject *__pyx_n_s_d;
 static PyObject *__pyx_n_s_dtype_is_object;
 static PyObject *__pyx_n_s_encode;
@@ -1483,7 +1463,6 @@ static PyObject *__pyx_n_s_id;
 static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_itemsize;
 static PyObject *__pyx_kp_s_itemsize_0_for_cython_array;
-static PyObject *__pyx_n_s_license;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_memview;
 static PyObject *__pyx_n_s_mode;
@@ -1570,8 +1549,8 @@ static PyObject *__pyx_tuple__16;
 static PyObject *__pyx_tuple__17;
 static PyObject *__pyx_tuple__18;
 
-/* "bmtools/mcmc/swendsen_wang_helpers.pyx":36
- * include "shared_defs.pxd"
+/* "bmtools/mcmc/swendsen_wang_helpers.pyx":32
+ *     double exp(double x) nogil
  * 
  * cdef int find_cluster_root(int[:] clusters, int i):             # <<<<<<<<<<<<<<
  *     """
@@ -1588,7 +1567,7 @@ static int __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_find_cluster_root(__Py
   Py_ssize_t __pyx_t_5;
   __Pyx_RefNannySetupContext("find_cluster_root", 0);
 
-  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":50
+  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":46
  *         Index of unit to find cluster root index for.
  *     """
  *     if clusters[i] < 0:             # <<<<<<<<<<<<<<
@@ -1599,7 +1578,7 @@ static int __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_find_cluster_root(__Py
   __pyx_t_2 = (((*((int *) ( /* dim=0 */ (__pyx_v_clusters.data + __pyx_t_1 * __pyx_v_clusters.strides[0]) ))) < 0) != 0);
   if (__pyx_t_2) {
 
-    /* "bmtools/mcmc/swendsen_wang_helpers.pyx":51
+    /* "bmtools/mcmc/swendsen_wang_helpers.pyx":47
  *     """
  *     if clusters[i] < 0:
  *         return i             # <<<<<<<<<<<<<<
@@ -1609,7 +1588,7 @@ static int __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_find_cluster_root(__Py
     __pyx_r = __pyx_v_i;
     goto __pyx_L0;
 
-    /* "bmtools/mcmc/swendsen_wang_helpers.pyx":50
+    /* "bmtools/mcmc/swendsen_wang_helpers.pyx":46
  *         Index of unit to find cluster root index for.
  *     """
  *     if clusters[i] < 0:             # <<<<<<<<<<<<<<
@@ -1618,7 +1597,7 @@ static int __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_find_cluster_root(__Py
  */
   }
 
-  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":55
+  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":51
  *         # if non-root entry make sure points directly at root rather than
  *         # requiring multiple hops for quicker future access
  *         clusters[i] = find_cluster_root(clusters, clusters[i])             # <<<<<<<<<<<<<<
@@ -1630,7 +1609,7 @@ static int __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_find_cluster_root(__Py
     __pyx_t_4 = __pyx_v_i;
     *((int *) ( /* dim=0 */ (__pyx_v_clusters.data + __pyx_t_4 * __pyx_v_clusters.strides[0]) )) = __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_find_cluster_root(__pyx_v_clusters, (*((int *) ( /* dim=0 */ (__pyx_v_clusters.data + __pyx_t_3 * __pyx_v_clusters.strides[0]) ))));
 
-    /* "bmtools/mcmc/swendsen_wang_helpers.pyx":56
+    /* "bmtools/mcmc/swendsen_wang_helpers.pyx":52
  *         # requiring multiple hops for quicker future access
  *         clusters[i] = find_cluster_root(clusters, clusters[i])
  *         return clusters[i]             # <<<<<<<<<<<<<<
@@ -1642,8 +1621,8 @@ static int __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_find_cluster_root(__Py
     goto __pyx_L0;
   }
 
-  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":36
- * include "shared_defs.pxd"
+  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":32
+ *     double exp(double x) nogil
  * 
  * cdef int find_cluster_root(int[:] clusters, int i):             # <<<<<<<<<<<<<<
  *     """
@@ -1656,7 +1635,7 @@ static int __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_find_cluster_root(__Py
   return __pyx_r;
 }
 
-/* "bmtools/mcmc/swendsen_wang_helpers.pyx":59
+/* "bmtools/mcmc/swendsen_wang_helpers.pyx":55
  * 
  * # use cpdef rather than cdef here to allow external calling by test suite
  * cpdef int[:] construct_clusters_and_update_biases(             # <<<<<<<<<<<<<<
@@ -1701,7 +1680,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_constru
   Py_ssize_t __pyx_t_23;
   __Pyx_RefNannySetupContext("construct_clusters_and_update_biases", 0);
 
-  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":85
+  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":81
  *     """
  *     cdef int i, j, root_i, root_j
  *     cdef int n_unit = bond_states.shape[0]             # <<<<<<<<<<<<<<
@@ -1710,48 +1689,48 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_constru
  */
   __pyx_v_n_unit = (__pyx_v_bond_states.shape[0]);
 
-  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":89
+  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":85
  *     # i.e. all entries set to -1
  *     cdef int[:] clusters = view.array(
  *         shape=(n_unit,), itemsize=sizeof(int), format='i')             # <<<<<<<<<<<<<<
  *     for i in range(n_unit):
  *         clusters[i] = -1
  */
-  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 85, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_n_unit); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_n_unit); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 85, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 85, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_shape, __pyx_t_3) < 0) __PYX_ERR(0, 89, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_shape, __pyx_t_3) < 0) __PYX_ERR(0, 85, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyInt_FromSize_t((sizeof(int))); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_FromSize_t((sizeof(int))); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 85, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_itemsize, __pyx_t_3) < 0) __PYX_ERR(0, 89, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_itemsize, __pyx_t_3) < 0) __PYX_ERR(0, 85, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_format, __pyx_n_s_i) < 0) __PYX_ERR(0, 89, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_format, __pyx_n_s_i) < 0) __PYX_ERR(0, 85, __pyx_L1_error)
 
-  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":88
+  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":84
  *     # clusters initialised with all units to being in singleton clusters
  *     # i.e. all entries set to -1
  *     cdef int[:] clusters = view.array(             # <<<<<<<<<<<<<<
  *         shape=(n_unit,), itemsize=sizeof(int), format='i')
  *     for i in range(n_unit):
  */
-  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 88, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 84, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_ds_int(__pyx_t_3);
-  if (unlikely(!__pyx_t_4.memview)) __PYX_ERR(0, 88, __pyx_L1_error)
+  if (unlikely(!__pyx_t_4.memview)) __PYX_ERR(0, 84, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_clusters = __pyx_t_4;
   __pyx_t_4.memview = NULL;
   __pyx_t_4.data = NULL;
 
-  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":90
+  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":86
  *     cdef int[:] clusters = view.array(
  *         shape=(n_unit,), itemsize=sizeof(int), format='i')
  *     for i in range(n_unit):             # <<<<<<<<<<<<<<
@@ -1762,7 +1741,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_constru
   for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
     __pyx_v_i = __pyx_t_6;
 
-    /* "bmtools/mcmc/swendsen_wang_helpers.pyx":91
+    /* "bmtools/mcmc/swendsen_wang_helpers.pyx":87
  *         shape=(n_unit,), itemsize=sizeof(int), format='i')
  *     for i in range(n_unit):
  *         clusters[i] = -1             # <<<<<<<<<<<<<<
@@ -1773,7 +1752,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_constru
     *((int *) ( /* dim=0 */ (__pyx_v_clusters.data + __pyx_t_7 * __pyx_v_clusters.strides[0]) )) = -1;
   }
 
-  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":93
+  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":89
  *         clusters[i] = -1
  *     # loop over lower diagonal of bond states matrix
  *     for i in range(1, n_unit):             # <<<<<<<<<<<<<<
@@ -1784,7 +1763,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_constru
   for (__pyx_t_6 = 1; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
     __pyx_v_i = __pyx_t_6;
 
-    /* "bmtools/mcmc/swendsen_wang_helpers.pyx":94
+    /* "bmtools/mcmc/swendsen_wang_helpers.pyx":90
  *     # loop over lower diagonal of bond states matrix
  *     for i in range(1, n_unit):
  *         for j in range(i):             # <<<<<<<<<<<<<<
@@ -1795,7 +1774,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_constru
     for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
       __pyx_v_j = __pyx_t_9;
 
-      /* "bmtools/mcmc/swendsen_wang_helpers.pyx":96
+      /* "bmtools/mcmc/swendsen_wang_helpers.pyx":92
  *         for j in range(i):
  *             # skip if bond inactive
  *             if bond_states[i,j] == 0:             # <<<<<<<<<<<<<<
@@ -1807,7 +1786,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_constru
       __pyx_t_12 = (((*((unsigned char *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_bond_states.data + __pyx_t_10 * __pyx_v_bond_states.strides[0]) ) + __pyx_t_11 * __pyx_v_bond_states.strides[1]) ))) == 0) != 0);
       if (__pyx_t_12) {
 
-        /* "bmtools/mcmc/swendsen_wang_helpers.pyx":97
+        /* "bmtools/mcmc/swendsen_wang_helpers.pyx":93
  *             # skip if bond inactive
  *             if bond_states[i,j] == 0:
  *                 continue             # <<<<<<<<<<<<<<
@@ -1816,7 +1795,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_constru
  */
         goto __pyx_L7_continue;
 
-        /* "bmtools/mcmc/swendsen_wang_helpers.pyx":96
+        /* "bmtools/mcmc/swendsen_wang_helpers.pyx":92
  *         for j in range(i):
  *             # skip if bond inactive
  *             if bond_states[i,j] == 0:             # <<<<<<<<<<<<<<
@@ -1825,7 +1804,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_constru
  */
       }
 
-      /* "bmtools/mcmc/swendsen_wang_helpers.pyx":99
+      /* "bmtools/mcmc/swendsen_wang_helpers.pyx":95
  *                 continue
  *             # get cluster root indices for two units
  *             root_i = find_cluster_root(clusters, i)             # <<<<<<<<<<<<<<
@@ -1834,7 +1813,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_constru
  */
       __pyx_v_root_i = __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_find_cluster_root(__pyx_v_clusters, __pyx_v_i);
 
-      /* "bmtools/mcmc/swendsen_wang_helpers.pyx":100
+      /* "bmtools/mcmc/swendsen_wang_helpers.pyx":96
  *             # get cluster root indices for two units
  *             root_i = find_cluster_root(clusters, i)
  *             root_j = find_cluster_root(clusters, j)             # <<<<<<<<<<<<<<
@@ -1843,7 +1822,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_constru
  */
       __pyx_v_root_j = __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_find_cluster_root(__pyx_v_clusters, __pyx_v_j);
 
-      /* "bmtools/mcmc/swendsen_wang_helpers.pyx":102
+      /* "bmtools/mcmc/swendsen_wang_helpers.pyx":98
  *             root_j = find_cluster_root(clusters, j)
  *             # if not already in same cluster (i.e. same root) merge
  *             if root_i != root_j:             # <<<<<<<<<<<<<<
@@ -1853,7 +1832,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_constru
       __pyx_t_12 = ((__pyx_v_root_i != __pyx_v_root_j) != 0);
       if (__pyx_t_12) {
 
-        /* "bmtools/mcmc/swendsen_wang_helpers.pyx":106
+        /* "bmtools/mcmc/swendsen_wang_helpers.pyx":102
  *                 root_small, root_large =  (
  *                     (root_i, root_j)
  *                     if clusters[root_i] > clusters[root_j]             # <<<<<<<<<<<<<<
@@ -1864,7 +1843,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_constru
         __pyx_t_15 = __pyx_v_root_j;
         if ((((*((int *) ( /* dim=0 */ (__pyx_v_clusters.data + __pyx_t_14 * __pyx_v_clusters.strides[0]) ))) > (*((int *) ( /* dim=0 */ (__pyx_v_clusters.data + __pyx_t_15 * __pyx_v_clusters.strides[0]) )))) != 0)) {
 
-          /* "bmtools/mcmc/swendsen_wang_helpers.pyx":105
+          /* "bmtools/mcmc/swendsen_wang_helpers.pyx":101
  *                 # establish which of the two clusters is larger
  *                 root_small, root_large =  (
  *                     (root_i, root_j)             # <<<<<<<<<<<<<<
@@ -1876,7 +1855,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_constru
           __pyx_t_13 = __pyx_t_16;
         } else {
 
-          /* "bmtools/mcmc/swendsen_wang_helpers.pyx":107
+          /* "bmtools/mcmc/swendsen_wang_helpers.pyx":103
  *                     (root_i, root_j)
  *                     if clusters[root_i] > clusters[root_j]
  *                     else (root_j, root_i)             # <<<<<<<<<<<<<<
@@ -1888,7 +1867,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_constru
           __pyx_t_13 = __pyx_t_16;
         }
 
-        /* "bmtools/mcmc/swendsen_wang_helpers.pyx":105
+        /* "bmtools/mcmc/swendsen_wang_helpers.pyx":101
  *                 # establish which of the two clusters is larger
  *                 root_small, root_large =  (
  *                     (root_i, root_j)             # <<<<<<<<<<<<<<
@@ -1900,7 +1879,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_constru
         __pyx_v_root_small = __pyx_t_17;
         __pyx_v_root_large = __pyx_t_18;
 
-        /* "bmtools/mcmc/swendsen_wang_helpers.pyx":110
+        /* "bmtools/mcmc/swendsen_wang_helpers.pyx":106
  *                 )
  *                 # add bias of smaller cluster to larger
  *                 biases[root_large] += biases[root_small]             # <<<<<<<<<<<<<<
@@ -1911,7 +1890,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_constru
         __pyx_t_20 = __pyx_v_root_large;
         *((double *) ( /* dim=0 */ (__pyx_v_biases.data + __pyx_t_20 * __pyx_v_biases.strides[0]) )) += (*((double *) ( /* dim=0 */ (__pyx_v_biases.data + __pyx_t_19 * __pyx_v_biases.strides[0]) )));
 
-        /* "bmtools/mcmc/swendsen_wang_helpers.pyx":112
+        /* "bmtools/mcmc/swendsen_wang_helpers.pyx":108
  *                 biases[root_large] += biases[root_small]
  *                 # add size of smaller cluster to larger
  *                 clusters[root_large] += clusters[root_small]             # <<<<<<<<<<<<<<
@@ -1922,7 +1901,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_constru
         __pyx_t_22 = __pyx_v_root_large;
         *((int *) ( /* dim=0 */ (__pyx_v_clusters.data + __pyx_t_22 * __pyx_v_clusters.strides[0]) )) += (*((int *) ( /* dim=0 */ (__pyx_v_clusters.data + __pyx_t_21 * __pyx_v_clusters.strides[0]) )));
 
-        /* "bmtools/mcmc/swendsen_wang_helpers.pyx":114
+        /* "bmtools/mcmc/swendsen_wang_helpers.pyx":110
  *                 clusters[root_large] += clusters[root_small]
  *                 # redirect pointer of smaller cluster to larger
  *                 clusters[root_small] = root_large             # <<<<<<<<<<<<<<
@@ -1932,7 +1911,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_constru
         __pyx_t_23 = __pyx_v_root_small;
         *((int *) ( /* dim=0 */ (__pyx_v_clusters.data + __pyx_t_23 * __pyx_v_clusters.strides[0]) )) = __pyx_v_root_large;
 
-        /* "bmtools/mcmc/swendsen_wang_helpers.pyx":102
+        /* "bmtools/mcmc/swendsen_wang_helpers.pyx":98
  *             root_j = find_cluster_root(clusters, j)
  *             # if not already in same cluster (i.e. same root) merge
  *             if root_i != root_j:             # <<<<<<<<<<<<<<
@@ -1944,7 +1923,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_constru
     }
   }
 
-  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":115
+  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":111
  *                 # redirect pointer of smaller cluster to larger
  *                 clusters[root_small] = root_large
  *     return clusters             # <<<<<<<<<<<<<<
@@ -1955,7 +1934,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_constru
   __pyx_r = __pyx_v_clusters;
   goto __pyx_L0;
 
-  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":59
+  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":55
  * 
  * # use cpdef rather than cdef here to allow external calling by test suite
  * cpdef int[:] construct_clusters_and_update_biases(             # <<<<<<<<<<<<<<
@@ -2013,11 +1992,11 @@ static PyObject *__pyx_pw_7bmtools_4mcmc_21swendsen_wang_helpers_1construct_clus
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_biases)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("construct_clusters_and_update_biases", 1, 2, 2, 1); __PYX_ERR(0, 59, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("construct_clusters_and_update_biases", 1, 2, 2, 1); __PYX_ERR(0, 55, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "construct_clusters_and_update_biases") < 0)) __PYX_ERR(0, 59, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "construct_clusters_and_update_biases") < 0)) __PYX_ERR(0, 55, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2025,12 +2004,12 @@ static PyObject *__pyx_pw_7bmtools_4mcmc_21swendsen_wang_helpers_1construct_clus
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_bond_states = __Pyx_PyObject_to_MemoryviewSlice_dsds_unsigned_char(values[0]); if (unlikely(!__pyx_v_bond_states.memview)) __PYX_ERR(0, 60, __pyx_L3_error)
-    __pyx_v_biases = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[1]); if (unlikely(!__pyx_v_biases.memview)) __PYX_ERR(0, 60, __pyx_L3_error)
+    __pyx_v_bond_states = __Pyx_PyObject_to_MemoryviewSlice_dsds_unsigned_char(values[0]); if (unlikely(!__pyx_v_bond_states.memview)) __PYX_ERR(0, 56, __pyx_L3_error)
+    __pyx_v_biases = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[1]); if (unlikely(!__pyx_v_biases.memview)) __PYX_ERR(0, 56, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("construct_clusters_and_update_biases", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 59, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("construct_clusters_and_update_biases", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 55, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("bmtools.mcmc.swendsen_wang_helpers.construct_clusters_and_update_biases", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2050,8 +2029,8 @@ static PyObject *__pyx_pf_7bmtools_4mcmc_21swendsen_wang_helpers_construct_clust
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("construct_clusters_and_update_biases", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_construct_clusters_and_update_biases(__pyx_v_bond_states, __pyx_v_biases, 0); if (unlikely(!__pyx_t_1.memview)) __PYX_ERR(0, 59, __pyx_L1_error)
-  __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_t_1, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_construct_clusters_and_update_biases(__pyx_v_bond_states, __pyx_v_biases, 0); if (unlikely(!__pyx_t_1.memview)) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_t_1, 1, (PyObject *(*)(char *)) __pyx_memview_get_int, (int (*)(char *, PyObject *)) __pyx_memview_set_int, 0);; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 55, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __PYX_XDEC_MEMVIEW(&__pyx_t_1, 1);
   __pyx_r = __pyx_t_2;
@@ -2072,7 +2051,7 @@ static PyObject *__pyx_pf_7bmtools_4mcmc_21swendsen_wang_helpers_construct_clust
   return __pyx_r;
 }
 
-/* "bmtools/mcmc/swendsen_wang_helpers.pyx":117
+/* "bmtools/mcmc/swendsen_wang_helpers.pyx":113
  *     return clusters
  * 
  * cpdef double[:] calc_flip_probs_and_sample(             # <<<<<<<<<<<<<<
@@ -2105,7 +2084,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_calc_fl
   Py_ssize_t __pyx_t_15;
   __Pyx_RefNannySetupContext("calc_flip_probs_and_sample", 0);
 
-  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":142
+  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":138
  *     """
  *     cdef int i, root
  *     cdef int n_unit = clusters.shape[0]             # <<<<<<<<<<<<<<
@@ -2114,48 +2093,48 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_calc_fl
  */
   __pyx_v_n_unit = (__pyx_v_clusters.shape[0]);
 
-  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":146
+  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":142
  *     # signed probability values
  *     cdef double[:] flip_probs = view.array(
  *         shape=(n_unit,), itemsize=sizeof(double), format='d')             # <<<<<<<<<<<<<<
  *     for i in range(n_unit):
  *         flip_probs[i] = -2.
  */
-  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 142, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_n_unit); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_n_unit); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 142, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 142, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_shape, __pyx_t_3) < 0) __PYX_ERR(0, 146, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_shape, __pyx_t_3) < 0) __PYX_ERR(0, 142, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyInt_FromSize_t((sizeof(double))); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 146, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_FromSize_t((sizeof(double))); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 142, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_itemsize, __pyx_t_3) < 0) __PYX_ERR(0, 146, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_itemsize, __pyx_t_3) < 0) __PYX_ERR(0, 142, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 146, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 142, __pyx_L1_error)
 
-  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":145
+  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":141
  *     # initialise flip probs array to -2 values as outside valid range of
  *     # signed probability values
  *     cdef double[:] flip_probs = view.array(             # <<<<<<<<<<<<<<
  *         shape=(n_unit,), itemsize=sizeof(double), format='d')
  *     for i in range(n_unit):
  */
-  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 141, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(__pyx_t_3);
-  if (unlikely(!__pyx_t_4.memview)) __PYX_ERR(0, 145, __pyx_L1_error)
+  if (unlikely(!__pyx_t_4.memview)) __PYX_ERR(0, 141, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_flip_probs = __pyx_t_4;
   __pyx_t_4.memview = NULL;
   __pyx_t_4.data = NULL;
 
-  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":147
+  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":143
  *     cdef double[:] flip_probs = view.array(
  *         shape=(n_unit,), itemsize=sizeof(double), format='d')
  *     for i in range(n_unit):             # <<<<<<<<<<<<<<
@@ -2166,7 +2145,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_calc_fl
   for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
     __pyx_v_i = __pyx_t_6;
 
-    /* "bmtools/mcmc/swendsen_wang_helpers.pyx":148
+    /* "bmtools/mcmc/swendsen_wang_helpers.pyx":144
  *         shape=(n_unit,), itemsize=sizeof(double), format='d')
  *     for i in range(n_unit):
  *         flip_probs[i] = -2.             # <<<<<<<<<<<<<<
@@ -2177,7 +2156,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_calc_fl
     *((double *) ( /* dim=0 */ (__pyx_v_flip_probs.data + __pyx_t_7 * __pyx_v_flip_probs.strides[0]) )) = -2.;
   }
 
-  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":150
+  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":146
  *         flip_probs[i] = -2.
  *     # loop across all units and set flip probability and sample cluster state
  *     for i in range(n_unit):             # <<<<<<<<<<<<<<
@@ -2188,7 +2167,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_calc_fl
   for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
     __pyx_v_i = __pyx_t_6;
 
-    /* "bmtools/mcmc/swendsen_wang_helpers.pyx":151
+    /* "bmtools/mcmc/swendsen_wang_helpers.pyx":147
  *     # loop across all units and set flip probability and sample cluster state
  *     for i in range(n_unit):
  *         root = find_cluster_root(clusters, i)             # <<<<<<<<<<<<<<
@@ -2197,7 +2176,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_calc_fl
  */
     __pyx_v_root = __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_find_cluster_root(__pyx_v_clusters, __pyx_v_i);
 
-    /* "bmtools/mcmc/swendsen_wang_helpers.pyx":153
+    /* "bmtools/mcmc/swendsen_wang_helpers.pyx":149
  *         root = find_cluster_root(clusters, i)
  *         # check if probability of root calculated yet
  *         if flip_probs[root] == -2.:             # <<<<<<<<<<<<<<
@@ -2208,7 +2187,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_calc_fl
     __pyx_t_9 = (((*((double *) ( /* dim=0 */ (__pyx_v_flip_probs.data + __pyx_t_8 * __pyx_v_flip_probs.strides[0]) ))) == -2.) != 0);
     if (__pyx_t_9) {
 
-      /* "bmtools/mcmc/swendsen_wang_helpers.pyx":154
+      /* "bmtools/mcmc/swendsen_wang_helpers.pyx":150
  *         # check if probability of root calculated yet
  *         if flip_probs[root] == -2.:
  *             flip_probs[root] = 1. / (1. + exp(-biases[root]))             # <<<<<<<<<<<<<<
@@ -2219,7 +2198,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_calc_fl
       __pyx_t_11 = __pyx_v_root;
       *((double *) ( /* dim=0 */ (__pyx_v_flip_probs.data + __pyx_t_11 * __pyx_v_flip_probs.strides[0]) )) = (1. / (1. + exp((-(*((double *) ( /* dim=0 */ (__pyx_v_biases.data + __pyx_t_10 * __pyx_v_biases.strides[0]) )))))));
 
-      /* "bmtools/mcmc/swendsen_wang_helpers.pyx":156
+      /* "bmtools/mcmc/swendsen_wang_helpers.pyx":152
  *             flip_probs[root] = 1. / (1. + exp(-biases[root]))
  *             # sample flip sign and multiply by probability
  *             flip_probs[root] *= 2 * (rng.uniform() < flip_probs[root]) - 1             # <<<<<<<<<<<<<<
@@ -2230,7 +2209,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_calc_fl
       __pyx_t_13 = __pyx_v_root;
       *((double *) ( /* dim=0 */ (__pyx_v_flip_probs.data + __pyx_t_13 * __pyx_v_flip_probs.strides[0]) )) *= ((2 * (((struct __pyx_vtabstruct_7bmtools_4mcmc_17randomkit_wrapper_RandomKit *)__pyx_v_rng->__pyx_vtab)->uniform(__pyx_v_rng) < (*((double *) ( /* dim=0 */ (__pyx_v_flip_probs.data + __pyx_t_12 * __pyx_v_flip_probs.strides[0]) ))))) - 1);
 
-      /* "bmtools/mcmc/swendsen_wang_helpers.pyx":153
+      /* "bmtools/mcmc/swendsen_wang_helpers.pyx":149
  *         root = find_cluster_root(clusters, i)
  *         # check if probability of root calculated yet
  *         if flip_probs[root] == -2.:             # <<<<<<<<<<<<<<
@@ -2239,7 +2218,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_calc_fl
  */
     }
 
-    /* "bmtools/mcmc/swendsen_wang_helpers.pyx":158
+    /* "bmtools/mcmc/swendsen_wang_helpers.pyx":154
  *             flip_probs[root] *= 2 * (rng.uniform() < flip_probs[root]) - 1
  *         # propagate (signed) probability to all units in cluster
  *         flip_probs[i] = flip_probs[root]             # <<<<<<<<<<<<<<
@@ -2251,7 +2230,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_calc_fl
     *((double *) ( /* dim=0 */ (__pyx_v_flip_probs.data + __pyx_t_15 * __pyx_v_flip_probs.strides[0]) )) = (*((double *) ( /* dim=0 */ (__pyx_v_flip_probs.data + __pyx_t_14 * __pyx_v_flip_probs.strides[0]) )));
   }
 
-  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":159
+  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":155
  *         # propagate (signed) probability to all units in cluster
  *         flip_probs[i] = flip_probs[root]
  *     return flip_probs             # <<<<<<<<<<<<<<
@@ -2262,7 +2241,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_calc_fl
   __pyx_r = __pyx_v_flip_probs;
   goto __pyx_L0;
 
-  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":117
+  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":113
  *     return clusters
  * 
  * cpdef double[:] calc_flip_probs_and_sample(             # <<<<<<<<<<<<<<
@@ -2322,16 +2301,16 @@ static PyObject *__pyx_pw_7bmtools_4mcmc_21swendsen_wang_helpers_3calc_flip_prob
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_biases)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("calc_flip_probs_and_sample", 1, 3, 3, 1); __PYX_ERR(0, 117, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("calc_flip_probs_and_sample", 1, 3, 3, 1); __PYX_ERR(0, 113, __pyx_L3_error)
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_rng)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("calc_flip_probs_and_sample", 1, 3, 3, 2); __PYX_ERR(0, 117, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("calc_flip_probs_and_sample", 1, 3, 3, 2); __PYX_ERR(0, 113, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "calc_flip_probs_and_sample") < 0)) __PYX_ERR(0, 117, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "calc_flip_probs_and_sample") < 0)) __PYX_ERR(0, 113, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -2340,19 +2319,19 @@ static PyObject *__pyx_pw_7bmtools_4mcmc_21swendsen_wang_helpers_3calc_flip_prob
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
     }
-    __pyx_v_clusters = __Pyx_PyObject_to_MemoryviewSlice_ds_int(values[0]); if (unlikely(!__pyx_v_clusters.memview)) __PYX_ERR(0, 118, __pyx_L3_error)
-    __pyx_v_biases = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[1]); if (unlikely(!__pyx_v_biases.memview)) __PYX_ERR(0, 118, __pyx_L3_error)
+    __pyx_v_clusters = __Pyx_PyObject_to_MemoryviewSlice_ds_int(values[0]); if (unlikely(!__pyx_v_clusters.memview)) __PYX_ERR(0, 114, __pyx_L3_error)
+    __pyx_v_biases = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[1]); if (unlikely(!__pyx_v_biases.memview)) __PYX_ERR(0, 114, __pyx_L3_error)
     __pyx_v_rng = ((struct __pyx_obj_7bmtools_4mcmc_17randomkit_wrapper_RandomKit *)values[2]);
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("calc_flip_probs_and_sample", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 117, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("calc_flip_probs_and_sample", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 113, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("bmtools.mcmc.swendsen_wang_helpers.calc_flip_probs_and_sample", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_rng), __pyx_ptype_7bmtools_4mcmc_17randomkit_wrapper_RandomKit, 1, "rng", 0))) __PYX_ERR(0, 118, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_rng), __pyx_ptype_7bmtools_4mcmc_17randomkit_wrapper_RandomKit, 1, "rng", 0))) __PYX_ERR(0, 114, __pyx_L1_error)
   __pyx_r = __pyx_pf_7bmtools_4mcmc_21swendsen_wang_helpers_2calc_flip_probs_and_sample(__pyx_self, __pyx_v_clusters, __pyx_v_biases, __pyx_v_rng);
 
   /* function exit code */
@@ -2371,8 +2350,8 @@ static PyObject *__pyx_pf_7bmtools_4mcmc_21swendsen_wang_helpers_2calc_flip_prob
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("calc_flip_probs_and_sample", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_calc_flip_probs_and_sample(__pyx_v_clusters, __pyx_v_biases, __pyx_v_rng, 0); if (unlikely(!__pyx_t_1.memview)) __PYX_ERR(0, 117, __pyx_L1_error)
-  __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_t_1, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 117, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_calc_flip_probs_and_sample(__pyx_v_clusters, __pyx_v_biases, __pyx_v_rng, 0); if (unlikely(!__pyx_t_1.memview)) __PYX_ERR(0, 113, __pyx_L1_error)
+  __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_t_1, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 113, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __PYX_XDEC_MEMVIEW(&__pyx_t_1, 1);
   __pyx_r = __pyx_t_2;
@@ -2393,7 +2372,7 @@ static PyObject *__pyx_pf_7bmtools_4mcmc_21swendsen_wang_helpers_2calc_flip_prob
   return __pyx_r;
 }
 
-/* "bmtools/mcmc/swendsen_wang_helpers.pyx":161
+/* "bmtools/mcmc/swendsen_wang_helpers.pyx":157
  *     return flip_probs
  * 
  * cpdef double[:] sample_flip_states_given_bonds(             # <<<<<<<<<<<<<<
@@ -2411,7 +2390,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_sample_
   __Pyx_memviewslice __pyx_t_2 = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_RefNannySetupContext("sample_flip_states_given_bonds", 0);
 
-  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":187
+  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":183
  *         Instance of a RandomKit wrapper for pseudorandom number generation.
  *     """
  *     assert bond_states.shape[0] == bond_states.shape[1], (             # <<<<<<<<<<<<<<
@@ -2422,12 +2401,12 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_sample_
   if (unlikely(!Py_OptimizeFlag)) {
     if (unlikely(!(((__pyx_v_bond_states.shape[0]) == (__pyx_v_bond_states.shape[1])) != 0))) {
       PyErr_SetObject(PyExc_AssertionError, __pyx_kp_s_bond_states_array_must_be_a_squa);
-      __PYX_ERR(0, 187, __pyx_L1_error)
+      __PYX_ERR(0, 183, __pyx_L1_error)
     }
   }
   #endif
 
-  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":190
+  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":186
  *         'bond_states array must be a square matrix'
  *     )
  *     assert bond_states.shape[0] == biases.shape[0], (             # <<<<<<<<<<<<<<
@@ -2438,36 +2417,36 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_sample_
   if (unlikely(!Py_OptimizeFlag)) {
     if (unlikely(!(((__pyx_v_bond_states.shape[0]) == (__pyx_v_biases.shape[0])) != 0))) {
       PyErr_SetObject(PyExc_AssertionError, __pyx_kp_s_biases_must_be_1D_array_with_len);
-      __PYX_ERR(0, 190, __pyx_L1_error)
+      __PYX_ERR(0, 186, __pyx_L1_error)
     }
   }
   #endif
 
-  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":193
+  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":189
  *         'biases must be 1D array with length matching bond_states'
  *     )
  *     cdef int[:] clusters = construct_clusters_and_update_biases(             # <<<<<<<<<<<<<<
  *         bond_states, biases)
  *     cdef double[:] flip_probs = calc_flip_probs_and_sample(
  */
-  __pyx_t_1 = __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_construct_clusters_and_update_biases(__pyx_v_bond_states, __pyx_v_biases, 0); if (unlikely(!__pyx_t_1.memview)) __PYX_ERR(0, 193, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_construct_clusters_and_update_biases(__pyx_v_bond_states, __pyx_v_biases, 0); if (unlikely(!__pyx_t_1.memview)) __PYX_ERR(0, 189, __pyx_L1_error)
   __pyx_v_clusters = __pyx_t_1;
   __pyx_t_1.memview = NULL;
   __pyx_t_1.data = NULL;
 
-  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":195
+  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":191
  *     cdef int[:] clusters = construct_clusters_and_update_biases(
  *         bond_states, biases)
  *     cdef double[:] flip_probs = calc_flip_probs_and_sample(             # <<<<<<<<<<<<<<
  *         clusters, biases, rng)
  *     return flip_probs
  */
-  __pyx_t_2 = __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_calc_flip_probs_and_sample(__pyx_v_clusters, __pyx_v_biases, __pyx_v_rng, 0); if (unlikely(!__pyx_t_2.memview)) __PYX_ERR(0, 195, __pyx_L1_error)
+  __pyx_t_2 = __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_calc_flip_probs_and_sample(__pyx_v_clusters, __pyx_v_biases, __pyx_v_rng, 0); if (unlikely(!__pyx_t_2.memview)) __PYX_ERR(0, 191, __pyx_L1_error)
   __pyx_v_flip_probs = __pyx_t_2;
   __pyx_t_2.memview = NULL;
   __pyx_t_2.data = NULL;
 
-  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":197
+  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":193
  *     cdef double[:] flip_probs = calc_flip_probs_and_sample(
  *         clusters, biases, rng)
  *     return flip_probs             # <<<<<<<<<<<<<<
@@ -2476,7 +2455,7 @@ static __Pyx_memviewslice __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_sample_
   __pyx_r = __pyx_v_flip_probs;
   goto __pyx_L0;
 
-  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":161
+  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":157
  *     return flip_probs
  * 
  * cpdef double[:] sample_flip_states_given_bonds(             # <<<<<<<<<<<<<<
@@ -2535,16 +2514,16 @@ static PyObject *__pyx_pw_7bmtools_4mcmc_21swendsen_wang_helpers_5sample_flip_st
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_biases)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("sample_flip_states_given_bonds", 1, 3, 3, 1); __PYX_ERR(0, 161, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("sample_flip_states_given_bonds", 1, 3, 3, 1); __PYX_ERR(0, 157, __pyx_L3_error)
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_rng)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("sample_flip_states_given_bonds", 1, 3, 3, 2); __PYX_ERR(0, 161, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("sample_flip_states_given_bonds", 1, 3, 3, 2); __PYX_ERR(0, 157, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "sample_flip_states_given_bonds") < 0)) __PYX_ERR(0, 161, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "sample_flip_states_given_bonds") < 0)) __PYX_ERR(0, 157, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -2553,19 +2532,19 @@ static PyObject *__pyx_pw_7bmtools_4mcmc_21swendsen_wang_helpers_5sample_flip_st
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
     }
-    __pyx_v_bond_states = __Pyx_PyObject_to_MemoryviewSlice_dsds_unsigned_char(values[0]); if (unlikely(!__pyx_v_bond_states.memview)) __PYX_ERR(0, 162, __pyx_L3_error)
-    __pyx_v_biases = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[1]); if (unlikely(!__pyx_v_biases.memview)) __PYX_ERR(0, 162, __pyx_L3_error)
+    __pyx_v_bond_states = __Pyx_PyObject_to_MemoryviewSlice_dsds_unsigned_char(values[0]); if (unlikely(!__pyx_v_bond_states.memview)) __PYX_ERR(0, 158, __pyx_L3_error)
+    __pyx_v_biases = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[1]); if (unlikely(!__pyx_v_biases.memview)) __PYX_ERR(0, 158, __pyx_L3_error)
     __pyx_v_rng = ((struct __pyx_obj_7bmtools_4mcmc_17randomkit_wrapper_RandomKit *)values[2]);
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("sample_flip_states_given_bonds", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 161, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("sample_flip_states_given_bonds", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 157, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("bmtools.mcmc.swendsen_wang_helpers.sample_flip_states_given_bonds", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_rng), __pyx_ptype_7bmtools_4mcmc_17randomkit_wrapper_RandomKit, 1, "rng", 0))) __PYX_ERR(0, 162, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_rng), __pyx_ptype_7bmtools_4mcmc_17randomkit_wrapper_RandomKit, 1, "rng", 0))) __PYX_ERR(0, 158, __pyx_L1_error)
   __pyx_r = __pyx_pf_7bmtools_4mcmc_21swendsen_wang_helpers_4sample_flip_states_given_bonds(__pyx_self, __pyx_v_bond_states, __pyx_v_biases, __pyx_v_rng);
 
   /* function exit code */
@@ -2584,8 +2563,8 @@ static PyObject *__pyx_pf_7bmtools_4mcmc_21swendsen_wang_helpers_4sample_flip_st
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("sample_flip_states_given_bonds", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_sample_flip_states_given_bonds(__pyx_v_bond_states, __pyx_v_biases, __pyx_v_rng, 0); if (unlikely(!__pyx_t_1.memview)) __PYX_ERR(0, 161, __pyx_L1_error)
-  __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_t_1, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 161, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_7bmtools_4mcmc_21swendsen_wang_helpers_sample_flip_states_given_bonds(__pyx_v_bond_states, __pyx_v_biases, __pyx_v_rng, 0); if (unlikely(!__pyx_t_1.memview)) __PYX_ERR(0, 157, __pyx_L1_error)
+  __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_t_1, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 157, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __PYX_XDEC_MEMVIEW(&__pyx_t_1, 1);
   __pyx_r = __pyx_t_2;
@@ -14858,7 +14837,7 @@ static struct PyModuleDef __pyx_moduledef = {
     PyModuleDef_HEAD_INIT,
   #endif
     "swendsen_wang_helpers",
-    __pyx_k_Swendsen_Wang_helper_functions, /* m_doc */
+    __pyx_k_Swendsen_Wang_helper_functions_C, /* m_doc */
     -1, /* m_size */
     __pyx_methods /* m_methods */,
     NULL, /* m_reload */
@@ -14873,15 +14852,12 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Buffer_view_does_not_expose_stri, __pyx_k_Buffer_view_does_not_expose_stri, sizeof(__pyx_k_Buffer_view_does_not_expose_stri), 0, 0, 1, 0},
   {&__pyx_kp_s_Can_only_create_a_buffer_that_is, __pyx_k_Can_only_create_a_buffer_that_is, sizeof(__pyx_k_Can_only_create_a_buffer_that_is), 0, 0, 1, 0},
   {&__pyx_kp_s_Cannot_index_with_type_s, __pyx_k_Cannot_index_with_type_s, sizeof(__pyx_k_Cannot_index_with_type_s), 0, 0, 1, 0},
-  {&__pyx_kp_s_Copyright_2015_Matt_Graham, __pyx_k_Copyright_2015_Matt_Graham, sizeof(__pyx_k_Copyright_2015_Matt_Graham), 0, 0, 1, 0},
   {&__pyx_n_s_Ellipsis, __pyx_k_Ellipsis, sizeof(__pyx_k_Ellipsis), 0, 0, 1, 1},
   {&__pyx_kp_s_Empty_shape_tuple_for_cython_arr, __pyx_k_Empty_shape_tuple_for_cython_arr, sizeof(__pyx_k_Empty_shape_tuple_for_cython_arr), 0, 0, 1, 0},
   {&__pyx_n_s_IndexError, __pyx_k_IndexError, sizeof(__pyx_k_IndexError), 0, 0, 1, 1},
   {&__pyx_kp_s_Indirect_dimensions_not_supporte, __pyx_k_Indirect_dimensions_not_supporte, sizeof(__pyx_k_Indirect_dimensions_not_supporte), 0, 0, 1, 0},
   {&__pyx_kp_s_Invalid_mode_expected_c_or_fortr, __pyx_k_Invalid_mode_expected_c_or_fortr, sizeof(__pyx_k_Invalid_mode_expected_c_or_fortr), 0, 0, 1, 0},
   {&__pyx_kp_s_Invalid_shape_in_axis_d_d, __pyx_k_Invalid_shape_in_axis_d_d, sizeof(__pyx_k_Invalid_shape_in_axis_d_d), 0, 0, 1, 0},
-  {&__pyx_n_s_MIT, __pyx_k_MIT, sizeof(__pyx_k_MIT), 0, 0, 1, 1},
-  {&__pyx_kp_s_Matt_Graham, __pyx_k_Matt_Graham, sizeof(__pyx_k_Matt_Graham), 0, 0, 1, 0},
   {&__pyx_n_s_MemoryError, __pyx_k_MemoryError, sizeof(__pyx_k_MemoryError), 0, 0, 1, 1},
   {&__pyx_kp_s_MemoryView_of_r_at_0x_x, __pyx_k_MemoryView_of_r_at_0x_x, sizeof(__pyx_k_MemoryView_of_r_at_0x_x), 0, 0, 1, 0},
   {&__pyx_kp_s_MemoryView_of_r_object, __pyx_k_MemoryView_of_r_object, sizeof(__pyx_k_MemoryView_of_r_object), 0, 0, 1, 0},
@@ -14891,7 +14867,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Unable_to_convert_item_to_object, __pyx_k_Unable_to_convert_item_to_object, sizeof(__pyx_k_Unable_to_convert_item_to_object), 0, 0, 1, 0},
   {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
   {&__pyx_n_s_allocate_buffer, __pyx_k_allocate_buffer, sizeof(__pyx_k_allocate_buffer), 0, 0, 1, 1},
-  {&__pyx_n_s_authors, __pyx_k_authors, sizeof(__pyx_k_authors), 0, 0, 1, 1},
   {&__pyx_n_s_base, __pyx_k_base, sizeof(__pyx_k_base), 0, 0, 1, 1},
   {&__pyx_n_s_biases, __pyx_k_biases, sizeof(__pyx_k_biases), 0, 0, 1, 1},
   {&__pyx_kp_s_biases_must_be_1D_array_with_len, __pyx_k_biases_must_be_1D_array_with_len, sizeof(__pyx_k_biases_must_be_1D_array_with_len), 0, 0, 1, 0},
@@ -14903,7 +14878,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_clusters, __pyx_k_clusters, sizeof(__pyx_k_clusters), 0, 0, 1, 1},
   {&__pyx_kp_s_contiguous_and_direct, __pyx_k_contiguous_and_direct, sizeof(__pyx_k_contiguous_and_direct), 0, 0, 1, 0},
   {&__pyx_kp_s_contiguous_and_indirect, __pyx_k_contiguous_and_indirect, sizeof(__pyx_k_contiguous_and_indirect), 0, 0, 1, 0},
-  {&__pyx_n_s_copyright, __pyx_k_copyright, sizeof(__pyx_k_copyright), 0, 0, 1, 1},
   {&__pyx_n_s_d, __pyx_k_d, sizeof(__pyx_k_d), 0, 0, 1, 1},
   {&__pyx_n_s_dtype_is_object, __pyx_k_dtype_is_object, sizeof(__pyx_k_dtype_is_object), 0, 0, 1, 1},
   {&__pyx_n_s_encode, __pyx_k_encode, sizeof(__pyx_k_encode), 0, 0, 1, 1},
@@ -14919,7 +14893,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
   {&__pyx_n_s_itemsize, __pyx_k_itemsize, sizeof(__pyx_k_itemsize), 0, 0, 1, 1},
   {&__pyx_kp_s_itemsize_0_for_cython_array, __pyx_k_itemsize_0_for_cython_array, sizeof(__pyx_k_itemsize_0_for_cython_array), 0, 0, 1, 0},
-  {&__pyx_n_s_license, __pyx_k_license, sizeof(__pyx_k_license), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_memview, __pyx_k_memview, sizeof(__pyx_k_memview), 0, 0, 1, 1},
   {&__pyx_n_s_mode, __pyx_k_mode, sizeof(__pyx_k_mode), 0, 0, 1, 1},
@@ -14948,7 +14921,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 86, __pyx_L1_error)
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(1, 131, __pyx_L1_error)
   __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(1, 146, __pyx_L1_error)
   __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(1, 149, __pyx_L1_error)
@@ -15231,7 +15204,7 @@ PyMODINIT_FUNC PyInit_swendsen_wang_helpers(void)
   #endif
   /*--- Module creation code ---*/
   #if PY_MAJOR_VERSION < 3
-  __pyx_m = Py_InitModule4("swendsen_wang_helpers", __pyx_methods, __pyx_k_Swendsen_Wang_helper_functions, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
+  __pyx_m = Py_InitModule4("swendsen_wang_helpers", __pyx_methods, __pyx_k_Swendsen_Wang_helper_functions_C, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
   #else
   __pyx_m = PyModule_Create(&__pyx_moduledef);
   #endif
@@ -15303,8 +15276,8 @@ PyMODINIT_FUNC PyInit_swendsen_wang_helpers(void)
   if (__Pyx_SetVtable(__pyx_type___pyx_memoryviewslice.tp_dict, __pyx_vtabptr__memoryviewslice) < 0) __PYX_ERR(1, 951, __pyx_L1_error)
   __pyx_memoryviewslice_type = &__pyx_type___pyx_memoryviewslice;
   /*--- Type import code ---*/
-  __pyx_ptype_7bmtools_4mcmc_17randomkit_wrapper_RandomKit = __Pyx_ImportType("bmtools.mcmc.randomkit_wrapper", "RandomKit", sizeof(struct __pyx_obj_7bmtools_4mcmc_17randomkit_wrapper_RandomKit), 1); if (unlikely(!__pyx_ptype_7bmtools_4mcmc_17randomkit_wrapper_RandomKit)) __PYX_ERR(2, 26, __pyx_L1_error)
-  __pyx_vtabptr_7bmtools_4mcmc_17randomkit_wrapper_RandomKit = (struct __pyx_vtabstruct_7bmtools_4mcmc_17randomkit_wrapper_RandomKit*)__Pyx_GetVtable(__pyx_ptype_7bmtools_4mcmc_17randomkit_wrapper_RandomKit->tp_dict); if (unlikely(!__pyx_vtabptr_7bmtools_4mcmc_17randomkit_wrapper_RandomKit)) __PYX_ERR(2, 26, __pyx_L1_error)
+  __pyx_ptype_7bmtools_4mcmc_17randomkit_wrapper_RandomKit = __Pyx_ImportType("bmtools.mcmc.randomkit_wrapper", "RandomKit", sizeof(struct __pyx_obj_7bmtools_4mcmc_17randomkit_wrapper_RandomKit), 1); if (unlikely(!__pyx_ptype_7bmtools_4mcmc_17randomkit_wrapper_RandomKit)) __PYX_ERR(2, 21, __pyx_L1_error)
+  __pyx_vtabptr_7bmtools_4mcmc_17randomkit_wrapper_RandomKit = (struct __pyx_vtabstruct_7bmtools_4mcmc_17randomkit_wrapper_RandomKit*)__Pyx_GetVtable(__pyx_ptype_7bmtools_4mcmc_17randomkit_wrapper_RandomKit->tp_dict); if (unlikely(!__pyx_vtabptr_7bmtools_4mcmc_17randomkit_wrapper_RandomKit)) __PYX_ERR(2, 21, __pyx_L1_error)
   /*--- Variable import code ---*/
   /*--- Function import code ---*/
   /*--- Execution code ---*/
@@ -15312,73 +15285,10 @@ PyMODINIT_FUNC PyInit_swendsen_wang_helpers(void)
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":28
- * """
- * 
- * __authors__ = 'Matt Graham'             # <<<<<<<<<<<<<<
- * __copyright__ = 'Copyright 2015, Matt Graham'
- * __license__ = 'MIT'
- */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_authors, __pyx_kp_s_Matt_Graham) < 0) __PYX_ERR(0, 28, __pyx_L1_error)
-
-  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":29
- * 
- * __authors__ = 'Matt Graham'
- * __copyright__ = 'Copyright 2015, Matt Graham'             # <<<<<<<<<<<<<<
- * __license__ = 'MIT'
- * 
- */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_copyright, __pyx_kp_s_Copyright_2015_Matt_Graham) < 0) __PYX_ERR(0, 29, __pyx_L1_error)
-
-  /* "bmtools/mcmc/swendsen_wang_helpers.pyx":30
- * __authors__ = 'Matt Graham'
- * __copyright__ = 'Copyright 2015, Matt Graham'
- * __license__ = 'MIT'             # <<<<<<<<<<<<<<
- * 
- * cimport randomkit_wrapper as rk
- */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_license, __pyx_n_s_MIT) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
-
-  /* "bmtools/mcmc/shared_defs.pxd":5
- * """
- * 
- * __authors__ = 'Matt Graham'             # <<<<<<<<<<<<<<
- * __copyright__ = 'Copyright 2015, Matt Graham'
- * __license__ = 'MIT'
- */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_authors, __pyx_kp_s_Matt_Graham) < 0) __PYX_ERR(3, 5, __pyx_L1_error)
-
-  /* "bmtools/mcmc/shared_defs.pxd":6
- * 
- * __authors__ = 'Matt Graham'
- * __copyright__ = 'Copyright 2015, Matt Graham'             # <<<<<<<<<<<<<<
- * __license__ = 'MIT'
- * 
- */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_copyright, __pyx_kp_s_Copyright_2015_Matt_Graham) < 0) __PYX_ERR(3, 6, __pyx_L1_error)
-
-  /* "bmtools/mcmc/shared_defs.pxd":7
- * __authors__ = 'Matt Graham'
- * __copyright__ = 'Copyright 2015, Matt Graham'
- * __license__ = 'MIT'             # <<<<<<<<<<<<<<
- * 
- * # Use exponential function from C math library as faster than native
- */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_license, __pyx_n_s_MIT) < 0) __PYX_ERR(3, 7, __pyx_L1_error)
-
-  /* "bmtools/mcmc/shared_defs.pxd":19
- * # cython arrays with this type.
- * ctypedef signed char state_t
- * cdef char* state_t_code = 'c'             # <<<<<<<<<<<<<<
- * #ctypedef int state_t
- * #cdef char state_t_code = 'i'
- */
-  __pyx_v_7bmtools_4mcmc_21swendsen_wang_helpers_state_t_code = ((char *)"c");
-
   /* "bmtools/mcmc/swendsen_wang_helpers.pyx":1
- * """             # <<<<<<<<<<<<<<
- * ==============================
- * Swendsen-Wang helper functions
+ * # -*- coding: utf-8 -*-             # <<<<<<<<<<<<<<
+ * """Swendsen-Wang helper functions.
+ * 
  */
   __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);

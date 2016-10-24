@@ -1,7 +1,5 @@
-"""
-==============================================
-Irreversible two-unit Boltzmann machine sampler
-===============================================
+# -*- coding: utf-8 -*-
+"""Irreversible two-unit Boltzmann machine sampler.
 
 Boltzmann machine sampler with irreversible two-unit update dynamics.
 
@@ -10,12 +8,9 @@ of sequential composition of irreversible dynamics which resample states
 of pairs of units at a time.
 """
 
-__authors__ = 'Matt Graham'
-__copyright__ = 'Copyright 2015, Matt Graham'
-__license__ = 'MIT'
-
 cimport randomkit_wrapper as rk
-include "shared_defs.pxd"
+from bmtools.exact.helpers cimport state_t
+
 
 cdef inline void argsort_4(double seq[4], int order[4]):
     """ Explicit five comparison ascending argsort of four values """
@@ -33,6 +28,7 @@ cdef inline void argsort_4(double seq[4], int order[4]):
         order[1], order[3] = order[3], order[1]
     if seq[order[1]]> seq[order[2]]:
         order[1], order[2] = order[2], order[1]
+
 
 cdef class IrreversibleTwoUnitSampler:
 

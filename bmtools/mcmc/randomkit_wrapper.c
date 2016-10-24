@@ -7,6 +7,8 @@
             "bmtools/mcmc/randomkit.h"
         ], 
         "extra_compile_args": [
+            "-O3", 
+            "-ffast-math", 
             "-fopenmp"
         ]
     }, 
@@ -506,8 +508,8 @@ static const char *__pyx_f[] = {
 /*--- Type declarations ---*/
 struct __pyx_obj_7bmtools_4mcmc_17randomkit_wrapper_RandomKit;
 
-/* "bmtools/mcmc/randomkit_wrapper.pxd":26
- *     long rk_interval(unsigned long maximum, rk_state *state)
+/* "bmtools/mcmc/randomkit_wrapper.pxd":21
+ * 
  * 
  * cdef class RandomKit:             # <<<<<<<<<<<<<<
  *     cdef rk_state *state
@@ -521,8 +523,8 @@ struct __pyx_obj_7bmtools_4mcmc_17randomkit_wrapper_RandomKit {
 
 
 
-/* "bmtools/mcmc/randomkit_wrapper.pyx":18
- * from libc cimport stdlib
+/* "bmtools/mcmc/randomkit_wrapper.pyx":13
+ * 
  * 
  * cdef class RandomKit:             # <<<<<<<<<<<<<<
  * 
@@ -691,25 +693,13 @@ int __pyx_module_is_main_bmtools__mcmc__randomkit_wrapper = 0;
 
 /* Implementation of 'bmtools.mcmc.randomkit_wrapper' */
 static PyObject *__pyx_builtin_MemoryError;
-static const char __pyx_k_MIT[] = "MIT";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_seed[] = "seed";
 static const char __pyx_k_test[] = "__test__";
-static const char __pyx_k_authors[] = "__authors__";
-static const char __pyx_k_license[] = "__license__";
-static const char __pyx_k_copyright[] = "__copyright__";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
-static const char __pyx_k_Matt_Graham[] = "Matt Graham";
 static const char __pyx_k_MemoryError[] = "MemoryError";
-static const char __pyx_k_Copyright_2015_Matt_Graham[] = "Copyright 2015, Matt Graham";
-static const char __pyx_k_Random_kit_wrapper_class_Implem[] = "\n========================\nRandom kit wrapper class\n========================\n\nImplementation of a basic Cython wrapper class around the 'Random kit' library\nby Jean-Sebastien Roy. Intended for use in other Cython modules as a more\nrobust replacement for C stdlib rand().\n";
-static PyObject *__pyx_kp_s_Copyright_2015_Matt_Graham;
-static PyObject *__pyx_n_s_MIT;
-static PyObject *__pyx_kp_s_Matt_Graham;
+static const char __pyx_k_Random_kit_wrapper_class_Impleme[] = "Random kit wrapper class.\n\nImplementation of a basic Cython wrapper class around the 'Random kit' library\nby Jean-Sebastien Roy. Intended for use in other Cython modules as a more\nrobust replacement for C stdlib rand().\n";
 static PyObject *__pyx_n_s_MemoryError;
-static PyObject *__pyx_n_s_authors;
-static PyObject *__pyx_n_s_copyright;
-static PyObject *__pyx_n_s_license;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_pyx_vtable;
 static PyObject *__pyx_n_s_seed;
@@ -719,7 +709,7 @@ static int __pyx_pf_7bmtools_4mcmc_17randomkit_wrapper_9RandomKit_2__init__(stru
 static void __pyx_pf_7bmtools_4mcmc_17randomkit_wrapper_9RandomKit_4__dealloc__(struct __pyx_obj_7bmtools_4mcmc_17randomkit_wrapper_RandomKit *__pyx_v_self); /* proto */
 static PyObject *__pyx_tp_new_7bmtools_4mcmc_17randomkit_wrapper_RandomKit(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 
-/* "bmtools/mcmc/randomkit_wrapper.pyx":27
+/* "bmtools/mcmc/randomkit_wrapper.pyx":22
  *     """
  * 
  *     def __cinit__(RandomKit self):             # <<<<<<<<<<<<<<
@@ -749,7 +739,7 @@ static int __pyx_pf_7bmtools_4mcmc_17randomkit_wrapper_9RandomKit___cinit__(stru
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "bmtools/mcmc/randomkit_wrapper.pyx":28
+  /* "bmtools/mcmc/randomkit_wrapper.pyx":23
  * 
  *     def __cinit__(RandomKit self):
  *         self.state = <rk_state*> stdlib.malloc(sizeof(rk_state))             # <<<<<<<<<<<<<<
@@ -758,7 +748,7 @@ static int __pyx_pf_7bmtools_4mcmc_17randomkit_wrapper_9RandomKit___cinit__(stru
  */
   __pyx_v_self->state = ((rk_state *)malloc((sizeof(rk_state))));
 
-  /* "bmtools/mcmc/randomkit_wrapper.pyx":29
+  /* "bmtools/mcmc/randomkit_wrapper.pyx":24
  *     def __cinit__(RandomKit self):
  *         self.state = <rk_state*> stdlib.malloc(sizeof(rk_state))
  *         if (self.state == NULL):             # <<<<<<<<<<<<<<
@@ -768,16 +758,16 @@ static int __pyx_pf_7bmtools_4mcmc_17randomkit_wrapper_9RandomKit___cinit__(stru
   __pyx_t_1 = ((__pyx_v_self->state == NULL) != 0);
   if (__pyx_t_1) {
 
-    /* "bmtools/mcmc/randomkit_wrapper.pyx":30
+    /* "bmtools/mcmc/randomkit_wrapper.pyx":25
  *         self.state = <rk_state*> stdlib.malloc(sizeof(rk_state))
  *         if (self.state == NULL):
  *             raise MemoryError             # <<<<<<<<<<<<<<
  * 
  *     def __init__(RandomKit self, unsigned long seed):
  */
-    PyErr_NoMemory(); __PYX_ERR(0, 30, __pyx_L1_error)
+    PyErr_NoMemory(); __PYX_ERR(0, 25, __pyx_L1_error)
 
-    /* "bmtools/mcmc/randomkit_wrapper.pyx":29
+    /* "bmtools/mcmc/randomkit_wrapper.pyx":24
  *     def __cinit__(RandomKit self):
  *         self.state = <rk_state*> stdlib.malloc(sizeof(rk_state))
  *         if (self.state == NULL):             # <<<<<<<<<<<<<<
@@ -786,7 +776,7 @@ static int __pyx_pf_7bmtools_4mcmc_17randomkit_wrapper_9RandomKit___cinit__(stru
  */
   }
 
-  /* "bmtools/mcmc/randomkit_wrapper.pyx":27
+  /* "bmtools/mcmc/randomkit_wrapper.pyx":22
  *     """
  * 
  *     def __cinit__(RandomKit self):             # <<<<<<<<<<<<<<
@@ -805,7 +795,7 @@ static int __pyx_pf_7bmtools_4mcmc_17randomkit_wrapper_9RandomKit___cinit__(stru
   return __pyx_r;
 }
 
-/* "bmtools/mcmc/randomkit_wrapper.pyx":32
+/* "bmtools/mcmc/randomkit_wrapper.pyx":27
  *             raise MemoryError
  * 
  *     def __init__(RandomKit self, unsigned long seed):             # <<<<<<<<<<<<<<
@@ -838,18 +828,18 @@ static int __pyx_pw_7bmtools_4mcmc_17randomkit_wrapper_9RandomKit_3__init__(PyOb
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 32, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 27, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
     }
-    __pyx_v_seed = __Pyx_PyInt_As_unsigned_long(values[0]); if (unlikely((__pyx_v_seed == (unsigned long)-1) && PyErr_Occurred())) __PYX_ERR(0, 32, __pyx_L3_error)
+    __pyx_v_seed = __Pyx_PyInt_As_unsigned_long(values[0]); if (unlikely((__pyx_v_seed == (unsigned long)-1) && PyErr_Occurred())) __PYX_ERR(0, 27, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 32, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 27, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("bmtools.mcmc.randomkit_wrapper.RandomKit.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -867,7 +857,7 @@ static int __pyx_pf_7bmtools_4mcmc_17randomkit_wrapper_9RandomKit_2__init__(stru
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "bmtools/mcmc/randomkit_wrapper.pyx":33
+  /* "bmtools/mcmc/randomkit_wrapper.pyx":28
  * 
  *     def __init__(RandomKit self, unsigned long seed):
  *         rk_seed(seed, self.state)             # <<<<<<<<<<<<<<
@@ -876,7 +866,7 @@ static int __pyx_pf_7bmtools_4mcmc_17randomkit_wrapper_9RandomKit_2__init__(stru
  */
   rk_seed(__pyx_v_seed, __pyx_v_self->state);
 
-  /* "bmtools/mcmc/randomkit_wrapper.pyx":32
+  /* "bmtools/mcmc/randomkit_wrapper.pyx":27
  *             raise MemoryError
  * 
  *     def __init__(RandomKit self, unsigned long seed):             # <<<<<<<<<<<<<<
@@ -890,7 +880,7 @@ static int __pyx_pf_7bmtools_4mcmc_17randomkit_wrapper_9RandomKit_2__init__(stru
   return __pyx_r;
 }
 
-/* "bmtools/mcmc/randomkit_wrapper.pyx":35
+/* "bmtools/mcmc/randomkit_wrapper.pyx":30
  *         rk_seed(seed, self.state)
  * 
  *     def __dealloc__(RandomKit self):             # <<<<<<<<<<<<<<
@@ -914,7 +904,7 @@ static void __pyx_pf_7bmtools_4mcmc_17randomkit_wrapper_9RandomKit_4__dealloc__(
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "bmtools/mcmc/randomkit_wrapper.pyx":36
+  /* "bmtools/mcmc/randomkit_wrapper.pyx":31
  * 
  *     def __dealloc__(RandomKit self):
  *         if self.state:             # <<<<<<<<<<<<<<
@@ -924,7 +914,7 @@ static void __pyx_pf_7bmtools_4mcmc_17randomkit_wrapper_9RandomKit_4__dealloc__(
   __pyx_t_1 = (__pyx_v_self->state != 0);
   if (__pyx_t_1) {
 
-    /* "bmtools/mcmc/randomkit_wrapper.pyx":37
+    /* "bmtools/mcmc/randomkit_wrapper.pyx":32
  *     def __dealloc__(RandomKit self):
  *         if self.state:
  *             stdlib.free(self.state)             # <<<<<<<<<<<<<<
@@ -933,7 +923,7 @@ static void __pyx_pf_7bmtools_4mcmc_17randomkit_wrapper_9RandomKit_4__dealloc__(
  */
     free(__pyx_v_self->state);
 
-    /* "bmtools/mcmc/randomkit_wrapper.pyx":36
+    /* "bmtools/mcmc/randomkit_wrapper.pyx":31
  * 
  *     def __dealloc__(RandomKit self):
  *         if self.state:             # <<<<<<<<<<<<<<
@@ -942,7 +932,7 @@ static void __pyx_pf_7bmtools_4mcmc_17randomkit_wrapper_9RandomKit_4__dealloc__(
  */
   }
 
-  /* "bmtools/mcmc/randomkit_wrapper.pyx":35
+  /* "bmtools/mcmc/randomkit_wrapper.pyx":30
  *         rk_seed(seed, self.state)
  * 
  *     def __dealloc__(RandomKit self):             # <<<<<<<<<<<<<<
@@ -954,7 +944,7 @@ static void __pyx_pf_7bmtools_4mcmc_17randomkit_wrapper_9RandomKit_4__dealloc__(
   __Pyx_RefNannyFinishContext();
 }
 
-/* "bmtools/mcmc/randomkit_wrapper.pyx":39
+/* "bmtools/mcmc/randomkit_wrapper.pyx":34
  *             stdlib.free(self.state)
  * 
  *     cdef unsigned long integer(RandomKit self, unsigned long maximum):             # <<<<<<<<<<<<<<
@@ -967,7 +957,7 @@ static unsigned long __pyx_f_7bmtools_4mcmc_17randomkit_wrapper_9RandomKit_integ
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("integer", 0);
 
-  /* "bmtools/mcmc/randomkit_wrapper.pyx":48
+  /* "bmtools/mcmc/randomkit_wrapper.pyx":43
  *                 Maximum of integer range to sample from.
  *         """
  *         return rk_interval(maximum, self.state)             # <<<<<<<<<<<<<<
@@ -977,7 +967,7 @@ static unsigned long __pyx_f_7bmtools_4mcmc_17randomkit_wrapper_9RandomKit_integ
   __pyx_r = rk_interval(__pyx_v_maximum, __pyx_v_self->state);
   goto __pyx_L0;
 
-  /* "bmtools/mcmc/randomkit_wrapper.pyx":39
+  /* "bmtools/mcmc/randomkit_wrapper.pyx":34
  *             stdlib.free(self.state)
  * 
  *     cdef unsigned long integer(RandomKit self, unsigned long maximum):             # <<<<<<<<<<<<<<
@@ -991,7 +981,7 @@ static unsigned long __pyx_f_7bmtools_4mcmc_17randomkit_wrapper_9RandomKit_integ
   return __pyx_r;
 }
 
-/* "bmtools/mcmc/randomkit_wrapper.pyx":50
+/* "bmtools/mcmc/randomkit_wrapper.pyx":45
  *         return rk_interval(maximum, self.state)
  * 
  *     cdef double uniform(RandomKit self):             # <<<<<<<<<<<<<<
@@ -1004,7 +994,7 @@ static double __pyx_f_7bmtools_4mcmc_17randomkit_wrapper_9RandomKit_uniform(stru
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("uniform", 0);
 
-  /* "bmtools/mcmc/randomkit_wrapper.pyx":54
+  /* "bmtools/mcmc/randomkit_wrapper.pyx":49
  *         Returns a sample from a uniform distribution over [0,1].
  *         """
  *         return rk_double(self.state)             # <<<<<<<<<<<<<<
@@ -1014,7 +1004,7 @@ static double __pyx_f_7bmtools_4mcmc_17randomkit_wrapper_9RandomKit_uniform(stru
   __pyx_r = rk_double(__pyx_v_self->state);
   goto __pyx_L0;
 
-  /* "bmtools/mcmc/randomkit_wrapper.pyx":50
+  /* "bmtools/mcmc/randomkit_wrapper.pyx":45
  *         return rk_interval(maximum, self.state)
  * 
  *     cdef double uniform(RandomKit self):             # <<<<<<<<<<<<<<
@@ -1028,7 +1018,7 @@ static double __pyx_f_7bmtools_4mcmc_17randomkit_wrapper_9RandomKit_uniform(stru
   return __pyx_r;
 }
 
-/* "bmtools/mcmc/randomkit_wrapper.pyx":56
+/* "bmtools/mcmc/randomkit_wrapper.pyx":51
  *         return rk_double(self.state)
  * 
  *     cdef double gaussian(RandomKit self):             # <<<<<<<<<<<<<<
@@ -1041,7 +1031,7 @@ static double __pyx_f_7bmtools_4mcmc_17randomkit_wrapper_9RandomKit_gaussian(str
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("gaussian", 0);
 
-  /* "bmtools/mcmc/randomkit_wrapper.pyx":60
+  /* "bmtools/mcmc/randomkit_wrapper.pyx":55
  *         Returns a sample from a zero-mean unit-variance Gaussian distribution.
  *         """
  *         return rk_gauss(self.state)             # <<<<<<<<<<<<<<
@@ -1049,7 +1039,7 @@ static double __pyx_f_7bmtools_4mcmc_17randomkit_wrapper_9RandomKit_gaussian(str
   __pyx_r = rk_gauss(__pyx_v_self->state);
   goto __pyx_L0;
 
-  /* "bmtools/mcmc/randomkit_wrapper.pyx":56
+  /* "bmtools/mcmc/randomkit_wrapper.pyx":51
  *         return rk_double(self.state)
  * 
  *     cdef double gaussian(RandomKit self):             # <<<<<<<<<<<<<<
@@ -1172,7 +1162,7 @@ static struct PyModuleDef __pyx_moduledef = {
     PyModuleDef_HEAD_INIT,
   #endif
     "randomkit_wrapper",
-    __pyx_k_Random_kit_wrapper_class_Implem, /* m_doc */
+    __pyx_k_Random_kit_wrapper_class_Impleme, /* m_doc */
     -1, /* m_size */
     __pyx_methods /* m_methods */,
     NULL, /* m_reload */
@@ -1183,13 +1173,7 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
-  {&__pyx_kp_s_Copyright_2015_Matt_Graham, __pyx_k_Copyright_2015_Matt_Graham, sizeof(__pyx_k_Copyright_2015_Matt_Graham), 0, 0, 1, 0},
-  {&__pyx_n_s_MIT, __pyx_k_MIT, sizeof(__pyx_k_MIT), 0, 0, 1, 1},
-  {&__pyx_kp_s_Matt_Graham, __pyx_k_Matt_Graham, sizeof(__pyx_k_Matt_Graham), 0, 0, 1, 0},
   {&__pyx_n_s_MemoryError, __pyx_k_MemoryError, sizeof(__pyx_k_MemoryError), 0, 0, 1, 1},
-  {&__pyx_n_s_authors, __pyx_k_authors, sizeof(__pyx_k_authors), 0, 0, 1, 1},
-  {&__pyx_n_s_copyright, __pyx_k_copyright, sizeof(__pyx_k_copyright), 0, 0, 1, 1},
-  {&__pyx_n_s_license, __pyx_k_license, sizeof(__pyx_k_license), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_vtable, __pyx_k_pyx_vtable, sizeof(__pyx_k_pyx_vtable), 0, 0, 1, 1},
   {&__pyx_n_s_seed, __pyx_k_seed, sizeof(__pyx_k_seed), 0, 0, 1, 1},
@@ -1197,7 +1181,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(0, 30, __pyx_L1_error)
+  __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(0, 25, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -1265,7 +1249,7 @@ PyMODINIT_FUNC PyInit_randomkit_wrapper(void)
   #endif
   /*--- Module creation code ---*/
   #if PY_MAJOR_VERSION < 3
-  __pyx_m = Py_InitModule4("randomkit_wrapper", __pyx_methods, __pyx_k_Random_kit_wrapper_class_Implem, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
+  __pyx_m = Py_InitModule4("randomkit_wrapper", __pyx_methods, __pyx_k_Random_kit_wrapper_class_Impleme, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
   #else
   __pyx_m = PyModule_Create(&__pyx_moduledef);
   #endif
@@ -1305,10 +1289,10 @@ PyMODINIT_FUNC PyInit_randomkit_wrapper(void)
   __pyx_vtable_7bmtools_4mcmc_17randomkit_wrapper_RandomKit.integer = (unsigned long (*)(struct __pyx_obj_7bmtools_4mcmc_17randomkit_wrapper_RandomKit *, unsigned long))__pyx_f_7bmtools_4mcmc_17randomkit_wrapper_9RandomKit_integer;
   __pyx_vtable_7bmtools_4mcmc_17randomkit_wrapper_RandomKit.uniform = (double (*)(struct __pyx_obj_7bmtools_4mcmc_17randomkit_wrapper_RandomKit *))__pyx_f_7bmtools_4mcmc_17randomkit_wrapper_9RandomKit_uniform;
   __pyx_vtable_7bmtools_4mcmc_17randomkit_wrapper_RandomKit.gaussian = (double (*)(struct __pyx_obj_7bmtools_4mcmc_17randomkit_wrapper_RandomKit *))__pyx_f_7bmtools_4mcmc_17randomkit_wrapper_9RandomKit_gaussian;
-  if (PyType_Ready(&__pyx_type_7bmtools_4mcmc_17randomkit_wrapper_RandomKit) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7bmtools_4mcmc_17randomkit_wrapper_RandomKit) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
   __pyx_type_7bmtools_4mcmc_17randomkit_wrapper_RandomKit.tp_print = 0;
-  if (__Pyx_SetVtable(__pyx_type_7bmtools_4mcmc_17randomkit_wrapper_RandomKit.tp_dict, __pyx_vtabptr_7bmtools_4mcmc_17randomkit_wrapper_RandomKit) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
-  if (PyObject_SetAttrString(__pyx_m, "RandomKit", (PyObject *)&__pyx_type_7bmtools_4mcmc_17randomkit_wrapper_RandomKit) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_7bmtools_4mcmc_17randomkit_wrapper_RandomKit.tp_dict, __pyx_vtabptr_7bmtools_4mcmc_17randomkit_wrapper_RandomKit) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "RandomKit", (PyObject *)&__pyx_type_7bmtools_4mcmc_17randomkit_wrapper_RandomKit) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
   __pyx_ptype_7bmtools_4mcmc_17randomkit_wrapper_RandomKit = &__pyx_type_7bmtools_4mcmc_17randomkit_wrapper_RandomKit;
   /*--- Type import code ---*/
   /*--- Variable import code ---*/
@@ -1318,37 +1302,10 @@ PyMODINIT_FUNC PyInit_randomkit_wrapper(void)
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "bmtools/mcmc/randomkit_wrapper.pyx":11
- * """
- * 
- * __authors__ = "Matt Graham"             # <<<<<<<<<<<<<<
- * __copyright__ = "Copyright 2015, Matt Graham"
- * __license__ = "MIT"
- */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_authors, __pyx_kp_s_Matt_Graham) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
-
-  /* "bmtools/mcmc/randomkit_wrapper.pyx":12
- * 
- * __authors__ = "Matt Graham"
- * __copyright__ = "Copyright 2015, Matt Graham"             # <<<<<<<<<<<<<<
- * __license__ = "MIT"
- * 
- */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_copyright, __pyx_kp_s_Copyright_2015_Matt_Graham) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
-
-  /* "bmtools/mcmc/randomkit_wrapper.pyx":13
- * __authors__ = "Matt Graham"
- * __copyright__ = "Copyright 2015, Matt Graham"
- * __license__ = "MIT"             # <<<<<<<<<<<<<<
- * 
- * cimport randomkit_wrapper
- */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_license, __pyx_n_s_MIT) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
-
   /* "bmtools/mcmc/randomkit_wrapper.pyx":1
- * """             # <<<<<<<<<<<<<<
- * ========================
- * Random kit wrapper class
+ * # -*- coding: utf-8 -*-             # <<<<<<<<<<<<<<
+ * """Random kit wrapper class.
+ * 
  */
   __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);

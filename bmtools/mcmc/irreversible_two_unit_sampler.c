@@ -7,6 +7,8 @@
             "bmtools/mcmc/randomkit.h"
         ], 
         "extra_compile_args": [
+            "-O3", 
+            "-ffast-math", 
             "-fopenmp"
         ]
     }, 
@@ -604,14 +606,14 @@ typedef volatile __pyx_atomic_int_type __pyx_atomic_int;
 #endif
 
 
-/* "bmtools/mcmc/shared_defs.pxd":18
- * # values (-1/+1). Also specify a type code for use in initialising
- * # cython arrays with this type.
+/* "bmtools/exact/helpers.pxd":7
+ * """
+ * 
  * ctypedef signed char state_t             # <<<<<<<<<<<<<<
- * cdef char* state_t_code = 'c'
- * #ctypedef int state_t
+ * cdef char* state_t_code
+ * 
  */
-typedef signed char __pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t;
+typedef signed char __pyx_t_7bmtools_5exact_7helpers_state_t;
 
 /*--- Type declarations ---*/
 struct __pyx_obj_7bmtools_4mcmc_17randomkit_wrapper_RandomKit;
@@ -621,8 +623,8 @@ struct __pyx_MemviewEnum_obj;
 struct __pyx_memoryview_obj;
 struct __pyx_memoryviewslice_obj;
 
-/* "randomkit_wrapper.pxd":26
- *     long rk_interval(unsigned long maximum, rk_state *state)
+/* "randomkit_wrapper.pxd":21
+ * 
  * 
  * cdef class RandomKit:             # <<<<<<<<<<<<<<
  *     cdef rk_state *state
@@ -635,8 +637,8 @@ struct __pyx_obj_7bmtools_4mcmc_17randomkit_wrapper_RandomKit {
 };
 
 
-/* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":37
- *         order[1], order[2] = order[2], order[1]
+/* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":33
+ * 
  * 
  * cdef class IrreversibleTwoUnitSampler:             # <<<<<<<<<<<<<<
  * 
@@ -731,8 +733,8 @@ struct __pyx_memoryviewslice_obj {
 
 
 
-/* "randomkit_wrapper.pxd":26
- *     long rk_interval(unsigned long maximum, rk_state *state)
+/* "randomkit_wrapper.pxd":21
+ * 
  * 
  * cdef class RandomKit:             # <<<<<<<<<<<<<<
  *     cdef rk_state *state
@@ -761,8 +763,8 @@ struct __pyx_vtabstruct_array {
 static struct __pyx_vtabstruct_array *__pyx_vtabptr_array;
 
 
-/* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":20
- * from cython.view cimport array
+/* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":19
+ * 
  * 
  * cdef class IrreversibleTwoUnitSampler:             # <<<<<<<<<<<<<<
  *     """
@@ -1245,7 +1247,7 @@ static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_ds_dou
 static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dsds_int(PyObject *);
 
 /* ObjectToMemviewSlice.proto */
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t(PyObject *);
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_7bmtools_5exact_7helpers_state_t(PyObject *);
 
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_unsigned_long(unsigned long value);
@@ -1257,8 +1259,8 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_signed__char(signed char value);
 
 /* MemviewDtypeToObject.proto */
-static CYTHON_INLINE PyObject *__pyx_memview_get_nn___pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t(const char *itemp);
-static CYTHON_INLINE int __pyx_memview_set_nn___pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t(const char *itemp, PyObject *obj);
+static CYTHON_INLINE PyObject *__pyx_memview_get_nn___pyx_t_7bmtools_5exact_7helpers_state_t(const char *itemp);
+static CYTHON_INLINE int __pyx_memview_set_nn___pyx_t_7bmtools_5exact_7helpers_state_t(const char *itemp, PyObject *obj);
 
 /* MemviewSliceCopyTemplate.proto */
 static __Pyx_memviewslice
@@ -1286,31 +1288,10 @@ static CYTHON_INLINE char __Pyx_PyInt_As_char(PyObject *);
 static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *);
 
 /* ObjectToMemviewSlice.proto */
-static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t(PyObject *);
+static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_7bmtools_5exact_7helpers_state_t(PyObject *);
 
 /* CheckBinaryVersion.proto */
 static int __Pyx_check_binary_version(void);
-
-/* PyObjectSetAttrStr.proto */
-#if CYTHON_COMPILING_IN_CPYTHON
-#define __Pyx_PyObject_DelAttrStr(o,n) __Pyx_PyObject_SetAttrStr(o,n,NULL)
-static CYTHON_INLINE int __Pyx_PyObject_SetAttrStr(PyObject* obj, PyObject* attr_name, PyObject* value) {
-    PyTypeObject* tp = Py_TYPE(obj);
-    if (likely(tp->tp_setattro))
-        return tp->tp_setattro(obj, attr_name, value);
-#if PY_MAJOR_VERSION < 3
-    if (likely(tp->tp_setattr))
-        return tp->tp_setattr(obj, PyString_AS_STRING(attr_name), value);
-#endif
-    return PyObject_SetAttr(obj, attr_name, value);
-}
-#else
-#define __Pyx_PyObject_DelAttrStr(o,n)   PyObject_DelAttr(o,n)
-#define __Pyx_PyObject_SetAttrStr(o,n,v) PyObject_SetAttr(o,n,v)
-#endif
-
-/* VoidPtrExport.proto */
-static int __Pyx_ExportVoidPtr(PyObject *name, void *p, const char *sig);
 
 /* PyIdentifierFromString.proto */
 #if !defined(__Pyx_PyIdentifier_FromString)
@@ -1326,6 +1307,9 @@ static PyObject *__Pyx_ImportModule(const char *name);
 
 /* TypeImport.proto */
 static PyTypeObject *__Pyx_ImportType(const char *module_name, const char *class_name, size_t size, int strict);
+
+/* VoidPtrImport.proto */
+static int __Pyx_ImportVoidPtr(PyObject *module, const char *name, void **p, const char *sig);
 
 /* InitStrings.proto */
 static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
@@ -1346,6 +1330,10 @@ static PyObject *__pyx_memoryviewslice_assign_item_from_object(struct __pyx_memo
 /* Module declarations from 'bmtools.mcmc.randomkit_wrapper' */
 static PyTypeObject *__pyx_ptype_7bmtools_4mcmc_17randomkit_wrapper_RandomKit = 0;
 
+/* Module declarations from 'bmtools.exact.helpers' */
+static char **__pyx_vp_7bmtools_5exact_7helpers_state_t_code = 0;
+#define __pyx_v_7bmtools_5exact_7helpers_state_t_code (*__pyx_vp_7bmtools_5exact_7helpers_state_t_code)
+
 /* Module declarations from 'cython.view' */
 
 /* Module declarations from 'bmtools.mcmc.irreversible_two_unit_sampler' */
@@ -1354,7 +1342,6 @@ static PyTypeObject *__pyx_array_type = 0;
 static PyTypeObject *__pyx_MemviewEnum_type = 0;
 static PyTypeObject *__pyx_memoryview_type = 0;
 static PyTypeObject *__pyx_memoryviewslice_type = 0;
-static char *__pyx_v_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t_code;
 static PyObject *generic = 0;
 static PyObject *strided = 0;
 static PyObject *indirect = 0;
@@ -1397,7 +1384,7 @@ static void __pyx_memoryview_slice_assign_scalar(__Pyx_memviewslice *, int, size
 static void __pyx_memoryview__slice_assign_scalar(char *, Py_ssize_t *, Py_ssize_t *, int, size_t, void *); /*proto*/
 static __Pyx_TypeInfo __Pyx_TypeInfo_double = { "double", NULL, sizeof(double), { 0 }, 0, 'R', 0, 0 };
 static __Pyx_TypeInfo __Pyx_TypeInfo_int = { "int", NULL, sizeof(int), { 0 }, 0, IS_UNSIGNED(int) ? 'U' : 'I', IS_UNSIGNED(int), 0 };
-static __Pyx_TypeInfo __Pyx_TypeInfo_nn___pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t = { "state_t", NULL, sizeof(__pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t), { 0 }, 0, IS_UNSIGNED(__pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t) ? 'U' : 'I', IS_UNSIGNED(__pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t), 0 };
+static __Pyx_TypeInfo __Pyx_TypeInfo_nn___pyx_t_7bmtools_5exact_7helpers_state_t = { "state_t", NULL, sizeof(__pyx_t_7bmtools_5exact_7helpers_state_t), { 0 }, 0, IS_UNSIGNED(__pyx_t_7bmtools_5exact_7helpers_state_t) ? 'U' : 'I', IS_UNSIGNED(__pyx_t_7bmtools_5exact_7helpers_state_t), 0 };
 #define __Pyx_MODULE_NAME "bmtools.mcmc.irreversible_two_unit_sampler"
 int __pyx_module_is_main_bmtools__mcmc__irreversible_two_unit_sampler = 0;
 
@@ -1413,7 +1400,6 @@ static PyObject *__pyx_builtin_IndexError;
 static const char __pyx_k_O[] = "O";
 static const char __pyx_k_c[] = "c";
 static const char __pyx_k_id[] = "id";
-static const char __pyx_k_MIT[] = "MIT";
 static const char __pyx_k_obj[] = "obj";
 static const char __pyx_k_base[] = "base";
 static const char __pyx_k_main[] = "__main__";
@@ -1440,25 +1426,19 @@ static const char __pyx_k_import[] = "__import__";
 static const char __pyx_k_name_2[] = "__name__";
 static const char __pyx_k_struct[] = "struct";
 static const char __pyx_k_unpack[] = "unpack";
-static const char __pyx_k_authors[] = "__authors__";
 static const char __pyx_k_fortran[] = "fortran";
-static const char __pyx_k_license[] = "__license__";
 static const char __pyx_k_memview[] = "memview";
 static const char __pyx_k_weights[] = "weights";
 static const char __pyx_k_Ellipsis[] = "Ellipsis";
 static const char __pyx_k_itemsize[] = "itemsize";
 static const char __pyx_k_n_sample[] = "n_sample";
-static const char __pyx_k_pyx_capi[] = "__pyx_capi__";
 static const char __pyx_k_TypeError[] = "TypeError";
-static const char __pyx_k_copyright[] = "__copyright__";
 static const char __pyx_k_enumerate[] = "enumerate";
 static const char __pyx_k_IndexError[] = "IndexError";
 static const char __pyx_k_ValueError[] = "ValueError";
 static const char __pyx_k_init_state[] = "init_state";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
-static const char __pyx_k_Matt_Graham[] = "Matt Graham";
 static const char __pyx_k_MemoryError[] = "MemoryError";
-static const char __pyx_k_state_t_code[] = "state_t_code";
 static const char __pyx_k_update_pairs[] = "update_pairs";
 static const char __pyx_k_pyx_getbuffer[] = "__pyx_getbuffer";
 static const char __pyx_k_allocate_buffer[] = "allocate_buffer";
@@ -1471,11 +1451,10 @@ static const char __pyx_k_MemoryView_of_r_at_0x_x[] = "<MemoryView of %r at 0x%x
 static const char __pyx_k_contiguous_and_indirect[] = "<contiguous and indirect>";
 static const char __pyx_k_Cannot_index_with_type_s[] = "Cannot index with type '%s'";
 static const char __pyx_k_Invalid_shape_in_axis_d_d[] = "Invalid shape in axis %d: %d.";
-static const char __pyx_k_Copyright_2015_Matt_Graham[] = "Copyright 2015, Matt Graham";
 static const char __pyx_k_itemsize_0_for_cython_array[] = "itemsize <= 0 for cython.array";
 static const char __pyx_k_unable_to_allocate_array_data[] = "unable to allocate array data.";
 static const char __pyx_k_strided_and_direct_or_indirect[] = "<strided and direct or indirect>";
-static const char __pyx_k_Irreversible_two_unit_Boltzmann[] = "\n==============================================\nIrreversible two-unit Boltzmann machine sampler\n===============================================\n\nBoltzmann machine sampler with irreversible two-unit update dynamics.\n\nUpdate dynamics leave Boltzmann machine distribution invariant and consist\nof sequential composition of irreversible dynamics which resample states\nof pairs of units at a time.\n";
+static const char __pyx_k_Irreversible_two_unit_Boltzmann[] = "Irreversible two-unit Boltzmann machine sampler.\n\nBoltzmann machine sampler with irreversible two-unit update dynamics.\n\nUpdate dynamics leave Boltzmann machine distribution invariant and consist\nof sequential composition of irreversible dynamics which resample states\nof pairs of units at a time.\n";
 static const char __pyx_k_Buffer_view_does_not_expose_stri[] = "Buffer view does not expose strides";
 static const char __pyx_k_Can_only_create_a_buffer_that_is[] = "Can only create a buffer that is contiguous in memory.";
 static const char __pyx_k_Empty_shape_tuple_for_cython_arr[] = "Empty shape tuple for cython.array";
@@ -1489,15 +1468,12 @@ static PyObject *__pyx_n_s_ASCII;
 static PyObject *__pyx_kp_s_Buffer_view_does_not_expose_stri;
 static PyObject *__pyx_kp_s_Can_only_create_a_buffer_that_is;
 static PyObject *__pyx_kp_s_Cannot_index_with_type_s;
-static PyObject *__pyx_kp_s_Copyright_2015_Matt_Graham;
 static PyObject *__pyx_n_s_Ellipsis;
 static PyObject *__pyx_kp_s_Empty_shape_tuple_for_cython_arr;
 static PyObject *__pyx_n_s_IndexError;
 static PyObject *__pyx_kp_s_Indirect_dimensions_not_supporte;
 static PyObject *__pyx_kp_s_Invalid_mode_expected_c_or_fortr;
 static PyObject *__pyx_kp_s_Invalid_shape_in_axis_d_d;
-static PyObject *__pyx_n_s_MIT;
-static PyObject *__pyx_kp_s_Matt_Graham;
 static PyObject *__pyx_n_s_MemoryError;
 static PyObject *__pyx_kp_s_MemoryView_of_r_at_0x_x;
 static PyObject *__pyx_kp_s_MemoryView_of_r_object;
@@ -1507,7 +1483,6 @@ static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_kp_s_Unable_to_convert_item_to_object;
 static PyObject *__pyx_n_s_ValueError;
 static PyObject *__pyx_n_s_allocate_buffer;
-static PyObject *__pyx_n_s_authors;
 static PyObject *__pyx_n_s_base;
 static PyObject *__pyx_n_s_biases;
 static PyObject *__pyx_n_s_c;
@@ -1515,7 +1490,6 @@ static PyObject *__pyx_n_u_c;
 static PyObject *__pyx_n_s_class;
 static PyObject *__pyx_kp_s_contiguous_and_direct;
 static PyObject *__pyx_kp_s_contiguous_and_indirect;
-static PyObject *__pyx_n_s_copyright;
 static PyObject *__pyx_n_s_dtype_is_object;
 static PyObject *__pyx_n_s_encode;
 static PyObject *__pyx_n_s_enumerate;
@@ -1530,7 +1504,6 @@ static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_init_state;
 static PyObject *__pyx_n_s_itemsize;
 static PyObject *__pyx_kp_s_itemsize_0_for_cython_array;
-static PyObject *__pyx_n_s_license;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_memview;
 static PyObject *__pyx_n_s_mode;
@@ -1540,7 +1513,6 @@ static PyObject *__pyx_n_s_name_2;
 static PyObject *__pyx_n_s_ndim;
 static PyObject *__pyx_n_s_obj;
 static PyObject *__pyx_n_s_pack;
-static PyObject *__pyx_n_s_pyx_capi;
 static PyObject *__pyx_n_s_pyx_getbuffer;
 static PyObject *__pyx_n_s_pyx_vtable;
 static PyObject *__pyx_n_s_range;
@@ -1548,7 +1520,6 @@ static PyObject *__pyx_n_s_seed;
 static PyObject *__pyx_n_s_shape;
 static PyObject *__pyx_n_s_size;
 static PyObject *__pyx_n_s_start;
-static PyObject *__pyx_n_s_state_t_code;
 static PyObject *__pyx_n_s_step;
 static PyObject *__pyx_n_s_stop;
 static PyObject *__pyx_kp_s_strided_and_direct;
@@ -1623,7 +1594,7 @@ static PyObject *__pyx_tuple__17;
 static PyObject *__pyx_tuple__18;
 static PyObject *__pyx_tuple__19;
 
-/* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":29
+/* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":28
  *     """
  * 
  *     def __init__(IrreversibleTwoUnitSampler self, double[:, :] weights,             # <<<<<<<<<<<<<<
@@ -1663,21 +1634,21 @@ static int __pyx_pw_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_biases)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, 1); __PYX_ERR(0, 29, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, 1); __PYX_ERR(0, 28, __pyx_L3_error)
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_update_pairs)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, 2); __PYX_ERR(0, 29, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, 2); __PYX_ERR(0, 28, __pyx_L3_error)
         }
         case  3:
         if (likely((values[3] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_seed)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, 3); __PYX_ERR(0, 29, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, 3); __PYX_ERR(0, 28, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 29, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(0, 28, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
       goto __pyx_L5_argtuple_error;
@@ -1687,14 +1658,14 @@ static int __pyx_pw_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
       values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
     }
-    __pyx_v_weights = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(values[0]); if (unlikely(!__pyx_v_weights.memview)) __PYX_ERR(0, 29, __pyx_L3_error)
-    __pyx_v_biases = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[1]); if (unlikely(!__pyx_v_biases.memview)) __PYX_ERR(0, 30, __pyx_L3_error)
-    __pyx_v_update_pairs = __Pyx_PyObject_to_MemoryviewSlice_dsds_int(values[2]); if (unlikely(!__pyx_v_update_pairs.memview)) __PYX_ERR(0, 30, __pyx_L3_error)
-    __pyx_v_seed = __Pyx_PyInt_As_unsigned_long(values[3]); if (unlikely((__pyx_v_seed == (unsigned long)-1) && PyErr_Occurred())) __PYX_ERR(0, 30, __pyx_L3_error)
+    __pyx_v_weights = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(values[0]); if (unlikely(!__pyx_v_weights.memview)) __PYX_ERR(0, 28, __pyx_L3_error)
+    __pyx_v_biases = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[1]); if (unlikely(!__pyx_v_biases.memview)) __PYX_ERR(0, 29, __pyx_L3_error)
+    __pyx_v_update_pairs = __Pyx_PyObject_to_MemoryviewSlice_dsds_int(values[2]); if (unlikely(!__pyx_v_update_pairs.memview)) __PYX_ERR(0, 29, __pyx_L3_error)
+    __pyx_v_seed = __Pyx_PyInt_As_unsigned_long(values[3]); if (unlikely((__pyx_v_seed == (unsigned long)-1) && PyErr_Occurred())) __PYX_ERR(0, 29, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 29, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 28, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("bmtools.mcmc.irreversible_two_unit_sampler.IrreversibleTwoUnitSampler.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1714,7 +1685,7 @@ static int __pyx_pf_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":31
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":30
  *     def __init__(IrreversibleTwoUnitSampler self, double[:, :] weights,
  *                  double[:] biases, int[:, :] update_pairs, unsigned long seed):
  *         self.n_unit = weights.shape[0]             # <<<<<<<<<<<<<<
@@ -1723,7 +1694,7 @@ static int __pyx_pf_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
  */
   __pyx_v_self->n_unit = (__pyx_v_weights.shape[0]);
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":32
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":31
  *                  double[:] biases, int[:, :] update_pairs, unsigned long seed):
  *         self.n_unit = weights.shape[0]
  *         self.weights = weights             # <<<<<<<<<<<<<<
@@ -1734,7 +1705,7 @@ static int __pyx_pf_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
   __PYX_INC_MEMVIEW(&__pyx_v_weights, 0);
   __pyx_v_self->weights = __pyx_v_weights;
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":33
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":32
  *         self.n_unit = weights.shape[0]
  *         self.weights = weights
  *         self.biases = biases             # <<<<<<<<<<<<<<
@@ -1745,7 +1716,7 @@ static int __pyx_pf_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
   __PYX_INC_MEMVIEW(&__pyx_v_biases, 0);
   __pyx_v_self->biases = __pyx_v_biases;
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":34
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":33
  *         self.weights = weights
  *         self.biases = biases
  *         self.update_pairs = update_pairs             # <<<<<<<<<<<<<<
@@ -1756,21 +1727,21 @@ static int __pyx_pf_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
   __PYX_INC_MEMVIEW(&__pyx_v_update_pairs, 0);
   __pyx_v_self->update_pairs = __pyx_v_update_pairs;
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":35
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":34
  *         self.biases = biases
  *         self.update_pairs = update_pairs
  *         self.rng = rk.RandomKit(seed)             # <<<<<<<<<<<<<<
  * 
  *     def get_samples(IrreversibleTwoUnitSampler self, int n_sample,
  */
-  __pyx_t_1 = __Pyx_PyInt_From_unsigned_long(__pyx_v_seed); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_unsigned_long(__pyx_v_seed); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_7bmtools_4mcmc_17randomkit_wrapper_RandomKit), __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_7bmtools_4mcmc_17randomkit_wrapper_RandomKit), __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_GIVEREF(__pyx_t_1);
@@ -1779,7 +1750,7 @@ static int __pyx_pf_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
   __pyx_v_self->rng = ((struct __pyx_obj_7bmtools_4mcmc_17randomkit_wrapper_RandomKit *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":29
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":28
  *     """
  * 
  *     def __init__(IrreversibleTwoUnitSampler self, double[:, :] weights,             # <<<<<<<<<<<<<<
@@ -1803,7 +1774,7 @@ static int __pyx_pf_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
   return __pyx_r;
 }
 
-/* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":37
+/* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":36
  *         self.rng = rk.RandomKit(seed)
  * 
  *     def get_samples(IrreversibleTwoUnitSampler self, int n_sample,             # <<<<<<<<<<<<<<
@@ -1844,7 +1815,7 @@ static PyObject *__pyx_pw_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irrev
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_samples") < 0)) __PYX_ERR(0, 37, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_samples") < 0)) __PYX_ERR(0, 36, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -1854,9 +1825,9 @@ static PyObject *__pyx_pw_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irrev
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_n_sample = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_n_sample == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 37, __pyx_L3_error)
+    __pyx_v_n_sample = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_n_sample == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 36, __pyx_L3_error)
     if (values[1]) {
-      __pyx_v_init_state = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t(values[1]); if (unlikely(!__pyx_v_init_state.memview)) __PYX_ERR(0, 38, __pyx_L3_error)
+      __pyx_v_init_state = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_7bmtools_5exact_7helpers_state_t(values[1]); if (unlikely(!__pyx_v_init_state.memview)) __PYX_ERR(0, 37, __pyx_L3_error)
     } else {
       __pyx_v_init_state = __pyx_k_;
       __PYX_INC_MEMVIEW(&__pyx_v_init_state, 1);
@@ -1864,7 +1835,7 @@ static PyObject *__pyx_pw_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irrev
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("get_samples", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 37, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("get_samples", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 36, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("bmtools.mcmc.irreversible_two_unit_sampler.IrreversibleTwoUnitSampler.get_samples", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1907,20 +1878,20 @@ static PyObject *__pyx_pf_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irrev
   int __pyx_t_18;
   __Pyx_RefNannySetupContext("get_samples", 0);
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":46
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":45
  *         cdef state_t[:] state
  *         cdef state_t[:, :] samples = array(
  *             shape=(n_sample,self.n_unit), itemsize=sizeof(state_t),             # <<<<<<<<<<<<<<
- *             format='c')
+ *             format=state_t_code)
  *         if init_state is None:
  */
-  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_n_sample); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_n_sample); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_self->n_unit); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_self->n_unit); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2);
@@ -1928,77 +1899,107 @@ static PyObject *__pyx_pf_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irrev
   PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_3);
   __pyx_t_2 = 0;
   __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_shape, __pyx_t_4) < 0) __PYX_ERR(0, 46, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_shape, __pyx_t_4) < 0) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyInt_FromSize_t((sizeof(__pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t))); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_FromSize_t((sizeof(__pyx_t_7bmtools_5exact_7helpers_state_t))); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_itemsize, __pyx_t_4) < 0) __PYX_ERR(0, 46, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_itemsize, __pyx_t_4) < 0) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_format, __pyx_n_s_c) < 0) __PYX_ERR(0, 46, __pyx_L1_error)
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":45
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":46
+ *         cdef state_t[:, :] samples = array(
+ *             shape=(n_sample,self.n_unit), itemsize=sizeof(state_t),
+ *             format=state_t_code)             # <<<<<<<<<<<<<<
+ *         if init_state is None:
+ *             state = array(shape=(self.n_unit,), itemsize=sizeof(state_t),
+ */
+  __pyx_t_4 = __Pyx_PyBytes_FromString(__pyx_v_7bmtools_5exact_7helpers_state_t_code); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_format, __pyx_t_4) < 0) __PYX_ERR(0, 45, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":44
  *         cdef int i, k, l, s, p
  *         cdef state_t[:] state
  *         cdef state_t[:, :] samples = array(             # <<<<<<<<<<<<<<
  *             shape=(n_sample,self.n_unit), itemsize=sizeof(state_t),
- *             format='c')
+ *             format=state_t_code)
  */
-  __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t(__pyx_t_4);
-  if (unlikely(!__pyx_t_5.memview)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_7bmtools_5exact_7helpers_state_t(__pyx_t_4);
+  if (unlikely(!__pyx_t_5.memview)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_samples = __pyx_t_5;
   __pyx_t_5.memview = NULL;
   __pyx_t_5.data = NULL;
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":48
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":47
  *             shape=(n_sample,self.n_unit), itemsize=sizeof(state_t),
- *             format='c')
+ *             format=state_t_code)
  *         if init_state is None:             # <<<<<<<<<<<<<<
  *             state = array(shape=(self.n_unit,), itemsize=sizeof(state_t),
- *                           format='c')
+ *                           format=state_t_code)
  */
   __pyx_t_6 = ((((PyObject *) __pyx_v_init_state.memview) == Py_None) != 0);
   if (__pyx_t_6) {
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":49
- *             format='c')
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":48
+ *             format=state_t_code)
  *         if init_state is None:
  *             state = array(shape=(self.n_unit,), itemsize=sizeof(state_t),             # <<<<<<<<<<<<<<
- *                           format='c')
+ *                           format=state_t_code)
  *             for i in range(self.n_unit):
  */
-    __pyx_t_4 = PyDict_New(); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 49, __pyx_L1_error)
+    __pyx_t_4 = PyDict_New(); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 48, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->n_unit); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->n_unit); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 49, __pyx_L1_error)
+    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 48, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_GIVEREF(__pyx_t_1);
     PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
     __pyx_t_1 = 0;
-    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_shape, __pyx_t_3) < 0) __PYX_ERR(0, 49, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_shape, __pyx_t_3) < 0) __PYX_ERR(0, 48, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyInt_FromSize_t((sizeof(__pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t))); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 49, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyInt_FromSize_t((sizeof(__pyx_t_7bmtools_5exact_7helpers_state_t))); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 48, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_itemsize, __pyx_t_3) < 0) __PYX_ERR(0, 49, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_itemsize, __pyx_t_3) < 0) __PYX_ERR(0, 48, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_format, __pyx_n_s_c) < 0) __PYX_ERR(0, 49, __pyx_L1_error)
-    __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 49, __pyx_L1_error)
+
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":49
+ *         if init_state is None:
+ *             state = array(shape=(self.n_unit,), itemsize=sizeof(state_t),
+ *                           format=state_t_code)             # <<<<<<<<<<<<<<
+ *             for i in range(self.n_unit):
+ *                 state[i] = 2*(self.rng.uniform() < 0.5) - 1
+ */
+    __pyx_t_3 = __Pyx_PyBytes_FromString(__pyx_v_7bmtools_5exact_7helpers_state_t_code); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 49, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_format, __pyx_t_3) < 0) __PYX_ERR(0, 48, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":48
+ *             format=state_t_code)
+ *         if init_state is None:
+ *             state = array(shape=(self.n_unit,), itemsize=sizeof(state_t),             # <<<<<<<<<<<<<<
+ *                           format=state_t_code)
+ *             for i in range(self.n_unit):
+ */
+    __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 48, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t(__pyx_t_3);
-    if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 49, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_7bmtools_5exact_7helpers_state_t(__pyx_t_3);
+    if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 48, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_v_state = __pyx_t_7;
     __pyx_t_7.memview = NULL;
     __pyx_t_7.data = NULL;
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":51
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":50
  *             state = array(shape=(self.n_unit,), itemsize=sizeof(state_t),
- *                           format='c')
+ *                           format=state_t_code)
  *             for i in range(self.n_unit):             # <<<<<<<<<<<<<<
  *                 state[i] = 2*(self.rng.uniform() < 0.5) - 1
  *         else:
@@ -2007,28 +2008,28 @@ static PyObject *__pyx_pf_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irrev
     for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
       __pyx_v_i = __pyx_t_9;
 
-      /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":52
- *                           format='c')
+      /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":51
+ *                           format=state_t_code)
  *             for i in range(self.n_unit):
  *                 state[i] = 2*(self.rng.uniform() < 0.5) - 1             # <<<<<<<<<<<<<<
  *         else:
  *             state = init_state
  */
       __pyx_t_10 = __pyx_v_i;
-      *((__pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t *) ( /* dim=0 */ (__pyx_v_state.data + __pyx_t_10 * __pyx_v_state.strides[0]) )) = ((2 * (((struct __pyx_vtabstruct_7bmtools_4mcmc_17randomkit_wrapper_RandomKit *)__pyx_v_self->rng->__pyx_vtab)->uniform(__pyx_v_self->rng) < 0.5)) - 1);
+      *((__pyx_t_7bmtools_5exact_7helpers_state_t *) ( /* dim=0 */ (__pyx_v_state.data + __pyx_t_10 * __pyx_v_state.strides[0]) )) = ((2 * (((struct __pyx_vtabstruct_7bmtools_4mcmc_17randomkit_wrapper_RandomKit *)__pyx_v_self->rng->__pyx_vtab)->uniform(__pyx_v_self->rng) < 0.5)) - 1);
     }
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":48
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":47
  *             shape=(n_sample,self.n_unit), itemsize=sizeof(state_t),
- *             format='c')
+ *             format=state_t_code)
  *         if init_state is None:             # <<<<<<<<<<<<<<
  *             state = array(shape=(self.n_unit,), itemsize=sizeof(state_t),
- *                           format='c')
+ *                           format=state_t_code)
  */
     goto __pyx_L3;
   }
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":54
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":53
  *                 state[i] = 2*(self.rng.uniform() < 0.5) - 1
  *         else:
  *             state = init_state             # <<<<<<<<<<<<<<
@@ -2041,7 +2042,7 @@ static PyObject *__pyx_pf_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irrev
   }
   __pyx_L3:;
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":55
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":54
  *         else:
  *             state = init_state
  *         for s in range(n_sample):             # <<<<<<<<<<<<<<
@@ -2052,7 +2053,7 @@ static PyObject *__pyx_pf_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irrev
   for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
     __pyx_v_s = __pyx_t_9;
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":56
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":55
  *             state = init_state
  *         for s in range(n_sample):
  *             for p in range(self.update_pairs.shape[0]):             # <<<<<<<<<<<<<<
@@ -2063,7 +2064,7 @@ static PyObject *__pyx_pf_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irrev
     for (__pyx_t_12 = 0; __pyx_t_12 < __pyx_t_11; __pyx_t_12+=1) {
       __pyx_v_p = __pyx_t_12;
 
-      /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":57
+      /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":56
  *         for s in range(n_sample):
  *             for p in range(self.update_pairs.shape[0]):
  *                 k, l = self.update_pairs[p, 0], self.update_pairs[p, 1]             # <<<<<<<<<<<<<<
@@ -2079,7 +2080,7 @@ static PyObject *__pyx_pf_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irrev
       __pyx_v_k = __pyx_t_15;
       __pyx_v_l = __pyx_t_18;
 
-      /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":58
+      /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":57
  *             for p in range(self.update_pairs.shape[0]):
  *                 k, l = self.update_pairs[p, 0], self.update_pairs[p, 1]
  *                 self.sample_pair(state, k, l)             # <<<<<<<<<<<<<<
@@ -2089,7 +2090,7 @@ static PyObject *__pyx_pf_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irrev
       ((struct __pyx_vtabstruct_7bmtools_4mcmc_29irreversible_two_unit_sampler_IrreversibleTwoUnitSampler *)__pyx_v_self->__pyx_vtab)->sample_pair(__pyx_v_self, __pyx_v_state, __pyx_v_k, __pyx_v_l);
     }
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":59
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":58
  *                 k, l = self.update_pairs[p, 0], self.update_pairs[p, 1]
  *                 self.sample_pair(state, k, l)
  *             samples[s,:] = state             # <<<<<<<<<<<<<<
@@ -2107,7 +2108,7 @@ static PyObject *__pyx_pf_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irrev
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 59, __pyx_L1_error)
+        __PYX_ERR(0, 58, __pyx_L1_error)
     }
         __pyx_t_7.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -2116,11 +2117,11 @@ __pyx_t_7.shape[0] = __pyx_v_samples.shape[1];
 __pyx_t_7.strides[0] = __pyx_v_samples.strides[1];
     __pyx_t_7.suboffsets[0] = -1;
 
-if (unlikely(__pyx_memoryview_copy_contents(__pyx_v_state, __pyx_t_7, 1, 1, 0) < 0)) __PYX_ERR(0, 59, __pyx_L1_error)
+if (unlikely(__pyx_memoryview_copy_contents(__pyx_v_state, __pyx_t_7, 1, 1, 0) < 0)) __PYX_ERR(0, 58, __pyx_L1_error)
     __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
   }
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":60
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":59
  *                 self.sample_pair(state, k, l)
  *             samples[s,:] = state
  *         return samples             # <<<<<<<<<<<<<<
@@ -2128,13 +2129,13 @@ if (unlikely(__pyx_memoryview_copy_contents(__pyx_v_state, __pyx_t_7, 1, 1, 0) <
  *     cdef void sample_pair(IrreversibleTwoUnitSampler self,
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_v_samples, 2, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_v_samples, 2, (PyObject *(*)(char *)) __pyx_memview_get_nn___pyx_t_7bmtools_5exact_7helpers_state_t, (int (*)(char *, PyObject *)) __pyx_memview_set_nn___pyx_t_7bmtools_5exact_7helpers_state_t, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 59, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_r = __pyx_t_3;
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":37
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":36
  *         self.rng = rk.RandomKit(seed)
  * 
  *     def get_samples(IrreversibleTwoUnitSampler self, int n_sample,             # <<<<<<<<<<<<<<
@@ -2161,7 +2162,7 @@ if (unlikely(__pyx_memoryview_copy_contents(__pyx_v_state, __pyx_t_7, 1, 1, 0) <
   return __pyx_r;
 }
 
-/* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":62
+/* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":61
  *         return samples
  * 
  *     cdef void sample_pair(IrreversibleTwoUnitSampler self,             # <<<<<<<<<<<<<<
@@ -2183,7 +2184,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
   Py_ssize_t __pyx_t_5;
   __Pyx_RefNannySetupContext("sample_pair", 0);
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":69
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":68
  *         """
  *         # calculate integer corresponding to current unit pair config
  *         cdef int curr_pair_state_index = (state[k]+1) + (state[l]+1)/2             # <<<<<<<<<<<<<<
@@ -2192,9 +2193,9 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
  */
   __pyx_t_1 = __pyx_v_k;
   __pyx_t_2 = __pyx_v_l;
-  __pyx_v_curr_pair_state_index = (((*((__pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t *) ( /* dim=0 */ (__pyx_v_state.data + __pyx_t_1 * __pyx_v_state.strides[0]) ))) + 1) + (((*((__pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t *) ( /* dim=0 */ (__pyx_v_state.data + __pyx_t_2 * __pyx_v_state.strides[0]) ))) + 1) / 2));
+  __pyx_v_curr_pair_state_index = (((*((__pyx_t_7bmtools_5exact_7helpers_state_t *) ( /* dim=0 */ (__pyx_v_state.data + __pyx_t_1 * __pyx_v_state.strides[0]) ))) + 1) + (((*((__pyx_t_7bmtools_5exact_7helpers_state_t *) ( /* dim=0 */ (__pyx_v_state.data + __pyx_t_2 * __pyx_v_state.strides[0]) ))) + 1) / 2));
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":72
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":71
  *         # get unormalised probabilities of four configs of binary pair
  *         cdef double probs[4]
  *         self.calc_pair_probs(state, k, l, probs)             # <<<<<<<<<<<<<<
@@ -2203,7 +2204,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
  */
   ((struct __pyx_vtabstruct_7bmtools_4mcmc_29irreversible_two_unit_sampler_IrreversibleTwoUnitSampler *)__pyx_v_self->__pyx_vtab)->calc_pair_probs(__pyx_v_self, __pyx_v_state, __pyx_v_k, __pyx_v_l, __pyx_v_probs);
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":75
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":74
  *         # explicit four element sort quicker than built-ins
  *         cdef int order[4]
  *         argsort_4(probs, order)             # <<<<<<<<<<<<<<
@@ -2212,7 +2213,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
  */
   __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_argsort_4(__pyx_v_probs, __pyx_v_order);
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":79
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":78
  *         cdef double q
  *         cdef int next_pair_state_index
  *         if curr_pair_state_index == order[3]:             # <<<<<<<<<<<<<<
@@ -2222,7 +2223,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
   __pyx_t_3 = ((__pyx_v_curr_pair_state_index == (__pyx_v_order[3])) != 0);
   if (__pyx_t_3) {
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":80
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":79
  *         cdef int next_pair_state_index
  *         if curr_pair_state_index == order[3]:
  *             q = self.rng.uniform() * probs[order[3]]             # <<<<<<<<<<<<<<
@@ -2231,7 +2232,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
  */
     __pyx_v_q = (((struct __pyx_vtabstruct_7bmtools_4mcmc_17randomkit_wrapper_RandomKit *)__pyx_v_self->rng->__pyx_vtab)->uniform(__pyx_v_self->rng) * (__pyx_v_probs[(__pyx_v_order[3])]));
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":81
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":80
  *         if curr_pair_state_index == order[3]:
  *             q = self.rng.uniform() * probs[order[3]]
  *             if q <= probs[order[0]]:             # <<<<<<<<<<<<<<
@@ -2241,7 +2242,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
     __pyx_t_3 = ((__pyx_v_q <= (__pyx_v_probs[(__pyx_v_order[0])])) != 0);
     if (__pyx_t_3) {
 
-      /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":82
+      /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":81
  *             q = self.rng.uniform() * probs[order[3]]
  *             if q <= probs[order[0]]:
  *                 next_pair_state_index = order[0]             # <<<<<<<<<<<<<<
@@ -2250,7 +2251,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
  */
       __pyx_v_next_pair_state_index = (__pyx_v_order[0]);
 
-      /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":81
+      /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":80
  *         if curr_pair_state_index == order[3]:
  *             q = self.rng.uniform() * probs[order[3]]
  *             if q <= probs[order[0]]:             # <<<<<<<<<<<<<<
@@ -2260,7 +2261,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
       goto __pyx_L4;
     }
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":83
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":82
  *             if q <= probs[order[0]]:
  *                 next_pair_state_index = order[0]
  *             elif q <= probs[order[2]]:             # <<<<<<<<<<<<<<
@@ -2270,7 +2271,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
     __pyx_t_3 = ((__pyx_v_q <= (__pyx_v_probs[(__pyx_v_order[2])])) != 0);
     if (__pyx_t_3) {
 
-      /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":84
+      /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":83
  *                 next_pair_state_index = order[0]
  *             elif q <= probs[order[2]]:
  *                 next_pair_state_index = order[2]             # <<<<<<<<<<<<<<
@@ -2279,7 +2280,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
  */
       __pyx_v_next_pair_state_index = (__pyx_v_order[2]);
 
-      /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":83
+      /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":82
  *             if q <= probs[order[0]]:
  *                 next_pair_state_index = order[0]
  *             elif q <= probs[order[2]]:             # <<<<<<<<<<<<<<
@@ -2289,7 +2290,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
       goto __pyx_L4;
     }
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":86
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":85
  *                 next_pair_state_index = order[2]
  *             else:
  *                 next_pair_state_index = order[3]             # <<<<<<<<<<<<<<
@@ -2301,7 +2302,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
     }
     __pyx_L4:;
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":79
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":78
  *         cdef double q
  *         cdef int next_pair_state_index
  *         if curr_pair_state_index == order[3]:             # <<<<<<<<<<<<<<
@@ -2311,7 +2312,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
     goto __pyx_L3;
   }
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":87
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":86
  *             else:
  *                 next_pair_state_index = order[3]
  *         elif curr_pair_state_index == order[2]:             # <<<<<<<<<<<<<<
@@ -2321,7 +2322,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
   __pyx_t_3 = ((__pyx_v_curr_pair_state_index == (__pyx_v_order[2])) != 0);
   if (__pyx_t_3) {
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":88
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":87
  *                 next_pair_state_index = order[3]
  *         elif curr_pair_state_index == order[2]:
  *             q = self.rng.uniform() * probs[order[2]]             # <<<<<<<<<<<<<<
@@ -2330,7 +2331,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
  */
     __pyx_v_q = (((struct __pyx_vtabstruct_7bmtools_4mcmc_17randomkit_wrapper_RandomKit *)__pyx_v_self->rng->__pyx_vtab)->uniform(__pyx_v_self->rng) * (__pyx_v_probs[(__pyx_v_order[2])]));
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":89
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":88
  *         elif curr_pair_state_index == order[2]:
  *             q = self.rng.uniform() * probs[order[2]]
  *             if q <= probs[order[1]]:             # <<<<<<<<<<<<<<
@@ -2340,7 +2341,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
     __pyx_t_3 = ((__pyx_v_q <= (__pyx_v_probs[(__pyx_v_order[1])])) != 0);
     if (__pyx_t_3) {
 
-      /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":90
+      /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":89
  *             q = self.rng.uniform() * probs[order[2]]
  *             if q <= probs[order[1]]:
  *                 next_pair_state_index = order[1]             # <<<<<<<<<<<<<<
@@ -2349,7 +2350,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
  */
       __pyx_v_next_pair_state_index = (__pyx_v_order[1]);
 
-      /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":89
+      /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":88
  *         elif curr_pair_state_index == order[2]:
  *             q = self.rng.uniform() * probs[order[2]]
  *             if q <= probs[order[1]]:             # <<<<<<<<<<<<<<
@@ -2359,7 +2360,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
       goto __pyx_L5;
     }
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":92
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":91
  *                 next_pair_state_index = order[1]
  *             else:
  *                 next_pair_state_index = order[3]             # <<<<<<<<<<<<<<
@@ -2371,7 +2372,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
     }
     __pyx_L5:;
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":87
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":86
  *             else:
  *                 next_pair_state_index = order[3]
  *         elif curr_pair_state_index == order[2]:             # <<<<<<<<<<<<<<
@@ -2381,7 +2382,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
     goto __pyx_L3;
   }
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":95
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":94
  *         # if current state one of two with lowest cond prob make
  *         # deterministic move to one of higher cond prob states
  *         elif curr_pair_state_index == order[1]:             # <<<<<<<<<<<<<<
@@ -2391,7 +2392,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
   __pyx_t_3 = ((__pyx_v_curr_pair_state_index == (__pyx_v_order[1])) != 0);
   if (__pyx_t_3) {
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":96
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":95
  *         # deterministic move to one of higher cond prob states
  *         elif curr_pair_state_index == order[1]:
  *             next_pair_state_index = order[3]             # <<<<<<<<<<<<<<
@@ -2400,7 +2401,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
  */
     __pyx_v_next_pair_state_index = (__pyx_v_order[3]);
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":95
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":94
  *         # if current state one of two with lowest cond prob make
  *         # deterministic move to one of higher cond prob states
  *         elif curr_pair_state_index == order[1]:             # <<<<<<<<<<<<<<
@@ -2410,7 +2411,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
     goto __pyx_L3;
   }
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":98
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":97
  *             next_pair_state_index = order[3]
  *         else:
  *             next_pair_state_index = order[2]             # <<<<<<<<<<<<<<
@@ -2422,7 +2423,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
   }
   __pyx_L3:;
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":100
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":99
  *             next_pair_state_index = order[2]
  *         # update configuration of unit pair
  *         state[k] = 2*(next_pair_state_index/2)-1             # <<<<<<<<<<<<<<
@@ -2430,9 +2431,9 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
  * 
  */
   __pyx_t_4 = __pyx_v_k;
-  *((__pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t *) ( /* dim=0 */ (__pyx_v_state.data + __pyx_t_4 * __pyx_v_state.strides[0]) )) = ((2 * (__pyx_v_next_pair_state_index / 2)) - 1);
+  *((__pyx_t_7bmtools_5exact_7helpers_state_t *) ( /* dim=0 */ (__pyx_v_state.data + __pyx_t_4 * __pyx_v_state.strides[0]) )) = ((2 * (__pyx_v_next_pair_state_index / 2)) - 1);
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":101
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":100
  *         # update configuration of unit pair
  *         state[k] = 2*(next_pair_state_index/2)-1
  *         state[l] = 2*(next_pair_state_index%2)-1             # <<<<<<<<<<<<<<
@@ -2440,9 +2441,9 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
  *     cdef void calc_pair_probs(IrreversibleTwoUnitSampler self,
  */
   __pyx_t_5 = __pyx_v_l;
-  *((__pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t *) ( /* dim=0 */ (__pyx_v_state.data + __pyx_t_5 * __pyx_v_state.strides[0]) )) = ((2 * (__pyx_v_next_pair_state_index % 2)) - 1);
+  *((__pyx_t_7bmtools_5exact_7helpers_state_t *) ( /* dim=0 */ (__pyx_v_state.data + __pyx_t_5 * __pyx_v_state.strides[0]) )) = ((2 * (__pyx_v_next_pair_state_index % 2)) - 1);
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":62
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":61
  *         return samples
  * 
  *     cdef void sample_pair(IrreversibleTwoUnitSampler self,             # <<<<<<<<<<<<<<
@@ -2454,7 +2455,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
   __Pyx_RefNannyFinishContext();
 }
 
-/* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":103
+/* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":102
  *         state[l] = 2*(next_pair_state_index%2)-1
  * 
  *     cdef void calc_pair_probs(IrreversibleTwoUnitSampler self,             # <<<<<<<<<<<<<<
@@ -2484,7 +2485,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
   Py_ssize_t __pyx_t_14;
   __Pyx_RefNannySetupContext("calc_pair_probs", 0);
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":114
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":113
  *         # dot product with weight matrix - hacky however unit pair will be
  *         # reassigned in sample_pair anyway
  *         state[k] = 0             # <<<<<<<<<<<<<<
@@ -2492,9 +2493,9 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
  *         # calculate weighted sum of current unit states excluding pair to be
  */
   __pyx_t_1 = __pyx_v_k;
-  *((__pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t *) ( /* dim=0 */ (__pyx_v_state.data + __pyx_t_1 * __pyx_v_state.strides[0]) )) = 0;
+  *((__pyx_t_7bmtools_5exact_7helpers_state_t *) ( /* dim=0 */ (__pyx_v_state.data + __pyx_t_1 * __pyx_v_state.strides[0]) )) = 0;
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":115
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":114
  *         # reassigned in sample_pair anyway
  *         state[k] = 0
  *         state[l] = 0             # <<<<<<<<<<<<<<
@@ -2502,9 +2503,9 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
  *         # updated
  */
   __pyx_t_2 = __pyx_v_l;
-  *((__pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t *) ( /* dim=0 */ (__pyx_v_state.data + __pyx_t_2 * __pyx_v_state.strides[0]) )) = 0;
+  *((__pyx_t_7bmtools_5exact_7helpers_state_t *) ( /* dim=0 */ (__pyx_v_state.data + __pyx_t_2 * __pyx_v_state.strides[0]) )) = 0;
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":118
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":117
  *         # calculate weighted sum of current unit states excluding pair to be
  *         # updated
  *         cdef double x_k = self.biases[k]             # <<<<<<<<<<<<<<
@@ -2514,7 +2515,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
   __pyx_t_3 = __pyx_v_k;
   __pyx_v_x_k = (*((double *) ( /* dim=0 */ (__pyx_v_self->biases.data + __pyx_t_3 * __pyx_v_self->biases.strides[0]) )));
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":119
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":118
  *         # updated
  *         cdef double x_k = self.biases[k]
  *         cdef double x_l = self.biases[l]             # <<<<<<<<<<<<<<
@@ -2524,7 +2525,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
   __pyx_t_4 = __pyx_v_l;
   __pyx_v_x_l = (*((double *) ( /* dim=0 */ (__pyx_v_self->biases.data + __pyx_t_4 * __pyx_v_self->biases.strides[0]) )));
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":121
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":120
  *         cdef double x_l = self.biases[l]
  *         cdef int i
  *         for i in range(self.n_unit):             # <<<<<<<<<<<<<<
@@ -2535,7 +2536,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
   for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
     __pyx_v_i = __pyx_t_6;
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":122
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":121
  *         cdef int i
  *         for i in range(self.n_unit):
  *             x_k += self.weights[k,i] * state[i]             # <<<<<<<<<<<<<<
@@ -2545,9 +2546,9 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
     __pyx_t_7 = __pyx_v_k;
     __pyx_t_8 = __pyx_v_i;
     __pyx_t_9 = __pyx_v_i;
-    __pyx_v_x_k = (__pyx_v_x_k + ((*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_self->weights.data + __pyx_t_7 * __pyx_v_self->weights.strides[0]) ) + __pyx_t_8 * __pyx_v_self->weights.strides[1]) ))) * (*((__pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t *) ( /* dim=0 */ (__pyx_v_state.data + __pyx_t_9 * __pyx_v_state.strides[0]) )))));
+    __pyx_v_x_k = (__pyx_v_x_k + ((*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_self->weights.data + __pyx_t_7 * __pyx_v_self->weights.strides[0]) ) + __pyx_t_8 * __pyx_v_self->weights.strides[1]) ))) * (*((__pyx_t_7bmtools_5exact_7helpers_state_t *) ( /* dim=0 */ (__pyx_v_state.data + __pyx_t_9 * __pyx_v_state.strides[0]) )))));
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":123
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":122
  *         for i in range(self.n_unit):
  *             x_k += self.weights[k,i] * state[i]
  *             x_l += self.weights[l,i] * state[i]             # <<<<<<<<<<<<<<
@@ -2557,10 +2558,10 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
     __pyx_t_10 = __pyx_v_l;
     __pyx_t_11 = __pyx_v_i;
     __pyx_t_12 = __pyx_v_i;
-    __pyx_v_x_l = (__pyx_v_x_l + ((*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_self->weights.data + __pyx_t_10 * __pyx_v_self->weights.strides[0]) ) + __pyx_t_11 * __pyx_v_self->weights.strides[1]) ))) * (*((__pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t *) ( /* dim=0 */ (__pyx_v_state.data + __pyx_t_12 * __pyx_v_state.strides[0]) )))));
+    __pyx_v_x_l = (__pyx_v_x_l + ((*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_self->weights.data + __pyx_t_10 * __pyx_v_self->weights.strides[0]) ) + __pyx_t_11 * __pyx_v_self->weights.strides[1]) ))) * (*((__pyx_t_7bmtools_5exact_7helpers_state_t *) ( /* dim=0 */ (__pyx_v_state.data + __pyx_t_12 * __pyx_v_state.strides[0]) )))));
   }
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":125
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":124
  *             x_l += self.weights[l,i] * state[i]
  *         # get weight corresponding to unit pair being updated
  *         cdef double W_kl = self.weights[k, l]             # <<<<<<<<<<<<<<
@@ -2571,7 +2572,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
   __pyx_t_14 = __pyx_v_l;
   __pyx_v_W_kl = (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_self->weights.data + __pyx_t_13 * __pyx_v_self->weights.strides[0]) ) + __pyx_t_14 * __pyx_v_self->weights.strides[1]) )));
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":127
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":126
  *         cdef double W_kl = self.weights[k, l]
  *         # set probabilities of four binary pair possible configurations
  *         pair_probs[0] = exp(-x_k - x_l + W_kl)             # <<<<<<<<<<<<<<
@@ -2580,7 +2581,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
  */
   (__pyx_v_pair_probs[0]) = exp((((-__pyx_v_x_k) - __pyx_v_x_l) + __pyx_v_W_kl));
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":128
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":127
  *         # set probabilities of four binary pair possible configurations
  *         pair_probs[0] = exp(-x_k - x_l + W_kl)
  *         pair_probs[1] = exp(-x_k + x_l - W_kl)             # <<<<<<<<<<<<<<
@@ -2589,7 +2590,7 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
  */
   (__pyx_v_pair_probs[1]) = exp((((-__pyx_v_x_k) + __pyx_v_x_l) - __pyx_v_W_kl));
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":129
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":128
  *         pair_probs[0] = exp(-x_k - x_l + W_kl)
  *         pair_probs[1] = exp(-x_k + x_l - W_kl)
  *         pair_probs[2] = exp(x_k - x_l - W_kl)             # <<<<<<<<<<<<<<
@@ -2597,14 +2598,14 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
  */
   (__pyx_v_pair_probs[2]) = exp(((__pyx_v_x_k - __pyx_v_x_l) - __pyx_v_W_kl));
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":130
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":129
  *         pair_probs[1] = exp(-x_k + x_l - W_kl)
  *         pair_probs[2] = exp(x_k - x_l - W_kl)
  *         pair_probs[3] = exp(x_k + x_l + W_kl)             # <<<<<<<<<<<<<<
  */
   (__pyx_v_pair_probs[3]) = exp(((__pyx_v_x_k + __pyx_v_x_l) + __pyx_v_W_kl));
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":103
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":102
  *         state[l] = 2*(next_pair_state_index%2)-1
  * 
  *     cdef void calc_pair_probs(IrreversibleTwoUnitSampler self,             # <<<<<<<<<<<<<<
@@ -2616,8 +2617,8 @@ static void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26Irreversibl
   __Pyx_RefNannyFinishContext();
 }
 
-/* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":20
- * include "shared_defs.pxd"
+/* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":15
+ * 
  * 
  * cdef inline void argsort_4(double seq[4], int order[4]):             # <<<<<<<<<<<<<<
  *     """ Explicit five comparison ascending argsort of four values """
@@ -2631,7 +2632,7 @@ static CYTHON_INLINE void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler
   int __pyx_t_3;
   __Pyx_RefNannySetupContext("argsort_4", 0);
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":22
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":17
  * cdef inline void argsort_4(double seq[4], int order[4]):
  *     """ Explicit five comparison ascending argsort of four values """
  *     if seq[0] <= seq[1]:             # <<<<<<<<<<<<<<
@@ -2641,7 +2642,7 @@ static CYTHON_INLINE void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler
   __pyx_t_1 = (((__pyx_v_seq[0]) <= (__pyx_v_seq[1])) != 0);
   if (__pyx_t_1) {
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":23
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":18
  *     """ Explicit five comparison ascending argsort of four values """
  *     if seq[0] <= seq[1]:
  *         order[0], order[1] = 0, 1             # <<<<<<<<<<<<<<
@@ -2653,7 +2654,7 @@ static CYTHON_INLINE void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler
     (__pyx_v_order[0]) = __pyx_t_2;
     (__pyx_v_order[1]) = __pyx_t_3;
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":22
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":17
  * cdef inline void argsort_4(double seq[4], int order[4]):
  *     """ Explicit five comparison ascending argsort of four values """
  *     if seq[0] <= seq[1]:             # <<<<<<<<<<<<<<
@@ -2663,7 +2664,7 @@ static CYTHON_INLINE void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler
     goto __pyx_L3;
   }
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":25
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":20
  *         order[0], order[1] = 0, 1
  *     else:
  *         order[0], order[1] = 1, 0             # <<<<<<<<<<<<<<
@@ -2678,7 +2679,7 @@ static CYTHON_INLINE void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler
   }
   __pyx_L3:;
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":26
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":21
  *     else:
  *         order[0], order[1] = 1, 0
  *     if seq[2] <= seq[3]:             # <<<<<<<<<<<<<<
@@ -2688,7 +2689,7 @@ static CYTHON_INLINE void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler
   __pyx_t_1 = (((__pyx_v_seq[2]) <= (__pyx_v_seq[3])) != 0);
   if (__pyx_t_1) {
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":27
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":22
  *         order[0], order[1] = 1, 0
  *     if seq[2] <= seq[3]:
  *         order[2], order[3] = 2, 3             # <<<<<<<<<<<<<<
@@ -2700,7 +2701,7 @@ static CYTHON_INLINE void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler
     (__pyx_v_order[2]) = __pyx_t_2;
     (__pyx_v_order[3]) = __pyx_t_3;
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":26
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":21
  *     else:
  *         order[0], order[1] = 1, 0
  *     if seq[2] <= seq[3]:             # <<<<<<<<<<<<<<
@@ -2710,7 +2711,7 @@ static CYTHON_INLINE void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler
     goto __pyx_L4;
   }
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":29
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":24
  *         order[2], order[3] = 2, 3
  *     else:
  *         order[2], order[3] = 3, 2             # <<<<<<<<<<<<<<
@@ -2725,7 +2726,7 @@ static CYTHON_INLINE void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler
   }
   __pyx_L4:;
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":30
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":25
  *     else:
  *         order[2], order[3] = 3, 2
  *     if seq[order[0]] > seq[order[2]]:             # <<<<<<<<<<<<<<
@@ -2735,7 +2736,7 @@ static CYTHON_INLINE void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler
   __pyx_t_1 = (((__pyx_v_seq[(__pyx_v_order[0])]) > (__pyx_v_seq[(__pyx_v_order[2])])) != 0);
   if (__pyx_t_1) {
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":31
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":26
  *         order[2], order[3] = 3, 2
  *     if seq[order[0]] > seq[order[2]]:
  *         order[0], order[2] = order[2], order[0]             # <<<<<<<<<<<<<<
@@ -2747,7 +2748,7 @@ static CYTHON_INLINE void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler
     (__pyx_v_order[0]) = __pyx_t_2;
     (__pyx_v_order[2]) = __pyx_t_3;
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":30
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":25
  *     else:
  *         order[2], order[3] = 3, 2
  *     if seq[order[0]] > seq[order[2]]:             # <<<<<<<<<<<<<<
@@ -2756,7 +2757,7 @@ static CYTHON_INLINE void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler
  */
   }
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":32
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":27
  *     if seq[order[0]] > seq[order[2]]:
  *         order[0], order[2] = order[2], order[0]
  *     if seq[order[1]] > seq[order[3]]:             # <<<<<<<<<<<<<<
@@ -2766,7 +2767,7 @@ static CYTHON_INLINE void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler
   __pyx_t_1 = (((__pyx_v_seq[(__pyx_v_order[1])]) > (__pyx_v_seq[(__pyx_v_order[3])])) != 0);
   if (__pyx_t_1) {
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":33
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":28
  *         order[0], order[2] = order[2], order[0]
  *     if seq[order[1]] > seq[order[3]]:
  *         order[1], order[3] = order[3], order[1]             # <<<<<<<<<<<<<<
@@ -2778,7 +2779,7 @@ static CYTHON_INLINE void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler
     (__pyx_v_order[1]) = __pyx_t_3;
     (__pyx_v_order[3]) = __pyx_t_2;
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":32
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":27
  *     if seq[order[0]] > seq[order[2]]:
  *         order[0], order[2] = order[2], order[0]
  *     if seq[order[1]] > seq[order[3]]:             # <<<<<<<<<<<<<<
@@ -2787,7 +2788,7 @@ static CYTHON_INLINE void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler
  */
   }
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":34
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":29
  *     if seq[order[1]] > seq[order[3]]:
  *         order[1], order[3] = order[3], order[1]
  *     if seq[order[1]]> seq[order[2]]:             # <<<<<<<<<<<<<<
@@ -2797,19 +2798,19 @@ static CYTHON_INLINE void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler
   __pyx_t_1 = (((__pyx_v_seq[(__pyx_v_order[1])]) > (__pyx_v_seq[(__pyx_v_order[2])])) != 0);
   if (__pyx_t_1) {
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":35
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":30
  *         order[1], order[3] = order[3], order[1]
  *     if seq[order[1]]> seq[order[2]]:
  *         order[1], order[2] = order[2], order[1]             # <<<<<<<<<<<<<<
  * 
- * cdef class IrreversibleTwoUnitSampler:
+ * 
  */
     __pyx_t_2 = (__pyx_v_order[2]);
     __pyx_t_3 = (__pyx_v_order[1]);
     (__pyx_v_order[1]) = __pyx_t_2;
     (__pyx_v_order[2]) = __pyx_t_3;
 
-    /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":34
+    /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":29
  *     if seq[order[1]] > seq[order[3]]:
  *         order[1], order[3] = order[3], order[1]
  *     if seq[order[1]]> seq[order[2]]:             # <<<<<<<<<<<<<<
@@ -2818,8 +2819,8 @@ static CYTHON_INLINE void __pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler
  */
   }
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":20
- * include "shared_defs.pxd"
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pxd":15
+ * 
  * 
  * cdef inline void argsort_4(double seq[4], int order[4]):             # <<<<<<<<<<<<<<
  *     """ Explicit five comparison ascending argsort of four values """
@@ -15212,15 +15213,12 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Buffer_view_does_not_expose_stri, __pyx_k_Buffer_view_does_not_expose_stri, sizeof(__pyx_k_Buffer_view_does_not_expose_stri), 0, 0, 1, 0},
   {&__pyx_kp_s_Can_only_create_a_buffer_that_is, __pyx_k_Can_only_create_a_buffer_that_is, sizeof(__pyx_k_Can_only_create_a_buffer_that_is), 0, 0, 1, 0},
   {&__pyx_kp_s_Cannot_index_with_type_s, __pyx_k_Cannot_index_with_type_s, sizeof(__pyx_k_Cannot_index_with_type_s), 0, 0, 1, 0},
-  {&__pyx_kp_s_Copyright_2015_Matt_Graham, __pyx_k_Copyright_2015_Matt_Graham, sizeof(__pyx_k_Copyright_2015_Matt_Graham), 0, 0, 1, 0},
   {&__pyx_n_s_Ellipsis, __pyx_k_Ellipsis, sizeof(__pyx_k_Ellipsis), 0, 0, 1, 1},
   {&__pyx_kp_s_Empty_shape_tuple_for_cython_arr, __pyx_k_Empty_shape_tuple_for_cython_arr, sizeof(__pyx_k_Empty_shape_tuple_for_cython_arr), 0, 0, 1, 0},
   {&__pyx_n_s_IndexError, __pyx_k_IndexError, sizeof(__pyx_k_IndexError), 0, 0, 1, 1},
   {&__pyx_kp_s_Indirect_dimensions_not_supporte, __pyx_k_Indirect_dimensions_not_supporte, sizeof(__pyx_k_Indirect_dimensions_not_supporte), 0, 0, 1, 0},
   {&__pyx_kp_s_Invalid_mode_expected_c_or_fortr, __pyx_k_Invalid_mode_expected_c_or_fortr, sizeof(__pyx_k_Invalid_mode_expected_c_or_fortr), 0, 0, 1, 0},
   {&__pyx_kp_s_Invalid_shape_in_axis_d_d, __pyx_k_Invalid_shape_in_axis_d_d, sizeof(__pyx_k_Invalid_shape_in_axis_d_d), 0, 0, 1, 0},
-  {&__pyx_n_s_MIT, __pyx_k_MIT, sizeof(__pyx_k_MIT), 0, 0, 1, 1},
-  {&__pyx_kp_s_Matt_Graham, __pyx_k_Matt_Graham, sizeof(__pyx_k_Matt_Graham), 0, 0, 1, 0},
   {&__pyx_n_s_MemoryError, __pyx_k_MemoryError, sizeof(__pyx_k_MemoryError), 0, 0, 1, 1},
   {&__pyx_kp_s_MemoryView_of_r_at_0x_x, __pyx_k_MemoryView_of_r_at_0x_x, sizeof(__pyx_k_MemoryView_of_r_at_0x_x), 0, 0, 1, 0},
   {&__pyx_kp_s_MemoryView_of_r_object, __pyx_k_MemoryView_of_r_object, sizeof(__pyx_k_MemoryView_of_r_object), 0, 0, 1, 0},
@@ -15230,7 +15228,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Unable_to_convert_item_to_object, __pyx_k_Unable_to_convert_item_to_object, sizeof(__pyx_k_Unable_to_convert_item_to_object), 0, 0, 1, 0},
   {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
   {&__pyx_n_s_allocate_buffer, __pyx_k_allocate_buffer, sizeof(__pyx_k_allocate_buffer), 0, 0, 1, 1},
-  {&__pyx_n_s_authors, __pyx_k_authors, sizeof(__pyx_k_authors), 0, 0, 1, 1},
   {&__pyx_n_s_base, __pyx_k_base, sizeof(__pyx_k_base), 0, 0, 1, 1},
   {&__pyx_n_s_biases, __pyx_k_biases, sizeof(__pyx_k_biases), 0, 0, 1, 1},
   {&__pyx_n_s_c, __pyx_k_c, sizeof(__pyx_k_c), 0, 0, 1, 1},
@@ -15238,7 +15235,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_class, __pyx_k_class, sizeof(__pyx_k_class), 0, 0, 1, 1},
   {&__pyx_kp_s_contiguous_and_direct, __pyx_k_contiguous_and_direct, sizeof(__pyx_k_contiguous_and_direct), 0, 0, 1, 0},
   {&__pyx_kp_s_contiguous_and_indirect, __pyx_k_contiguous_and_indirect, sizeof(__pyx_k_contiguous_and_indirect), 0, 0, 1, 0},
-  {&__pyx_n_s_copyright, __pyx_k_copyright, sizeof(__pyx_k_copyright), 0, 0, 1, 1},
   {&__pyx_n_s_dtype_is_object, __pyx_k_dtype_is_object, sizeof(__pyx_k_dtype_is_object), 0, 0, 1, 1},
   {&__pyx_n_s_encode, __pyx_k_encode, sizeof(__pyx_k_encode), 0, 0, 1, 1},
   {&__pyx_n_s_enumerate, __pyx_k_enumerate, sizeof(__pyx_k_enumerate), 0, 0, 1, 1},
@@ -15253,7 +15249,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_init_state, __pyx_k_init_state, sizeof(__pyx_k_init_state), 0, 0, 1, 1},
   {&__pyx_n_s_itemsize, __pyx_k_itemsize, sizeof(__pyx_k_itemsize), 0, 0, 1, 1},
   {&__pyx_kp_s_itemsize_0_for_cython_array, __pyx_k_itemsize_0_for_cython_array, sizeof(__pyx_k_itemsize_0_for_cython_array), 0, 0, 1, 0},
-  {&__pyx_n_s_license, __pyx_k_license, sizeof(__pyx_k_license), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_memview, __pyx_k_memview, sizeof(__pyx_k_memview), 0, 0, 1, 1},
   {&__pyx_n_s_mode, __pyx_k_mode, sizeof(__pyx_k_mode), 0, 0, 1, 1},
@@ -15263,7 +15258,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_ndim, __pyx_k_ndim, sizeof(__pyx_k_ndim), 0, 0, 1, 1},
   {&__pyx_n_s_obj, __pyx_k_obj, sizeof(__pyx_k_obj), 0, 0, 1, 1},
   {&__pyx_n_s_pack, __pyx_k_pack, sizeof(__pyx_k_pack), 0, 0, 1, 1},
-  {&__pyx_n_s_pyx_capi, __pyx_k_pyx_capi, sizeof(__pyx_k_pyx_capi), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_getbuffer, __pyx_k_pyx_getbuffer, sizeof(__pyx_k_pyx_getbuffer), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_vtable, __pyx_k_pyx_vtable, sizeof(__pyx_k_pyx_vtable), 0, 0, 1, 1},
   {&__pyx_n_s_range, __pyx_k_range, sizeof(__pyx_k_range), 0, 0, 1, 1},
@@ -15271,7 +15265,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_shape, __pyx_k_shape, sizeof(__pyx_k_shape), 0, 0, 1, 1},
   {&__pyx_n_s_size, __pyx_k_size, sizeof(__pyx_k_size), 0, 0, 1, 1},
   {&__pyx_n_s_start, __pyx_k_start, sizeof(__pyx_k_start), 0, 0, 1, 1},
-  {&__pyx_n_s_state_t_code, __pyx_k_state_t_code, sizeof(__pyx_k_state_t_code), 0, 0, 1, 1},
   {&__pyx_n_s_step, __pyx_k_step, sizeof(__pyx_k_step), 0, 0, 1, 1},
   {&__pyx_n_s_stop, __pyx_k_stop, sizeof(__pyx_k_stop), 0, 0, 1, 1},
   {&__pyx_kp_s_strided_and_direct, __pyx_k_strided_and_direct, sizeof(__pyx_k_strided_and_direct), 0, 0, 1, 0},
@@ -15287,7 +15280,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 50, __pyx_L1_error)
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(1, 131, __pyx_L1_error)
   __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(1, 146, __pyx_L1_error)
   __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(1, 149, __pyx_L1_error)
@@ -15529,9 +15522,10 @@ PyMODINIT_FUNC PyInit_irreversible_two_unit_sampler(void); /*proto*/
 PyMODINIT_FUNC PyInit_irreversible_two_unit_sampler(void)
 #endif
 {
-  __Pyx_memviewslice __pyx_t_1 = { 0, 0, { 0 }, { 0 }, { 0 } };
-  PyObject *__pyx_t_2 = NULL;
-  static PyThread_type_lock __pyx_t_3[8];
+  PyObject *__pyx_t_1 = NULL;
+  __Pyx_memviewslice __pyx_t_2 = { 0, 0, { 0 }, { 0 }, { 0 } };
+  PyObject *__pyx_t_3 = NULL;
+  static PyThread_type_lock __pyx_t_4[8];
   __Pyx_RefNannyDeclarations
   #if CYTHON_REFNANNY
   __Pyx_RefNanny = __Pyx_RefNannyImportAPI("refnanny");
@@ -15610,16 +15604,15 @@ PyMODINIT_FUNC PyInit_irreversible_two_unit_sampler(void)
   contiguous = Py_None; Py_INCREF(Py_None);
   indirect_contiguous = Py_None; Py_INCREF(Py_None);
   /*--- Variable export code ---*/
-  if (__Pyx_ExportVoidPtr(__pyx_n_s_state_t_code, (void *)&__pyx_v_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t_code, "char *") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   /*--- Function export code ---*/
   /*--- Type init code ---*/
   __pyx_vtabptr_7bmtools_4mcmc_29irreversible_two_unit_sampler_IrreversibleTwoUnitSampler = &__pyx_vtable_7bmtools_4mcmc_29irreversible_two_unit_sampler_IrreversibleTwoUnitSampler;
   __pyx_vtable_7bmtools_4mcmc_29irreversible_two_unit_sampler_IrreversibleTwoUnitSampler.sample_pair = (void (*)(struct __pyx_obj_7bmtools_4mcmc_29irreversible_two_unit_sampler_IrreversibleTwoUnitSampler *, __Pyx_memviewslice, int, int))__pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26IrreversibleTwoUnitSampler_sample_pair;
   __pyx_vtable_7bmtools_4mcmc_29irreversible_two_unit_sampler_IrreversibleTwoUnitSampler.calc_pair_probs = (void (*)(struct __pyx_obj_7bmtools_4mcmc_29irreversible_two_unit_sampler_IrreversibleTwoUnitSampler *, __Pyx_memviewslice, int, int, double *))__pyx_f_7bmtools_4mcmc_29irreversible_two_unit_sampler_26IrreversibleTwoUnitSampler_calc_pair_probs;
-  if (PyType_Ready(&__pyx_type_7bmtools_4mcmc_29irreversible_two_unit_sampler_IrreversibleTwoUnitSampler) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_7bmtools_4mcmc_29irreversible_two_unit_sampler_IrreversibleTwoUnitSampler) < 0) __PYX_ERR(0, 19, __pyx_L1_error)
   __pyx_type_7bmtools_4mcmc_29irreversible_two_unit_sampler_IrreversibleTwoUnitSampler.tp_print = 0;
-  if (__Pyx_SetVtable(__pyx_type_7bmtools_4mcmc_29irreversible_two_unit_sampler_IrreversibleTwoUnitSampler.tp_dict, __pyx_vtabptr_7bmtools_4mcmc_29irreversible_two_unit_sampler_IrreversibleTwoUnitSampler) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
-  if (PyObject_SetAttrString(__pyx_m, "IrreversibleTwoUnitSampler", (PyObject *)&__pyx_type_7bmtools_4mcmc_29irreversible_two_unit_sampler_IrreversibleTwoUnitSampler) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_7bmtools_4mcmc_29irreversible_two_unit_sampler_IrreversibleTwoUnitSampler.tp_dict, __pyx_vtabptr_7bmtools_4mcmc_29irreversible_two_unit_sampler_IrreversibleTwoUnitSampler) < 0) __PYX_ERR(0, 19, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "IrreversibleTwoUnitSampler", (PyObject *)&__pyx_type_7bmtools_4mcmc_29irreversible_two_unit_sampler_IrreversibleTwoUnitSampler) < 0) __PYX_ERR(0, 19, __pyx_L1_error)
   __pyx_ptype_7bmtools_4mcmc_29irreversible_two_unit_sampler_IrreversibleTwoUnitSampler = &__pyx_type_7bmtools_4mcmc_29irreversible_two_unit_sampler_IrreversibleTwoUnitSampler;
   __pyx_vtabptr_array = &__pyx_vtable_array;
   __pyx_vtable_array.get_memview = (PyObject *(*)(struct __pyx_array_obj *))__pyx_array_get_memview;
@@ -15652,64 +15645,40 @@ PyMODINIT_FUNC PyInit_irreversible_two_unit_sampler(void)
   if (__Pyx_SetVtable(__pyx_type___pyx_memoryviewslice.tp_dict, __pyx_vtabptr__memoryviewslice) < 0) __PYX_ERR(1, 951, __pyx_L1_error)
   __pyx_memoryviewslice_type = &__pyx_type___pyx_memoryviewslice;
   /*--- Type import code ---*/
-  __pyx_ptype_7bmtools_4mcmc_17randomkit_wrapper_RandomKit = __Pyx_ImportType("bmtools.mcmc.randomkit_wrapper", "RandomKit", sizeof(struct __pyx_obj_7bmtools_4mcmc_17randomkit_wrapper_RandomKit), 1); if (unlikely(!__pyx_ptype_7bmtools_4mcmc_17randomkit_wrapper_RandomKit)) __PYX_ERR(2, 26, __pyx_L1_error)
-  __pyx_vtabptr_7bmtools_4mcmc_17randomkit_wrapper_RandomKit = (struct __pyx_vtabstruct_7bmtools_4mcmc_17randomkit_wrapper_RandomKit*)__Pyx_GetVtable(__pyx_ptype_7bmtools_4mcmc_17randomkit_wrapper_RandomKit->tp_dict); if (unlikely(!__pyx_vtabptr_7bmtools_4mcmc_17randomkit_wrapper_RandomKit)) __PYX_ERR(2, 26, __pyx_L1_error)
+  __pyx_ptype_7bmtools_4mcmc_17randomkit_wrapper_RandomKit = __Pyx_ImportType("bmtools.mcmc.randomkit_wrapper", "RandomKit", sizeof(struct __pyx_obj_7bmtools_4mcmc_17randomkit_wrapper_RandomKit), 1); if (unlikely(!__pyx_ptype_7bmtools_4mcmc_17randomkit_wrapper_RandomKit)) __PYX_ERR(2, 21, __pyx_L1_error)
+  __pyx_vtabptr_7bmtools_4mcmc_17randomkit_wrapper_RandomKit = (struct __pyx_vtabstruct_7bmtools_4mcmc_17randomkit_wrapper_RandomKit*)__Pyx_GetVtable(__pyx_ptype_7bmtools_4mcmc_17randomkit_wrapper_RandomKit->tp_dict); if (unlikely(!__pyx_vtabptr_7bmtools_4mcmc_17randomkit_wrapper_RandomKit)) __PYX_ERR(2, 21, __pyx_L1_error)
   /*--- Variable import code ---*/
+  __pyx_t_1 = __Pyx_ImportModule("bmtools.exact.helpers"); if (!__pyx_t_1) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_ImportVoidPtr(__pyx_t_1, "state_t_code", (void **)&__pyx_vp_7bmtools_5exact_7helpers_state_t_code, "char *") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  Py_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   /*--- Function import code ---*/
   /*--- Execution code ---*/
   #if defined(__Pyx_Generator_USED) || defined(__Pyx_Coroutine_USED)
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":13
- * """
- * 
- * __authors__ = 'Matt Graham'             # <<<<<<<<<<<<<<
- * __copyright__ = 'Copyright 2015, Matt Graham'
- * __license__ = 'MIT'
- */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_authors, __pyx_kp_s_Matt_Graham) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
-
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":14
- * 
- * __authors__ = 'Matt Graham'
- * __copyright__ = 'Copyright 2015, Matt Graham'             # <<<<<<<<<<<<<<
- * __license__ = 'MIT'
- * 
- */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_copyright, __pyx_kp_s_Copyright_2015_Matt_Graham) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
-
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":15
- * __authors__ = 'Matt Graham'
- * __copyright__ = 'Copyright 2015, Matt Graham'
- * __license__ = 'MIT'             # <<<<<<<<<<<<<<
- * 
- * cimport randomkit_wrapper as rk
- */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_license, __pyx_n_s_MIT) < 0) __PYX_ERR(0, 15, __pyx_L1_error)
-
-  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":38
+  /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":37
  * 
  *     def get_samples(IrreversibleTwoUnitSampler self, int n_sample,
  *                     state_t[:] init_state=None):             # <<<<<<<<<<<<<<
  *         """
  *         Get samples by performing specificied number of sweeps through pairs of
  */
-  __pyx_t_1 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t(Py_None);
-  if (unlikely(!__pyx_t_1.memview)) __PYX_ERR(0, 38, __pyx_L1_error)
-  __pyx_k_ = __pyx_t_1;
-  __pyx_t_1.memview = NULL;
-  __pyx_t_1.data = NULL;
+  __pyx_t_2 = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_7bmtools_5exact_7helpers_state_t(Py_None);
+  if (unlikely(!__pyx_t_2.memview)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_k_ = __pyx_t_2;
+  __pyx_t_2.memview = NULL;
+  __pyx_t_2.data = NULL;
 
   /* "bmtools/mcmc/irreversible_two_unit_sampler.pyx":1
- * """             # <<<<<<<<<<<<<<
- * ==============================================
- * Irreversible two-unit Boltzmann machine sampler
+ * # -*- coding: utf-8 -*-             # <<<<<<<<<<<<<<
+ * """Irreversible two-unit Boltzmann machine sampler.
+ * 
  */
-  __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_3) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "View.MemoryView":207
  *         info.obj = self
@@ -15718,10 +15687,10 @@ PyMODINIT_FUNC PyInit_irreversible_two_unit_sampler(void)
  * 
  *     def __dealloc__(array self):
  */
-  __pyx_t_2 = __pyx_capsule_create(((void *)(&__pyx_array_getbuffer)), ((char *)"getbuffer(obj, view, flags)")); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 207, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_array_type->tp_dict, __pyx_n_s_pyx_getbuffer, __pyx_t_2) < 0) __PYX_ERR(1, 207, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = __pyx_capsule_create(((void *)(&__pyx_array_getbuffer)), ((char *)"getbuffer(obj, view, flags)")); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 207, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_array_type->tp_dict, __pyx_n_s_pyx_getbuffer, __pyx_t_3) < 0) __PYX_ERR(1, 207, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   PyType_Modified(__pyx_array_type);
 
   /* "View.MemoryView":282
@@ -15731,12 +15700,12 @@ PyMODINIT_FUNC PyInit_irreversible_two_unit_sampler(void)
  * cdef strided = Enum("<strided and direct>") # default
  * cdef indirect = Enum("<strided and indirect>")
  */
-  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__15, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 282, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__15, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 282, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
   __Pyx_XGOTREF(generic);
-  __Pyx_DECREF_SET(generic, __pyx_t_2);
-  __Pyx_GIVEREF(__pyx_t_2);
-  __pyx_t_2 = 0;
+  __Pyx_DECREF_SET(generic, __pyx_t_3);
+  __Pyx_GIVEREF(__pyx_t_3);
+  __pyx_t_3 = 0;
 
   /* "View.MemoryView":283
  * 
@@ -15745,12 +15714,12 @@ PyMODINIT_FUNC PyInit_irreversible_two_unit_sampler(void)
  * cdef indirect = Enum("<strided and indirect>")
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__16, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 283, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__16, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 283, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
   __Pyx_XGOTREF(strided);
-  __Pyx_DECREF_SET(strided, __pyx_t_2);
-  __Pyx_GIVEREF(__pyx_t_2);
-  __pyx_t_2 = 0;
+  __Pyx_DECREF_SET(strided, __pyx_t_3);
+  __Pyx_GIVEREF(__pyx_t_3);
+  __pyx_t_3 = 0;
 
   /* "View.MemoryView":284
  * cdef generic = Enum("<strided and direct or indirect>")
@@ -15759,12 +15728,12 @@ PyMODINIT_FUNC PyInit_irreversible_two_unit_sampler(void)
  * 
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__17, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 284, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__17, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 284, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
   __Pyx_XGOTREF(indirect);
-  __Pyx_DECREF_SET(indirect, __pyx_t_2);
-  __Pyx_GIVEREF(__pyx_t_2);
-  __pyx_t_2 = 0;
+  __Pyx_DECREF_SET(indirect, __pyx_t_3);
+  __Pyx_GIVEREF(__pyx_t_3);
+  __pyx_t_3 = 0;
 
   /* "View.MemoryView":287
  * 
@@ -15773,12 +15742,12 @@ PyMODINIT_FUNC PyInit_irreversible_two_unit_sampler(void)
  * cdef indirect_contiguous = Enum("<contiguous and indirect>")
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__18, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 287, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__18, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 287, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
   __Pyx_XGOTREF(contiguous);
-  __Pyx_DECREF_SET(contiguous, __pyx_t_2);
-  __Pyx_GIVEREF(__pyx_t_2);
-  __pyx_t_2 = 0;
+  __Pyx_DECREF_SET(contiguous, __pyx_t_3);
+  __Pyx_GIVEREF(__pyx_t_3);
+  __pyx_t_3 = 0;
 
   /* "View.MemoryView":288
  * 
@@ -15787,12 +15756,12 @@ PyMODINIT_FUNC PyInit_irreversible_two_unit_sampler(void)
  * 
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__19, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 288, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__19, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 288, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
   __Pyx_XGOTREF(indirect_contiguous);
-  __Pyx_DECREF_SET(indirect_contiguous, __pyx_t_2);
-  __Pyx_GIVEREF(__pyx_t_2);
-  __pyx_t_2 = 0;
+  __Pyx_DECREF_SET(indirect_contiguous, __pyx_t_3);
+  __Pyx_GIVEREF(__pyx_t_3);
+  __pyx_t_3 = 0;
 
   /* "View.MemoryView":312
  * 
@@ -15810,15 +15779,15 @@ PyMODINIT_FUNC PyInit_irreversible_two_unit_sampler(void)
  *     PyThread_allocate_lock(),
  *     PyThread_allocate_lock(),
  */
-  __pyx_t_3[0] = PyThread_allocate_lock();
-  __pyx_t_3[1] = PyThread_allocate_lock();
-  __pyx_t_3[2] = PyThread_allocate_lock();
-  __pyx_t_3[3] = PyThread_allocate_lock();
-  __pyx_t_3[4] = PyThread_allocate_lock();
-  __pyx_t_3[5] = PyThread_allocate_lock();
-  __pyx_t_3[6] = PyThread_allocate_lock();
-  __pyx_t_3[7] = PyThread_allocate_lock();
-  memcpy(&(__pyx_memoryview_thread_locks[0]), __pyx_t_3, sizeof(__pyx_memoryview_thread_locks[0]) * (8));
+  __pyx_t_4[0] = PyThread_allocate_lock();
+  __pyx_t_4[1] = PyThread_allocate_lock();
+  __pyx_t_4[2] = PyThread_allocate_lock();
+  __pyx_t_4[3] = PyThread_allocate_lock();
+  __pyx_t_4[4] = PyThread_allocate_lock();
+  __pyx_t_4[5] = PyThread_allocate_lock();
+  __pyx_t_4[6] = PyThread_allocate_lock();
+  __pyx_t_4[7] = PyThread_allocate_lock();
+  memcpy(&(__pyx_memoryview_thread_locks[0]), __pyx_t_4, sizeof(__pyx_memoryview_thread_locks[0]) * (8));
 
   /* "View.MemoryView":535
  *         info.obj = self
@@ -15827,10 +15796,10 @@ PyMODINIT_FUNC PyInit_irreversible_two_unit_sampler(void)
  * 
  * 
  */
-  __pyx_t_2 = __pyx_capsule_create(((void *)(&__pyx_memoryview_getbuffer)), ((char *)"getbuffer(obj, view, flags)")); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 535, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_memoryview_type->tp_dict, __pyx_n_s_pyx_getbuffer, __pyx_t_2) < 0) __PYX_ERR(1, 535, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = __pyx_capsule_create(((void *)(&__pyx_memoryview_getbuffer)), ((char *)"getbuffer(obj, view, flags)")); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 535, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_memoryview_type->tp_dict, __pyx_n_s_pyx_getbuffer, __pyx_t_3) < 0) __PYX_ERR(1, 535, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   PyType_Modified(__pyx_memoryview_type);
 
   /* "View.MemoryView":981
@@ -15840,10 +15809,10 @@ PyMODINIT_FUNC PyInit_irreversible_two_unit_sampler(void)
  * 
  * 
  */
-  __pyx_t_2 = __pyx_capsule_create(((void *)(&__pyx_memoryview_getbuffer)), ((char *)"getbuffer(obj, view, flags)")); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 981, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_memoryviewslice_type->tp_dict, __pyx_n_s_pyx_getbuffer, __pyx_t_2) < 0) __PYX_ERR(1, 981, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = __pyx_capsule_create(((void *)(&__pyx_memoryview_getbuffer)), ((char *)"getbuffer(obj, view, flags)")); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 981, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_memoryviewslice_type->tp_dict, __pyx_n_s_pyx_getbuffer, __pyx_t_3) < 0) __PYX_ERR(1, 981, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   PyType_Modified(__pyx_memoryviewslice_type);
 
   /* "View.MemoryView":1391
@@ -15858,8 +15827,9 @@ PyMODINIT_FUNC PyInit_irreversible_two_unit_sampler(void)
 
   goto __pyx_L0;
   __pyx_L1_error:;
-  __PYX_XDEC_MEMVIEW(&__pyx_t_1, 1);
-  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_1);
+  __PYX_XDEC_MEMVIEW(&__pyx_t_2, 1);
+  __Pyx_XDECREF(__pyx_t_3);
   if (__pyx_m) {
     if (__pyx_d) {
       __Pyx_AddTraceback("init bmtools.mcmc.irreversible_two_unit_sampler", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -18251,7 +18221,7 @@ __pyx_fail:
     }
 
 /* ObjectToMemviewSlice */
-        static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t(PyObject *obj) {
+        static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_7bmtools_5exact_7helpers_state_t(PyObject *obj) {
     __Pyx_memviewslice result = { 0, 0, { 0 }, { 0 }, { 0 } };
     __Pyx_BufFmt_StackElem stack[1];
     int axes_specs[] = { (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_STRIDED) };
@@ -18262,7 +18232,7 @@ __pyx_fail:
     }
     retcode = __Pyx_ValidateAndInit_memviewslice(axes_specs, 0,
                                                  PyBUF_RECORDS, 1,
-                                                 &__Pyx_TypeInfo_nn___pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t, stack,
+                                                 &__Pyx_TypeInfo_nn___pyx_t_7bmtools_5exact_7helpers_state_t, stack,
                                                  &result, obj);
     if (unlikely(retcode == -1))
         goto __pyx_fail;
@@ -18355,14 +18325,14 @@ __pyx_fail:
 }
 
 /* MemviewDtypeToObject */
-        static CYTHON_INLINE PyObject *__pyx_memview_get_nn___pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t(const char *itemp) {
-    return (PyObject *) __Pyx_PyInt_From_signed__char(*(__pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t *) itemp);
+        static CYTHON_INLINE PyObject *__pyx_memview_get_nn___pyx_t_7bmtools_5exact_7helpers_state_t(const char *itemp) {
+    return (PyObject *) __Pyx_PyInt_From_signed__char(*(__pyx_t_7bmtools_5exact_7helpers_state_t *) itemp);
 }
-static CYTHON_INLINE int __pyx_memview_set_nn___pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t(const char *itemp, PyObject *obj) {
-    __pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t value = __Pyx_PyInt_As_signed__char(obj);
+static CYTHON_INLINE int __pyx_memview_set_nn___pyx_t_7bmtools_5exact_7helpers_state_t(const char *itemp, PyObject *obj) {
+    __pyx_t_7bmtools_5exact_7helpers_state_t value = __Pyx_PyInt_As_signed__char(obj);
     if ((value == (signed char)-1) && PyErr_Occurred())
         return 0;
-    *(__pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t *) itemp = value;
+    *(__pyx_t_7bmtools_5exact_7helpers_state_t *) itemp = value;
     return 1;
 }
 
@@ -19386,7 +19356,7 @@ raise_neg_overflow:
 }
 
 /* ObjectToMemviewSlice */
-        static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t(PyObject *obj) {
+        static CYTHON_INLINE __Pyx_memviewslice __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_7bmtools_5exact_7helpers_state_t(PyObject *obj) {
     __Pyx_memviewslice result = { 0, 0, { 0 }, { 0 }, { 0 } };
     __Pyx_BufFmt_StackElem stack[1];
     int axes_specs[] = { (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_STRIDED), (__Pyx_MEMVIEW_DIRECT | __Pyx_MEMVIEW_STRIDED) };
@@ -19397,7 +19367,7 @@ raise_neg_overflow:
     }
     retcode = __Pyx_ValidateAndInit_memviewslice(axes_specs, 0,
                                                  PyBUF_RECORDS, 2,
-                                                 &__Pyx_TypeInfo_nn___pyx_t_7bmtools_4mcmc_29irreversible_two_unit_sampler_state_t, stack,
+                                                 &__Pyx_TypeInfo_nn___pyx_t_7bmtools_5exact_7helpers_state_t, stack,
                                                  &result, obj);
     if (unlikely(retcode == -1))
         goto __pyx_fail;
@@ -19422,37 +19392,6 @@ __pyx_fail:
         return PyErr_WarnEx(NULL, message, 1);
     }
     return 0;
-}
-
-/* VoidPtrExport */
-        static int __Pyx_ExportVoidPtr(PyObject *name, void *p, const char *sig) {
-    PyObject *d;
-    PyObject *cobj = 0;
-    d = PyDict_GetItem(__pyx_d, __pyx_n_s_pyx_capi);
-    Py_XINCREF(d);
-    if (!d) {
-        d = PyDict_New();
-        if (!d)
-            goto bad;
-        if (__Pyx_PyObject_SetAttrStr(__pyx_m, __pyx_n_s_pyx_capi, d) < 0)
-            goto bad;
-    }
-#if PY_VERSION_HEX >= 0x02070000
-    cobj = PyCapsule_New(p, sig, 0);
-#else
-    cobj = PyCObject_FromVoidPtrAndDesc(p, (void *)sig, 0);
-#endif
-    if (!cobj)
-        goto bad;
-    if (PyDict_SetItem(d, name, cobj) < 0)
-        goto bad;
-    Py_DECREF(cobj);
-    Py_DECREF(d);
-    return 0;
-bad:
-    Py_XDECREF(cobj);
-    Py_XDECREF(d);
-    return -1;
 }
 
 /* ModuleImport */
@@ -19535,6 +19474,55 @@ bad:
     Py_XDECREF(py_module);
     Py_XDECREF(result);
     return NULL;
+}
+#endif
+
+/* VoidPtrImport */
+        #ifndef __PYX_HAVE_RT_ImportVoidPtr
+#define __PYX_HAVE_RT_ImportVoidPtr
+static int __Pyx_ImportVoidPtr(PyObject *module, const char *name, void **p, const char *sig) {
+    PyObject *d = 0;
+    PyObject *cobj = 0;
+    d = PyObject_GetAttrString(module, (char *)"__pyx_capi__");
+    if (!d)
+        goto bad;
+    cobj = PyDict_GetItemString(d, name);
+    if (!cobj) {
+        PyErr_Format(PyExc_ImportError,
+            "%.200s does not export expected C variable %.200s",
+                PyModule_GetName(module), name);
+        goto bad;
+    }
+#if PY_VERSION_HEX >= 0x02070000
+    if (!PyCapsule_IsValid(cobj, sig)) {
+        PyErr_Format(PyExc_TypeError,
+            "C variable %.200s.%.200s has wrong signature (expected %.500s, got %.500s)",
+             PyModule_GetName(module), name, sig, PyCapsule_GetName(cobj));
+        goto bad;
+    }
+    *p = PyCapsule_GetPointer(cobj, sig);
+#else
+    {const char *desc, *s1, *s2;
+    desc = (const char *)PyCObject_GetDesc(cobj);
+    if (!desc)
+        goto bad;
+    s1 = desc; s2 = sig;
+    while (*s1 != '\0' && *s1 == *s2) { s1++; s2++; }
+    if (*s1 != *s2) {
+        PyErr_Format(PyExc_TypeError,
+            "C variable %.200s.%.200s has wrong signature (expected %.500s, got %.500s)",
+             PyModule_GetName(module), name, sig, desc);
+        goto bad;
+    }
+    *p = PyCObject_AsVoidPtr(cobj);}
+#endif
+    if (!(*p))
+        goto bad;
+    Py_DECREF(d);
+    return 0;
+bad:
+    Py_XDECREF(d);
+    return -1;
 }
 #endif
 

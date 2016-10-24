@@ -1,30 +1,19 @@
-"""
-=======================================
-Swendsen-Wang Boltzmann machine sampler
-=======================================
+# -*- coding: utf-8 -*-
+"""Swendsen-Wang Boltzmann machine sampler.
 
 Wrapper class implementing Swendsen-Wang algorithm (spin-cluster method) for
 MCMC sampling from a Boltzmann machine distribution (~Ising spin model).
 
 References
 ----------
-
-> Swendsen, R. H., and Wang, J.-S. (1987), 
-> Nonuniversal critical dynamics in Monte Carlo simulations, 
+> Swendsen, R. H., and Wang, J.-S. (1987),
+> Nonuniversal critical dynamics in Monte Carlo simulations,
 > Phys. Rev. Lett., 58(2):86–88.
-
 """
 
-__authors__ = 'Matt Graham'
-__copyright__ = 'Copyright 2015, Matt Graham'
-__license__ = 'MIT'
-
 cimport samplers.randomkit_wrapper as rk
+from bmtools.exact.helpers cimport state_t
 
-ctypedef signed char state_t
-
-cdef extern from 'math.h':
-    double exp(double x)
 
 cdef class SwendsenWangSampler:
 

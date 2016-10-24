@@ -1,19 +1,14 @@
-"""
-========================
-Random kit wrapper class
-========================
+# -*- coding: utf-8 -*-
+"""Random kit wrapper class.
 
 Implementation of a basic Cython wrapper class around the 'Random kit' library
 by Jean-Sebastien Roy. Intended for use in other Cython modules as a more
 robust replacement for C stdlib rand().
 """
 
-__authors__ = "Matt Graham"
-__copyright__ = "Copyright 2015, Matt Graham"
-__license__ = "MIT"
-
 cimport randomkit_wrapper
 from libc cimport stdlib
+
 
 cdef class RandomKit:
 

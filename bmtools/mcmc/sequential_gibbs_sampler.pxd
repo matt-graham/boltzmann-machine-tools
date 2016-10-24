@@ -1,18 +1,13 @@
-"""
-===================================================
-Sequential scan Gibbs sampler for Boltzmann machine
-===================================================
+# -*- coding: utf-8 -*-
+"""Sequential scan Gibbs sampler for Boltzmann machine.
 
 Simple implementation of a standard single-unit update Gibbs sampler with
 fixed sequential scan order.
 """
 
-__authors__ = 'Matt Graham'
-__copyright__ = 'Copyright 2015, Matt Graham'
-__license__ = 'MIT'
-
 cimport randomkit_wrapper as rk
-include "shared_defs.pxd"
+from bmtools.exact.helpers cimport state_t
+
 
 cdef class SequentialGibbsSampler:
 

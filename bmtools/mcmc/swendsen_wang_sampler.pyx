@@ -1,25 +1,21 @@
-"""
-=======================================
-Swendsen-Wang Boltzmann machine sampler
-=======================================
+# -*- coding: utf-8 -*-
+"""Swendsen-Wang Boltzmann machine sampler.
 
 Wrapper class implementing Swendsen-Wang algorithm (spin-cluster method) for
 MCMC sampling from a Boltzmann machine distribution (~Ising spin model).
 
 References
 ----------
-
-> Swendsen, R. H., and Wang, J.-S. (1987), 
-> Nonuniversal critical dynamics in Monte Carlo simulations, 
+> Swendsen, R. H., and Wang, J.-S. (1987),
+> Nonuniversal critical dynamics in Monte Carlo simulations,
 > Phys. Rev. Lett., 58(2):86–88.
-
 """
 
-__authors__ = 'Matt Graham'
-__copyright__ = 'Copyright 2015, Matt Graham'
-__license__ = 'MIT'
-
 from cython.view cimport array
+from bmtools.exact.helpers cimport state_t, state_t_code
+
+cdef extern from 'math.h':
+    double exp(double x)
 
 cdef class SwendsenWangSampler:
 
@@ -45,8 +41,10 @@ cdef class SwendsenWangSampler:
         self.bond_probs = array(shape=shape_2, itemsize=d_size, format='d')
         self.flip_probs = array(shape=shape_1, itemsize=d_size, format='d')
         self.cluster_biases = array(shape=shape_1, itemsize=d_size, format='d')
-        self.bonds_state = array(shape=shape_2, itemsize=s_size, format='c')
-        self.units_state = array(shape=shape_1, itemsize=s_size, format='c')
+        self.bonds_state = array(
+            shape=shape_2, itemsize=s_size, format=state_t_code)
+        self.units_state = array(
+            shape=shape_1, itemsize=s_size, format=state_t_code)
         self.clusters = array(shape=shape_1, itemsize=i_size, format='i')
 
     cdef void sample_bonds_given_units(SwendsenWangSampler self):

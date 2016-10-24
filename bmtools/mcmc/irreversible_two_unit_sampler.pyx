@@ -1,7 +1,5 @@
-"""
-==============================================
-Irreversible two-unit Boltzmann machine sampler
-===============================================
+# -*- coding: utf-8 -*-
+"""Irreversible two-unit Boltzmann machine sampler.
 
 Boltzmann machine sampler with irreversible two-unit update dynamics.
 
@@ -10,12 +8,13 @@ of sequential composition of irreversible dynamics which resample states
 of pairs of units at a time.
 """
 
-__authors__ = 'Matt Graham'
-__copyright__ = 'Copyright 2015, Matt Graham'
-__license__ = 'MIT'
-
 cimport randomkit_wrapper as rk
+from bmtools.exact.helpers cimport state_t, state_t_code
 from cython.view cimport array
+
+cdef extern from 'math.h':
+    double exp(double x) nogil
+
 
 cdef class IrreversibleTwoUnitSampler:
     """
@@ -44,10 +43,10 @@ cdef class IrreversibleTwoUnitSampler:
         cdef state_t[:] state
         cdef state_t[:, :] samples = array(
             shape=(n_sample,self.n_unit), itemsize=sizeof(state_t),
-            format='c')
+            format=state_t_code)
         if init_state is None:
             state = array(shape=(self.n_unit,), itemsize=sizeof(state_t),
-                          format='c')
+                          format=state_t_code)
             for i in range(self.n_unit):
                 state[i] = 2*(self.rng.uniform() < 0.5) - 1
         else:

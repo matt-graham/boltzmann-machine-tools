@@ -1,7 +1,5 @@
-"""
-==============================
-Swendsen-Wang helper functions
-==============================
+# -*- coding: utf-8 -*-
+"""Swendsen-Wang helper functions.
 
 Cython implementations of helpers for performing clustering and flip
 probability calculation on a Boltzmann machine / Ising model augmented with
@@ -25,13 +23,11 @@ implementations could be made to exploit known structure to the connectivity.
 See also comments in Iain's code on this issue.
 """
 
-__authors__ = 'Matt Graham'
-__copyright__ = 'Copyright 2015, Matt Graham'
-__license__ = 'MIT'
-
 cimport randomkit_wrapper as rk
 from cython cimport view
-include "shared_defs.pxd"
+
+cdef extern from 'math.h':
+    double exp(double x) nogil
 
 cdef int find_cluster_root(int[:] clusters, int i):
     """
