@@ -1,7 +1,5 @@
-"""
-=============================================
-Gaussian mixture Boltzman machine relaxations
-=============================================
+# -*- coding: utf-8 -*-
+"""Gaussian mixture Boltzman machine relaxations.
 
 Helper classes for performing inference with Gaussian mixture Boltzmann machine
 relaxations [1].
