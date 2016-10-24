@@ -1,19 +1,14 @@
-"""
-=========================================
-Bolzmann machine Monte-Carlo expectations
-=========================================
+# -*- coding: utf-8 -*-
+"""Boltzmann machine Monte-Carlo expectations.
 
 Tool for calculating the root-mean-square error between pre-calculated true
 first and second moments of a Boltzmann machine and Monte Carlo estimates of
 these values from samples.
 """
 
-__authors__ = 'Matt Graham'
-__copyright__ = 'Copyright 2015, Matt Graham'
-__license__ = 'MIT'
-
 cdef extern from 'math.h':
     double sqrt(double x)
+
 
 cpdef calculate_incremental_expectations_errors(
         double[:, :] samples, double[:] expc_s_true,

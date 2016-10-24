@@ -5,13 +5,15 @@
     "distutils": {
         "depends": [], 
         "extra_compile_args": [
+            "-O3", 
+            "-ffast-math", 
             "-fopenmp"
         ], 
         "extra_link_args": [
             "-fopenmp"
         ]
     }, 
-    "module_name": "bmtools.exact.mc_expectations"
+    "module_name": "bmtools.mcmc.mc_expectations"
 }
 END: Cython Metadata */
 
@@ -281,8 +283,8 @@ static CYTHON_INLINE float __PYX_NAN() {
   #endif
 #endif
 
-#define __PYX_HAVE__bmtools__exact__mc_expectations
-#define __PYX_HAVE_API__bmtools__exact__mc_expectations
+#define __PYX_HAVE__bmtools__mcmc__mc_expectations
+#define __PYX_HAVE_API__bmtools__mcmc__mc_expectations
 #include "math.h"
 #include "pythread.h"
 #include "string.h"
@@ -504,7 +506,7 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "bmtools/exact/mc_expectations.pyx",
+  "bmtools/mcmc/mc_expectations.pyx",
   "stringsource",
 };
 /* MemviewSliceStruct.proto */
@@ -1202,7 +1204,7 @@ static PyObject *__pyx_memoryview_assign_item_from_object(struct __pyx_memoryvie
 static PyObject *__pyx_memoryviewslice_convert_item_to_object(struct __pyx_memoryviewslice_obj *__pyx_v_self, char *__pyx_v_itemp); /* proto*/
 static PyObject *__pyx_memoryviewslice_assign_item_from_object(struct __pyx_memoryviewslice_obj *__pyx_v_self, char *__pyx_v_itemp, PyObject *__pyx_v_value); /* proto*/
 
-/* Module declarations from 'bmtools.exact.mc_expectations' */
+/* Module declarations from 'bmtools.mcmc.mc_expectations' */
 static PyTypeObject *__pyx_array_type = 0;
 static PyTypeObject *__pyx_MemviewEnum_type = 0;
 static PyTypeObject *__pyx_memoryview_type = 0;
@@ -1214,7 +1216,7 @@ static PyObject *contiguous = 0;
 static PyObject *indirect_contiguous = 0;
 static int __pyx_memoryview_thread_locks_used;
 static PyThread_type_lock __pyx_memoryview_thread_locks[8];
-static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental_expectations_errors(__Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, int __pyx_skip_dispatch); /*proto*/
+static PyObject *__pyx_f_7bmtools_4mcmc_15mc_expectations_calculate_incremental_expectations_errors(__Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, int __pyx_skip_dispatch); /*proto*/
 static struct __pyx_array_obj *__pyx_array_new(PyObject *, Py_ssize_t, char *, char *, char *); /*proto*/
 static void *__pyx_align_pointer(void *, size_t); /*proto*/
 static PyObject *__pyx_memoryview_new(PyObject *, int, int, __Pyx_TypeInfo *); /*proto*/
@@ -1248,10 +1250,10 @@ static void __pyx_memoryview_refcount_objects_in_slice(char *, Py_ssize_t *, Py_
 static void __pyx_memoryview_slice_assign_scalar(__Pyx_memviewslice *, int, size_t, void *, int); /*proto*/
 static void __pyx_memoryview__slice_assign_scalar(char *, Py_ssize_t *, Py_ssize_t *, int, size_t, void *); /*proto*/
 static __Pyx_TypeInfo __Pyx_TypeInfo_double = { "double", NULL, sizeof(double), { 0 }, 0, 'R', 0, 0 };
-#define __Pyx_MODULE_NAME "bmtools.exact.mc_expectations"
-int __pyx_module_is_main_bmtools__exact__mc_expectations = 0;
+#define __Pyx_MODULE_NAME "bmtools.mcmc.mc_expectations"
+int __pyx_module_is_main_bmtools__mcmc__mc_expectations = 0;
 
-/* Implementation of 'bmtools.exact.mc_expectations' */
+/* Implementation of 'bmtools.mcmc.mc_expectations' */
 static PyObject *__pyx_builtin_range;
 static PyObject *__pyx_builtin_ValueError;
 static PyObject *__pyx_builtin_MemoryError;
@@ -1263,7 +1265,6 @@ static PyObject *__pyx_builtin_IndexError;
 static const char __pyx_k_O[] = "O";
 static const char __pyx_k_c[] = "c";
 static const char __pyx_k_id[] = "id";
-static const char __pyx_k_MIT[] = "MIT";
 static const char __pyx_k_obj[] = "obj";
 static const char __pyx_k_base[] = "base";
 static const char __pyx_k_main[] = "__main__";
@@ -1290,22 +1291,18 @@ static const char __pyx_k_import[] = "__import__";
 static const char __pyx_k_name_2[] = "__name__";
 static const char __pyx_k_struct[] = "struct";
 static const char __pyx_k_unpack[] = "unpack";
-static const char __pyx_k_authors[] = "__authors__";
 static const char __pyx_k_dist_ss[] = "dist_ss";
 static const char __pyx_k_expc_ss[] = "expc_ss";
 static const char __pyx_k_fortran[] = "fortran";
-static const char __pyx_k_license[] = "__license__";
 static const char __pyx_k_memview[] = "memview";
 static const char __pyx_k_samples[] = "samples";
 static const char __pyx_k_Ellipsis[] = "Ellipsis";
 static const char __pyx_k_itemsize[] = "itemsize";
 static const char __pyx_k_TypeError[] = "TypeError";
-static const char __pyx_k_copyright[] = "__copyright__";
 static const char __pyx_k_enumerate[] = "enumerate";
 static const char __pyx_k_IndexError[] = "IndexError";
 static const char __pyx_k_ValueError[] = "ValueError";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
-static const char __pyx_k_Matt_Graham[] = "Matt Graham";
 static const char __pyx_k_MemoryError[] = "MemoryError";
 static const char __pyx_k_expc_s_true[] = "expc_s_true";
 static const char __pyx_k_expc_ss_true[] = "expc_ss_true";
@@ -1320,11 +1317,10 @@ static const char __pyx_k_MemoryView_of_r_at_0x_x[] = "<MemoryView of %r at 0x%x
 static const char __pyx_k_contiguous_and_indirect[] = "<contiguous and indirect>";
 static const char __pyx_k_Cannot_index_with_type_s[] = "Cannot index with type '%s'";
 static const char __pyx_k_Invalid_shape_in_axis_d_d[] = "Invalid shape in axis %d: %d.";
-static const char __pyx_k_Copyright_2015_Matt_Graham[] = "Copyright 2015, Matt Graham";
 static const char __pyx_k_itemsize_0_for_cython_array[] = "itemsize <= 0 for cython.array";
 static const char __pyx_k_unable_to_allocate_array_data[] = "unable to allocate array data.";
 static const char __pyx_k_strided_and_direct_or_indirect[] = "<strided and direct or indirect>";
-static const char __pyx_k_Bolzmann_machine_Monte_Carlo_ex[] = "\n=========================================\nBolzmann machine Monte-Carlo expectations\n=========================================\n\nTool for calculating the root-mean-square error between pre-calculated true\nfirst and second moments of a Boltzmann machine and Monte Carlo estimates of\nthese values from samples.\n";
+static const char __pyx_k_Boltzmann_machine_Monte_Carlo_ex[] = "Boltzmann machine Monte-Carlo expectations.\n\nTool for calculating the root-mean-square error between pre-calculated true\nfirst and second moments of a Boltzmann machine and Monte Carlo estimates of\nthese values from samples.\n";
 static const char __pyx_k_Buffer_view_does_not_expose_stri[] = "Buffer view does not expose strides";
 static const char __pyx_k_Can_only_create_a_buffer_that_is[] = "Can only create a buffer that is contiguous in memory.";
 static const char __pyx_k_Empty_shape_tuple_for_cython_arr[] = "Empty shape tuple for cython.array";
@@ -1338,15 +1334,12 @@ static PyObject *__pyx_n_s_ASCII;
 static PyObject *__pyx_kp_s_Buffer_view_does_not_expose_stri;
 static PyObject *__pyx_kp_s_Can_only_create_a_buffer_that_is;
 static PyObject *__pyx_kp_s_Cannot_index_with_type_s;
-static PyObject *__pyx_kp_s_Copyright_2015_Matt_Graham;
 static PyObject *__pyx_n_s_Ellipsis;
 static PyObject *__pyx_kp_s_Empty_shape_tuple_for_cython_arr;
 static PyObject *__pyx_n_s_IndexError;
 static PyObject *__pyx_kp_s_Indirect_dimensions_not_supporte;
 static PyObject *__pyx_kp_s_Invalid_mode_expected_c_or_fortr;
 static PyObject *__pyx_kp_s_Invalid_shape_in_axis_d_d;
-static PyObject *__pyx_n_s_MIT;
-static PyObject *__pyx_kp_s_Matt_Graham;
 static PyObject *__pyx_n_s_MemoryError;
 static PyObject *__pyx_kp_s_MemoryView_of_r_at_0x_x;
 static PyObject *__pyx_kp_s_MemoryView_of_r_object;
@@ -1356,14 +1349,12 @@ static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_kp_s_Unable_to_convert_item_to_object;
 static PyObject *__pyx_n_s_ValueError;
 static PyObject *__pyx_n_s_allocate_buffer;
-static PyObject *__pyx_n_s_authors;
 static PyObject *__pyx_n_s_base;
 static PyObject *__pyx_n_s_c;
 static PyObject *__pyx_n_u_c;
 static PyObject *__pyx_n_s_class;
 static PyObject *__pyx_kp_s_contiguous_and_direct;
 static PyObject *__pyx_kp_s_contiguous_and_indirect;
-static PyObject *__pyx_n_s_copyright;
 static PyObject *__pyx_n_s_dist_s;
 static PyObject *__pyx_n_s_dist_ss;
 static PyObject *__pyx_n_s_dtype_is_object;
@@ -1383,7 +1374,6 @@ static PyObject *__pyx_n_s_id;
 static PyObject *__pyx_n_s_import;
 static PyObject *__pyx_n_s_itemsize;
 static PyObject *__pyx_kp_s_itemsize_0_for_cython_array;
-static PyObject *__pyx_n_s_license;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_memview;
 static PyObject *__pyx_n_s_mode;
@@ -1409,7 +1399,7 @@ static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_kp_s_unable_to_allocate_array_data;
 static PyObject *__pyx_kp_s_unable_to_allocate_shape_and_str;
 static PyObject *__pyx_n_s_unpack;
-static PyObject *__pyx_pf_7bmtools_5exact_15mc_expectations_calculate_incremental_expectations_errors(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_samples, __Pyx_memviewslice __pyx_v_expc_s_true, __Pyx_memviewslice __pyx_v_expc_ss_true, __Pyx_memviewslice __pyx_v_expc_s, __Pyx_memviewslice __pyx_v_expc_ss, __Pyx_memviewslice __pyx_v_dist_s, __Pyx_memviewslice __pyx_v_dist_ss); /* proto */
+static PyObject *__pyx_pf_7bmtools_4mcmc_15mc_expectations_calculate_incremental_expectations_errors(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_samples, __Pyx_memviewslice __pyx_v_expc_s_true, __Pyx_memviewslice __pyx_v_expc_ss_true, __Pyx_memviewslice __pyx_v_expc_s, __Pyx_memviewslice __pyx_v_expc_ss, __Pyx_memviewslice __pyx_v_dist_s, __Pyx_memviewslice __pyx_v_dist_ss); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __pyx_array_obj *__pyx_v_self, PyObject *__pyx_v_shape, Py_ssize_t __pyx_v_itemsize, PyObject *__pyx_v_format, PyObject *__pyx_v_mode, int __pyx_v_allocate_buffer); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array_2__getbuffer__(struct __pyx_array_obj *__pyx_v_self, Py_buffer *__pyx_v_info, int __pyx_v_flags); /* proto */
 static void __pyx_array___pyx_pf_15View_dot_MemoryView_5array_4__dealloc__(struct __pyx_array_obj *__pyx_v_self); /* proto */
@@ -1468,16 +1458,16 @@ static PyObject *__pyx_tuple__16;
 static PyObject *__pyx_tuple__17;
 static PyObject *__pyx_tuple__18;
 
-/* "bmtools/exact/mc_expectations.pyx":18
- *     double sqrt(double x)
+/* "bmtools/mcmc/mc_expectations.pyx":13
+ * 
  * 
  * cpdef calculate_incremental_expectations_errors(             # <<<<<<<<<<<<<<
  *         double[:, :] samples, double[:] expc_s_true,
  *         double[:, :] expc_ss_true, double[:] expc_s, double[:, :] expc_ss,
  */
 
-static PyObject *__pyx_pw_7bmtools_5exact_15mc_expectations_1calculate_incremental_expectations_errors(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental_expectations_errors(__Pyx_memviewslice __pyx_v_samples, __Pyx_memviewslice __pyx_v_expc_s_true, __Pyx_memviewslice __pyx_v_expc_ss_true, __Pyx_memviewslice __pyx_v_expc_s, __Pyx_memviewslice __pyx_v_expc_ss, __Pyx_memviewslice __pyx_v_dist_s, __Pyx_memviewslice __pyx_v_dist_ss, CYTHON_UNUSED int __pyx_skip_dispatch) {
+static PyObject *__pyx_pw_7bmtools_4mcmc_15mc_expectations_1calculate_incremental_expectations_errors(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyObject *__pyx_f_7bmtools_4mcmc_15mc_expectations_calculate_incremental_expectations_errors(__Pyx_memviewslice __pyx_v_samples, __Pyx_memviewslice __pyx_v_expc_s_true, __Pyx_memviewslice __pyx_v_expc_ss_true, __Pyx_memviewslice __pyx_v_expc_s, __Pyx_memviewslice __pyx_v_expc_ss, __Pyx_memviewslice __pyx_v_dist_s, __Pyx_memviewslice __pyx_v_dist_ss, CYTHON_UNUSED int __pyx_skip_dispatch) {
   int __pyx_v_s;
   int __pyx_v_i;
   int __pyx_v_j;
@@ -1530,7 +1520,7 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
   Py_ssize_t __pyx_t_42;
   __Pyx_RefNannySetupContext("calculate_incremental_expectations_errors", 0);
 
-  /* "bmtools/exact/mc_expectations.pyx":24
+  /* "bmtools/mcmc/mc_expectations.pyx":19
  *     cdef int s, i, j, n_sample, n_unit
  *     cdef double d
  *     n_sample = samples.shape[0]             # <<<<<<<<<<<<<<
@@ -1539,7 +1529,7 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
  */
   __pyx_v_n_sample = (__pyx_v_samples.shape[0]);
 
-  /* "bmtools/exact/mc_expectations.pyx":25
+  /* "bmtools/mcmc/mc_expectations.pyx":20
  *     cdef double d
  *     n_sample = samples.shape[0]
  *     n_unit = samples.shape[1]             # <<<<<<<<<<<<<<
@@ -1548,7 +1538,7 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
  */
   __pyx_v_n_unit = (__pyx_v_samples.shape[1]);
 
-  /* "bmtools/exact/mc_expectations.pyx":26
+  /* "bmtools/mcmc/mc_expectations.pyx":21
  *     n_sample = samples.shape[0]
  *     n_unit = samples.shape[1]
  *     for s in range(n_sample):             # <<<<<<<<<<<<<<
@@ -1559,7 +1549,7 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_s = __pyx_t_2;
 
-    /* "bmtools/exact/mc_expectations.pyx":27
+    /* "bmtools/mcmc/mc_expectations.pyx":22
  *     n_unit = samples.shape[1]
  *     for s in range(n_sample):
  *         if s == 0:             # <<<<<<<<<<<<<<
@@ -1569,7 +1559,7 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
     __pyx_t_3 = ((__pyx_v_s == 0) != 0);
     if (__pyx_t_3) {
 
-      /* "bmtools/exact/mc_expectations.pyx":28
+      /* "bmtools/mcmc/mc_expectations.pyx":23
  *     for s in range(n_sample):
  *         if s == 0:
  *             for i in range(n_unit):             # <<<<<<<<<<<<<<
@@ -1580,7 +1570,7 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
       for (__pyx_t_5 = 0; __pyx_t_5 < __pyx_t_4; __pyx_t_5+=1) {
         __pyx_v_i = __pyx_t_5;
 
-        /* "bmtools/exact/mc_expectations.pyx":29
+        /* "bmtools/mcmc/mc_expectations.pyx":24
  *         if s == 0:
  *             for i in range(n_unit):
  *                 expc_s[i] = 0.             # <<<<<<<<<<<<<<
@@ -1590,7 +1580,7 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
         __pyx_t_6 = __pyx_v_i;
         *((double *) ( /* dim=0 */ (__pyx_v_expc_s.data + __pyx_t_6 * __pyx_v_expc_s.strides[0]) )) = 0.;
 
-        /* "bmtools/exact/mc_expectations.pyx":30
+        /* "bmtools/mcmc/mc_expectations.pyx":25
  *             for i in range(n_unit):
  *                 expc_s[i] = 0.
  *                 expc_ss[i, i] = 1.             # <<<<<<<<<<<<<<
@@ -1601,7 +1591,7 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
         __pyx_t_8 = __pyx_v_i;
         *((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_expc_ss.data + __pyx_t_7 * __pyx_v_expc_ss.strides[0]) ) + __pyx_t_8 * __pyx_v_expc_ss.strides[1]) )) = 1.;
 
-        /* "bmtools/exact/mc_expectations.pyx":31
+        /* "bmtools/mcmc/mc_expectations.pyx":26
  *                 expc_s[i] = 0.
  *                 expc_ss[i, i] = 1.
  *                 for j in range(i):             # <<<<<<<<<<<<<<
@@ -1612,7 +1602,7 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
         for (__pyx_t_10 = 0; __pyx_t_10 < __pyx_t_9; __pyx_t_10+=1) {
           __pyx_v_j = __pyx_t_10;
 
-          /* "bmtools/exact/mc_expectations.pyx":32
+          /* "bmtools/mcmc/mc_expectations.pyx":27
  *                 expc_ss[i, i] = 1.
  *                 for j in range(i):
  *                     expc_ss[i, j] = 0.             # <<<<<<<<<<<<<<
@@ -1625,7 +1615,7 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
         }
       }
 
-      /* "bmtools/exact/mc_expectations.pyx":27
+      /* "bmtools/mcmc/mc_expectations.pyx":22
  *     n_unit = samples.shape[1]
  *     for s in range(n_sample):
  *         if s == 0:             # <<<<<<<<<<<<<<
@@ -1634,7 +1624,7 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
  */
     }
 
-    /* "bmtools/exact/mc_expectations.pyx":33
+    /* "bmtools/mcmc/mc_expectations.pyx":28
  *                 for j in range(i):
  *                     expc_ss[i, j] = 0.
  *         dist_s[s] = 0.             # <<<<<<<<<<<<<<
@@ -1644,7 +1634,7 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
     __pyx_t_13 = __pyx_v_s;
     *((double *) ( /* dim=0 */ (__pyx_v_dist_s.data + __pyx_t_13 * __pyx_v_dist_s.strides[0]) )) = 0.;
 
-    /* "bmtools/exact/mc_expectations.pyx":34
+    /* "bmtools/mcmc/mc_expectations.pyx":29
  *                     expc_ss[i, j] = 0.
  *         dist_s[s] = 0.
  *         dist_ss[s] = 0.             # <<<<<<<<<<<<<<
@@ -1654,7 +1644,7 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
     __pyx_t_14 = __pyx_v_s;
     *((double *) ( /* dim=0 */ (__pyx_v_dist_ss.data + __pyx_t_14 * __pyx_v_dist_ss.strides[0]) )) = 0.;
 
-    /* "bmtools/exact/mc_expectations.pyx":35
+    /* "bmtools/mcmc/mc_expectations.pyx":30
  *         dist_s[s] = 0.
  *         dist_ss[s] = 0.
  *         for i in range(n_unit):             # <<<<<<<<<<<<<<
@@ -1665,7 +1655,7 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
     for (__pyx_t_5 = 0; __pyx_t_5 < __pyx_t_4; __pyx_t_5+=1) {
       __pyx_v_i = __pyx_t_5;
 
-      /* "bmtools/exact/mc_expectations.pyx":36
+      /* "bmtools/mcmc/mc_expectations.pyx":31
  *         dist_ss[s] = 0.
  *         for i in range(n_unit):
  *             expc_s[i] += (samples[s, i] - expc_s[i]) / (s + 1.)             # <<<<<<<<<<<<<<
@@ -1678,7 +1668,7 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
       __pyx_t_18 = __pyx_v_i;
       *((double *) ( /* dim=0 */ (__pyx_v_expc_s.data + __pyx_t_18 * __pyx_v_expc_s.strides[0]) )) += (((*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_samples.data + __pyx_t_15 * __pyx_v_samples.strides[0]) ) + __pyx_t_16 * __pyx_v_samples.strides[1]) ))) - (*((double *) ( /* dim=0 */ (__pyx_v_expc_s.data + __pyx_t_17 * __pyx_v_expc_s.strides[0]) )))) / (__pyx_v_s + 1.));
 
-      /* "bmtools/exact/mc_expectations.pyx":37
+      /* "bmtools/mcmc/mc_expectations.pyx":32
  *         for i in range(n_unit):
  *             expc_s[i] += (samples[s, i] - expc_s[i]) / (s + 1.)
  *             for j in range(i):             # <<<<<<<<<<<<<<
@@ -1689,7 +1679,7 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
       for (__pyx_t_10 = 0; __pyx_t_10 < __pyx_t_9; __pyx_t_10+=1) {
         __pyx_v_j = __pyx_t_10;
 
-        /* "bmtools/exact/mc_expectations.pyx":38
+        /* "bmtools/mcmc/mc_expectations.pyx":33
  *             expc_s[i] += (samples[s, i] - expc_s[i]) / (s + 1.)
  *             for j in range(i):
  *                 expc_ss[i, j] += (samples[s, i] * samples[s, j]             # <<<<<<<<<<<<<<
@@ -1701,7 +1691,7 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
         __pyx_t_21 = __pyx_v_s;
         __pyx_t_22 = __pyx_v_j;
 
-        /* "bmtools/exact/mc_expectations.pyx":39
+        /* "bmtools/mcmc/mc_expectations.pyx":34
  *             for j in range(i):
  *                 expc_ss[i, j] += (samples[s, i] * samples[s, j]
  *                                   - expc_ss[i, j]) / (s + 1.)             # <<<<<<<<<<<<<<
@@ -1711,7 +1701,7 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
         __pyx_t_23 = __pyx_v_i;
         __pyx_t_24 = __pyx_v_j;
 
-        /* "bmtools/exact/mc_expectations.pyx":38
+        /* "bmtools/mcmc/mc_expectations.pyx":33
  *             expc_s[i] += (samples[s, i] - expc_s[i]) / (s + 1.)
  *             for j in range(i):
  *                 expc_ss[i, j] += (samples[s, i] * samples[s, j]             # <<<<<<<<<<<<<<
@@ -1722,7 +1712,7 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
         __pyx_t_26 = __pyx_v_j;
         *((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_expc_ss.data + __pyx_t_25 * __pyx_v_expc_ss.strides[0]) ) + __pyx_t_26 * __pyx_v_expc_ss.strides[1]) )) += ((((*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_samples.data + __pyx_t_19 * __pyx_v_samples.strides[0]) ) + __pyx_t_20 * __pyx_v_samples.strides[1]) ))) * (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_samples.data + __pyx_t_21 * __pyx_v_samples.strides[0]) ) + __pyx_t_22 * __pyx_v_samples.strides[1]) )))) - (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_expc_ss.data + __pyx_t_23 * __pyx_v_expc_ss.strides[0]) ) + __pyx_t_24 * __pyx_v_expc_ss.strides[1]) )))) / (__pyx_v_s + 1.));
 
-        /* "bmtools/exact/mc_expectations.pyx":40
+        /* "bmtools/mcmc/mc_expectations.pyx":35
  *                 expc_ss[i, j] += (samples[s, i] * samples[s, j]
  *                                   - expc_ss[i, j]) / (s + 1.)
  *                 d = expc_ss[i, j] - expc_ss_true[i, j]             # <<<<<<<<<<<<<<
@@ -1735,7 +1725,7 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
         __pyx_t_30 = __pyx_v_j;
         __pyx_v_d = ((*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_expc_ss.data + __pyx_t_27 * __pyx_v_expc_ss.strides[0]) ) + __pyx_t_28 * __pyx_v_expc_ss.strides[1]) ))) - (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_expc_ss_true.data + __pyx_t_29 * __pyx_v_expc_ss_true.strides[0]) ) + __pyx_t_30 * __pyx_v_expc_ss_true.strides[1]) ))));
 
-        /* "bmtools/exact/mc_expectations.pyx":41
+        /* "bmtools/mcmc/mc_expectations.pyx":36
  *                                   - expc_ss[i, j]) / (s + 1.)
  *                 d = expc_ss[i, j] - expc_ss_true[i, j]
  *                 dist_ss[s] += 2 * d * d             # <<<<<<<<<<<<<<
@@ -1746,7 +1736,7 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
         *((double *) ( /* dim=0 */ (__pyx_v_dist_ss.data + __pyx_t_31 * __pyx_v_dist_ss.strides[0]) )) += ((2.0 * __pyx_v_d) * __pyx_v_d);
       }
 
-      /* "bmtools/exact/mc_expectations.pyx":42
+      /* "bmtools/mcmc/mc_expectations.pyx":37
  *                 d = expc_ss[i, j] - expc_ss_true[i, j]
  *                 dist_ss[s] += 2 * d * d
  *             d = expc_s[i] - expc_s_true[i]             # <<<<<<<<<<<<<<
@@ -1757,7 +1747,7 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
       __pyx_t_33 = __pyx_v_i;
       __pyx_v_d = ((*((double *) ( /* dim=0 */ (__pyx_v_expc_s.data + __pyx_t_32 * __pyx_v_expc_s.strides[0]) ))) - (*((double *) ( /* dim=0 */ (__pyx_v_expc_s_true.data + __pyx_t_33 * __pyx_v_expc_s_true.strides[0]) ))));
 
-      /* "bmtools/exact/mc_expectations.pyx":43
+      /* "bmtools/mcmc/mc_expectations.pyx":38
  *                 dist_ss[s] += 2 * d * d
  *             d = expc_s[i] - expc_s_true[i]
  *             dist_s[s] += d * d             # <<<<<<<<<<<<<<
@@ -1768,7 +1758,7 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
       *((double *) ( /* dim=0 */ (__pyx_v_dist_s.data + __pyx_t_34 * __pyx_v_dist_s.strides[0]) )) += (__pyx_v_d * __pyx_v_d);
     }
 
-    /* "bmtools/exact/mc_expectations.pyx":44
+    /* "bmtools/mcmc/mc_expectations.pyx":39
  *             d = expc_s[i] - expc_s_true[i]
  *             dist_s[s] += d * d
  *         dist_s[s] = sqrt(dist_s[s])             # <<<<<<<<<<<<<<
@@ -1779,7 +1769,7 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
     __pyx_t_36 = __pyx_v_s;
     *((double *) ( /* dim=0 */ (__pyx_v_dist_s.data + __pyx_t_36 * __pyx_v_dist_s.strides[0]) )) = sqrt((*((double *) ( /* dim=0 */ (__pyx_v_dist_s.data + __pyx_t_35 * __pyx_v_dist_s.strides[0]) ))));
 
-    /* "bmtools/exact/mc_expectations.pyx":45
+    /* "bmtools/mcmc/mc_expectations.pyx":40
  *             dist_s[s] += d * d
  *         dist_s[s] = sqrt(dist_s[s])
  *         dist_ss[s] = sqrt(dist_ss[s])             # <<<<<<<<<<<<<<
@@ -1791,7 +1781,7 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
     *((double *) ( /* dim=0 */ (__pyx_v_dist_ss.data + __pyx_t_38 * __pyx_v_dist_ss.strides[0]) )) = sqrt((*((double *) ( /* dim=0 */ (__pyx_v_dist_ss.data + __pyx_t_37 * __pyx_v_dist_ss.strides[0]) ))));
   }
 
-  /* "bmtools/exact/mc_expectations.pyx":46
+  /* "bmtools/mcmc/mc_expectations.pyx":41
  *         dist_s[s] = sqrt(dist_s[s])
  *         dist_ss[s] = sqrt(dist_ss[s])
  *     for i in range(1, n_unit):             # <<<<<<<<<<<<<<
@@ -1802,7 +1792,7 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
   for (__pyx_t_2 = 1; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "bmtools/exact/mc_expectations.pyx":47
+    /* "bmtools/mcmc/mc_expectations.pyx":42
  *         dist_ss[s] = sqrt(dist_ss[s])
  *     for i in range(1, n_unit):
  *         for j in range(i):             # <<<<<<<<<<<<<<
@@ -1812,7 +1802,7 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
     for (__pyx_t_5 = 0; __pyx_t_5 < __pyx_t_4; __pyx_t_5+=1) {
       __pyx_v_j = __pyx_t_5;
 
-      /* "bmtools/exact/mc_expectations.pyx":48
+      /* "bmtools/mcmc/mc_expectations.pyx":43
  *     for i in range(1, n_unit):
  *         for j in range(i):
  *             expc_ss[j, i] = expc_ss[i, j]             # <<<<<<<<<<<<<<
@@ -1825,8 +1815,8 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
     }
   }
 
-  /* "bmtools/exact/mc_expectations.pyx":18
- *     double sqrt(double x)
+  /* "bmtools/mcmc/mc_expectations.pyx":13
+ * 
  * 
  * cpdef calculate_incremental_expectations_errors(             # <<<<<<<<<<<<<<
  *         double[:, :] samples, double[:] expc_s_true,
@@ -1841,9 +1831,9 @@ static PyObject *__pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental
 }
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7bmtools_5exact_15mc_expectations_1calculate_incremental_expectations_errors(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_7bmtools_5exact_15mc_expectations_calculate_incremental_expectations_errors[] = "calculate_incremental_expectations_errors(__Pyx_memviewslice samples, __Pyx_memviewslice expc_s_true, __Pyx_memviewslice expc_ss_true, __Pyx_memviewslice expc_s, __Pyx_memviewslice expc_ss, __Pyx_memviewslice dist_s, __Pyx_memviewslice dist_ss)";
-static PyObject *__pyx_pw_7bmtools_5exact_15mc_expectations_1calculate_incremental_expectations_errors(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_7bmtools_4mcmc_15mc_expectations_1calculate_incremental_expectations_errors(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_7bmtools_4mcmc_15mc_expectations_calculate_incremental_expectations_errors[] = "calculate_incremental_expectations_errors(__Pyx_memviewslice samples, __Pyx_memviewslice expc_s_true, __Pyx_memviewslice expc_ss_true, __Pyx_memviewslice expc_s, __Pyx_memviewslice expc_ss, __Pyx_memviewslice dist_s, __Pyx_memviewslice dist_ss)";
+static PyObject *__pyx_pw_7bmtools_4mcmc_15mc_expectations_1calculate_incremental_expectations_errors(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   __Pyx_memviewslice __pyx_v_samples = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_expc_s_true = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_expc_ss_true = { 0, 0, { 0 }, { 0 }, { 0 } };
@@ -1879,36 +1869,36 @@ static PyObject *__pyx_pw_7bmtools_5exact_15mc_expectations_1calculate_increment
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_expc_s_true)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("calculate_incremental_expectations_errors", 1, 7, 7, 1); __PYX_ERR(0, 18, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("calculate_incremental_expectations_errors", 1, 7, 7, 1); __PYX_ERR(0, 13, __pyx_L3_error)
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_expc_ss_true)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("calculate_incremental_expectations_errors", 1, 7, 7, 2); __PYX_ERR(0, 18, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("calculate_incremental_expectations_errors", 1, 7, 7, 2); __PYX_ERR(0, 13, __pyx_L3_error)
         }
         case  3:
         if (likely((values[3] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_expc_s)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("calculate_incremental_expectations_errors", 1, 7, 7, 3); __PYX_ERR(0, 18, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("calculate_incremental_expectations_errors", 1, 7, 7, 3); __PYX_ERR(0, 13, __pyx_L3_error)
         }
         case  4:
         if (likely((values[4] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_expc_ss)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("calculate_incremental_expectations_errors", 1, 7, 7, 4); __PYX_ERR(0, 18, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("calculate_incremental_expectations_errors", 1, 7, 7, 4); __PYX_ERR(0, 13, __pyx_L3_error)
         }
         case  5:
         if (likely((values[5] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_dist_s)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("calculate_incremental_expectations_errors", 1, 7, 7, 5); __PYX_ERR(0, 18, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("calculate_incremental_expectations_errors", 1, 7, 7, 5); __PYX_ERR(0, 13, __pyx_L3_error)
         }
         case  6:
         if (likely((values[6] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_dist_ss)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("calculate_incremental_expectations_errors", 1, 7, 7, 6); __PYX_ERR(0, 18, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("calculate_incremental_expectations_errors", 1, 7, 7, 6); __PYX_ERR(0, 13, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "calculate_incremental_expectations_errors") < 0)) __PYX_ERR(0, 18, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "calculate_incremental_expectations_errors") < 0)) __PYX_ERR(0, 13, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 7) {
       goto __pyx_L5_argtuple_error;
@@ -1921,36 +1911,36 @@ static PyObject *__pyx_pw_7bmtools_5exact_15mc_expectations_1calculate_increment
       values[5] = PyTuple_GET_ITEM(__pyx_args, 5);
       values[6] = PyTuple_GET_ITEM(__pyx_args, 6);
     }
-    __pyx_v_samples = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(values[0]); if (unlikely(!__pyx_v_samples.memview)) __PYX_ERR(0, 19, __pyx_L3_error)
-    __pyx_v_expc_s_true = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[1]); if (unlikely(!__pyx_v_expc_s_true.memview)) __PYX_ERR(0, 19, __pyx_L3_error)
-    __pyx_v_expc_ss_true = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(values[2]); if (unlikely(!__pyx_v_expc_ss_true.memview)) __PYX_ERR(0, 20, __pyx_L3_error)
-    __pyx_v_expc_s = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[3]); if (unlikely(!__pyx_v_expc_s.memview)) __PYX_ERR(0, 20, __pyx_L3_error)
-    __pyx_v_expc_ss = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(values[4]); if (unlikely(!__pyx_v_expc_ss.memview)) __PYX_ERR(0, 20, __pyx_L3_error)
-    __pyx_v_dist_s = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[5]); if (unlikely(!__pyx_v_dist_s.memview)) __PYX_ERR(0, 21, __pyx_L3_error)
-    __pyx_v_dist_ss = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[6]); if (unlikely(!__pyx_v_dist_ss.memview)) __PYX_ERR(0, 21, __pyx_L3_error)
+    __pyx_v_samples = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(values[0]); if (unlikely(!__pyx_v_samples.memview)) __PYX_ERR(0, 14, __pyx_L3_error)
+    __pyx_v_expc_s_true = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[1]); if (unlikely(!__pyx_v_expc_s_true.memview)) __PYX_ERR(0, 14, __pyx_L3_error)
+    __pyx_v_expc_ss_true = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(values[2]); if (unlikely(!__pyx_v_expc_ss_true.memview)) __PYX_ERR(0, 15, __pyx_L3_error)
+    __pyx_v_expc_s = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[3]); if (unlikely(!__pyx_v_expc_s.memview)) __PYX_ERR(0, 15, __pyx_L3_error)
+    __pyx_v_expc_ss = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(values[4]); if (unlikely(!__pyx_v_expc_ss.memview)) __PYX_ERR(0, 15, __pyx_L3_error)
+    __pyx_v_dist_s = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[5]); if (unlikely(!__pyx_v_dist_s.memview)) __PYX_ERR(0, 16, __pyx_L3_error)
+    __pyx_v_dist_ss = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[6]); if (unlikely(!__pyx_v_dist_ss.memview)) __PYX_ERR(0, 16, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("calculate_incremental_expectations_errors", 1, 7, 7, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 18, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("calculate_incremental_expectations_errors", 1, 7, 7, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 13, __pyx_L3_error)
   __pyx_L3_error:;
-  __Pyx_AddTraceback("bmtools.exact.mc_expectations.calculate_incremental_expectations_errors", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("bmtools.mcmc.mc_expectations.calculate_incremental_expectations_errors", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7bmtools_5exact_15mc_expectations_calculate_incremental_expectations_errors(__pyx_self, __pyx_v_samples, __pyx_v_expc_s_true, __pyx_v_expc_ss_true, __pyx_v_expc_s, __pyx_v_expc_ss, __pyx_v_dist_s, __pyx_v_dist_ss);
+  __pyx_r = __pyx_pf_7bmtools_4mcmc_15mc_expectations_calculate_incremental_expectations_errors(__pyx_self, __pyx_v_samples, __pyx_v_expc_s_true, __pyx_v_expc_ss_true, __pyx_v_expc_s, __pyx_v_expc_ss, __pyx_v_dist_s, __pyx_v_dist_ss);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7bmtools_5exact_15mc_expectations_calculate_incremental_expectations_errors(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_samples, __Pyx_memviewslice __pyx_v_expc_s_true, __Pyx_memviewslice __pyx_v_expc_ss_true, __Pyx_memviewslice __pyx_v_expc_s, __Pyx_memviewslice __pyx_v_expc_ss, __Pyx_memviewslice __pyx_v_dist_s, __Pyx_memviewslice __pyx_v_dist_ss) {
+static PyObject *__pyx_pf_7bmtools_4mcmc_15mc_expectations_calculate_incremental_expectations_errors(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_samples, __Pyx_memviewslice __pyx_v_expc_s_true, __Pyx_memviewslice __pyx_v_expc_ss_true, __Pyx_memviewslice __pyx_v_expc_s, __Pyx_memviewslice __pyx_v_expc_ss, __Pyx_memviewslice __pyx_v_dist_s, __Pyx_memviewslice __pyx_v_dist_ss) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("calculate_incremental_expectations_errors", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_7bmtools_5exact_15mc_expectations_calculate_incremental_expectations_errors(__pyx_v_samples, __pyx_v_expc_s_true, __pyx_v_expc_ss_true, __pyx_v_expc_s, __pyx_v_expc_ss, __pyx_v_dist_s, __pyx_v_dist_ss, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 18, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_7bmtools_4mcmc_15mc_expectations_calculate_incremental_expectations_errors(__pyx_v_samples, __pyx_v_expc_s_true, __pyx_v_expc_ss_true, __pyx_v_expc_s, __pyx_v_expc_ss, __pyx_v_dist_s, __pyx_v_dist_ss, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 13, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -1959,7 +1949,7 @@ static PyObject *__pyx_pf_7bmtools_5exact_15mc_expectations_calculate_incrementa
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("bmtools.exact.mc_expectations.calculate_incremental_expectations_errors", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("bmtools.mcmc.mc_expectations.calculate_incremental_expectations_errors", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_samples, 1);
@@ -13669,7 +13659,7 @@ static PyBufferProcs __pyx_tp_as_buffer_array = {
 
 static PyTypeObject __pyx_type___pyx_array = {
   PyVarObject_HEAD_INIT(0, 0)
-  "bmtools.exact.mc_expectations.array", /*tp_name*/
+  "bmtools.mcmc.mc_expectations.array", /*tp_name*/
   sizeof(struct __pyx_array_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_array, /*tp_dealloc*/
@@ -13775,7 +13765,7 @@ static PyMethodDef __pyx_methods_Enum[] = {
 
 static PyTypeObject __pyx_type___pyx_MemviewEnum = {
   PyVarObject_HEAD_INIT(0, 0)
-  "bmtools.exact.mc_expectations.Enum", /*tp_name*/
+  "bmtools.mcmc.mc_expectations.Enum", /*tp_name*/
   sizeof(struct __pyx_MemviewEnum_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_Enum, /*tp_dealloc*/
@@ -14022,7 +14012,7 @@ static PyBufferProcs __pyx_tp_as_buffer_memoryview = {
 
 static PyTypeObject __pyx_type___pyx_memoryview = {
   PyVarObject_HEAD_INIT(0, 0)
-  "bmtools.exact.mc_expectations.memoryview", /*tp_name*/
+  "bmtools.mcmc.mc_expectations.memoryview", /*tp_name*/
   sizeof(struct __pyx_memoryview_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc_memoryview, /*tp_dealloc*/
@@ -14147,7 +14137,7 @@ static struct PyGetSetDef __pyx_getsets__memoryviewslice[] = {
 
 static PyTypeObject __pyx_type___pyx_memoryviewslice = {
   PyVarObject_HEAD_INIT(0, 0)
-  "bmtools.exact.mc_expectations._memoryviewslice", /*tp_name*/
+  "bmtools.mcmc.mc_expectations._memoryviewslice", /*tp_name*/
   sizeof(struct __pyx_memoryviewslice_obj), /*tp_basicsize*/
   0, /*tp_itemsize*/
   __pyx_tp_dealloc__memoryviewslice, /*tp_dealloc*/
@@ -14212,7 +14202,7 @@ static PyTypeObject __pyx_type___pyx_memoryviewslice = {
 };
 
 static PyMethodDef __pyx_methods[] = {
-  {"calculate_incremental_expectations_errors", (PyCFunction)__pyx_pw_7bmtools_5exact_15mc_expectations_1calculate_incremental_expectations_errors, METH_VARARGS|METH_KEYWORDS, __pyx_doc_7bmtools_5exact_15mc_expectations_calculate_incremental_expectations_errors},
+  {"calculate_incremental_expectations_errors", (PyCFunction)__pyx_pw_7bmtools_4mcmc_15mc_expectations_1calculate_incremental_expectations_errors, METH_VARARGS|METH_KEYWORDS, __pyx_doc_7bmtools_4mcmc_15mc_expectations_calculate_incremental_expectations_errors},
   {0, 0, 0, 0}
 };
 
@@ -14224,7 +14214,7 @@ static struct PyModuleDef __pyx_moduledef = {
     PyModuleDef_HEAD_INIT,
   #endif
     "mc_expectations",
-    __pyx_k_Bolzmann_machine_Monte_Carlo_ex, /* m_doc */
+    __pyx_k_Boltzmann_machine_Monte_Carlo_ex, /* m_doc */
     -1, /* m_size */
     __pyx_methods /* m_methods */,
     NULL, /* m_reload */
@@ -14239,15 +14229,12 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Buffer_view_does_not_expose_stri, __pyx_k_Buffer_view_does_not_expose_stri, sizeof(__pyx_k_Buffer_view_does_not_expose_stri), 0, 0, 1, 0},
   {&__pyx_kp_s_Can_only_create_a_buffer_that_is, __pyx_k_Can_only_create_a_buffer_that_is, sizeof(__pyx_k_Can_only_create_a_buffer_that_is), 0, 0, 1, 0},
   {&__pyx_kp_s_Cannot_index_with_type_s, __pyx_k_Cannot_index_with_type_s, sizeof(__pyx_k_Cannot_index_with_type_s), 0, 0, 1, 0},
-  {&__pyx_kp_s_Copyright_2015_Matt_Graham, __pyx_k_Copyright_2015_Matt_Graham, sizeof(__pyx_k_Copyright_2015_Matt_Graham), 0, 0, 1, 0},
   {&__pyx_n_s_Ellipsis, __pyx_k_Ellipsis, sizeof(__pyx_k_Ellipsis), 0, 0, 1, 1},
   {&__pyx_kp_s_Empty_shape_tuple_for_cython_arr, __pyx_k_Empty_shape_tuple_for_cython_arr, sizeof(__pyx_k_Empty_shape_tuple_for_cython_arr), 0, 0, 1, 0},
   {&__pyx_n_s_IndexError, __pyx_k_IndexError, sizeof(__pyx_k_IndexError), 0, 0, 1, 1},
   {&__pyx_kp_s_Indirect_dimensions_not_supporte, __pyx_k_Indirect_dimensions_not_supporte, sizeof(__pyx_k_Indirect_dimensions_not_supporte), 0, 0, 1, 0},
   {&__pyx_kp_s_Invalid_mode_expected_c_or_fortr, __pyx_k_Invalid_mode_expected_c_or_fortr, sizeof(__pyx_k_Invalid_mode_expected_c_or_fortr), 0, 0, 1, 0},
   {&__pyx_kp_s_Invalid_shape_in_axis_d_d, __pyx_k_Invalid_shape_in_axis_d_d, sizeof(__pyx_k_Invalid_shape_in_axis_d_d), 0, 0, 1, 0},
-  {&__pyx_n_s_MIT, __pyx_k_MIT, sizeof(__pyx_k_MIT), 0, 0, 1, 1},
-  {&__pyx_kp_s_Matt_Graham, __pyx_k_Matt_Graham, sizeof(__pyx_k_Matt_Graham), 0, 0, 1, 0},
   {&__pyx_n_s_MemoryError, __pyx_k_MemoryError, sizeof(__pyx_k_MemoryError), 0, 0, 1, 1},
   {&__pyx_kp_s_MemoryView_of_r_at_0x_x, __pyx_k_MemoryView_of_r_at_0x_x, sizeof(__pyx_k_MemoryView_of_r_at_0x_x), 0, 0, 1, 0},
   {&__pyx_kp_s_MemoryView_of_r_object, __pyx_k_MemoryView_of_r_object, sizeof(__pyx_k_MemoryView_of_r_object), 0, 0, 1, 0},
@@ -14257,14 +14244,12 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Unable_to_convert_item_to_object, __pyx_k_Unable_to_convert_item_to_object, sizeof(__pyx_k_Unable_to_convert_item_to_object), 0, 0, 1, 0},
   {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
   {&__pyx_n_s_allocate_buffer, __pyx_k_allocate_buffer, sizeof(__pyx_k_allocate_buffer), 0, 0, 1, 1},
-  {&__pyx_n_s_authors, __pyx_k_authors, sizeof(__pyx_k_authors), 0, 0, 1, 1},
   {&__pyx_n_s_base, __pyx_k_base, sizeof(__pyx_k_base), 0, 0, 1, 1},
   {&__pyx_n_s_c, __pyx_k_c, sizeof(__pyx_k_c), 0, 0, 1, 1},
   {&__pyx_n_u_c, __pyx_k_c, sizeof(__pyx_k_c), 0, 1, 0, 1},
   {&__pyx_n_s_class, __pyx_k_class, sizeof(__pyx_k_class), 0, 0, 1, 1},
   {&__pyx_kp_s_contiguous_and_direct, __pyx_k_contiguous_and_direct, sizeof(__pyx_k_contiguous_and_direct), 0, 0, 1, 0},
   {&__pyx_kp_s_contiguous_and_indirect, __pyx_k_contiguous_and_indirect, sizeof(__pyx_k_contiguous_and_indirect), 0, 0, 1, 0},
-  {&__pyx_n_s_copyright, __pyx_k_copyright, sizeof(__pyx_k_copyright), 0, 0, 1, 1},
   {&__pyx_n_s_dist_s, __pyx_k_dist_s, sizeof(__pyx_k_dist_s), 0, 0, 1, 1},
   {&__pyx_n_s_dist_ss, __pyx_k_dist_ss, sizeof(__pyx_k_dist_ss), 0, 0, 1, 1},
   {&__pyx_n_s_dtype_is_object, __pyx_k_dtype_is_object, sizeof(__pyx_k_dtype_is_object), 0, 0, 1, 1},
@@ -14284,7 +14269,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
   {&__pyx_n_s_itemsize, __pyx_k_itemsize, sizeof(__pyx_k_itemsize), 0, 0, 1, 1},
   {&__pyx_kp_s_itemsize_0_for_cython_array, __pyx_k_itemsize_0_for_cython_array, sizeof(__pyx_k_itemsize_0_for_cython_array), 0, 0, 1, 0},
-  {&__pyx_n_s_license, __pyx_k_license, sizeof(__pyx_k_license), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_memview, __pyx_k_memview, sizeof(__pyx_k_memview), 0, 0, 1, 1},
   {&__pyx_n_s_mode, __pyx_k_mode, sizeof(__pyx_k_mode), 0, 0, 1, 1},
@@ -14313,7 +14297,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 21, __pyx_L1_error)
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(1, 131, __pyx_L1_error)
   __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(1, 146, __pyx_L1_error)
   __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(1, 149, __pyx_L1_error)
@@ -14596,7 +14580,7 @@ PyMODINIT_FUNC PyInit_mc_expectations(void)
   #endif
   /*--- Module creation code ---*/
   #if PY_MAJOR_VERSION < 3
-  __pyx_m = Py_InitModule4("mc_expectations", __pyx_methods, __pyx_k_Bolzmann_machine_Monte_Carlo_ex, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
+  __pyx_m = Py_InitModule4("mc_expectations", __pyx_methods, __pyx_k_Boltzmann_machine_Monte_Carlo_ex, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
   #else
   __pyx_m = PyModule_Create(&__pyx_moduledef);
   #endif
@@ -14613,14 +14597,14 @@ PyMODINIT_FUNC PyInit_mc_expectations(void)
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
-  if (__pyx_module_is_main_bmtools__exact__mc_expectations) {
+  if (__pyx_module_is_main_bmtools__mcmc__mc_expectations) {
     if (PyObject_SetAttrString(__pyx_m, "__name__", __pyx_n_s_main) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(0, 1, __pyx_L1_error)
-    if (!PyDict_GetItemString(modules, "bmtools.exact.mc_expectations")) {
-      if (unlikely(PyDict_SetItemString(modules, "bmtools.exact.mc_expectations", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
+    if (!PyDict_GetItemString(modules, "bmtools.mcmc.mc_expectations")) {
+      if (unlikely(PyDict_SetItemString(modules, "bmtools.mcmc.mc_expectations", __pyx_m) < 0)) __PYX_ERR(0, 1, __pyx_L1_error)
     }
   }
   #endif
@@ -14675,37 +14659,10 @@ PyMODINIT_FUNC PyInit_mc_expectations(void)
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "bmtools/exact/mc_expectations.pyx":11
- * """
+  /* "bmtools/mcmc/mc_expectations.pyx":1
+ * # -*- coding: utf-8 -*-             # <<<<<<<<<<<<<<
+ * """Boltzmann machine Monte-Carlo expectations.
  * 
- * __authors__ = 'Matt Graham'             # <<<<<<<<<<<<<<
- * __copyright__ = 'Copyright 2015, Matt Graham'
- * __license__ = 'MIT'
- */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_authors, __pyx_kp_s_Matt_Graham) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
-
-  /* "bmtools/exact/mc_expectations.pyx":12
- * 
- * __authors__ = 'Matt Graham'
- * __copyright__ = 'Copyright 2015, Matt Graham'             # <<<<<<<<<<<<<<
- * __license__ = 'MIT'
- * 
- */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_copyright, __pyx_kp_s_Copyright_2015_Matt_Graham) < 0) __PYX_ERR(0, 12, __pyx_L1_error)
-
-  /* "bmtools/exact/mc_expectations.pyx":13
- * __authors__ = 'Matt Graham'
- * __copyright__ = 'Copyright 2015, Matt Graham'
- * __license__ = 'MIT'             # <<<<<<<<<<<<<<
- * 
- * cdef extern from 'math.h':
- */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_license, __pyx_n_s_MIT) < 0) __PYX_ERR(0, 13, __pyx_L1_error)
-
-  /* "bmtools/exact/mc_expectations.pyx":1
- * """             # <<<<<<<<<<<<<<
- * =========================================
- * Bolzmann machine Monte-Carlo expectations
  */
   __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -14862,11 +14819,11 @@ PyMODINIT_FUNC PyInit_mc_expectations(void)
   __Pyx_XDECREF(__pyx_t_1);
   if (__pyx_m) {
     if (__pyx_d) {
-      __Pyx_AddTraceback("init bmtools.exact.mc_expectations", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init bmtools.mcmc.mc_expectations", __pyx_clineno, __pyx_lineno, __pyx_filename);
     }
     Py_DECREF(__pyx_m); __pyx_m = 0;
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init bmtools.exact.mc_expectations");
+    PyErr_SetString(PyExc_ImportError, "init bmtools.mcmc.mc_expectations");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
