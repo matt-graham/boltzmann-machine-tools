@@ -1,14 +1,8 @@
-"""
-=================================================
-Set up script for Boltzmann machine tools package
-=================================================
+# -*- coding: utf-8 -*-
+"""Set up script for Boltzmann machine tools package.
 
 Builds Cython modules either from .pyx files or .c files.
 """
-
-__authors__ = 'Matt Graham'
-__copyright__ = 'Copyright 2015, Matt Graham'
-__license__ = 'MIT'
 
 from setuptools import setup, Extension
 import argparse
@@ -77,7 +71,7 @@ else:
 
 ext_modules = [
     Extension('bmtools.mcmc.randomkit_wrapper',
-              ['bmtools/mcmc/randomkit_wrapper' + ext, 
+              ['bmtools/mcmc/randomkit_wrapper' + ext,
                'bmtools/mcmc/randomkit.c'],
               extra_compile_args=extra_compile_args),
     Extension('bmtools.mcmc.sequential_gibbs_sampler',
@@ -92,12 +86,24 @@ ext_modules = [
     Extension('bmtools.mcmc.swendsen_wang_sampler',
               ['bmtools/mcmc/swendsen_wang_sampler' + ext],
               extra_compile_args=extra_compile_args),
+    Extension('bmtools.mcmc.mc_expectations',
+              ['bmtools/mcmc/mc_expectations' + ext],
+              extra_compile_args=extra_compile_args,
+              extra_link_args=extra_link_args),
+    Extension('bmtools.exact.helpers',
+              ['bmtools/exact/helpers' + ext],
+              extra_compile_args=extra_compile_args,
+              extra_link_args=extra_link_args),
     Extension('bmtools.exact.moments',
               ['bmtools/exact/moments' + ext],
               extra_compile_args=extra_compile_args,
               extra_link_args=extra_link_args),
-    Extension('bmtools.exact.mc_expectations',
-              ['bmtools/exact/mc_expectations' + ext],
+    Extension('bmtools.exact.likelihood',
+              ['bmtools/exact/likelihood' + ext],
+              extra_compile_args=extra_compile_args,
+              extra_link_args=extra_link_args),
+    Extension('bmtools.exact.variational',
+              ['bmtools/exact/variational' + ext],
               extra_compile_args=extra_compile_args,
               extra_link_args=extra_link_args)
 ]
@@ -109,9 +115,9 @@ if args.use_cython:
                             gdb_debug=args.debug)
 
 packages = [
-    'bmtools', 
-    'bmtools.exact', 
-    'bmtools.mcmc', 
+    'bmtools',
+    'bmtools.exact',
+    'bmtools.mcmc',
     'bmtools.relaxations'
 ]
 
@@ -119,6 +125,7 @@ setup(
     name='bmtools',
     author='Matt Graham',
     description='Boltzmann machine tools',
+    url="https://github.com/matt-graham/boltzmann-machine-tools",
     packages=packages,
     ext_modules=ext_modules,
 )
