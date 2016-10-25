@@ -35,15 +35,12 @@ References
      Advances in Neural Information Processing Systems 2012 (pp. 3194-3202).
 """
 
-__authors__ = 'Matt Graham'
-__copyright__ = 'Copyright 2015, Matt Graham'
-__license__ = 'MIT'
-
 import numpy as np
 import scipy.linalg as la
 import itertools as it
 import cvxpy as cvx
 import bmtools.exact.moments as mom
+import bmtools.exact.helpers as hlp
 
 
 # Dimension of original binary state space above which to have user have to
@@ -99,7 +96,7 @@ class BaseGMRelaxation(object):
             print('Size of state space is large ({0}) '
                   'set force=True to proceed anyway'.format(2**self.n_unit))
         norm_const_s, expc_s, expc_ss = mom.calculate_moments_parallel(
-            self.W, self.b, force=force, n_thread=num_threads)
+            self.W, self.b, force=force, num_threads=num_threads)
         return norm_const_s, np.array(expc_s), np.array(expc_ss)
 
     def neg_log_dens_x(self, x):
@@ -118,13 +115,13 @@ class BaseGMRelaxation(object):
             print('Size of state space is large ({0}) '
                   'set force=True to proceed anyway'.format(2**self.n_unit))
         probs, norm_const = mom.calculate_probs_parallel(
-            self.W, self.b, force=force, n_thread=num_threads)
+            self.W, self.b, force=force, num_threads=num_threads)
         binary_state_counts = prng.multinomial(n_sample, probs)
         xs = np.empty((n_sample, self.n_dim))
         cum_count = 0
         s = np.empty(self.n_unit, dtype=np.int8)
         for i in np.nonzero(binary_state_counts)[0]:
-            mom.update_state_from_int_enum(i, s)
+            hlp.index_to_state(i, s)
             count = binary_state_counts[i]
             xs[cum_count:cum_count+count] = self.sample_x_gvn_s(s, count, prng)
             cum_count += count
