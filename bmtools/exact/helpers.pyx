@@ -68,7 +68,7 @@ cdef void next_state(state_t[:] state, int next_state_index) nogil:
         unit_index += 1
 
 
-cdef void index_to_state(int index, state_t[:] state) nogil:
+cpdef void index_to_state(int index, state_t[:] state) nogil:
     """Update signed binary state vector to correspond to a state space index.
 
     The encoding is big-endian, that is the most significant bit of the
