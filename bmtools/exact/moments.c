@@ -1276,7 +1276,7 @@ static char **__pyx_vp_7bmtools_5exact_7helpers_state_t_code = 0;
 static double (*__pyx_f_7bmtools_5exact_7helpers_neg_energy)(__Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice); /*proto*/
 static void (*__pyx_f_7bmtools_5exact_7helpers_check_state_space_size)(int, int, int __pyx_skip_dispatch); /*proto*/
 static __Pyx_memviewslice (*__pyx_f_7bmtools_5exact_7helpers_partition_state_space)(int, int); /*proto*/
-static void (*__pyx_f_7bmtools_5exact_7helpers_index_to_state)(int, __Pyx_memviewslice); /*proto*/
+static void (*__pyx_f_7bmtools_5exact_7helpers_index_to_state)(int, __Pyx_memviewslice, int __pyx_skip_dispatch); /*proto*/
 static void (*__pyx_f_7bmtools_5exact_7helpers_next_state)(__Pyx_memviewslice, int); /*proto*/
 
 /* Module declarations from 'cython.view' */
@@ -2776,7 +2776,7 @@ __pyx_t_20 = __pyx_v_t;
                             goto __pyx_L17;
                             __pyx_L17:;
                             #ifdef _OPENMP
-                            #pragma omp critical(__pyx_parallel_lastprivates0)
+                            #pragma omp critical(__pyx_parallel_lastprivates3)
                             #endif /* _OPENMP */
                             {
                                 __pyx_parallel_temp0 = __pyx_v_t;
@@ -3725,7 +3725,7 @@ __pyx_t_21 = __pyx_v_t;
                             goto __pyx_L13;
                             __pyx_L13:;
                             #ifdef _OPENMP
-                            #pragma omp critical(__pyx_parallel_lastprivates1)
+                            #pragma omp critical(__pyx_parallel_lastprivates4)
                             #endif /* _OPENMP */
                             {
                                 __pyx_parallel_temp0 = __pyx_v_t;
@@ -3945,7 +3945,7 @@ __pyx_t_27 = 0;
                             goto __pyx_L24;
                             __pyx_L24:;
                             #ifdef _OPENMP
-                            #pragma omp critical(__pyx_parallel_lastprivates2)
+                            #pragma omp critical(__pyx_parallel_lastprivates5)
                             #endif /* _OPENMP */
                             {
                                 __pyx_parallel_temp0 = __pyx_v_t;
@@ -4109,7 +4109,7 @@ static void __pyx_f_7bmtools_5exact_7moments_calc_unnormed_probs_for_state_range
  *     for i in range(end_state_index - start_state_index):
  *         probs[i] = exp(neg_energy(state, weights, biases))
  */
-  __pyx_f_7bmtools_5exact_7helpers_index_to_state(__pyx_v_start_state_index, __pyx_v_state);
+  __pyx_f_7bmtools_5exact_7helpers_index_to_state(__pyx_v_start_state_index, __pyx_v_state, 0);
 
   /* "bmtools/exact/moments.pyx":267
  *     cdef int i
@@ -4257,7 +4257,7 @@ static void __pyx_f_7bmtools_5exact_7moments_accum_moments_for_state_range(__Pyx
  *     for i in range(weights.shape[0]):
  *         first_mom[i] = 0.
  */
-  __pyx_f_7bmtools_5exact_7helpers_index_to_state(__pyx_v_start_state_index, __pyx_v_state);
+  __pyx_f_7bmtools_5exact_7helpers_index_to_state(__pyx_v_start_state_index, __pyx_v_state, 0);
 
   /* "bmtools/exact/moments.pyx":291
  *     cdef int state_index, i, j
@@ -4445,7 +4445,7 @@ static double __pyx_f_7bmtools_5exact_7moments_calc_norm_const(__Pyx_memviewslic
  *     if end_state_index == -1:
  *         end_state_index = 2**weights.shape[0]
  */
-  __pyx_f_7bmtools_5exact_7helpers_index_to_state(__pyx_v_start_state_index, __pyx_v_state);
+  __pyx_f_7bmtools_5exact_7helpers_index_to_state(__pyx_v_start_state_index, __pyx_v_state, 0);
 
   /* "bmtools/exact/moments.pyx":316
  *     cdef int state_index
@@ -17721,7 +17721,7 @@ PyMODINIT_FUNC PyInit_moments(void)
   if (__Pyx_ImportFunction(__pyx_t_2, "neg_energy", (void (**)(void))&__pyx_f_7bmtools_5exact_7helpers_neg_energy, "double (__Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   if (__Pyx_ImportFunction(__pyx_t_2, "check_state_space_size", (void (**)(void))&__pyx_f_7bmtools_5exact_7helpers_check_state_space_size, "void (int, int, int __pyx_skip_dispatch)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   if (__Pyx_ImportFunction(__pyx_t_2, "partition_state_space", (void (**)(void))&__pyx_f_7bmtools_5exact_7helpers_partition_state_space, "__Pyx_memviewslice (int, int)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (__Pyx_ImportFunction(__pyx_t_2, "index_to_state", (void (**)(void))&__pyx_f_7bmtools_5exact_7helpers_index_to_state, "void (int, __Pyx_memviewslice)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_ImportFunction(__pyx_t_2, "index_to_state", (void (**)(void))&__pyx_f_7bmtools_5exact_7helpers_index_to_state, "void (int, __Pyx_memviewslice, int __pyx_skip_dispatch)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   if (__Pyx_ImportFunction(__pyx_t_2, "next_state", (void (**)(void))&__pyx_f_7bmtools_5exact_7helpers_next_state, "void (__Pyx_memviewslice, int)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   Py_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   /*--- Execution code ---*/

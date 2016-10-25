@@ -1252,7 +1252,7 @@ static char **__pyx_vp_7bmtools_5exact_7helpers_state_t_code = 0;
 static double (*__pyx_f_7bmtools_5exact_7helpers_neg_energy)(__Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice); /*proto*/
 static void (*__pyx_f_7bmtools_5exact_7helpers_check_state_space_size)(int, int, int __pyx_skip_dispatch); /*proto*/
 static __Pyx_memviewslice (*__pyx_f_7bmtools_5exact_7helpers_partition_state_space)(int, int); /*proto*/
-static void (*__pyx_f_7bmtools_5exact_7helpers_index_to_state)(int, __Pyx_memviewslice); /*proto*/
+static void (*__pyx_f_7bmtools_5exact_7helpers_index_to_state)(int, __Pyx_memviewslice, int __pyx_skip_dispatch); /*proto*/
 static void (*__pyx_f_7bmtools_5exact_7helpers_next_state)(__Pyx_memviewslice, int); /*proto*/
 
 /* Module declarations from 'bmtools.exact.variational' */
@@ -1269,6 +1269,7 @@ static int __pyx_memoryview_thread_locks_used;
 static PyThread_type_lock __pyx_memoryview_thread_locks[8];
 static void __pyx_f_7bmtools_5exact_11variational_accum_kl_terms_for_state_range(__Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, double *, double *, double *, int, int); /*proto*/
 static void __pyx_f_7bmtools_5exact_11variational_accum_kl_and_grad_terms_for_state_range(__Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, double *, double *, double *, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice, int, int); /*proto*/
+static double __pyx_f_7bmtools_5exact_11variational_logistic_sigmoid(double); /*proto*/
 static struct __pyx_array_obj *__pyx_array_new(PyObject *, Py_ssize_t, char *, char *, char *); /*proto*/
 static void *__pyx_align_pointer(void *, size_t); /*proto*/
 static PyObject *__pyx_memoryview_new(PyObject *, int, int, __Pyx_TypeInfo *); /*proto*/
@@ -1341,6 +1342,7 @@ static const char __pyx_k_force[] = "force";
 static const char __pyx_k_range[] = "range";
 static const char __pyx_k_shape[] = "shape";
 static const char __pyx_k_start[] = "start";
+static const char __pyx_k_biases[] = "biases";
 static const char __pyx_k_encode[] = "encode";
 static const char __pyx_k_format[] = "format";
 static const char __pyx_k_import[] = "__import__";
@@ -1350,10 +1352,14 @@ static const char __pyx_k_struct[] = "struct";
 static const char __pyx_k_unpack[] = "unpack";
 static const char __pyx_k_fortran[] = "fortran";
 static const char __pyx_k_memview[] = "memview";
+static const char __pyx_k_var_obj[] = "var_obj";
+static const char __pyx_k_weights[] = "weights";
 static const char __pyx_k_Ellipsis[] = "Ellipsis";
 static const char __pyx_k_biases_1[] = "biases_1";
 static const char __pyx_k_biases_2[] = "biases_2";
 static const char __pyx_k_itemsize[] = "itemsize";
+static const char __pyx_k_prob_m_i[] = "prob_m_i";
+static const char __pyx_k_prob_p_i[] = "prob_p_i";
 static const char __pyx_k_TypeError[] = "TypeError";
 static const char __pyx_k_enumerate[] = "enumerate";
 static const char __pyx_k_intervals[] = "intervals";
@@ -1364,11 +1370,13 @@ static const char __pyx_k_IndexError[] = "IndexError";
 static const char __pyx_k_ValueError[] = "ValueError";
 static const char __pyx_k_num_states[] = "num_states";
 static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
+static const char __pyx_k_var_biases[] = "var_biases";
 static const char __pyx_k_MemoryError[] = "MemoryError";
 static const char __pyx_k_num_threads[] = "num_threads";
 static const char __pyx_k_kl_div_terms[] = "kl_div_terms";
 static const char __pyx_k_kl_divergence[] = "kl_divergence";
 static const char __pyx_k_pyx_getbuffer[] = "__pyx_getbuffer";
+static const char __pyx_k_var_first_mom[] = "var_first_mom";
 static const char __pyx_k_allocate_buffer[] = "allocate_buffer";
 static const char __pyx_k_dtype_is_object[] = "dtype_is_object";
 static const char __pyx_k_log_norm_const_1[] = "log_norm_const_1";
@@ -1380,6 +1388,7 @@ static const char __pyx_k_norm_const_2_terms[] = "norm_const_2_terms";
 static const char __pyx_k_second_mom_1_terms[] = "second_mom_1_terms";
 static const char __pyx_k_strided_and_direct[] = "<strided and direct>";
 static const char __pyx_k_grads_wrt_weights_1[] = "grads_wrt_weights_1";
+static const char __pyx_k_grads_wrt_var_biases[] = "grads_wrt_var_biases";
 static const char __pyx_k_strided_and_indirect[] = "<strided and indirect>";
 static const char __pyx_k_contiguous_and_direct[] = "<contiguous and direct>";
 static const char __pyx_k_MemoryView_of_r_object[] = "<MemoryView of %r object>";
@@ -1390,6 +1399,7 @@ static const char __pyx_k_Invalid_shape_in_axis_d_d[] = "Invalid shape in axis %
 static const char __pyx_k_bmtools_exact_variational[] = "bmtools.exact.variational";
 static const char __pyx_k_itemsize_0_for_cython_array[] = "itemsize <= 0 for cython.array";
 static const char __pyx_k_kl_divergence_and_gradients[] = "kl_divergence_and_gradients";
+static const char __pyx_k_var_obj_and_grads_mean_field[] = "var_obj_and_grads_mean_field";
 static const char __pyx_k_unable_to_allocate_array_data[] = "unable to allocate array data.";
 static const char __pyx_k_strided_and_direct_or_indirect[] = "<strided and direct or indirect>";
 static const char __pyx_k_home_matt_Projects_boltzmann_ma[] = "/home/matt/Projects/boltzmann-machine-tools/bmtools/exact/variational.pyx";
@@ -1423,6 +1433,7 @@ static PyObject *__pyx_kp_s_Unable_to_convert_item_to_object;
 static PyObject *__pyx_n_s_ValueError;
 static PyObject *__pyx_n_s_allocate_buffer;
 static PyObject *__pyx_n_s_base;
+static PyObject *__pyx_n_s_biases;
 static PyObject *__pyx_n_s_biases_1;
 static PyObject *__pyx_n_s_biases_2;
 static PyObject *__pyx_n_s_bmtools_exact_variational;
@@ -1444,6 +1455,7 @@ static PyObject *__pyx_n_s_fortran;
 static PyObject *__pyx_n_u_fortran;
 static PyObject *__pyx_kp_s_got_differing_extents_in_dimensi;
 static PyObject *__pyx_n_s_grads_wrt_biases_1;
+static PyObject *__pyx_n_s_grads_wrt_var_biases;
 static PyObject *__pyx_n_s_grads_wrt_weights_1;
 static PyObject *__pyx_kp_s_home_matt_Projects_boltzmann_ma;
 static PyObject *__pyx_n_s_i;
@@ -1471,6 +1483,8 @@ static PyObject *__pyx_n_s_num_threads;
 static PyObject *__pyx_n_s_num_units;
 static PyObject *__pyx_n_s_obj;
 static PyObject *__pyx_n_s_pack;
+static PyObject *__pyx_n_s_prob_m_i;
+static PyObject *__pyx_n_s_prob_p_i;
 static PyObject *__pyx_n_s_pyx_getbuffer;
 static PyObject *__pyx_n_s_pyx_vtable;
 static PyObject *__pyx_n_s_range;
@@ -1490,10 +1504,16 @@ static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_kp_s_unable_to_allocate_array_data;
 static PyObject *__pyx_kp_s_unable_to_allocate_shape_and_str;
 static PyObject *__pyx_n_s_unpack;
+static PyObject *__pyx_n_s_var_biases;
+static PyObject *__pyx_n_s_var_first_mom;
+static PyObject *__pyx_n_s_var_obj;
+static PyObject *__pyx_n_s_var_obj_and_grads_mean_field;
+static PyObject *__pyx_n_s_weights;
 static PyObject *__pyx_n_s_weights_1;
 static PyObject *__pyx_n_s_weights_2;
 static PyObject *__pyx_pf_7bmtools_5exact_11variational_kl_divergence(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_weights_1, __Pyx_memviewslice __pyx_v_biases_1, __Pyx_memviewslice __pyx_v_weights_2, __Pyx_memviewslice __pyx_v_biases_2, int __pyx_v_force, int __pyx_v_num_threads); /* proto */
 static PyObject *__pyx_pf_7bmtools_5exact_11variational_2kl_divergence_and_gradients(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_weights_1, __Pyx_memviewslice __pyx_v_biases_1, __Pyx_memviewslice __pyx_v_weights_2, __Pyx_memviewslice __pyx_v_biases_2, int __pyx_v_force, int __pyx_v_num_threads); /* proto */
+static PyObject *__pyx_pf_7bmtools_5exact_11variational_4var_obj_and_grads_mean_field(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_var_biases, __Pyx_memviewslice __pyx_v_weights, __Pyx_memviewslice __pyx_v_biases); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __pyx_array_obj *__pyx_v_self, PyObject *__pyx_v_shape, Py_ssize_t __pyx_v_itemsize, PyObject *__pyx_v_format, PyObject *__pyx_v_mode, int __pyx_v_allocate_buffer); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array_2__getbuffer__(struct __pyx_array_obj *__pyx_v_self, Py_buffer *__pyx_v_info, int __pyx_v_flags); /* proto */
 static void __pyx_array___pyx_pf_15View_dot_MemoryView_5array_4__dealloc__(struct __pyx_array_obj *__pyx_v_self); /* proto */
@@ -1549,14 +1569,16 @@ static PyObject *__pyx_tuple__13;
 static PyObject *__pyx_tuple__14;
 static PyObject *__pyx_tuple__16;
 static PyObject *__pyx_tuple__18;
-static PyObject *__pyx_tuple__19;
 static PyObject *__pyx_tuple__20;
 static PyObject *__pyx_tuple__21;
 static PyObject *__pyx_tuple__22;
+static PyObject *__pyx_tuple__23;
+static PyObject *__pyx_tuple__24;
 static PyObject *__pyx_codeobj__15;
 static PyObject *__pyx_codeobj__17;
+static PyObject *__pyx_codeobj__19;
 
-/* "bmtools/exact/variational.pyx":23
+/* "bmtools/exact/variational.pyx":24
  * 
  * 
  * def kl_divergence(             # <<<<<<<<<<<<<<
@@ -1602,17 +1624,17 @@ static PyObject *__pyx_pw_7bmtools_5exact_11variational_1kl_divergence(PyObject 
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_biases_1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("kl_divergence", 0, 4, 6, 1); __PYX_ERR(0, 23, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("kl_divergence", 0, 4, 6, 1); __PYX_ERR(0, 24, __pyx_L3_error)
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_weights_2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("kl_divergence", 0, 4, 6, 2); __PYX_ERR(0, 23, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("kl_divergence", 0, 4, 6, 2); __PYX_ERR(0, 24, __pyx_L3_error)
         }
         case  3:
         if (likely((values[3] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_biases_2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("kl_divergence", 0, 4, 6, 3); __PYX_ERR(0, 23, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("kl_divergence", 0, 4, 6, 3); __PYX_ERR(0, 24, __pyx_L3_error)
         }
         case  4:
         if (kw_args > 0) {
@@ -1626,7 +1648,7 @@ static PyObject *__pyx_pw_7bmtools_5exact_11variational_1kl_divergence(PyObject 
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "kl_divergence") < 0)) __PYX_ERR(0, 23, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "kl_divergence") < 0)) __PYX_ERR(0, 24, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -1640,15 +1662,15 @@ static PyObject *__pyx_pw_7bmtools_5exact_11variational_1kl_divergence(PyObject 
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_weights_1 = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(values[0]); if (unlikely(!__pyx_v_weights_1.memview)) __PYX_ERR(0, 24, __pyx_L3_error)
-    __pyx_v_biases_1 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[1]); if (unlikely(!__pyx_v_biases_1.memview)) __PYX_ERR(0, 24, __pyx_L3_error)
-    __pyx_v_weights_2 = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(values[2]); if (unlikely(!__pyx_v_weights_2.memview)) __PYX_ERR(0, 25, __pyx_L3_error)
-    __pyx_v_biases_2 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[3]); if (unlikely(!__pyx_v_biases_2.memview)) __PYX_ERR(0, 25, __pyx_L3_error)
+    __pyx_v_weights_1 = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(values[0]); if (unlikely(!__pyx_v_weights_1.memview)) __PYX_ERR(0, 25, __pyx_L3_error)
+    __pyx_v_biases_1 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[1]); if (unlikely(!__pyx_v_biases_1.memview)) __PYX_ERR(0, 25, __pyx_L3_error)
+    __pyx_v_weights_2 = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(values[2]); if (unlikely(!__pyx_v_weights_2.memview)) __PYX_ERR(0, 26, __pyx_L3_error)
+    __pyx_v_biases_2 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[3]); if (unlikely(!__pyx_v_biases_2.memview)) __PYX_ERR(0, 26, __pyx_L3_error)
     if (values[4]) {
-      __pyx_v_force = __Pyx_PyObject_IsTrue(values[4]); if (unlikely((__pyx_v_force == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 26, __pyx_L3_error)
+      __pyx_v_force = __Pyx_PyObject_IsTrue(values[4]); if (unlikely((__pyx_v_force == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 27, __pyx_L3_error)
     } else {
 
-      /* "bmtools/exact/variational.pyx":26
+      /* "bmtools/exact/variational.pyx":27
  *         double[:, :] weights_1, double[:] biases_1,
  *         double[:, :] weights_2, double[:] biases_2,
  *         bint force=False, int num_threads=4):             # <<<<<<<<<<<<<<
@@ -1658,14 +1680,14 @@ static PyObject *__pyx_pw_7bmtools_5exact_11variational_1kl_divergence(PyObject 
       __pyx_v_force = ((int)0);
     }
     if (values[5]) {
-      __pyx_v_num_threads = __Pyx_PyInt_As_int(values[5]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 26, __pyx_L3_error)
+      __pyx_v_num_threads = __Pyx_PyInt_As_int(values[5]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 27, __pyx_L3_error)
     } else {
       __pyx_v_num_threads = ((int)4);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("kl_divergence", 0, 4, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 23, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("kl_divergence", 0, 4, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 24, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("bmtools.exact.variational.kl_divergence", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1673,7 +1695,7 @@ static PyObject *__pyx_pw_7bmtools_5exact_11variational_1kl_divergence(PyObject 
   __pyx_L4_argument_unpacking_done:;
   __pyx_r = __pyx_pf_7bmtools_5exact_11variational_kl_divergence(__pyx_self, __pyx_v_weights_1, __pyx_v_biases_1, __pyx_v_weights_2, __pyx_v_biases_2, __pyx_v_force, __pyx_v_num_threads);
 
-  /* "bmtools/exact/variational.pyx":23
+  /* "bmtools/exact/variational.pyx":24
  * 
  * 
  * def kl_divergence(             # <<<<<<<<<<<<<<
@@ -1733,7 +1755,7 @@ static PyObject *__pyx_pf_7bmtools_5exact_11variational_kl_divergence(CYTHON_UNU
   Py_ssize_t __pyx_t_32;
   __Pyx_RefNannySetupContext("kl_divergence", 0);
 
-  /* "bmtools/exact/variational.pyx":61
+  /* "bmtools/exact/variational.pyx":62
  *            second distribution (i.e. `log(Z_2)` in expression above).
  *     """
  *     cdef int num_units = weights_1.shape[0]             # <<<<<<<<<<<<<<
@@ -1742,7 +1764,7 @@ static PyObject *__pyx_pf_7bmtools_5exact_11variational_kl_divergence(CYTHON_UNU
  */
   __pyx_v_num_units = (__pyx_v_weights_1.shape[0]);
 
-  /* "bmtools/exact/variational.pyx":62
+  /* "bmtools/exact/variational.pyx":63
  *     """
  *     cdef int num_units = weights_1.shape[0]
  *     check_state_space_size(num_units, force)             # <<<<<<<<<<<<<<
@@ -1751,7 +1773,7 @@ static PyObject *__pyx_pf_7bmtools_5exact_11variational_kl_divergence(CYTHON_UNU
  */
   __pyx_f_7bmtools_5exact_7helpers_check_state_space_size(__pyx_v_num_units, __pyx_v_force, 0);
 
-  /* "bmtools/exact/variational.pyx":63
+  /* "bmtools/exact/variational.pyx":64
  *     cdef int num_units = weights_1.shape[0]
  *     check_state_space_size(num_units, force)
  *     cdef int num_states = 2**num_units             # <<<<<<<<<<<<<<
@@ -1760,32 +1782,32 @@ static PyObject *__pyx_pf_7bmtools_5exact_11variational_kl_divergence(CYTHON_UNU
  */
   __pyx_v_num_states = __Pyx_pow_long(2, ((long)__pyx_v_num_units));
 
-  /* "bmtools/exact/variational.pyx":64
+  /* "bmtools/exact/variational.pyx":65
  *     check_state_space_size(num_units, force)
  *     cdef int num_states = 2**num_units
  *     cdef int[:] intervals = partition_state_space(num_states, num_threads)             # <<<<<<<<<<<<<<
  *     cdef state_t[:, :] states = array(
  *         shape=(num_threads, num_units), itemsize=sizeof(state_t),
  */
-  __pyx_t_1 = __pyx_f_7bmtools_5exact_7helpers_partition_state_space(__pyx_v_num_states, __pyx_v_num_threads); if (unlikely(!__pyx_t_1.memview)) __PYX_ERR(0, 64, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_7bmtools_5exact_7helpers_partition_state_space(__pyx_v_num_states, __pyx_v_num_threads); if (unlikely(!__pyx_t_1.memview)) __PYX_ERR(0, 65, __pyx_L1_error)
   __pyx_v_intervals = __pyx_t_1;
   __pyx_t_1.memview = NULL;
   __pyx_t_1.data = NULL;
 
-  /* "bmtools/exact/variational.pyx":66
+  /* "bmtools/exact/variational.pyx":67
  *     cdef int[:] intervals = partition_state_space(num_states, num_threads)
  *     cdef state_t[:, :] states = array(
  *         shape=(num_threads, num_units), itemsize=sizeof(state_t),             # <<<<<<<<<<<<<<
  *         format=state_t_code)
  *     cdef double[:] kl_div_terms = array(
  */
-  __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_num_units); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_num_units); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3);
@@ -1793,166 +1815,166 @@ static PyObject *__pyx_pf_7bmtools_5exact_11variational_kl_divergence(CYTHON_UNU
   PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_4);
   __pyx_t_3 = 0;
   __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_shape, __pyx_t_5) < 0) __PYX_ERR(0, 66, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_shape, __pyx_t_5) < 0) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyInt_FromSize_t((sizeof(__pyx_t_7bmtools_5exact_7helpers_state_t))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_FromSize_t((sizeof(__pyx_t_7bmtools_5exact_7helpers_state_t))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_itemsize, __pyx_t_5) < 0) __PYX_ERR(0, 66, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_itemsize, __pyx_t_5) < 0) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "bmtools/exact/variational.pyx":67
+  /* "bmtools/exact/variational.pyx":68
  *     cdef state_t[:, :] states = array(
  *         shape=(num_threads, num_units), itemsize=sizeof(state_t),
  *         format=state_t_code)             # <<<<<<<<<<<<<<
  *     cdef double[:] kl_div_terms = array(
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')
  */
-  __pyx_t_5 = __Pyx_PyBytes_FromString(__pyx_v_7bmtools_5exact_7helpers_state_t_code); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 67, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyBytes_FromString(__pyx_v_7bmtools_5exact_7helpers_state_t_code); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_format, __pyx_t_5) < 0) __PYX_ERR(0, 66, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_format, __pyx_t_5) < 0) __PYX_ERR(0, 67, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "bmtools/exact/variational.pyx":65
+  /* "bmtools/exact/variational.pyx":66
  *     cdef int num_states = 2**num_units
  *     cdef int[:] intervals = partition_state_space(num_states, num_threads)
  *     cdef state_t[:, :] states = array(             # <<<<<<<<<<<<<<
  *         shape=(num_threads, num_units), itemsize=sizeof(state_t),
  *         format=state_t_code)
  */
-  __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 65, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_7bmtools_5exact_7helpers_state_t(__pyx_t_5);
-  if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 65, __pyx_L1_error)
+  if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_states = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "bmtools/exact/variational.pyx":69
+  /* "bmtools/exact/variational.pyx":70
  *         format=state_t_code)
  *     cdef double[:] kl_div_terms = array(
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')             # <<<<<<<<<<<<<<
  *     cdef double[:] norm_const_1_terms = array(
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')
  */
-  __pyx_t_5 = PyDict_New(); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_t_5 = PyDict_New(); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 70, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 70, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 70, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_shape, __pyx_t_4) < 0) __PYX_ERR(0, 69, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_shape, __pyx_t_4) < 0) __PYX_ERR(0, 70, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyInt_FromSize_t((sizeof(double))); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_FromSize_t((sizeof(double))); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 70, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_itemsize, __pyx_t_4) < 0) __PYX_ERR(0, 69, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_itemsize, __pyx_t_4) < 0) __PYX_ERR(0, 70, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 69, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 70, __pyx_L1_error)
 
-  /* "bmtools/exact/variational.pyx":68
+  /* "bmtools/exact/variational.pyx":69
  *         shape=(num_threads, num_units), itemsize=sizeof(state_t),
  *         format=state_t_code)
  *     cdef double[:] kl_div_terms = array(             # <<<<<<<<<<<<<<
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')
  *     cdef double[:] norm_const_1_terms = array(
  */
-  __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(__pyx_t_4);
-  if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 68, __pyx_L1_error)
+  if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_kl_div_terms = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "bmtools/exact/variational.pyx":71
+  /* "bmtools/exact/variational.pyx":72
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')
  *     cdef double[:] norm_const_1_terms = array(
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')             # <<<<<<<<<<<<<<
  *     cdef double[:] norm_const_2_terms = array(
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')
  */
-  __pyx_t_4 = PyDict_New(); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_4 = PyDict_New(); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_5);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_5);
   __pyx_t_5 = 0;
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_shape, __pyx_t_2) < 0) __PYX_ERR(0, 71, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_shape, __pyx_t_2) < 0) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyInt_FromSize_t((sizeof(double))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_FromSize_t((sizeof(double))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_itemsize, __pyx_t_2) < 0) __PYX_ERR(0, 71, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_itemsize, __pyx_t_2) < 0) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 71, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 72, __pyx_L1_error)
 
-  /* "bmtools/exact/variational.pyx":70
+  /* "bmtools/exact/variational.pyx":71
  *     cdef double[:] kl_div_terms = array(
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')
  *     cdef double[:] norm_const_1_terms = array(             # <<<<<<<<<<<<<<
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')
  *     cdef double[:] norm_const_2_terms = array(
  */
-  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 70, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(__pyx_t_2);
-  if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 70, __pyx_L1_error)
+  if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 71, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_norm_const_1_terms = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "bmtools/exact/variational.pyx":73
+  /* "bmtools/exact/variational.pyx":74
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')
  *     cdef double[:] norm_const_2_terms = array(
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')             # <<<<<<<<<<<<<<
  *     cdef int t
  *     for t in prange(num_threads, nogil=True, schedule='static', chunksize=1,
  */
-  __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 73, __pyx_L1_error)
+  __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 74, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 73, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 74, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 73, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 74, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_4);
   PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4);
   __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_shape, __pyx_t_5) < 0) __PYX_ERR(0, 73, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_shape, __pyx_t_5) < 0) __PYX_ERR(0, 74, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyInt_FromSize_t((sizeof(double))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 73, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_FromSize_t((sizeof(double))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 74, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_itemsize, __pyx_t_5) < 0) __PYX_ERR(0, 73, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_itemsize, __pyx_t_5) < 0) __PYX_ERR(0, 74, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 73, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 74, __pyx_L1_error)
 
-  /* "bmtools/exact/variational.pyx":72
+  /* "bmtools/exact/variational.pyx":73
  *     cdef double[:] norm_const_1_terms = array(
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')
  *     cdef double[:] norm_const_2_terms = array(             # <<<<<<<<<<<<<<
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')
  *     cdef int t
  */
-  __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 72, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 73, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(__pyx_t_5);
-  if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 72, __pyx_L1_error)
+  if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 73, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_norm_const_2_terms = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "bmtools/exact/variational.pyx":75
+  /* "bmtools/exact/variational.pyx":76
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')
  *     cdef int t
  *     for t in prange(num_threads, nogil=True, schedule='static', chunksize=1,             # <<<<<<<<<<<<<<
@@ -2001,7 +2023,7 @@ static PyObject *__pyx_pf_7bmtools_5exact_11variational_kl_divergence(CYTHON_UNU
                         {
                             __pyx_v_t = (int)(0 + 1 * __pyx_t_9);
 
-                            /* "bmtools/exact/variational.pyx":77
+                            /* "bmtools/exact/variational.pyx":78
  *     for t in prange(num_threads, nogil=True, schedule='static', chunksize=1,
  *                     num_threads=num_threads):
  *         kl_div_terms[t] = 0.             # <<<<<<<<<<<<<<
@@ -2011,7 +2033,7 @@ static PyObject *__pyx_pf_7bmtools_5exact_11variational_kl_divergence(CYTHON_UNU
                             __pyx_t_12 = __pyx_v_t;
                             *((double *) ( /* dim=0 */ (__pyx_v_kl_div_terms.data + __pyx_t_12 * __pyx_v_kl_div_terms.strides[0]) )) = 0.;
 
-                            /* "bmtools/exact/variational.pyx":78
+                            /* "bmtools/exact/variational.pyx":79
  *                     num_threads=num_threads):
  *         kl_div_terms[t] = 0.
  *         norm_const_1_terms[t] = 0.             # <<<<<<<<<<<<<<
@@ -2021,7 +2043,7 @@ static PyObject *__pyx_pf_7bmtools_5exact_11variational_kl_divergence(CYTHON_UNU
                             __pyx_t_13 = __pyx_v_t;
                             *((double *) ( /* dim=0 */ (__pyx_v_norm_const_1_terms.data + __pyx_t_13 * __pyx_v_norm_const_1_terms.strides[0]) )) = 0.;
 
-                            /* "bmtools/exact/variational.pyx":79
+                            /* "bmtools/exact/variational.pyx":80
  *         kl_div_terms[t] = 0.
  *         norm_const_1_terms[t] = 0.
  *         norm_const_2_terms[t] = 0.             # <<<<<<<<<<<<<<
@@ -2031,7 +2053,7 @@ static PyObject *__pyx_pf_7bmtools_5exact_11variational_kl_divergence(CYTHON_UNU
                             __pyx_t_14 = __pyx_v_t;
                             *((double *) ( /* dim=0 */ (__pyx_v_norm_const_2_terms.data + __pyx_t_14 * __pyx_v_norm_const_2_terms.strides[0]) )) = 0.;
 
-                            /* "bmtools/exact/variational.pyx":82
+                            /* "bmtools/exact/variational.pyx":83
  *         accum_kl_terms_for_state_range(
  *             weights_1, biases_1, weights_2, biases_2,
  *             states[t], &kl_div_terms[t],             # <<<<<<<<<<<<<<
@@ -2055,7 +2077,7 @@ static PyObject *__pyx_pf_7bmtools_5exact_11variational_kl_divergence(CYTHON_UNU
             #ifdef WITH_THREAD
             PyGILState_Release(__pyx_gilstate_save);
             #endif
-        __PYX_ERR(0, 82, __pyx_L8_error)
+        __PYX_ERR(0, 83, __pyx_L8_error)
     }
         __pyx_t_15.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -2066,7 +2088,7 @@ __pyx_t_15.strides[0] = __pyx_v_states.strides[1];
 
 __pyx_t_16 = __pyx_v_t;
 
-                            /* "bmtools/exact/variational.pyx":83
+                            /* "bmtools/exact/variational.pyx":84
  *             weights_1, biases_1, weights_2, biases_2,
  *             states[t], &kl_div_terms[t],
  *             &norm_const_1_terms[t], &norm_const_2_terms[t],             # <<<<<<<<<<<<<<
@@ -2076,7 +2098,7 @@ __pyx_t_16 = __pyx_v_t;
                             __pyx_t_17 = __pyx_v_t;
                             __pyx_t_18 = __pyx_v_t;
 
-                            /* "bmtools/exact/variational.pyx":84
+                            /* "bmtools/exact/variational.pyx":85
  *             states[t], &kl_div_terms[t],
  *             &norm_const_1_terms[t], &norm_const_2_terms[t],
  *             intervals[t], intervals[t+1])             # <<<<<<<<<<<<<<
@@ -2086,7 +2108,7 @@ __pyx_t_16 = __pyx_v_t;
                             __pyx_t_19 = __pyx_v_t;
                             __pyx_t_20 = (__pyx_v_t + 1);
 
-                            /* "bmtools/exact/variational.pyx":80
+                            /* "bmtools/exact/variational.pyx":81
  *         norm_const_1_terms[t] = 0.
  *         norm_const_2_terms[t] = 0.
  *         accum_kl_terms_for_state_range(             # <<<<<<<<<<<<<<
@@ -2177,7 +2199,7 @@ __pyx_t_16 = __pyx_v_t;
         #endif
       }
 
-      /* "bmtools/exact/variational.pyx":75
+      /* "bmtools/exact/variational.pyx":76
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')
  *     cdef int t
  *     for t in prange(num_threads, nogil=True, schedule='static', chunksize=1,             # <<<<<<<<<<<<<<
@@ -2201,7 +2223,7 @@ __pyx_t_16 = __pyx_v_t;
       }
   }
 
-  /* "bmtools/exact/variational.pyx":85
+  /* "bmtools/exact/variational.pyx":86
  *             &norm_const_1_terms[t], &norm_const_2_terms[t],
  *             intervals[t], intervals[t+1])
  *     for t in range(1, num_threads):             # <<<<<<<<<<<<<<
@@ -2212,7 +2234,7 @@ __pyx_t_16 = __pyx_v_t;
   for (__pyx_t_9 = 1; __pyx_t_9 < __pyx_t_10; __pyx_t_9+=1) {
     __pyx_v_t = __pyx_t_9;
 
-    /* "bmtools/exact/variational.pyx":86
+    /* "bmtools/exact/variational.pyx":87
  *             intervals[t], intervals[t+1])
  *     for t in range(1, num_threads):
  *         norm_const_1_terms[0] += norm_const_1_terms[t]             # <<<<<<<<<<<<<<
@@ -2223,7 +2245,7 @@ __pyx_t_16 = __pyx_v_t;
     __pyx_t_22 = 0;
     *((double *) ( /* dim=0 */ (__pyx_v_norm_const_1_terms.data + __pyx_t_22 * __pyx_v_norm_const_1_terms.strides[0]) )) += (*((double *) ( /* dim=0 */ (__pyx_v_norm_const_1_terms.data + __pyx_t_21 * __pyx_v_norm_const_1_terms.strides[0]) )));
 
-    /* "bmtools/exact/variational.pyx":87
+    /* "bmtools/exact/variational.pyx":88
  *     for t in range(1, num_threads):
  *         norm_const_1_terms[0] += norm_const_1_terms[t]
  *         norm_const_2_terms[0] += norm_const_2_terms[t]             # <<<<<<<<<<<<<<
@@ -2234,7 +2256,7 @@ __pyx_t_16 = __pyx_v_t;
     __pyx_t_24 = 0;
     *((double *) ( /* dim=0 */ (__pyx_v_norm_const_2_terms.data + __pyx_t_24 * __pyx_v_norm_const_2_terms.strides[0]) )) += (*((double *) ( /* dim=0 */ (__pyx_v_norm_const_2_terms.data + __pyx_t_23 * __pyx_v_norm_const_2_terms.strides[0]) )));
 
-    /* "bmtools/exact/variational.pyx":88
+    /* "bmtools/exact/variational.pyx":89
  *         norm_const_1_terms[0] += norm_const_1_terms[t]
  *         norm_const_2_terms[0] += norm_const_2_terms[t]
  *         kl_div_terms[0] += kl_div_terms[t]             # <<<<<<<<<<<<<<
@@ -2246,7 +2268,7 @@ __pyx_t_16 = __pyx_v_t;
     *((double *) ( /* dim=0 */ (__pyx_v_kl_div_terms.data + __pyx_t_26 * __pyx_v_kl_div_terms.strides[0]) )) += (*((double *) ( /* dim=0 */ (__pyx_v_kl_div_terms.data + __pyx_t_25 * __pyx_v_kl_div_terms.strides[0]) )));
   }
 
-  /* "bmtools/exact/variational.pyx":89
+  /* "bmtools/exact/variational.pyx":90
  *         norm_const_2_terms[0] += norm_const_2_terms[t]
  *         kl_div_terms[0] += kl_div_terms[t]
  *     kl_div_terms[0] /= norm_const_1_terms[0]             # <<<<<<<<<<<<<<
@@ -2257,7 +2279,7 @@ __pyx_t_16 = __pyx_v_t;
   __pyx_t_28 = 0;
   *((double *) ( /* dim=0 */ (__pyx_v_kl_div_terms.data + __pyx_t_28 * __pyx_v_kl_div_terms.strides[0]) )) /= (*((double *) ( /* dim=0 */ (__pyx_v_norm_const_1_terms.data + __pyx_t_27 * __pyx_v_norm_const_1_terms.strides[0]) )));
 
-  /* "bmtools/exact/variational.pyx":90
+  /* "bmtools/exact/variational.pyx":91
  *         kl_div_terms[0] += kl_div_terms[t]
  *     kl_div_terms[0] /= norm_const_1_terms[0]
  *     cdef double log_norm_const_1 = log(norm_const_1_terms[0])             # <<<<<<<<<<<<<<
@@ -2267,7 +2289,7 @@ __pyx_t_16 = __pyx_v_t;
   __pyx_t_29 = 0;
   __pyx_v_log_norm_const_1 = log((*((double *) ( /* dim=0 */ (__pyx_v_norm_const_1_terms.data + __pyx_t_29 * __pyx_v_norm_const_1_terms.strides[0]) ))));
 
-  /* "bmtools/exact/variational.pyx":91
+  /* "bmtools/exact/variational.pyx":92
  *     kl_div_terms[0] /= norm_const_1_terms[0]
  *     cdef double log_norm_const_1 = log(norm_const_1_terms[0])
  *     cdef double log_norm_const_2 = log(norm_const_2_terms[0])             # <<<<<<<<<<<<<<
@@ -2277,7 +2299,7 @@ __pyx_t_16 = __pyx_v_t;
   __pyx_t_30 = 0;
   __pyx_v_log_norm_const_2 = log((*((double *) ( /* dim=0 */ (__pyx_v_norm_const_2_terms.data + __pyx_t_30 * __pyx_v_norm_const_2_terms.strides[0]) ))));
 
-  /* "bmtools/exact/variational.pyx":92
+  /* "bmtools/exact/variational.pyx":93
  *     cdef double log_norm_const_1 = log(norm_const_1_terms[0])
  *     cdef double log_norm_const_2 = log(norm_const_2_terms[0])
  *     kl_div_terms[0] += log_norm_const_2 - log_norm_const_1             # <<<<<<<<<<<<<<
@@ -2287,7 +2309,7 @@ __pyx_t_16 = __pyx_v_t;
   __pyx_t_31 = 0;
   *((double *) ( /* dim=0 */ (__pyx_v_kl_div_terms.data + __pyx_t_31 * __pyx_v_kl_div_terms.strides[0]) )) += (__pyx_v_log_norm_const_2 - __pyx_v_log_norm_const_1);
 
-  /* "bmtools/exact/variational.pyx":93
+  /* "bmtools/exact/variational.pyx":94
  *     cdef double log_norm_const_2 = log(norm_const_2_terms[0])
  *     kl_div_terms[0] += log_norm_const_2 - log_norm_const_1
  *     return kl_div_terms[0], log_norm_const_1, log_norm_const_2             # <<<<<<<<<<<<<<
@@ -2296,13 +2318,13 @@ __pyx_t_16 = __pyx_v_t;
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_32 = 0;
-  __pyx_t_5 = PyFloat_FromDouble((*((double *) ( /* dim=0 */ (__pyx_v_kl_div_terms.data + __pyx_t_32 * __pyx_v_kl_div_terms.strides[0]) )))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_5 = PyFloat_FromDouble((*((double *) ( /* dim=0 */ (__pyx_v_kl_div_terms.data + __pyx_t_32 * __pyx_v_kl_div_terms.strides[0]) )))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 94, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_log_norm_const_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_log_norm_const_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 94, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = PyFloat_FromDouble(__pyx_v_log_norm_const_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_4 = PyFloat_FromDouble(__pyx_v_log_norm_const_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 94, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = PyTuple_New(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 94, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_5);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_5);
@@ -2317,7 +2339,7 @@ __pyx_t_16 = __pyx_v_t;
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "bmtools/exact/variational.pyx":23
+  /* "bmtools/exact/variational.pyx":24
  * 
  * 
  * def kl_divergence(             # <<<<<<<<<<<<<<
@@ -2352,7 +2374,7 @@ __pyx_t_16 = __pyx_v_t;
   return __pyx_r;
 }
 
-/* "bmtools/exact/variational.pyx":96
+/* "bmtools/exact/variational.pyx":97
  * 
  * 
  * def kl_divergence_and_gradients(             # <<<<<<<<<<<<<<
@@ -2398,17 +2420,17 @@ static PyObject *__pyx_pw_7bmtools_5exact_11variational_3kl_divergence_and_gradi
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_biases_1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("kl_divergence_and_gradients", 0, 4, 6, 1); __PYX_ERR(0, 96, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("kl_divergence_and_gradients", 0, 4, 6, 1); __PYX_ERR(0, 97, __pyx_L3_error)
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_weights_2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("kl_divergence_and_gradients", 0, 4, 6, 2); __PYX_ERR(0, 96, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("kl_divergence_and_gradients", 0, 4, 6, 2); __PYX_ERR(0, 97, __pyx_L3_error)
         }
         case  3:
         if (likely((values[3] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_biases_2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("kl_divergence_and_gradients", 0, 4, 6, 3); __PYX_ERR(0, 96, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("kl_divergence_and_gradients", 0, 4, 6, 3); __PYX_ERR(0, 97, __pyx_L3_error)
         }
         case  4:
         if (kw_args > 0) {
@@ -2422,7 +2444,7 @@ static PyObject *__pyx_pw_7bmtools_5exact_11variational_3kl_divergence_and_gradi
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "kl_divergence_and_gradients") < 0)) __PYX_ERR(0, 96, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "kl_divergence_and_gradients") < 0)) __PYX_ERR(0, 97, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2436,15 +2458,15 @@ static PyObject *__pyx_pw_7bmtools_5exact_11variational_3kl_divergence_and_gradi
         default: goto __pyx_L5_argtuple_error;
       }
     }
-    __pyx_v_weights_1 = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(values[0]); if (unlikely(!__pyx_v_weights_1.memview)) __PYX_ERR(0, 97, __pyx_L3_error)
-    __pyx_v_biases_1 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[1]); if (unlikely(!__pyx_v_biases_1.memview)) __PYX_ERR(0, 97, __pyx_L3_error)
-    __pyx_v_weights_2 = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(values[2]); if (unlikely(!__pyx_v_weights_2.memview)) __PYX_ERR(0, 98, __pyx_L3_error)
-    __pyx_v_biases_2 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[3]); if (unlikely(!__pyx_v_biases_2.memview)) __PYX_ERR(0, 98, __pyx_L3_error)
+    __pyx_v_weights_1 = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(values[0]); if (unlikely(!__pyx_v_weights_1.memview)) __PYX_ERR(0, 98, __pyx_L3_error)
+    __pyx_v_biases_1 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[1]); if (unlikely(!__pyx_v_biases_1.memview)) __PYX_ERR(0, 98, __pyx_L3_error)
+    __pyx_v_weights_2 = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(values[2]); if (unlikely(!__pyx_v_weights_2.memview)) __PYX_ERR(0, 99, __pyx_L3_error)
+    __pyx_v_biases_2 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[3]); if (unlikely(!__pyx_v_biases_2.memview)) __PYX_ERR(0, 99, __pyx_L3_error)
     if (values[4]) {
-      __pyx_v_force = __Pyx_PyObject_IsTrue(values[4]); if (unlikely((__pyx_v_force == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 99, __pyx_L3_error)
+      __pyx_v_force = __Pyx_PyObject_IsTrue(values[4]); if (unlikely((__pyx_v_force == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 100, __pyx_L3_error)
     } else {
 
-      /* "bmtools/exact/variational.pyx":99
+      /* "bmtools/exact/variational.pyx":100
  *         double[:, :] weights_1, double[:] biases_1,
  *         double[:, :] weights_2, double[:] biases_2,
  *         bint force=False, int num_threads=4):             # <<<<<<<<<<<<<<
@@ -2454,14 +2476,14 @@ static PyObject *__pyx_pw_7bmtools_5exact_11variational_3kl_divergence_and_gradi
       __pyx_v_force = ((int)0);
     }
     if (values[5]) {
-      __pyx_v_num_threads = __Pyx_PyInt_As_int(values[5]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 99, __pyx_L3_error)
+      __pyx_v_num_threads = __Pyx_PyInt_As_int(values[5]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 100, __pyx_L3_error)
     } else {
       __pyx_v_num_threads = ((int)4);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("kl_divergence_and_gradients", 0, 4, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 96, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("kl_divergence_and_gradients", 0, 4, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 97, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("bmtools.exact.variational.kl_divergence_and_gradients", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2469,7 +2491,7 @@ static PyObject *__pyx_pw_7bmtools_5exact_11variational_3kl_divergence_and_gradi
   __pyx_L4_argument_unpacking_done:;
   __pyx_r = __pyx_pf_7bmtools_5exact_11variational_2kl_divergence_and_gradients(__pyx_self, __pyx_v_weights_1, __pyx_v_biases_1, __pyx_v_weights_2, __pyx_v_biases_2, __pyx_v_force, __pyx_v_num_threads);
 
-  /* "bmtools/exact/variational.pyx":96
+  /* "bmtools/exact/variational.pyx":97
  * 
  * 
  * def kl_divergence_and_gradients(             # <<<<<<<<<<<<<<
@@ -2587,7 +2609,7 @@ static PyObject *__pyx_pf_7bmtools_5exact_11variational_2kl_divergence_and_gradi
   PyObject *__pyx_t_84 = NULL;
   __Pyx_RefNannySetupContext("kl_divergence_and_gradients", 0);
 
-  /* "bmtools/exact/variational.pyx":125
+  /* "bmtools/exact/variational.pyx":126
  *         second_mom_1 (double[:, :]): Second moments of first distribution.
  *     """
  *     cdef int num_units = weights_1.shape[0]             # <<<<<<<<<<<<<<
@@ -2596,7 +2618,7 @@ static PyObject *__pyx_pf_7bmtools_5exact_11variational_2kl_divergence_and_gradi
  */
   __pyx_v_num_units = (__pyx_v_weights_1.shape[0]);
 
-  /* "bmtools/exact/variational.pyx":126
+  /* "bmtools/exact/variational.pyx":127
  *     """
  *     cdef int num_units = weights_1.shape[0]
  *     check_state_space_size(num_units, force)             # <<<<<<<<<<<<<<
@@ -2605,7 +2627,7 @@ static PyObject *__pyx_pf_7bmtools_5exact_11variational_2kl_divergence_and_gradi
  */
   __pyx_f_7bmtools_5exact_7helpers_check_state_space_size(__pyx_v_num_units, __pyx_v_force, 0);
 
-  /* "bmtools/exact/variational.pyx":127
+  /* "bmtools/exact/variational.pyx":128
  *     cdef int num_units = weights_1.shape[0]
  *     check_state_space_size(num_units, force)
  *     cdef int num_states = 2**num_units             # <<<<<<<<<<<<<<
@@ -2614,32 +2636,32 @@ static PyObject *__pyx_pf_7bmtools_5exact_11variational_2kl_divergence_and_gradi
  */
   __pyx_v_num_states = __Pyx_pow_long(2, ((long)__pyx_v_num_units));
 
-  /* "bmtools/exact/variational.pyx":128
+  /* "bmtools/exact/variational.pyx":129
  *     check_state_space_size(num_units, force)
  *     cdef int num_states = 2**num_units
  *     cdef int[:] intervals = partition_state_space(num_states, num_threads)             # <<<<<<<<<<<<<<
  *     cdef state_t[:, :] states = array(
  *         shape=(num_threads, num_units), itemsize=sizeof(state_t),
  */
-  __pyx_t_1 = __pyx_f_7bmtools_5exact_7helpers_partition_state_space(__pyx_v_num_states, __pyx_v_num_threads); if (unlikely(!__pyx_t_1.memview)) __PYX_ERR(0, 128, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_7bmtools_5exact_7helpers_partition_state_space(__pyx_v_num_states, __pyx_v_num_threads); if (unlikely(!__pyx_t_1.memview)) __PYX_ERR(0, 129, __pyx_L1_error)
   __pyx_v_intervals = __pyx_t_1;
   __pyx_t_1.memview = NULL;
   __pyx_t_1.data = NULL;
 
-  /* "bmtools/exact/variational.pyx":130
+  /* "bmtools/exact/variational.pyx":131
  *     cdef int[:] intervals = partition_state_space(num_states, num_threads)
  *     cdef state_t[:, :] states = array(
  *         shape=(num_threads, num_units), itemsize=sizeof(state_t),             # <<<<<<<<<<<<<<
  *         format=state_t_code)
  *     cdef double[:] kl_div_terms = array(
  */
-  __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 130, __pyx_L1_error)
+  __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 130, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_num_units); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 130, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_num_units); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 130, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3);
@@ -2647,179 +2669,179 @@ static PyObject *__pyx_pf_7bmtools_5exact_11variational_2kl_divergence_and_gradi
   PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_4);
   __pyx_t_3 = 0;
   __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_shape, __pyx_t_5) < 0) __PYX_ERR(0, 130, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_shape, __pyx_t_5) < 0) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyInt_FromSize_t((sizeof(__pyx_t_7bmtools_5exact_7helpers_state_t))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 130, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_FromSize_t((sizeof(__pyx_t_7bmtools_5exact_7helpers_state_t))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_itemsize, __pyx_t_5) < 0) __PYX_ERR(0, 130, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_itemsize, __pyx_t_5) < 0) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "bmtools/exact/variational.pyx":131
+  /* "bmtools/exact/variational.pyx":132
  *     cdef state_t[:, :] states = array(
  *         shape=(num_threads, num_units), itemsize=sizeof(state_t),
  *         format=state_t_code)             # <<<<<<<<<<<<<<
  *     cdef double[:] kl_div_terms = array(
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')
  */
-  __pyx_t_5 = __Pyx_PyBytes_FromString(__pyx_v_7bmtools_5exact_7helpers_state_t_code); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 131, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyBytes_FromString(__pyx_v_7bmtools_5exact_7helpers_state_t_code); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_format, __pyx_t_5) < 0) __PYX_ERR(0, 130, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_format, __pyx_t_5) < 0) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "bmtools/exact/variational.pyx":129
+  /* "bmtools/exact/variational.pyx":130
  *     cdef int num_states = 2**num_units
  *     cdef int[:] intervals = partition_state_space(num_states, num_threads)
  *     cdef state_t[:, :] states = array(             # <<<<<<<<<<<<<<
  *         shape=(num_threads, num_units), itemsize=sizeof(state_t),
  *         format=state_t_code)
  */
-  __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 129, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 130, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dsds_nn___pyx_t_7bmtools_5exact_7helpers_state_t(__pyx_t_5);
-  if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 129, __pyx_L1_error)
+  if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 130, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_states = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "bmtools/exact/variational.pyx":133
+  /* "bmtools/exact/variational.pyx":134
  *         format=state_t_code)
  *     cdef double[:] kl_div_terms = array(
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')             # <<<<<<<<<<<<<<
  *     cdef double[:] norm_const_1_terms = array(
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')
  */
-  __pyx_t_5 = PyDict_New(); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 133, __pyx_L1_error)
+  __pyx_t_5 = PyDict_New(); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 134, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 133, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 134, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 133, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 134, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2);
   __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_shape, __pyx_t_4) < 0) __PYX_ERR(0, 133, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_shape, __pyx_t_4) < 0) __PYX_ERR(0, 134, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyInt_FromSize_t((sizeof(double))); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 133, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_FromSize_t((sizeof(double))); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 134, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_itemsize, __pyx_t_4) < 0) __PYX_ERR(0, 133, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_itemsize, __pyx_t_4) < 0) __PYX_ERR(0, 134, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 133, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 134, __pyx_L1_error)
 
-  /* "bmtools/exact/variational.pyx":132
+  /* "bmtools/exact/variational.pyx":133
  *         shape=(num_threads, num_units), itemsize=sizeof(state_t),
  *         format=state_t_code)
  *     cdef double[:] kl_div_terms = array(             # <<<<<<<<<<<<<<
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')
  *     cdef double[:] norm_const_1_terms = array(
  */
-  __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 133, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(__pyx_t_4);
-  if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 132, __pyx_L1_error)
+  if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 133, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_kl_div_terms = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "bmtools/exact/variational.pyx":135
+  /* "bmtools/exact/variational.pyx":136
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')
  *     cdef double[:] norm_const_1_terms = array(
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')             # <<<<<<<<<<<<<<
  *     cdef double[:] norm_const_2_terms = array(
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')
  */
-  __pyx_t_4 = PyDict_New(); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __pyx_t_4 = PyDict_New(); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_5);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_5);
   __pyx_t_5 = 0;
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_shape, __pyx_t_2) < 0) __PYX_ERR(0, 135, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_shape, __pyx_t_2) < 0) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyInt_FromSize_t((sizeof(double))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_FromSize_t((sizeof(double))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_itemsize, __pyx_t_2) < 0) __PYX_ERR(0, 135, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_itemsize, __pyx_t_2) < 0) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 135, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 136, __pyx_L1_error)
 
-  /* "bmtools/exact/variational.pyx":134
+  /* "bmtools/exact/variational.pyx":135
  *     cdef double[:] kl_div_terms = array(
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')
  *     cdef double[:] norm_const_1_terms = array(             # <<<<<<<<<<<<<<
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')
  *     cdef double[:] norm_const_2_terms = array(
  */
-  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 134, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(__pyx_t_2);
-  if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 134, __pyx_L1_error)
+  if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 135, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_norm_const_1_terms = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "bmtools/exact/variational.pyx":137
+  /* "bmtools/exact/variational.pyx":138
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')
  *     cdef double[:] norm_const_2_terms = array(
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')             # <<<<<<<<<<<<<<
  *     cdef double[:, :] first_mom_1_terms = array(
  *         shape=(num_threads, num_units), itemsize=sizeof(double),
  */
-  __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_4);
   PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4);
   __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_shape, __pyx_t_5) < 0) __PYX_ERR(0, 137, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_shape, __pyx_t_5) < 0) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyInt_FromSize_t((sizeof(double))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_FromSize_t((sizeof(double))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_itemsize, __pyx_t_5) < 0) __PYX_ERR(0, 137, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_itemsize, __pyx_t_5) < 0) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 137, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 138, __pyx_L1_error)
 
-  /* "bmtools/exact/variational.pyx":136
+  /* "bmtools/exact/variational.pyx":137
  *     cdef double[:] norm_const_1_terms = array(
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')
  *     cdef double[:] norm_const_2_terms = array(             # <<<<<<<<<<<<<<
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')
  *     cdef double[:, :] first_mom_1_terms = array(
  */
-  __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 136, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(__pyx_t_5);
-  if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 136, __pyx_L1_error)
+  if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_norm_const_2_terms = __pyx_t_7;
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
 
-  /* "bmtools/exact/variational.pyx":139
+  /* "bmtools/exact/variational.pyx":140
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')
  *     cdef double[:, :] first_mom_1_terms = array(
  *         shape=(num_threads, num_units), itemsize=sizeof(double),             # <<<<<<<<<<<<<<
  *         format='d')
  *     cdef double[:, :, :] second_mom_1_terms = array(
  */
-  __pyx_t_5 = PyDict_New(); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 139, __pyx_L1_error)
+  __pyx_t_5 = PyDict_New(); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 140, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 139, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 140, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_num_units); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 139, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_num_units); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 140, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 139, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 140, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
@@ -2827,47 +2849,47 @@ static PyObject *__pyx_pf_7bmtools_5exact_11variational_2kl_divergence_and_gradi
   PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_4);
   __pyx_t_2 = 0;
   __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_shape, __pyx_t_3) < 0) __PYX_ERR(0, 139, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_shape, __pyx_t_3) < 0) __PYX_ERR(0, 140, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyInt_FromSize_t((sizeof(double))); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 139, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_FromSize_t((sizeof(double))); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 140, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_itemsize, __pyx_t_3) < 0) __PYX_ERR(0, 139, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_itemsize, __pyx_t_3) < 0) __PYX_ERR(0, 140, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 139, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 140, __pyx_L1_error)
 
-  /* "bmtools/exact/variational.pyx":138
+  /* "bmtools/exact/variational.pyx":139
  *     cdef double[:] norm_const_2_terms = array(
  *         shape=(num_threads,), itemsize=sizeof(double), format='d')
  *     cdef double[:, :] first_mom_1_terms = array(             # <<<<<<<<<<<<<<
  *         shape=(num_threads, num_units), itemsize=sizeof(double),
  *         format='d')
  */
-  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 138, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 139, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(__pyx_t_3);
-  if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 138, __pyx_L1_error)
+  if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 139, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_first_mom_1_terms = __pyx_t_8;
   __pyx_t_8.memview = NULL;
   __pyx_t_8.data = NULL;
 
-  /* "bmtools/exact/variational.pyx":142
+  /* "bmtools/exact/variational.pyx":143
  *         format='d')
  *     cdef double[:, :, :] second_mom_1_terms = array(
  *         shape=(num_threads, num_units, num_units), itemsize=sizeof(double),             # <<<<<<<<<<<<<<
  *         format='d')
  *     cdef double[:, :] grads_wrt_biases_1 = array(
  */
-  __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 142, __pyx_L1_error)
+  __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 143, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 142, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 143, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_num_units); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 142, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_num_units); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 143, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_num_units); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 142, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_num_units); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 143, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_9 = PyTuple_New(3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 142, __pyx_L1_error)
+  __pyx_t_9 = PyTuple_New(3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 143, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_GIVEREF(__pyx_t_5);
   PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_5);
@@ -2878,45 +2900,45 @@ static PyObject *__pyx_pf_7bmtools_5exact_11variational_2kl_divergence_and_gradi
   __pyx_t_5 = 0;
   __pyx_t_4 = 0;
   __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_shape, __pyx_t_9) < 0) __PYX_ERR(0, 142, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_shape, __pyx_t_9) < 0) __PYX_ERR(0, 143, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  __pyx_t_9 = __Pyx_PyInt_FromSize_t((sizeof(double))); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 142, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyInt_FromSize_t((sizeof(double))); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 143, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_itemsize, __pyx_t_9) < 0) __PYX_ERR(0, 142, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_itemsize, __pyx_t_9) < 0) __PYX_ERR(0, 143, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 142, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 143, __pyx_L1_error)
 
-  /* "bmtools/exact/variational.pyx":141
+  /* "bmtools/exact/variational.pyx":142
  *         shape=(num_threads, num_units), itemsize=sizeof(double),
  *         format='d')
  *     cdef double[:, :, :] second_mom_1_terms = array(             # <<<<<<<<<<<<<<
  *         shape=(num_threads, num_units, num_units), itemsize=sizeof(double),
  *         format='d')
  */
-  __pyx_t_9 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 141, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 142, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_10 = __Pyx_PyObject_to_MemoryviewSlice_dsdsds_double(__pyx_t_9);
-  if (unlikely(!__pyx_t_10.memview)) __PYX_ERR(0, 141, __pyx_L1_error)
+  if (unlikely(!__pyx_t_10.memview)) __PYX_ERR(0, 142, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   __pyx_v_second_mom_1_terms = __pyx_t_10;
   __pyx_t_10.memview = NULL;
   __pyx_t_10.data = NULL;
 
-  /* "bmtools/exact/variational.pyx":145
+  /* "bmtools/exact/variational.pyx":146
  *         format='d')
  *     cdef double[:, :] grads_wrt_biases_1 = array(
  *         shape=(num_threads, num_units), itemsize=sizeof(double),             # <<<<<<<<<<<<<<
  *         format='d')
  *     cdef double[:, :, :] grads_wrt_weights_1 = array(
  */
-  __pyx_t_9 = PyDict_New(); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_t_9 = PyDict_New(); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_num_units); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_num_units); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_3);
   PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3);
@@ -2924,47 +2946,47 @@ static PyObject *__pyx_pf_7bmtools_5exact_11variational_2kl_divergence_and_gradi
   PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_2);
   __pyx_t_3 = 0;
   __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_shape, __pyx_t_4) < 0) __PYX_ERR(0, 145, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_shape, __pyx_t_4) < 0) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyInt_FromSize_t((sizeof(double))); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_FromSize_t((sizeof(double))); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_itemsize, __pyx_t_4) < 0) __PYX_ERR(0, 145, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_itemsize, __pyx_t_4) < 0) __PYX_ERR(0, 146, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 145, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 146, __pyx_L1_error)
 
-  /* "bmtools/exact/variational.pyx":144
+  /* "bmtools/exact/variational.pyx":145
  *         shape=(num_threads, num_units, num_units), itemsize=sizeof(double),
  *         format='d')
  *     cdef double[:, :] grads_wrt_biases_1 = array(             # <<<<<<<<<<<<<<
  *         shape=(num_threads, num_units), itemsize=sizeof(double),
  *         format='d')
  */
-  __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_9); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 144, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_9); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 145, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(__pyx_t_4);
-  if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 144, __pyx_L1_error)
+  if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 145, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_grads_wrt_biases_1 = __pyx_t_8;
   __pyx_t_8.memview = NULL;
   __pyx_t_8.data = NULL;
 
-  /* "bmtools/exact/variational.pyx":148
+  /* "bmtools/exact/variational.pyx":149
  *         format='d')
  *     cdef double[:, :, :] grads_wrt_weights_1 = array(
  *         shape=(num_threads, num_units, num_units), itemsize=sizeof(double),             # <<<<<<<<<<<<<<
  *         format='d')
  *     cdef int t, i, j
  */
-  __pyx_t_4 = PyDict_New(); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 148, __pyx_L1_error)
+  __pyx_t_4 = PyDict_New(); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 149, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_9 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 148, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 149, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_num_units); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 148, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_num_units); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 149, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_num_units); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 148, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_num_units); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 149, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = PyTuple_New(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 148, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 149, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_9);
   PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_9);
@@ -2975,32 +2997,32 @@ static PyObject *__pyx_pf_7bmtools_5exact_11variational_2kl_divergence_and_gradi
   __pyx_t_9 = 0;
   __pyx_t_2 = 0;
   __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_shape, __pyx_t_5) < 0) __PYX_ERR(0, 148, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_shape, __pyx_t_5) < 0) __PYX_ERR(0, 149, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyInt_FromSize_t((sizeof(double))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 148, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_FromSize_t((sizeof(double))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 149, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_itemsize, __pyx_t_5) < 0) __PYX_ERR(0, 148, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_itemsize, __pyx_t_5) < 0) __PYX_ERR(0, 149, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 148, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 149, __pyx_L1_error)
 
-  /* "bmtools/exact/variational.pyx":147
+  /* "bmtools/exact/variational.pyx":148
  *         shape=(num_threads, num_units), itemsize=sizeof(double),
  *         format='d')
  *     cdef double[:, :, :] grads_wrt_weights_1 = array(             # <<<<<<<<<<<<<<
  *         shape=(num_threads, num_units, num_units), itemsize=sizeof(double),
  *         format='d')
  */
-  __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 148, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_10 = __Pyx_PyObject_to_MemoryviewSlice_dsdsds_double(__pyx_t_5);
-  if (unlikely(!__pyx_t_10.memview)) __PYX_ERR(0, 147, __pyx_L1_error)
+  if (unlikely(!__pyx_t_10.memview)) __PYX_ERR(0, 148, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_grads_wrt_weights_1 = __pyx_t_10;
   __pyx_t_10.memview = NULL;
   __pyx_t_10.data = NULL;
 
-  /* "bmtools/exact/variational.pyx":151
+  /* "bmtools/exact/variational.pyx":152
  *         format='d')
  *     cdef int t, i, j
  *     for t in prange(num_threads, nogil=True, schedule='static', chunksize=1,             # <<<<<<<<<<<<<<
@@ -3049,7 +3071,7 @@ static PyObject *__pyx_pf_7bmtools_5exact_11variational_2kl_divergence_and_gradi
                         {
                             __pyx_v_t = (int)(0 + 1 * __pyx_t_12);
 
-                            /* "bmtools/exact/variational.pyx":153
+                            /* "bmtools/exact/variational.pyx":154
  *     for t in prange(num_threads, nogil=True, schedule='static', chunksize=1,
  *                     num_threads=num_threads):
  *         kl_div_terms[t] = 0.             # <<<<<<<<<<<<<<
@@ -3059,7 +3081,7 @@ static PyObject *__pyx_pf_7bmtools_5exact_11variational_2kl_divergence_and_gradi
                             __pyx_t_15 = __pyx_v_t;
                             *((double *) ( /* dim=0 */ (__pyx_v_kl_div_terms.data + __pyx_t_15 * __pyx_v_kl_div_terms.strides[0]) )) = 0.;
 
-                            /* "bmtools/exact/variational.pyx":154
+                            /* "bmtools/exact/variational.pyx":155
  *                     num_threads=num_threads):
  *         kl_div_terms[t] = 0.
  *         norm_const_1_terms[t] = 0.             # <<<<<<<<<<<<<<
@@ -3069,7 +3091,7 @@ static PyObject *__pyx_pf_7bmtools_5exact_11variational_2kl_divergence_and_gradi
                             __pyx_t_16 = __pyx_v_t;
                             *((double *) ( /* dim=0 */ (__pyx_v_norm_const_1_terms.data + __pyx_t_16 * __pyx_v_norm_const_1_terms.strides[0]) )) = 0.;
 
-                            /* "bmtools/exact/variational.pyx":155
+                            /* "bmtools/exact/variational.pyx":156
  *         kl_div_terms[t] = 0.
  *         norm_const_1_terms[t] = 0.
  *         norm_const_2_terms[t] = 0.             # <<<<<<<<<<<<<<
@@ -3079,7 +3101,7 @@ static PyObject *__pyx_pf_7bmtools_5exact_11variational_2kl_divergence_and_gradi
                             __pyx_t_17 = __pyx_v_t;
                             *((double *) ( /* dim=0 */ (__pyx_v_norm_const_2_terms.data + __pyx_t_17 * __pyx_v_norm_const_2_terms.strides[0]) )) = 0.;
 
-                            /* "bmtools/exact/variational.pyx":158
+                            /* "bmtools/exact/variational.pyx":159
  *         accum_kl_and_grad_terms_for_state_range(
  *             weights_1, biases_1, weights_2, biases_2,
  *             states[t], &kl_div_terms[t],             # <<<<<<<<<<<<<<
@@ -3103,7 +3125,7 @@ static PyObject *__pyx_pf_7bmtools_5exact_11variational_2kl_divergence_and_gradi
             #ifdef WITH_THREAD
             PyGILState_Release(__pyx_gilstate_save);
             #endif
-        __PYX_ERR(0, 158, __pyx_L8_error)
+        __PYX_ERR(0, 159, __pyx_L8_error)
     }
         __pyx_t_18.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -3114,7 +3136,7 @@ __pyx_t_18.strides[0] = __pyx_v_states.strides[1];
 
 __pyx_t_19 = __pyx_v_t;
 
-                            /* "bmtools/exact/variational.pyx":159
+                            /* "bmtools/exact/variational.pyx":160
  *             weights_1, biases_1, weights_2, biases_2,
  *             states[t], &kl_div_terms[t],
  *             &norm_const_1_terms[t], &norm_const_2_terms[t],             # <<<<<<<<<<<<<<
@@ -3124,7 +3146,7 @@ __pyx_t_19 = __pyx_v_t;
                             __pyx_t_20 = __pyx_v_t;
                             __pyx_t_21 = __pyx_v_t;
 
-                            /* "bmtools/exact/variational.pyx":160
+                            /* "bmtools/exact/variational.pyx":161
  *             states[t], &kl_div_terms[t],
  *             &norm_const_1_terms[t], &norm_const_2_terms[t],
  *             first_mom_1_terms[t], second_mom_1_terms[t],             # <<<<<<<<<<<<<<
@@ -3148,7 +3170,7 @@ __pyx_t_19 = __pyx_v_t;
             #ifdef WITH_THREAD
             PyGILState_Release(__pyx_gilstate_save);
             #endif
-        __PYX_ERR(0, 160, __pyx_L8_error)
+        __PYX_ERR(0, 161, __pyx_L8_error)
     }
         __pyx_t_7.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -3174,7 +3196,7 @@ __pyx_t_8.data = __pyx_v_second_mom_1_terms.data;
             #ifdef WITH_THREAD
             PyGILState_Release(__pyx_gilstate_save);
             #endif
-        __PYX_ERR(0, 160, __pyx_L8_error)
+        __PYX_ERR(0, 161, __pyx_L8_error)
     }
         __pyx_t_8.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -3189,7 +3211,7 @@ __pyx_t_8.strides[1] = __pyx_v_second_mom_1_terms.strides[2];
 
 __pyx_t_22.data = __pyx_v_grads_wrt_biases_1.data;
 
-                            /* "bmtools/exact/variational.pyx":161
+                            /* "bmtools/exact/variational.pyx":162
  *             &norm_const_1_terms[t], &norm_const_2_terms[t],
  *             first_mom_1_terms[t], second_mom_1_terms[t],
  *             grads_wrt_biases_1[t], grads_wrt_weights_1[t],             # <<<<<<<<<<<<<<
@@ -3212,7 +3234,7 @@ __pyx_t_22.data = __pyx_v_grads_wrt_biases_1.data;
             #ifdef WITH_THREAD
             PyGILState_Release(__pyx_gilstate_save);
             #endif
-        __PYX_ERR(0, 161, __pyx_L8_error)
+        __PYX_ERR(0, 162, __pyx_L8_error)
     }
         __pyx_t_22.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -3238,7 +3260,7 @@ __pyx_t_23.data = __pyx_v_grads_wrt_weights_1.data;
             #ifdef WITH_THREAD
             PyGILState_Release(__pyx_gilstate_save);
             #endif
-        __PYX_ERR(0, 161, __pyx_L8_error)
+        __PYX_ERR(0, 162, __pyx_L8_error)
     }
         __pyx_t_23.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -3253,7 +3275,7 @@ __pyx_t_23.strides[1] = __pyx_v_grads_wrt_weights_1.strides[2];
 
 __pyx_t_24 = __pyx_v_t;
 
-                            /* "bmtools/exact/variational.pyx":162
+                            /* "bmtools/exact/variational.pyx":163
  *             first_mom_1_terms[t], second_mom_1_terms[t],
  *             grads_wrt_biases_1[t], grads_wrt_weights_1[t],
  *             intervals[t], intervals[t+1])             # <<<<<<<<<<<<<<
@@ -3262,7 +3284,7 @@ __pyx_t_24 = __pyx_v_t;
  */
                             __pyx_t_25 = (__pyx_v_t + 1);
 
-                            /* "bmtools/exact/variational.pyx":156
+                            /* "bmtools/exact/variational.pyx":157
  *         norm_const_1_terms[t] = 0.
  *         norm_const_2_terms[t] = 0.
  *         accum_kl_and_grad_terms_for_state_range(             # <<<<<<<<<<<<<<
@@ -3361,7 +3383,7 @@ __pyx_t_24 = __pyx_v_t;
         #endif
       }
 
-      /* "bmtools/exact/variational.pyx":151
+      /* "bmtools/exact/variational.pyx":152
  *         format='d')
  *     cdef int t, i, j
  *     for t in prange(num_threads, nogil=True, schedule='static', chunksize=1,             # <<<<<<<<<<<<<<
@@ -3385,7 +3407,7 @@ __pyx_t_24 = __pyx_v_t;
       }
   }
 
-  /* "bmtools/exact/variational.pyx":163
+  /* "bmtools/exact/variational.pyx":164
  *             grads_wrt_biases_1[t], grads_wrt_weights_1[t],
  *             intervals[t], intervals[t+1])
  *     for t in range(1, num_threads):             # <<<<<<<<<<<<<<
@@ -3396,7 +3418,7 @@ __pyx_t_24 = __pyx_v_t;
   for (__pyx_t_12 = 1; __pyx_t_12 < __pyx_t_13; __pyx_t_12+=1) {
     __pyx_v_t = __pyx_t_12;
 
-    /* "bmtools/exact/variational.pyx":164
+    /* "bmtools/exact/variational.pyx":165
  *             intervals[t], intervals[t+1])
  *     for t in range(1, num_threads):
  *         norm_const_1_terms[0] += norm_const_1_terms[t]             # <<<<<<<<<<<<<<
@@ -3407,7 +3429,7 @@ __pyx_t_24 = __pyx_v_t;
     __pyx_t_27 = 0;
     *((double *) ( /* dim=0 */ (__pyx_v_norm_const_1_terms.data + __pyx_t_27 * __pyx_v_norm_const_1_terms.strides[0]) )) += (*((double *) ( /* dim=0 */ (__pyx_v_norm_const_1_terms.data + __pyx_t_26 * __pyx_v_norm_const_1_terms.strides[0]) )));
 
-    /* "bmtools/exact/variational.pyx":165
+    /* "bmtools/exact/variational.pyx":166
  *     for t in range(1, num_threads):
  *         norm_const_1_terms[0] += norm_const_1_terms[t]
  *         norm_const_2_terms[0] += norm_const_2_terms[t]             # <<<<<<<<<<<<<<
@@ -3418,7 +3440,7 @@ __pyx_t_24 = __pyx_v_t;
     __pyx_t_29 = 0;
     *((double *) ( /* dim=0 */ (__pyx_v_norm_const_2_terms.data + __pyx_t_29 * __pyx_v_norm_const_2_terms.strides[0]) )) += (*((double *) ( /* dim=0 */ (__pyx_v_norm_const_2_terms.data + __pyx_t_28 * __pyx_v_norm_const_2_terms.strides[0]) )));
 
-    /* "bmtools/exact/variational.pyx":166
+    /* "bmtools/exact/variational.pyx":167
  *         norm_const_1_terms[0] += norm_const_1_terms[t]
  *         norm_const_2_terms[0] += norm_const_2_terms[t]
  *         kl_div_terms[0] += kl_div_terms[t]             # <<<<<<<<<<<<<<
@@ -3429,7 +3451,7 @@ __pyx_t_24 = __pyx_v_t;
     __pyx_t_31 = 0;
     *((double *) ( /* dim=0 */ (__pyx_v_kl_div_terms.data + __pyx_t_31 * __pyx_v_kl_div_terms.strides[0]) )) += (*((double *) ( /* dim=0 */ (__pyx_v_kl_div_terms.data + __pyx_t_30 * __pyx_v_kl_div_terms.strides[0]) )));
 
-    /* "bmtools/exact/variational.pyx":167
+    /* "bmtools/exact/variational.pyx":168
  *         norm_const_2_terms[0] += norm_const_2_terms[t]
  *         kl_div_terms[0] += kl_div_terms[t]
  *         for i in range(num_units):             # <<<<<<<<<<<<<<
@@ -3440,7 +3462,7 @@ __pyx_t_24 = __pyx_v_t;
     for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_14; __pyx_t_11+=1) {
       __pyx_v_i = __pyx_t_11;
 
-      /* "bmtools/exact/variational.pyx":168
+      /* "bmtools/exact/variational.pyx":169
  *         kl_div_terms[0] += kl_div_terms[t]
  *         for i in range(num_units):
  *             first_mom_1_terms[0][i] += first_mom_1_terms[t][i]             # <<<<<<<<<<<<<<
@@ -3458,7 +3480,7 @@ __pyx_t_24 = __pyx_v_t;
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 168, __pyx_L1_error)
+        __PYX_ERR(0, 169, __pyx_L1_error)
     }
         __pyx_t_22.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -3479,7 +3501,7 @@ __pyx_t_32 = __pyx_v_i;
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 168, __pyx_L1_error)
+        __PYX_ERR(0, 169, __pyx_L1_error)
     }
         __pyx_t_7.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -3493,7 +3515,7 @@ __pyx_t_33 = __pyx_v_i;
       __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
       __PYX_XDEC_MEMVIEW(&__pyx_t_22, 1);
 
-      /* "bmtools/exact/variational.pyx":169
+      /* "bmtools/exact/variational.pyx":170
  *         for i in range(num_units):
  *             first_mom_1_terms[0][i] += first_mom_1_terms[t][i]
  *             grads_wrt_biases_1[0][i] += grads_wrt_biases_1[t][i]             # <<<<<<<<<<<<<<
@@ -3511,7 +3533,7 @@ __pyx_t_33 = __pyx_v_i;
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 169, __pyx_L1_error)
+        __PYX_ERR(0, 170, __pyx_L1_error)
     }
         __pyx_t_22.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -3532,7 +3554,7 @@ __pyx_t_34 = __pyx_v_i;
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 169, __pyx_L1_error)
+        __PYX_ERR(0, 170, __pyx_L1_error)
     }
         __pyx_t_7.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -3546,7 +3568,7 @@ __pyx_t_35 = __pyx_v_i;
       __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
       __PYX_XDEC_MEMVIEW(&__pyx_t_22, 1);
 
-      /* "bmtools/exact/variational.pyx":170
+      /* "bmtools/exact/variational.pyx":171
  *             first_mom_1_terms[0][i] += first_mom_1_terms[t][i]
  *             grads_wrt_biases_1[0][i] += grads_wrt_biases_1[t][i]
  *             for j in range(i):             # <<<<<<<<<<<<<<
@@ -3557,7 +3579,7 @@ __pyx_t_35 = __pyx_v_i;
       for (__pyx_t_37 = 0; __pyx_t_37 < __pyx_t_36; __pyx_t_37+=1) {
         __pyx_v_j = __pyx_t_37;
 
-        /* "bmtools/exact/variational.pyx":171
+        /* "bmtools/exact/variational.pyx":172
  *             grads_wrt_biases_1[0][i] += grads_wrt_biases_1[t][i]
  *             for j in range(i):
  *                 second_mom_1_terms[0][i, j] += second_mom_1_terms[t][i, j]             # <<<<<<<<<<<<<<
@@ -3575,7 +3597,7 @@ __pyx_t_35 = __pyx_v_i;
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 171, __pyx_L1_error)
+        __PYX_ERR(0, 172, __pyx_L1_error)
     }
         __pyx_t_23.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -3601,7 +3623,7 @@ __pyx_t_38 = __pyx_v_i;
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 171, __pyx_L1_error)
+        __PYX_ERR(0, 172, __pyx_L1_error)
     }
         __pyx_t_8.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -3620,7 +3642,7 @@ __pyx_t_40 = __pyx_v_i;
         __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
         __PYX_XDEC_MEMVIEW(&__pyx_t_23, 1);
 
-        /* "bmtools/exact/variational.pyx":172
+        /* "bmtools/exact/variational.pyx":173
  *             for j in range(i):
  *                 second_mom_1_terms[0][i, j] += second_mom_1_terms[t][i, j]
  *                 grads_wrt_weights_1[0][i, j] += grads_wrt_weights_1[t][i, j]             # <<<<<<<<<<<<<<
@@ -3638,7 +3660,7 @@ __pyx_t_40 = __pyx_v_i;
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 172, __pyx_L1_error)
+        __PYX_ERR(0, 173, __pyx_L1_error)
     }
         __pyx_t_23.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -3664,7 +3686,7 @@ __pyx_t_42 = __pyx_v_i;
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 172, __pyx_L1_error)
+        __PYX_ERR(0, 173, __pyx_L1_error)
     }
         __pyx_t_8.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -3686,7 +3708,7 @@ __pyx_t_44 = __pyx_v_i;
     }
   }
 
-  /* "bmtools/exact/variational.pyx":173
+  /* "bmtools/exact/variational.pyx":174
  *                 second_mom_1_terms[0][i, j] += second_mom_1_terms[t][i, j]
  *                 grads_wrt_weights_1[0][i, j] += grads_wrt_weights_1[t][i, j]
  *     kl_div_terms[0] /= norm_const_1_terms[0]             # <<<<<<<<<<<<<<
@@ -3697,7 +3719,7 @@ __pyx_t_44 = __pyx_v_i;
   __pyx_t_47 = 0;
   *((double *) ( /* dim=0 */ (__pyx_v_kl_div_terms.data + __pyx_t_47 * __pyx_v_kl_div_terms.strides[0]) )) /= (*((double *) ( /* dim=0 */ (__pyx_v_norm_const_1_terms.data + __pyx_t_46 * __pyx_v_norm_const_1_terms.strides[0]) )));
 
-  /* "bmtools/exact/variational.pyx":174
+  /* "bmtools/exact/variational.pyx":175
  *                 grads_wrt_weights_1[0][i, j] += grads_wrt_weights_1[t][i, j]
  *     kl_div_terms[0] /= norm_const_1_terms[0]
  *     for i in range(num_units):             # <<<<<<<<<<<<<<
@@ -3708,7 +3730,7 @@ __pyx_t_44 = __pyx_v_i;
   for (__pyx_t_12 = 0; __pyx_t_12 < __pyx_t_13; __pyx_t_12+=1) {
     __pyx_v_i = __pyx_t_12;
 
-    /* "bmtools/exact/variational.pyx":175
+    /* "bmtools/exact/variational.pyx":176
  *     kl_div_terms[0] /= norm_const_1_terms[0]
  *     for i in range(num_units):
  *         first_mom_1_terms[0][i] /= norm_const_1_terms[0]             # <<<<<<<<<<<<<<
@@ -3727,7 +3749,7 @@ __pyx_t_44 = __pyx_v_i;
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 175, __pyx_L1_error)
+        __PYX_ERR(0, 176, __pyx_L1_error)
     }
         __pyx_t_22.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -3740,7 +3762,7 @@ __pyx_t_49 = __pyx_v_i;
     *((double *) ( /* dim=0 */ (__pyx_t_22.data + __pyx_t_49 * __pyx_t_22.strides[0]) )) /= (*((double *) ( /* dim=0 */ (__pyx_v_norm_const_1_terms.data + __pyx_t_48 * __pyx_v_norm_const_1_terms.strides[0]) )));
     __PYX_XDEC_MEMVIEW(&__pyx_t_22, 1);
 
-    /* "bmtools/exact/variational.pyx":176
+    /* "bmtools/exact/variational.pyx":177
  *     for i in range(num_units):
  *         first_mom_1_terms[0][i] /= norm_const_1_terms[0]
  *         grads_wrt_biases_1[0][i] /= norm_const_1_terms[0]             # <<<<<<<<<<<<<<
@@ -3759,7 +3781,7 @@ __pyx_t_49 = __pyx_v_i;
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 176, __pyx_L1_error)
+        __PYX_ERR(0, 177, __pyx_L1_error)
     }
         __pyx_t_22.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -3772,7 +3794,7 @@ __pyx_t_51 = __pyx_v_i;
     *((double *) ( /* dim=0 */ (__pyx_t_22.data + __pyx_t_51 * __pyx_t_22.strides[0]) )) /= (*((double *) ( /* dim=0 */ (__pyx_v_norm_const_1_terms.data + __pyx_t_50 * __pyx_v_norm_const_1_terms.strides[0]) )));
     __PYX_XDEC_MEMVIEW(&__pyx_t_22, 1);
 
-    /* "bmtools/exact/variational.pyx":178
+    /* "bmtools/exact/variational.pyx":179
  *         grads_wrt_biases_1[0][i] /= norm_const_1_terms[0]
  *         grads_wrt_biases_1[0][i] -= (
  *             kl_div_terms[0] * first_mom_1_terms[0][i])             # <<<<<<<<<<<<<<
@@ -3791,7 +3813,7 @@ __pyx_t_51 = __pyx_v_i;
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 178, __pyx_L1_error)
+        __PYX_ERR(0, 179, __pyx_L1_error)
     }
         __pyx_t_22.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -3802,7 +3824,7 @@ __pyx_t_22.strides[0] = __pyx_v_first_mom_1_terms.strides[1];
 
 __pyx_t_53 = __pyx_v_i;
 
-    /* "bmtools/exact/variational.pyx":177
+    /* "bmtools/exact/variational.pyx":178
  *         first_mom_1_terms[0][i] /= norm_const_1_terms[0]
  *         grads_wrt_biases_1[0][i] /= norm_const_1_terms[0]
  *         grads_wrt_biases_1[0][i] -= (             # <<<<<<<<<<<<<<
@@ -3820,7 +3842,7 @@ __pyx_t_53 = __pyx_v_i;
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 177, __pyx_L1_error)
+        __PYX_ERR(0, 178, __pyx_L1_error)
     }
         __pyx_t_7.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -3834,7 +3856,7 @@ __pyx_t_54 = __pyx_v_i;
     __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
     __PYX_XDEC_MEMVIEW(&__pyx_t_22, 1);
 
-    /* "bmtools/exact/variational.pyx":179
+    /* "bmtools/exact/variational.pyx":180
  *         grads_wrt_biases_1[0][i] -= (
  *             kl_div_terms[0] * first_mom_1_terms[0][i])
  *         second_mom_1_terms[0][i, i] = 1.             # <<<<<<<<<<<<<<
@@ -3852,7 +3874,7 @@ __pyx_t_54 = __pyx_v_i;
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 179, __pyx_L1_error)
+        __PYX_ERR(0, 180, __pyx_L1_error)
     }
         __pyx_t_23.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -3870,7 +3892,7 @@ __pyx_t_55 = __pyx_v_i;
     *((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_t_23.data + __pyx_t_55 * __pyx_t_23.strides[0]) ) + __pyx_t_56 * __pyx_t_23.strides[1]) )) = 1.;
     __PYX_XDEC_MEMVIEW(&__pyx_t_23, 1);
 
-    /* "bmtools/exact/variational.pyx":180
+    /* "bmtools/exact/variational.pyx":181
  *             kl_div_terms[0] * first_mom_1_terms[0][i])
  *         second_mom_1_terms[0][i, i] = 1.
  *         grads_wrt_weights_1[0][i, i] = 0.             # <<<<<<<<<<<<<<
@@ -3888,7 +3910,7 @@ __pyx_t_55 = __pyx_v_i;
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 180, __pyx_L1_error)
+        __PYX_ERR(0, 181, __pyx_L1_error)
     }
         __pyx_t_23.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -3906,7 +3928,7 @@ __pyx_t_57 = __pyx_v_i;
     *((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_t_23.data + __pyx_t_57 * __pyx_t_23.strides[0]) ) + __pyx_t_58 * __pyx_t_23.strides[1]) )) = 0.;
     __PYX_XDEC_MEMVIEW(&__pyx_t_23, 1);
 
-    /* "bmtools/exact/variational.pyx":181
+    /* "bmtools/exact/variational.pyx":182
  *         second_mom_1_terms[0][i, i] = 1.
  *         grads_wrt_weights_1[0][i, i] = 0.
  *         for j in range(i):             # <<<<<<<<<<<<<<
@@ -3917,7 +3939,7 @@ __pyx_t_57 = __pyx_v_i;
     for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_14; __pyx_t_11+=1) {
       __pyx_v_j = __pyx_t_11;
 
-      /* "bmtools/exact/variational.pyx":182
+      /* "bmtools/exact/variational.pyx":183
  *         grads_wrt_weights_1[0][i, i] = 0.
  *         for j in range(i):
  *             second_mom_1_terms[0][i, j] /= norm_const_1_terms[0]             # <<<<<<<<<<<<<<
@@ -3936,7 +3958,7 @@ __pyx_t_57 = __pyx_v_i;
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 182, __pyx_L1_error)
+        __PYX_ERR(0, 183, __pyx_L1_error)
     }
         __pyx_t_23.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -3954,7 +3976,7 @@ __pyx_t_60 = __pyx_v_i;
       *((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_t_23.data + __pyx_t_60 * __pyx_t_23.strides[0]) ) + __pyx_t_61 * __pyx_t_23.strides[1]) )) /= (*((double *) ( /* dim=0 */ (__pyx_v_norm_const_1_terms.data + __pyx_t_59 * __pyx_v_norm_const_1_terms.strides[0]) )));
       __PYX_XDEC_MEMVIEW(&__pyx_t_23, 1);
 
-      /* "bmtools/exact/variational.pyx":183
+      /* "bmtools/exact/variational.pyx":184
  *         for j in range(i):
  *             second_mom_1_terms[0][i, j] /= norm_const_1_terms[0]
  *             second_mom_1_terms[0][j, i] = second_mom_1_terms[0][i, j]             # <<<<<<<<<<<<<<
@@ -3972,7 +3994,7 @@ __pyx_t_60 = __pyx_v_i;
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 183, __pyx_L1_error)
+        __PYX_ERR(0, 184, __pyx_L1_error)
     }
         __pyx_t_23.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -3998,7 +4020,7 @@ __pyx_t_62 = __pyx_v_i;
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 183, __pyx_L1_error)
+        __PYX_ERR(0, 184, __pyx_L1_error)
     }
         __pyx_t_8.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -4017,7 +4039,7 @@ __pyx_t_64 = __pyx_v_j;
       __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
       __PYX_XDEC_MEMVIEW(&__pyx_t_23, 1);
 
-      /* "bmtools/exact/variational.pyx":184
+      /* "bmtools/exact/variational.pyx":185
  *             second_mom_1_terms[0][i, j] /= norm_const_1_terms[0]
  *             second_mom_1_terms[0][j, i] = second_mom_1_terms[0][i, j]
  *             grads_wrt_weights_1[0][i, j] /= norm_const_1_terms[0]             # <<<<<<<<<<<<<<
@@ -4036,7 +4058,7 @@ __pyx_t_64 = __pyx_v_j;
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 184, __pyx_L1_error)
+        __PYX_ERR(0, 185, __pyx_L1_error)
     }
         __pyx_t_23.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -4054,7 +4076,7 @@ __pyx_t_67 = __pyx_v_i;
       *((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_t_23.data + __pyx_t_67 * __pyx_t_23.strides[0]) ) + __pyx_t_68 * __pyx_t_23.strides[1]) )) /= (*((double *) ( /* dim=0 */ (__pyx_v_norm_const_1_terms.data + __pyx_t_66 * __pyx_v_norm_const_1_terms.strides[0]) )));
       __PYX_XDEC_MEMVIEW(&__pyx_t_23, 1);
 
-      /* "bmtools/exact/variational.pyx":186
+      /* "bmtools/exact/variational.pyx":187
  *             grads_wrt_weights_1[0][i, j] /= norm_const_1_terms[0]
  *             grads_wrt_weights_1[0][i, j] -= (
  *                 kl_div_terms[0] * second_mom_1_terms[0][i, j]             # <<<<<<<<<<<<<<
@@ -4073,7 +4095,7 @@ __pyx_t_67 = __pyx_v_i;
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 186, __pyx_L1_error)
+        __PYX_ERR(0, 187, __pyx_L1_error)
     }
         __pyx_t_23.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -4089,7 +4111,7 @@ __pyx_t_23.strides[1] = __pyx_v_second_mom_1_terms.strides[2];
 __pyx_t_70 = __pyx_v_i;
       __pyx_t_71 = __pyx_v_j;
 
-      /* "bmtools/exact/variational.pyx":185
+      /* "bmtools/exact/variational.pyx":186
  *             second_mom_1_terms[0][j, i] = second_mom_1_terms[0][i, j]
  *             grads_wrt_weights_1[0][i, j] /= norm_const_1_terms[0]
  *             grads_wrt_weights_1[0][i, j] -= (             # <<<<<<<<<<<<<<
@@ -4107,7 +4129,7 @@ __pyx_t_70 = __pyx_v_i;
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 185, __pyx_L1_error)
+        __PYX_ERR(0, 186, __pyx_L1_error)
     }
         __pyx_t_8.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -4126,7 +4148,7 @@ __pyx_t_72 = __pyx_v_i;
       __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
       __PYX_XDEC_MEMVIEW(&__pyx_t_23, 1);
 
-      /* "bmtools/exact/variational.pyx":188
+      /* "bmtools/exact/variational.pyx":189
  *                 kl_div_terms[0] * second_mom_1_terms[0][i, j]
  *             )
  *             grads_wrt_weights_1[0][j, i] = grads_wrt_weights_1[0][i, j]             # <<<<<<<<<<<<<<
@@ -4144,7 +4166,7 @@ __pyx_t_72 = __pyx_v_i;
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 188, __pyx_L1_error)
+        __PYX_ERR(0, 189, __pyx_L1_error)
     }
         __pyx_t_23.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -4170,7 +4192,7 @@ __pyx_t_74 = __pyx_v_i;
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 188, __pyx_L1_error)
+        __PYX_ERR(0, 189, __pyx_L1_error)
     }
         __pyx_t_8.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -4191,7 +4213,7 @@ __pyx_t_76 = __pyx_v_j;
     }
   }
 
-  /* "bmtools/exact/variational.pyx":189
+  /* "bmtools/exact/variational.pyx":190
  *             )
  *             grads_wrt_weights_1[0][j, i] = grads_wrt_weights_1[0][i, j]
  *     cdef double log_norm_const_1 = log(norm_const_1_terms[0])             # <<<<<<<<<<<<<<
@@ -4201,7 +4223,7 @@ __pyx_t_76 = __pyx_v_j;
   __pyx_t_78 = 0;
   __pyx_v_log_norm_const_1 = log((*((double *) ( /* dim=0 */ (__pyx_v_norm_const_1_terms.data + __pyx_t_78 * __pyx_v_norm_const_1_terms.strides[0]) ))));
 
-  /* "bmtools/exact/variational.pyx":190
+  /* "bmtools/exact/variational.pyx":191
  *             grads_wrt_weights_1[0][j, i] = grads_wrt_weights_1[0][i, j]
  *     cdef double log_norm_const_1 = log(norm_const_1_terms[0])
  *     cdef double log_norm_const_2 = log(norm_const_2_terms[0])             # <<<<<<<<<<<<<<
@@ -4211,7 +4233,7 @@ __pyx_t_76 = __pyx_v_j;
   __pyx_t_79 = 0;
   __pyx_v_log_norm_const_2 = log((*((double *) ( /* dim=0 */ (__pyx_v_norm_const_2_terms.data + __pyx_t_79 * __pyx_v_norm_const_2_terms.strides[0]) ))));
 
-  /* "bmtools/exact/variational.pyx":191
+  /* "bmtools/exact/variational.pyx":192
  *     cdef double log_norm_const_1 = log(norm_const_1_terms[0])
  *     cdef double log_norm_const_2 = log(norm_const_2_terms[0])
  *     kl_div_terms[0] += log_norm_const_2 - log_norm_const_1             # <<<<<<<<<<<<<<
@@ -4221,7 +4243,7 @@ __pyx_t_76 = __pyx_v_j;
   __pyx_t_80 = 0;
   *((double *) ( /* dim=0 */ (__pyx_v_kl_div_terms.data + __pyx_t_80 * __pyx_v_kl_div_terms.strides[0]) )) += (__pyx_v_log_norm_const_2 - __pyx_v_log_norm_const_1);
 
-  /* "bmtools/exact/variational.pyx":192
+  /* "bmtools/exact/variational.pyx":193
  *     cdef double log_norm_const_2 = log(norm_const_2_terms[0])
  *     kl_div_terms[0] += log_norm_const_2 - log_norm_const_1
  *     return (             # <<<<<<<<<<<<<<
@@ -4230,7 +4252,7 @@ __pyx_t_76 = __pyx_v_j;
  */
   __Pyx_XDECREF(__pyx_r);
 
-  /* "bmtools/exact/variational.pyx":193
+  /* "bmtools/exact/variational.pyx":194
  *     kl_div_terms[0] += log_norm_const_2 - log_norm_const_1
  *     return (
  *         kl_div_terms[0], log_norm_const_1, log_norm_const_2,             # <<<<<<<<<<<<<<
@@ -4238,14 +4260,14 @@ __pyx_t_76 = __pyx_v_j;
  *         first_mom_1_terms[0], second_mom_1_terms[0]
  */
   __pyx_t_81 = 0;
-  __pyx_t_5 = PyFloat_FromDouble((*((double *) ( /* dim=0 */ (__pyx_v_kl_div_terms.data + __pyx_t_81 * __pyx_v_kl_div_terms.strides[0]) )))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 193, __pyx_L1_error)
+  __pyx_t_5 = PyFloat_FromDouble((*((double *) ( /* dim=0 */ (__pyx_v_kl_div_terms.data + __pyx_t_81 * __pyx_v_kl_div_terms.strides[0]) )))); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 194, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_4 = PyFloat_FromDouble(__pyx_v_log_norm_const_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 193, __pyx_L1_error)
+  __pyx_t_4 = PyFloat_FromDouble(__pyx_v_log_norm_const_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 194, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_log_norm_const_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 193, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_log_norm_const_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 194, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
 
-  /* "bmtools/exact/variational.pyx":194
+  /* "bmtools/exact/variational.pyx":195
  *     return (
  *         kl_div_terms[0], log_norm_const_1, log_norm_const_2,
  *         grads_wrt_biases_1[0], grads_wrt_weights_1[0],             # <<<<<<<<<<<<<<
@@ -4263,7 +4285,7 @@ __pyx_t_76 = __pyx_v_j;
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 194, __pyx_L1_error)
+        __PYX_ERR(0, 195, __pyx_L1_error)
     }
         __pyx_t_22.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -4272,7 +4294,7 @@ __pyx_t_22.shape[0] = __pyx_v_grads_wrt_biases_1.shape[1];
 __pyx_t_22.strides[0] = __pyx_v_grads_wrt_biases_1.strides[1];
     __pyx_t_22.suboffsets[0] = -1;
 
-__pyx_t_2 = __pyx_memoryview_fromslice(__pyx_t_22, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 194, __pyx_L1_error)
+__pyx_t_2 = __pyx_memoryview_fromslice(__pyx_t_22, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 195, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __PYX_XDEC_MEMVIEW(&__pyx_t_22, 1);
   __pyx_t_23.data = __pyx_v_grads_wrt_weights_1.data;
@@ -4286,7 +4308,7 @@ __pyx_t_2 = __pyx_memoryview_fromslice(__pyx_t_22, 1, (PyObject *(*)(char *)) __
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 194, __pyx_L1_error)
+        __PYX_ERR(0, 195, __pyx_L1_error)
     }
         __pyx_t_23.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -4299,11 +4321,11 @@ __pyx_t_23.shape[1] = __pyx_v_grads_wrt_weights_1.shape[2];
 __pyx_t_23.strides[1] = __pyx_v_grads_wrt_weights_1.strides[2];
     __pyx_t_23.suboffsets[1] = -1;
 
-__pyx_t_9 = __pyx_memoryview_fromslice(__pyx_t_23, 2, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 194, __pyx_L1_error)
+__pyx_t_9 = __pyx_memoryview_fromslice(__pyx_t_23, 2, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 195, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __PYX_XDEC_MEMVIEW(&__pyx_t_23, 1);
 
-  /* "bmtools/exact/variational.pyx":195
+  /* "bmtools/exact/variational.pyx":196
  *         kl_div_terms[0], log_norm_const_1, log_norm_const_2,
  *         grads_wrt_biases_1[0], grads_wrt_weights_1[0],
  *         first_mom_1_terms[0], second_mom_1_terms[0]             # <<<<<<<<<<<<<<
@@ -4321,7 +4343,7 @@ __pyx_t_9 = __pyx_memoryview_fromslice(__pyx_t_23, 2, (PyObject *(*)(char *)) __
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 195, __pyx_L1_error)
+        __PYX_ERR(0, 196, __pyx_L1_error)
     }
         __pyx_t_22.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -4330,7 +4352,7 @@ __pyx_t_22.shape[0] = __pyx_v_first_mom_1_terms.shape[1];
 __pyx_t_22.strides[0] = __pyx_v_first_mom_1_terms.strides[1];
     __pyx_t_22.suboffsets[0] = -1;
 
-__pyx_t_82 = __pyx_memoryview_fromslice(__pyx_t_22, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_82)) __PYX_ERR(0, 195, __pyx_L1_error)
+__pyx_t_82 = __pyx_memoryview_fromslice(__pyx_t_22, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_82)) __PYX_ERR(0, 196, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_82);
   __PYX_XDEC_MEMVIEW(&__pyx_t_22, 1);
   __pyx_t_23.data = __pyx_v_second_mom_1_terms.data;
@@ -4344,7 +4366,7 @@ __pyx_t_82 = __pyx_memoryview_fromslice(__pyx_t_22, 1, (PyObject *(*)(char *)) _
         __pyx_tmp_idx += __pyx_tmp_shape;
     if (0 && (__pyx_tmp_idx < 0 || __pyx_tmp_idx >= __pyx_tmp_shape)) {
         PyErr_SetString(PyExc_IndexError, "Index out of bounds (axis 0)");
-        __PYX_ERR(0, 195, __pyx_L1_error)
+        __PYX_ERR(0, 196, __pyx_L1_error)
     }
         __pyx_t_23.data += __pyx_tmp_idx * __pyx_tmp_stride;
 }
@@ -4357,18 +4379,18 @@ __pyx_t_23.shape[1] = __pyx_v_second_mom_1_terms.shape[2];
 __pyx_t_23.strides[1] = __pyx_v_second_mom_1_terms.strides[2];
     __pyx_t_23.suboffsets[1] = -1;
 
-__pyx_t_83 = __pyx_memoryview_fromslice(__pyx_t_23, 2, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_83)) __PYX_ERR(0, 195, __pyx_L1_error)
+__pyx_t_83 = __pyx_memoryview_fromslice(__pyx_t_23, 2, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_83)) __PYX_ERR(0, 196, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_83);
   __PYX_XDEC_MEMVIEW(&__pyx_t_23, 1);
 
-  /* "bmtools/exact/variational.pyx":193
+  /* "bmtools/exact/variational.pyx":194
  *     kl_div_terms[0] += log_norm_const_2 - log_norm_const_1
  *     return (
  *         kl_div_terms[0], log_norm_const_1, log_norm_const_2,             # <<<<<<<<<<<<<<
  *         grads_wrt_biases_1[0], grads_wrt_weights_1[0],
  *         first_mom_1_terms[0], second_mom_1_terms[0]
  */
-  __pyx_t_84 = PyTuple_New(7); if (unlikely(!__pyx_t_84)) __PYX_ERR(0, 193, __pyx_L1_error)
+  __pyx_t_84 = PyTuple_New(7); if (unlikely(!__pyx_t_84)) __PYX_ERR(0, 194, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_84);
   __Pyx_GIVEREF(__pyx_t_5);
   PyTuple_SET_ITEM(__pyx_t_84, 0, __pyx_t_5);
@@ -4395,7 +4417,7 @@ __pyx_t_83 = __pyx_memoryview_fromslice(__pyx_t_23, 2, (PyObject *(*)(char *)) _
   __pyx_t_84 = 0;
   goto __pyx_L0;
 
-  /* "bmtools/exact/variational.pyx":96
+  /* "bmtools/exact/variational.pyx":97
  * 
  * 
  * def kl_divergence_and_gradients(             # <<<<<<<<<<<<<<
@@ -4442,7 +4464,7 @@ __pyx_t_83 = __pyx_memoryview_fromslice(__pyx_t_23, 2, (PyObject *(*)(char *)) _
   return __pyx_r;
 }
 
-/* "bmtools/exact/variational.pyx":199
+/* "bmtools/exact/variational.pyx":200
  * 
  * 
  * cdef void accum_kl_terms_for_state_range(             # <<<<<<<<<<<<<<
@@ -4460,16 +4482,16 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_terms_for_state_range
   int __pyx_t_2;
   long __pyx_t_3;
 
-  /* "bmtools/exact/variational.pyx":208
+  /* "bmtools/exact/variational.pyx":209
  *     cdef int index_offset
  *     cdef double neg_energy_1, neg_energy_2, unrm_prob_1, unrm_prob_2
  *     index_to_state(start_state_index, state)             # <<<<<<<<<<<<<<
  *     for index_offset in range(end_state_index - start_state_index):
  *         neg_energy_1 = neg_energy(state, weights_1, biases_1)
  */
-  __pyx_f_7bmtools_5exact_7helpers_index_to_state(__pyx_v_start_state_index, __pyx_v_state);
+  __pyx_f_7bmtools_5exact_7helpers_index_to_state(__pyx_v_start_state_index, __pyx_v_state, 0);
 
-  /* "bmtools/exact/variational.pyx":209
+  /* "bmtools/exact/variational.pyx":210
  *     cdef double neg_energy_1, neg_energy_2, unrm_prob_1, unrm_prob_2
  *     index_to_state(start_state_index, state)
  *     for index_offset in range(end_state_index - start_state_index):             # <<<<<<<<<<<<<<
@@ -4480,7 +4502,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_terms_for_state_range
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_index_offset = __pyx_t_2;
 
-    /* "bmtools/exact/variational.pyx":210
+    /* "bmtools/exact/variational.pyx":211
  *     index_to_state(start_state_index, state)
  *     for index_offset in range(end_state_index - start_state_index):
  *         neg_energy_1 = neg_energy(state, weights_1, biases_1)             # <<<<<<<<<<<<<<
@@ -4489,7 +4511,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_terms_for_state_range
  */
     __pyx_v_neg_energy_1 = __pyx_f_7bmtools_5exact_7helpers_neg_energy(__pyx_v_state, __pyx_v_weights_1, __pyx_v_biases_1);
 
-    /* "bmtools/exact/variational.pyx":211
+    /* "bmtools/exact/variational.pyx":212
  *     for index_offset in range(end_state_index - start_state_index):
  *         neg_energy_1 = neg_energy(state, weights_1, biases_1)
  *         neg_energy_2 = neg_energy(state, weights_2, biases_2)             # <<<<<<<<<<<<<<
@@ -4498,7 +4520,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_terms_for_state_range
  */
     __pyx_v_neg_energy_2 = __pyx_f_7bmtools_5exact_7helpers_neg_energy(__pyx_v_state, __pyx_v_weights_2, __pyx_v_biases_2);
 
-    /* "bmtools/exact/variational.pyx":212
+    /* "bmtools/exact/variational.pyx":213
  *         neg_energy_1 = neg_energy(state, weights_1, biases_1)
  *         neg_energy_2 = neg_energy(state, weights_2, biases_2)
  *         unrm_prob_1 = exp(neg_energy_1)             # <<<<<<<<<<<<<<
@@ -4507,7 +4529,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_terms_for_state_range
  */
     __pyx_v_unrm_prob_1 = exp(__pyx_v_neg_energy_1);
 
-    /* "bmtools/exact/variational.pyx":213
+    /* "bmtools/exact/variational.pyx":214
  *         neg_energy_2 = neg_energy(state, weights_2, biases_2)
  *         unrm_prob_1 = exp(neg_energy_1)
  *         unrm_prob_2 = exp(neg_energy_2)             # <<<<<<<<<<<<<<
@@ -4516,7 +4538,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_terms_for_state_range
  */
     __pyx_v_unrm_prob_2 = exp(__pyx_v_neg_energy_2);
 
-    /* "bmtools/exact/variational.pyx":214
+    /* "bmtools/exact/variational.pyx":215
  *         unrm_prob_1 = exp(neg_energy_1)
  *         unrm_prob_2 = exp(neg_energy_2)
  *         norm_const_1_term[0] += unrm_prob_1             # <<<<<<<<<<<<<<
@@ -4526,7 +4548,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_terms_for_state_range
     __pyx_t_3 = 0;
     (__pyx_v_norm_const_1_term[__pyx_t_3]) = ((__pyx_v_norm_const_1_term[__pyx_t_3]) + __pyx_v_unrm_prob_1);
 
-    /* "bmtools/exact/variational.pyx":215
+    /* "bmtools/exact/variational.pyx":216
  *         unrm_prob_2 = exp(neg_energy_2)
  *         norm_const_1_term[0] += unrm_prob_1
  *         norm_const_2_term[0] += unrm_prob_2             # <<<<<<<<<<<<<<
@@ -4536,7 +4558,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_terms_for_state_range
     __pyx_t_3 = 0;
     (__pyx_v_norm_const_2_term[__pyx_t_3]) = ((__pyx_v_norm_const_2_term[__pyx_t_3]) + __pyx_v_unrm_prob_2);
 
-    /* "bmtools/exact/variational.pyx":216
+    /* "bmtools/exact/variational.pyx":217
  *         norm_const_1_term[0] += unrm_prob_1
  *         norm_const_2_term[0] += unrm_prob_2
  *         kl_div_term[0] += unrm_prob_1 * (neg_energy_1 - neg_energy_2)             # <<<<<<<<<<<<<<
@@ -4546,7 +4568,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_terms_for_state_range
     __pyx_t_3 = 0;
     (__pyx_v_kl_div_term[__pyx_t_3]) = ((__pyx_v_kl_div_term[__pyx_t_3]) + (__pyx_v_unrm_prob_1 * (__pyx_v_neg_energy_1 - __pyx_v_neg_energy_2)));
 
-    /* "bmtools/exact/variational.pyx":217
+    /* "bmtools/exact/variational.pyx":218
  *         norm_const_2_term[0] += unrm_prob_2
  *         kl_div_term[0] += unrm_prob_1 * (neg_energy_1 - neg_energy_2)
  *         next_state(state, start_state_index + index_offset + 1)             # <<<<<<<<<<<<<<
@@ -4556,7 +4578,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_terms_for_state_range
     __pyx_f_7bmtools_5exact_7helpers_next_state(__pyx_v_state, ((__pyx_v_start_state_index + __pyx_v_index_offset) + 1));
   }
 
-  /* "bmtools/exact/variational.pyx":199
+  /* "bmtools/exact/variational.pyx":200
  * 
  * 
  * cdef void accum_kl_terms_for_state_range(             # <<<<<<<<<<<<<<
@@ -4567,7 +4589,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_terms_for_state_range
   /* function exit code */
 }
 
-/* "bmtools/exact/variational.pyx":220
+/* "bmtools/exact/variational.pyx":221
  * 
  * 
  * cdef void accum_kl_and_grad_terms_for_state_range(             # <<<<<<<<<<<<<<
@@ -4609,16 +4631,16 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_and_grad_terms_for_st
   Py_ssize_t __pyx_t_24;
   Py_ssize_t __pyx_t_25;
 
-  /* "bmtools/exact/variational.pyx":231
+  /* "bmtools/exact/variational.pyx":232
  *     cdef int i, j, index_offset
  *     cdef double neg_energy_1, neg_energy_2, unrm_prob_1, unrm_prob_2
  *     index_to_state(start_state_index, state)             # <<<<<<<<<<<<<<
  *     # Initialise terms to zero
  *     for i in range(state.shape[0]):
  */
-  __pyx_f_7bmtools_5exact_7helpers_index_to_state(__pyx_v_start_state_index, __pyx_v_state);
+  __pyx_f_7bmtools_5exact_7helpers_index_to_state(__pyx_v_start_state_index, __pyx_v_state, 0);
 
-  /* "bmtools/exact/variational.pyx":233
+  /* "bmtools/exact/variational.pyx":234
  *     index_to_state(start_state_index, state)
  *     # Initialise terms to zero
  *     for i in range(state.shape[0]):             # <<<<<<<<<<<<<<
@@ -4629,7 +4651,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_and_grad_terms_for_st
   for (__pyx_t_2 = 0; __pyx_t_2 < __pyx_t_1; __pyx_t_2+=1) {
     __pyx_v_i = __pyx_t_2;
 
-    /* "bmtools/exact/variational.pyx":234
+    /* "bmtools/exact/variational.pyx":235
  *     # Initialise terms to zero
  *     for i in range(state.shape[0]):
  *         first_mom_1[i] = 0.             # <<<<<<<<<<<<<<
@@ -4639,7 +4661,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_and_grad_terms_for_st
     __pyx_t_3 = __pyx_v_i;
     *((double *) ( /* dim=0 */ (__pyx_v_first_mom_1.data + __pyx_t_3 * __pyx_v_first_mom_1.strides[0]) )) = 0.;
 
-    /* "bmtools/exact/variational.pyx":235
+    /* "bmtools/exact/variational.pyx":236
  *     for i in range(state.shape[0]):
  *         first_mom_1[i] = 0.
  *         grads_wrt_biases_1[i] = 0.             # <<<<<<<<<<<<<<
@@ -4649,7 +4671,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_and_grad_terms_for_st
     __pyx_t_4 = __pyx_v_i;
     *((double *) ( /* dim=0 */ (__pyx_v_grads_wrt_biases_1.data + __pyx_t_4 * __pyx_v_grads_wrt_biases_1.strides[0]) )) = 0.;
 
-    /* "bmtools/exact/variational.pyx":236
+    /* "bmtools/exact/variational.pyx":237
  *         first_mom_1[i] = 0.
  *         grads_wrt_biases_1[i] = 0.
  *         for j in range(i):             # <<<<<<<<<<<<<<
@@ -4660,7 +4682,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_and_grad_terms_for_st
     for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
       __pyx_v_j = __pyx_t_6;
 
-      /* "bmtools/exact/variational.pyx":237
+      /* "bmtools/exact/variational.pyx":238
  *         grads_wrt_biases_1[i] = 0.
  *         for j in range(i):
  *             second_mom_1[i, j] = 0.             # <<<<<<<<<<<<<<
@@ -4671,7 +4693,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_and_grad_terms_for_st
       __pyx_t_8 = __pyx_v_j;
       *((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_second_mom_1.data + __pyx_t_7 * __pyx_v_second_mom_1.strides[0]) ) + __pyx_t_8 * __pyx_v_second_mom_1.strides[1]) )) = 0.;
 
-      /* "bmtools/exact/variational.pyx":238
+      /* "bmtools/exact/variational.pyx":239
  *         for j in range(i):
  *             second_mom_1[i, j] = 0.
  *             grads_wrt_weights_1[i, j] = 0.             # <<<<<<<<<<<<<<
@@ -4684,7 +4706,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_and_grad_terms_for_st
     }
   }
 
-  /* "bmtools/exact/variational.pyx":240
+  /* "bmtools/exact/variational.pyx":241
  *             grads_wrt_weights_1[i, j] = 0.
  *     # Accumulate expectation terms
  *     for index_offset in range(end_state_index - start_state_index):             # <<<<<<<<<<<<<<
@@ -4695,7 +4717,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_and_grad_terms_for_st
   for (__pyx_t_5 = 0; __pyx_t_5 < __pyx_t_2; __pyx_t_5+=1) {
     __pyx_v_index_offset = __pyx_t_5;
 
-    /* "bmtools/exact/variational.pyx":241
+    /* "bmtools/exact/variational.pyx":242
  *     # Accumulate expectation terms
  *     for index_offset in range(end_state_index - start_state_index):
  *         neg_energy_1 = neg_energy(state, weights_1, biases_1)             # <<<<<<<<<<<<<<
@@ -4704,7 +4726,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_and_grad_terms_for_st
  */
     __pyx_v_neg_energy_1 = __pyx_f_7bmtools_5exact_7helpers_neg_energy(__pyx_v_state, __pyx_v_weights_1, __pyx_v_biases_1);
 
-    /* "bmtools/exact/variational.pyx":242
+    /* "bmtools/exact/variational.pyx":243
  *     for index_offset in range(end_state_index - start_state_index):
  *         neg_energy_1 = neg_energy(state, weights_1, biases_1)
  *         neg_energy_2 = neg_energy(state, weights_2, biases_2)             # <<<<<<<<<<<<<<
@@ -4713,7 +4735,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_and_grad_terms_for_st
  */
     __pyx_v_neg_energy_2 = __pyx_f_7bmtools_5exact_7helpers_neg_energy(__pyx_v_state, __pyx_v_weights_2, __pyx_v_biases_2);
 
-    /* "bmtools/exact/variational.pyx":243
+    /* "bmtools/exact/variational.pyx":244
  *         neg_energy_1 = neg_energy(state, weights_1, biases_1)
  *         neg_energy_2 = neg_energy(state, weights_2, biases_2)
  *         unrm_prob_1 = exp(neg_energy_1)             # <<<<<<<<<<<<<<
@@ -4722,7 +4744,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_and_grad_terms_for_st
  */
     __pyx_v_unrm_prob_1 = exp(__pyx_v_neg_energy_1);
 
-    /* "bmtools/exact/variational.pyx":244
+    /* "bmtools/exact/variational.pyx":245
  *         neg_energy_2 = neg_energy(state, weights_2, biases_2)
  *         unrm_prob_1 = exp(neg_energy_1)
  *         unrm_prob_2 = exp(neg_energy_2)             # <<<<<<<<<<<<<<
@@ -4731,7 +4753,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_and_grad_terms_for_st
  */
     __pyx_v_unrm_prob_2 = exp(__pyx_v_neg_energy_2);
 
-    /* "bmtools/exact/variational.pyx":245
+    /* "bmtools/exact/variational.pyx":246
  *         unrm_prob_1 = exp(neg_energy_1)
  *         unrm_prob_2 = exp(neg_energy_2)
  *         norm_const_1_term[0] += unrm_prob_1             # <<<<<<<<<<<<<<
@@ -4741,7 +4763,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_and_grad_terms_for_st
     __pyx_t_11 = 0;
     (__pyx_v_norm_const_1_term[__pyx_t_11]) = ((__pyx_v_norm_const_1_term[__pyx_t_11]) + __pyx_v_unrm_prob_1);
 
-    /* "bmtools/exact/variational.pyx":246
+    /* "bmtools/exact/variational.pyx":247
  *         unrm_prob_2 = exp(neg_energy_2)
  *         norm_const_1_term[0] += unrm_prob_1
  *         norm_const_2_term[0] += unrm_prob_2             # <<<<<<<<<<<<<<
@@ -4751,7 +4773,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_and_grad_terms_for_st
     __pyx_t_11 = 0;
     (__pyx_v_norm_const_2_term[__pyx_t_11]) = ((__pyx_v_norm_const_2_term[__pyx_t_11]) + __pyx_v_unrm_prob_2);
 
-    /* "bmtools/exact/variational.pyx":247
+    /* "bmtools/exact/variational.pyx":248
  *         norm_const_1_term[0] += unrm_prob_1
  *         norm_const_2_term[0] += unrm_prob_2
  *         kl_div_term[0] += unrm_prob_1 * (neg_energy_1 - neg_energy_2)             # <<<<<<<<<<<<<<
@@ -4761,7 +4783,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_and_grad_terms_for_st
     __pyx_t_11 = 0;
     (__pyx_v_kl_div_term[__pyx_t_11]) = ((__pyx_v_kl_div_term[__pyx_t_11]) + (__pyx_v_unrm_prob_1 * (__pyx_v_neg_energy_1 - __pyx_v_neg_energy_2)));
 
-    /* "bmtools/exact/variational.pyx":248
+    /* "bmtools/exact/variational.pyx":249
  *         norm_const_2_term[0] += unrm_prob_2
  *         kl_div_term[0] += unrm_prob_1 * (neg_energy_1 - neg_energy_2)
  *         for i in range(state.shape[0]):             # <<<<<<<<<<<<<<
@@ -4772,7 +4794,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_and_grad_terms_for_st
     for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_1; __pyx_t_6+=1) {
       __pyx_v_i = __pyx_t_6;
 
-      /* "bmtools/exact/variational.pyx":249
+      /* "bmtools/exact/variational.pyx":250
  *         kl_div_term[0] += unrm_prob_1 * (neg_energy_1 - neg_energy_2)
  *         for i in range(state.shape[0]):
  *             first_mom_1[i] += unrm_prob_1 * state[i]             # <<<<<<<<<<<<<<
@@ -4783,7 +4805,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_and_grad_terms_for_st
       __pyx_t_13 = __pyx_v_i;
       *((double *) ( /* dim=0 */ (__pyx_v_first_mom_1.data + __pyx_t_13 * __pyx_v_first_mom_1.strides[0]) )) += (__pyx_v_unrm_prob_1 * (*((__pyx_t_7bmtools_5exact_7helpers_state_t *) ( /* dim=0 */ (__pyx_v_state.data + __pyx_t_12 * __pyx_v_state.strides[0]) ))));
 
-      /* "bmtools/exact/variational.pyx":251
+      /* "bmtools/exact/variational.pyx":252
  *             first_mom_1[i] += unrm_prob_1 * state[i]
  *             grads_wrt_biases_1[i] += (
  *                 unrm_prob_1 * (neg_energy_1 - neg_energy_2) * state[i])             # <<<<<<<<<<<<<<
@@ -4792,7 +4814,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_and_grad_terms_for_st
  */
       __pyx_t_14 = __pyx_v_i;
 
-      /* "bmtools/exact/variational.pyx":250
+      /* "bmtools/exact/variational.pyx":251
  *         for i in range(state.shape[0]):
  *             first_mom_1[i] += unrm_prob_1 * state[i]
  *             grads_wrt_biases_1[i] += (             # <<<<<<<<<<<<<<
@@ -4802,7 +4824,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_and_grad_terms_for_st
       __pyx_t_15 = __pyx_v_i;
       *((double *) ( /* dim=0 */ (__pyx_v_grads_wrt_biases_1.data + __pyx_t_15 * __pyx_v_grads_wrt_biases_1.strides[0]) )) += ((__pyx_v_unrm_prob_1 * (__pyx_v_neg_energy_1 - __pyx_v_neg_energy_2)) * (*((__pyx_t_7bmtools_5exact_7helpers_state_t *) ( /* dim=0 */ (__pyx_v_state.data + __pyx_t_14 * __pyx_v_state.strides[0]) ))));
 
-      /* "bmtools/exact/variational.pyx":252
+      /* "bmtools/exact/variational.pyx":253
  *             grads_wrt_biases_1[i] += (
  *                 unrm_prob_1 * (neg_energy_1 - neg_energy_2) * state[i])
  *             for j in range(i):             # <<<<<<<<<<<<<<
@@ -4813,7 +4835,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_and_grad_terms_for_st
       for (__pyx_t_17 = 0; __pyx_t_17 < __pyx_t_16; __pyx_t_17+=1) {
         __pyx_v_j = __pyx_t_17;
 
-        /* "bmtools/exact/variational.pyx":253
+        /* "bmtools/exact/variational.pyx":254
  *                 unrm_prob_1 * (neg_energy_1 - neg_energy_2) * state[i])
  *             for j in range(i):
  *                 second_mom_1[i, j] += unrm_prob_1 * state[i] * state[j]             # <<<<<<<<<<<<<<
@@ -4826,7 +4848,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_and_grad_terms_for_st
         __pyx_t_21 = __pyx_v_j;
         *((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_second_mom_1.data + __pyx_t_20 * __pyx_v_second_mom_1.strides[0]) ) + __pyx_t_21 * __pyx_v_second_mom_1.strides[1]) )) += ((__pyx_v_unrm_prob_1 * (*((__pyx_t_7bmtools_5exact_7helpers_state_t *) ( /* dim=0 */ (__pyx_v_state.data + __pyx_t_18 * __pyx_v_state.strides[0]) )))) * (*((__pyx_t_7bmtools_5exact_7helpers_state_t *) ( /* dim=0 */ (__pyx_v_state.data + __pyx_t_19 * __pyx_v_state.strides[0]) ))));
 
-        /* "bmtools/exact/variational.pyx":256
+        /* "bmtools/exact/variational.pyx":257
  *                 grads_wrt_weights_1[i, j] += (
  *                     unrm_prob_1 * (neg_energy_1 - neg_energy_2) *
  *                     state[i] * state[j]             # <<<<<<<<<<<<<<
@@ -4835,7 +4857,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_and_grad_terms_for_st
  */
         __pyx_t_22 = __pyx_v_i;
 
-        /* "bmtools/exact/variational.pyx":255
+        /* "bmtools/exact/variational.pyx":256
  *                 second_mom_1[i, j] += unrm_prob_1 * state[i] * state[j]
  *                 grads_wrt_weights_1[i, j] += (
  *                     unrm_prob_1 * (neg_energy_1 - neg_energy_2) *             # <<<<<<<<<<<<<<
@@ -4844,7 +4866,7 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_and_grad_terms_for_st
  */
         __pyx_t_23 = __pyx_v_j;
 
-        /* "bmtools/exact/variational.pyx":254
+        /* "bmtools/exact/variational.pyx":255
  *             for j in range(i):
  *                 second_mom_1[i, j] += unrm_prob_1 * state[i] * state[j]
  *                 grads_wrt_weights_1[i, j] += (             # <<<<<<<<<<<<<<
@@ -4857,15 +4879,17 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_and_grad_terms_for_st
       }
     }
 
-    /* "bmtools/exact/variational.pyx":258
+    /* "bmtools/exact/variational.pyx":259
  *                     state[i] * state[j]
  *                 )
  *         next_state(state, start_state_index + index_offset + 1)             # <<<<<<<<<<<<<<
+ * 
+ * 
  */
     __pyx_f_7bmtools_5exact_7helpers_next_state(__pyx_v_state, ((__pyx_v_start_state_index + __pyx_v_index_offset) + 1));
   }
 
-  /* "bmtools/exact/variational.pyx":220
+  /* "bmtools/exact/variational.pyx":221
  * 
  * 
  * cdef void accum_kl_and_grad_terms_for_state_range(             # <<<<<<<<<<<<<<
@@ -4874,6 +4898,449 @@ static void __pyx_f_7bmtools_5exact_11variational_accum_kl_and_grad_terms_for_st
  */
 
   /* function exit code */
+}
+
+/* "bmtools/exact/variational.pyx":262
+ * 
+ * 
+ * cdef double logistic_sigmoid(double x) nogil:             # <<<<<<<<<<<<<<
+ *     """Calculates the logistic sigmoid function."""
+ *     return 1. / (1. + exp(-x))
+ */
+
+static double __pyx_f_7bmtools_5exact_11variational_logistic_sigmoid(double __pyx_v_x) {
+  double __pyx_r;
+
+  /* "bmtools/exact/variational.pyx":264
+ * cdef double logistic_sigmoid(double x) nogil:
+ *     """Calculates the logistic sigmoid function."""
+ *     return 1. / (1. + exp(-x))             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __pyx_r = (1. / (1. + exp((-__pyx_v_x))));
+  goto __pyx_L0;
+
+  /* "bmtools/exact/variational.pyx":262
+ * 
+ * 
+ * cdef double logistic_sigmoid(double x) nogil:             # <<<<<<<<<<<<<<
+ *     """Calculates the logistic sigmoid function."""
+ *     return 1. / (1. + exp(-x))
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  return __pyx_r;
+}
+
+/* "bmtools/exact/variational.pyx":267
+ * 
+ * 
+ * def var_obj_and_grads_mean_field(             # <<<<<<<<<<<<<<
+ *         double[:] var_biases, double[:, :] weights, double[:] biases):
+ *     """Calculate mean-field variational objective and gradients.
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_7bmtools_5exact_11variational_5var_obj_and_grads_mean_field(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_7bmtools_5exact_11variational_4var_obj_and_grads_mean_field[] = "var_obj_and_grads_mean_field(__Pyx_memviewslice var_biases, __Pyx_memviewslice weights, __Pyx_memviewslice biases)\nCalculate mean-field variational objective and gradients.\n\n    Calculates the variational free-energy for a mean-field / full-factorised\n    variational approximation for a Boltzmann machine distribution and its\n    gradients with respect to the variational bias parameters. The form of the\n    approximating distribution is\n\n    ```\n    def var_approx_prob(s):\n        return prod(logistic_sigmoid(2 * s * var_biases))\n    ```\n\n    The variational free-energy corresponds to the KL divergence from the\n    target distribution to the approximating distribution minus the logarithm\n    of the normalising constant of the target distribution. As the KL\n    divergence is bounded from below by zero, the negative variational\n    objective is therefore a lower bound on the log normalisation constant of the target distribution with equality if and only if the target and\n    approximating distribution are equal across all states.\n\n    Args:\n        var_biases (double[:]): Parameters of approximate distribution.\n        weights (double[:, :]): Weight parameters of target distribution.\n        biases (double[:]): Bias parameters of target distribution.\n\n    Returns:\n        var_obj (double): Value of variational objective.\n        grads_wrt_var_biases (double[:]): Gradient of objective with respect\n            to variational bias parameters.\n        var_first_mom (double[:]): First moments of variational distribution.\n    ";
+static PyMethodDef __pyx_mdef_7bmtools_5exact_11variational_5var_obj_and_grads_mean_field = {"var_obj_and_grads_mean_field", (PyCFunction)__pyx_pw_7bmtools_5exact_11variational_5var_obj_and_grads_mean_field, METH_VARARGS|METH_KEYWORDS, __pyx_doc_7bmtools_5exact_11variational_4var_obj_and_grads_mean_field};
+static PyObject *__pyx_pw_7bmtools_5exact_11variational_5var_obj_and_grads_mean_field(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  __Pyx_memviewslice __pyx_v_var_biases = { 0, 0, { 0 }, { 0 }, { 0 } };
+  __Pyx_memviewslice __pyx_v_weights = { 0, 0, { 0 }, { 0 }, { 0 } };
+  __Pyx_memviewslice __pyx_v_biases = { 0, 0, { 0 }, { 0 }, { 0 } };
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("var_obj_and_grads_mean_field (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_var_biases,&__pyx_n_s_weights,&__pyx_n_s_biases,0};
+    PyObject* values[3] = {0,0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_var_biases)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        case  1:
+        if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_weights)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("var_obj_and_grads_mean_field", 1, 3, 3, 1); __PYX_ERR(0, 267, __pyx_L3_error)
+        }
+        case  2:
+        if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_biases)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("var_obj_and_grads_mean_field", 1, 3, 3, 2); __PYX_ERR(0, 267, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "var_obj_and_grads_mean_field") < 0)) __PYX_ERR(0, 267, __pyx_L3_error)
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+      values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+    }
+    __pyx_v_var_biases = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[0]); if (unlikely(!__pyx_v_var_biases.memview)) __PYX_ERR(0, 268, __pyx_L3_error)
+    __pyx_v_weights = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(values[1]); if (unlikely(!__pyx_v_weights.memview)) __PYX_ERR(0, 268, __pyx_L3_error)
+    __pyx_v_biases = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[2]); if (unlikely(!__pyx_v_biases.memview)) __PYX_ERR(0, 268, __pyx_L3_error)
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("var_obj_and_grads_mean_field", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 267, __pyx_L3_error)
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("bmtools.exact.variational.var_obj_and_grads_mean_field", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_7bmtools_5exact_11variational_4var_obj_and_grads_mean_field(__pyx_self, __pyx_v_var_biases, __pyx_v_weights, __pyx_v_biases);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_7bmtools_5exact_11variational_4var_obj_and_grads_mean_field(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_var_biases, __Pyx_memviewslice __pyx_v_weights, __Pyx_memviewslice __pyx_v_biases) {
+  int __pyx_v_num_units;
+  int __pyx_v_i;
+  int __pyx_v_j;
+  __Pyx_memviewslice __pyx_v_var_first_mom = { 0, 0, { 0 }, { 0 }, { 0 } };
+  __Pyx_memviewslice __pyx_v_grads_wrt_var_biases = { 0, 0, { 0 }, { 0 }, { 0 } };
+  double __pyx_v_var_obj;
+  double __pyx_v_prob_p_i;
+  double __pyx_v_prob_m_i;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  __Pyx_memviewslice __pyx_t_4 = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_t_5;
+  int __pyx_t_6;
+  Py_ssize_t __pyx_t_7;
+  Py_ssize_t __pyx_t_8;
+  Py_ssize_t __pyx_t_9;
+  int __pyx_t_10;
+  int __pyx_t_11;
+  Py_ssize_t __pyx_t_12;
+  Py_ssize_t __pyx_t_13;
+  Py_ssize_t __pyx_t_14;
+  Py_ssize_t __pyx_t_15;
+  Py_ssize_t __pyx_t_16;
+  Py_ssize_t __pyx_t_17;
+  Py_ssize_t __pyx_t_18;
+  Py_ssize_t __pyx_t_19;
+  Py_ssize_t __pyx_t_20;
+  Py_ssize_t __pyx_t_21;
+  Py_ssize_t __pyx_t_22;
+  Py_ssize_t __pyx_t_23;
+  Py_ssize_t __pyx_t_24;
+  PyObject *__pyx_t_25 = NULL;
+  __Pyx_RefNannySetupContext("var_obj_and_grads_mean_field", 0);
+
+  /* "bmtools/exact/variational.pyx":299
+ *         var_first_mom (double[:]): First moments of variational distribution.
+ *     """
+ *     cdef int num_units = var_biases.shape[0]             # <<<<<<<<<<<<<<
+ *     cdef int i, j
+ *     cdef double[:] var_first_mom = array(
+ */
+  __pyx_v_num_units = (__pyx_v_var_biases.shape[0]);
+
+  /* "bmtools/exact/variational.pyx":302
+ *     cdef int i, j
+ *     cdef double[:] var_first_mom = array(
+ *         shape=(num_units,), itemsize=sizeof(double), format='d')             # <<<<<<<<<<<<<<
+ *     cdef double[:] grads_wrt_var_biases = array(
+ *         shape=(num_units,), itemsize=sizeof(double), format='d')
+ */
+  __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 302, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_num_units); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 302, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 302, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_GIVEREF(__pyx_t_2);
+  PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
+  __pyx_t_2 = 0;
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_shape, __pyx_t_3) < 0) __PYX_ERR(0, 302, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyInt_FromSize_t((sizeof(double))); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 302, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_itemsize, __pyx_t_3) < 0) __PYX_ERR(0, 302, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 302, __pyx_L1_error)
+
+  /* "bmtools/exact/variational.pyx":301
+ *     cdef int num_units = var_biases.shape[0]
+ *     cdef int i, j
+ *     cdef double[:] var_first_mom = array(             # <<<<<<<<<<<<<<
+ *         shape=(num_units,), itemsize=sizeof(double), format='d')
+ *     cdef double[:] grads_wrt_var_biases = array(
+ */
+  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 301, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(__pyx_t_3);
+  if (unlikely(!__pyx_t_4.memview)) __PYX_ERR(0, 301, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_v_var_first_mom = __pyx_t_4;
+  __pyx_t_4.memview = NULL;
+  __pyx_t_4.data = NULL;
+
+  /* "bmtools/exact/variational.pyx":304
+ *         shape=(num_units,), itemsize=sizeof(double), format='d')
+ *     cdef double[:] grads_wrt_var_biases = array(
+ *         shape=(num_units,), itemsize=sizeof(double), format='d')             # <<<<<<<<<<<<<<
+ *     cdef double var_obj = 0.
+ *     cdef double prob_p_i, prob_m_i
+ */
+  __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 304, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_num_units); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 304, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 304, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_1);
+  PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
+  __pyx_t_1 = 0;
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_shape, __pyx_t_2) < 0) __PYX_ERR(0, 304, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_PyInt_FromSize_t((sizeof(double))); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 304, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_itemsize, __pyx_t_2) < 0) __PYX_ERR(0, 304, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_format, __pyx_n_s_d) < 0) __PYX_ERR(0, 304, __pyx_L1_error)
+
+  /* "bmtools/exact/variational.pyx":303
+ *     cdef double[:] var_first_mom = array(
+ *         shape=(num_units,), itemsize=sizeof(double), format='d')
+ *     cdef double[:] grads_wrt_var_biases = array(             # <<<<<<<<<<<<<<
+ *         shape=(num_units,), itemsize=sizeof(double), format='d')
+ *     cdef double var_obj = 0.
+ */
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_array_type), __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 303, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_4 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(__pyx_t_2);
+  if (unlikely(!__pyx_t_4.memview)) __PYX_ERR(0, 303, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_v_grads_wrt_var_biases = __pyx_t_4;
+  __pyx_t_4.memview = NULL;
+  __pyx_t_4.data = NULL;
+
+  /* "bmtools/exact/variational.pyx":305
+ *     cdef double[:] grads_wrt_var_biases = array(
+ *         shape=(num_units,), itemsize=sizeof(double), format='d')
+ *     cdef double var_obj = 0.             # <<<<<<<<<<<<<<
+ *     cdef double prob_p_i, prob_m_i
+ *     for i in range(num_units):
+ */
+  __pyx_v_var_obj = 0.;
+
+  /* "bmtools/exact/variational.pyx":307
+ *     cdef double var_obj = 0.
+ *     cdef double prob_p_i, prob_m_i
+ *     for i in range(num_units):             # <<<<<<<<<<<<<<
+ *         var_first_mom[i] = tanh(var_biases[i])
+ *     for i in range(num_units):
+ */
+  __pyx_t_5 = __pyx_v_num_units;
+  for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
+    __pyx_v_i = __pyx_t_6;
+
+    /* "bmtools/exact/variational.pyx":308
+ *     cdef double prob_p_i, prob_m_i
+ *     for i in range(num_units):
+ *         var_first_mom[i] = tanh(var_biases[i])             # <<<<<<<<<<<<<<
+ *     for i in range(num_units):
+ *         grads_wrt_var_biases[i] = 0.
+ */
+    __pyx_t_7 = __pyx_v_i;
+    __pyx_t_8 = __pyx_v_i;
+    *((double *) ( /* dim=0 */ (__pyx_v_var_first_mom.data + __pyx_t_8 * __pyx_v_var_first_mom.strides[0]) )) = tanh((*((double *) ( /* dim=0 */ (__pyx_v_var_biases.data + __pyx_t_7 * __pyx_v_var_biases.strides[0]) ))));
+  }
+
+  /* "bmtools/exact/variational.pyx":309
+ *     for i in range(num_units):
+ *         var_first_mom[i] = tanh(var_biases[i])
+ *     for i in range(num_units):             # <<<<<<<<<<<<<<
+ *         grads_wrt_var_biases[i] = 0.
+ *         for j in range(num_units):
+ */
+  __pyx_t_5 = __pyx_v_num_units;
+  for (__pyx_t_6 = 0; __pyx_t_6 < __pyx_t_5; __pyx_t_6+=1) {
+    __pyx_v_i = __pyx_t_6;
+
+    /* "bmtools/exact/variational.pyx":310
+ *         var_first_mom[i] = tanh(var_biases[i])
+ *     for i in range(num_units):
+ *         grads_wrt_var_biases[i] = 0.             # <<<<<<<<<<<<<<
+ *         for j in range(num_units):
+ *             grads_wrt_var_biases[i] -= weights[i, j] * var_first_mom[j]
+ */
+    __pyx_t_9 = __pyx_v_i;
+    *((double *) ( /* dim=0 */ (__pyx_v_grads_wrt_var_biases.data + __pyx_t_9 * __pyx_v_grads_wrt_var_biases.strides[0]) )) = 0.;
+
+    /* "bmtools/exact/variational.pyx":311
+ *     for i in range(num_units):
+ *         grads_wrt_var_biases[i] = 0.
+ *         for j in range(num_units):             # <<<<<<<<<<<<<<
+ *             grads_wrt_var_biases[i] -= weights[i, j] * var_first_mom[j]
+ *         prob_p_i = logistic_sigmoid(2 * var_biases[i])
+ */
+    __pyx_t_10 = __pyx_v_num_units;
+    for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
+      __pyx_v_j = __pyx_t_11;
+
+      /* "bmtools/exact/variational.pyx":312
+ *         grads_wrt_var_biases[i] = 0.
+ *         for j in range(num_units):
+ *             grads_wrt_var_biases[i] -= weights[i, j] * var_first_mom[j]             # <<<<<<<<<<<<<<
+ *         prob_p_i = logistic_sigmoid(2 * var_biases[i])
+ *         prob_m_i = 1. - prob_p_i
+ */
+      __pyx_t_12 = __pyx_v_i;
+      __pyx_t_13 = __pyx_v_j;
+      __pyx_t_14 = __pyx_v_j;
+      __pyx_t_15 = __pyx_v_i;
+      *((double *) ( /* dim=0 */ (__pyx_v_grads_wrt_var_biases.data + __pyx_t_15 * __pyx_v_grads_wrt_var_biases.strides[0]) )) -= ((*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_weights.data + __pyx_t_12 * __pyx_v_weights.strides[0]) ) + __pyx_t_13 * __pyx_v_weights.strides[1]) ))) * (*((double *) ( /* dim=0 */ (__pyx_v_var_first_mom.data + __pyx_t_14 * __pyx_v_var_first_mom.strides[0]) ))));
+    }
+
+    /* "bmtools/exact/variational.pyx":313
+ *         for j in range(num_units):
+ *             grads_wrt_var_biases[i] -= weights[i, j] * var_first_mom[j]
+ *         prob_p_i = logistic_sigmoid(2 * var_biases[i])             # <<<<<<<<<<<<<<
+ *         prob_m_i = 1. - prob_p_i
+ *         var_obj += (
+ */
+    __pyx_t_16 = __pyx_v_i;
+    __pyx_v_prob_p_i = __pyx_f_7bmtools_5exact_11variational_logistic_sigmoid((2.0 * (*((double *) ( /* dim=0 */ (__pyx_v_var_biases.data + __pyx_t_16 * __pyx_v_var_biases.strides[0]) )))));
+
+    /* "bmtools/exact/variational.pyx":314
+ *             grads_wrt_var_biases[i] -= weights[i, j] * var_first_mom[j]
+ *         prob_p_i = logistic_sigmoid(2 * var_biases[i])
+ *         prob_m_i = 1. - prob_p_i             # <<<<<<<<<<<<<<
+ *         var_obj += (
+ *             0.5 * var_first_mom[i] * grads_wrt_var_biases[i] -
+ */
+    __pyx_v_prob_m_i = (1. - __pyx_v_prob_p_i);
+
+    /* "bmtools/exact/variational.pyx":316
+ *         prob_m_i = 1. - prob_p_i
+ *         var_obj += (
+ *             0.5 * var_first_mom[i] * grads_wrt_var_biases[i] -             # <<<<<<<<<<<<<<
+ *             var_first_mom[i] * biases[i]
+ *             + prob_p_i * log(prob_p_i) + prob_m_i * log(prob_m_i)
+ */
+    __pyx_t_17 = __pyx_v_i;
+    __pyx_t_18 = __pyx_v_i;
+
+    /* "bmtools/exact/variational.pyx":317
+ *         var_obj += (
+ *             0.5 * var_first_mom[i] * grads_wrt_var_biases[i] -
+ *             var_first_mom[i] * biases[i]             # <<<<<<<<<<<<<<
+ *             + prob_p_i * log(prob_p_i) + prob_m_i * log(prob_m_i)
+ *         )
+ */
+    __pyx_t_19 = __pyx_v_i;
+    __pyx_t_20 = __pyx_v_i;
+
+    /* "bmtools/exact/variational.pyx":315
+ *         prob_p_i = logistic_sigmoid(2 * var_biases[i])
+ *         prob_m_i = 1. - prob_p_i
+ *         var_obj += (             # <<<<<<<<<<<<<<
+ *             0.5 * var_first_mom[i] * grads_wrt_var_biases[i] -
+ *             var_first_mom[i] * biases[i]
+ */
+    __pyx_v_var_obj = (__pyx_v_var_obj + (((((0.5 * (*((double *) ( /* dim=0 */ (__pyx_v_var_first_mom.data + __pyx_t_17 * __pyx_v_var_first_mom.strides[0]) )))) * (*((double *) ( /* dim=0 */ (__pyx_v_grads_wrt_var_biases.data + __pyx_t_18 * __pyx_v_grads_wrt_var_biases.strides[0]) )))) - ((*((double *) ( /* dim=0 */ (__pyx_v_var_first_mom.data + __pyx_t_19 * __pyx_v_var_first_mom.strides[0]) ))) * (*((double *) ( /* dim=0 */ (__pyx_v_biases.data + __pyx_t_20 * __pyx_v_biases.strides[0]) ))))) + (__pyx_v_prob_p_i * log(__pyx_v_prob_p_i))) + (__pyx_v_prob_m_i * log(__pyx_v_prob_m_i))));
+
+    /* "bmtools/exact/variational.pyx":320
+ *             + prob_p_i * log(prob_p_i) + prob_m_i * log(prob_m_i)
+ *         )
+ *         grads_wrt_var_biases[i] += var_biases[i] - biases[i]             # <<<<<<<<<<<<<<
+ *         grads_wrt_var_biases[i] *= 4. * prob_p_i * prob_m_i
+ *     return var_obj, grads_wrt_var_biases, var_first_mom
+ */
+    __pyx_t_21 = __pyx_v_i;
+    __pyx_t_22 = __pyx_v_i;
+    __pyx_t_23 = __pyx_v_i;
+    *((double *) ( /* dim=0 */ (__pyx_v_grads_wrt_var_biases.data + __pyx_t_23 * __pyx_v_grads_wrt_var_biases.strides[0]) )) += ((*((double *) ( /* dim=0 */ (__pyx_v_var_biases.data + __pyx_t_21 * __pyx_v_var_biases.strides[0]) ))) - (*((double *) ( /* dim=0 */ (__pyx_v_biases.data + __pyx_t_22 * __pyx_v_biases.strides[0]) ))));
+
+    /* "bmtools/exact/variational.pyx":321
+ *         )
+ *         grads_wrt_var_biases[i] += var_biases[i] - biases[i]
+ *         grads_wrt_var_biases[i] *= 4. * prob_p_i * prob_m_i             # <<<<<<<<<<<<<<
+ *     return var_obj, grads_wrt_var_biases, var_first_mom
+ */
+    __pyx_t_24 = __pyx_v_i;
+    *((double *) ( /* dim=0 */ (__pyx_v_grads_wrt_var_biases.data + __pyx_t_24 * __pyx_v_grads_wrt_var_biases.strides[0]) )) *= ((4. * __pyx_v_prob_p_i) * __pyx_v_prob_m_i);
+  }
+
+  /* "bmtools/exact/variational.pyx":322
+ *         grads_wrt_var_biases[i] += var_biases[i] - biases[i]
+ *         grads_wrt_var_biases[i] *= 4. * prob_p_i * prob_m_i
+ *     return var_obj, grads_wrt_var_biases, var_first_mom             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_var_obj); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 322, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __pyx_memoryview_fromslice(__pyx_v_grads_wrt_var_biases, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 322, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_1 = __pyx_memoryview_fromslice(__pyx_v_var_first_mom, 1, (PyObject *(*)(char *)) __pyx_memview_get_double, (int (*)(char *, PyObject *)) __pyx_memview_set_double, 0);; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 322, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_25 = PyTuple_New(3); if (unlikely(!__pyx_t_25)) __PYX_ERR(0, 322, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_25);
+  __Pyx_GIVEREF(__pyx_t_2);
+  PyTuple_SET_ITEM(__pyx_t_25, 0, __pyx_t_2);
+  __Pyx_GIVEREF(__pyx_t_3);
+  PyTuple_SET_ITEM(__pyx_t_25, 1, __pyx_t_3);
+  __Pyx_GIVEREF(__pyx_t_1);
+  PyTuple_SET_ITEM(__pyx_t_25, 2, __pyx_t_1);
+  __pyx_t_2 = 0;
+  __pyx_t_3 = 0;
+  __pyx_t_1 = 0;
+  __pyx_r = __pyx_t_25;
+  __pyx_t_25 = 0;
+  goto __pyx_L0;
+
+  /* "bmtools/exact/variational.pyx":267
+ * 
+ * 
+ * def var_obj_and_grads_mean_field(             # <<<<<<<<<<<<<<
+ *         double[:] var_biases, double[:, :] weights, double[:] biases):
+ *     """Calculate mean-field variational objective and gradients.
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __PYX_XDEC_MEMVIEW(&__pyx_t_4, 1);
+  __Pyx_XDECREF(__pyx_t_25);
+  __Pyx_AddTraceback("bmtools.exact.variational.var_obj_and_grads_mean_field", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __PYX_XDEC_MEMVIEW(&__pyx_v_var_first_mom, 1);
+  __PYX_XDEC_MEMVIEW(&__pyx_v_grads_wrt_var_biases, 1);
+  __PYX_XDEC_MEMVIEW(&__pyx_v_var_biases, 1);
+  __PYX_XDEC_MEMVIEW(&__pyx_v_weights, 1);
+  __PYX_XDEC_MEMVIEW(&__pyx_v_biases, 1);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
 }
 
 /* "View.MemoryView":120
@@ -17156,6 +17623,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
   {&__pyx_n_s_allocate_buffer, __pyx_k_allocate_buffer, sizeof(__pyx_k_allocate_buffer), 0, 0, 1, 1},
   {&__pyx_n_s_base, __pyx_k_base, sizeof(__pyx_k_base), 0, 0, 1, 1},
+  {&__pyx_n_s_biases, __pyx_k_biases, sizeof(__pyx_k_biases), 0, 0, 1, 1},
   {&__pyx_n_s_biases_1, __pyx_k_biases_1, sizeof(__pyx_k_biases_1), 0, 0, 1, 1},
   {&__pyx_n_s_biases_2, __pyx_k_biases_2, sizeof(__pyx_k_biases_2), 0, 0, 1, 1},
   {&__pyx_n_s_bmtools_exact_variational, __pyx_k_bmtools_exact_variational, sizeof(__pyx_k_bmtools_exact_variational), 0, 0, 1, 1},
@@ -17177,6 +17645,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_u_fortran, __pyx_k_fortran, sizeof(__pyx_k_fortran), 0, 1, 0, 1},
   {&__pyx_kp_s_got_differing_extents_in_dimensi, __pyx_k_got_differing_extents_in_dimensi, sizeof(__pyx_k_got_differing_extents_in_dimensi), 0, 0, 1, 0},
   {&__pyx_n_s_grads_wrt_biases_1, __pyx_k_grads_wrt_biases_1, sizeof(__pyx_k_grads_wrt_biases_1), 0, 0, 1, 1},
+  {&__pyx_n_s_grads_wrt_var_biases, __pyx_k_grads_wrt_var_biases, sizeof(__pyx_k_grads_wrt_var_biases), 0, 0, 1, 1},
   {&__pyx_n_s_grads_wrt_weights_1, __pyx_k_grads_wrt_weights_1, sizeof(__pyx_k_grads_wrt_weights_1), 0, 0, 1, 1},
   {&__pyx_kp_s_home_matt_Projects_boltzmann_ma, __pyx_k_home_matt_Projects_boltzmann_ma, sizeof(__pyx_k_home_matt_Projects_boltzmann_ma), 0, 0, 1, 0},
   {&__pyx_n_s_i, __pyx_k_i, sizeof(__pyx_k_i), 0, 0, 1, 1},
@@ -17204,6 +17673,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_num_units, __pyx_k_num_units, sizeof(__pyx_k_num_units), 0, 0, 1, 1},
   {&__pyx_n_s_obj, __pyx_k_obj, sizeof(__pyx_k_obj), 0, 0, 1, 1},
   {&__pyx_n_s_pack, __pyx_k_pack, sizeof(__pyx_k_pack), 0, 0, 1, 1},
+  {&__pyx_n_s_prob_m_i, __pyx_k_prob_m_i, sizeof(__pyx_k_prob_m_i), 0, 0, 1, 1},
+  {&__pyx_n_s_prob_p_i, __pyx_k_prob_p_i, sizeof(__pyx_k_prob_p_i), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_getbuffer, __pyx_k_pyx_getbuffer, sizeof(__pyx_k_pyx_getbuffer), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_vtable, __pyx_k_pyx_vtable, sizeof(__pyx_k_pyx_vtable), 0, 0, 1, 1},
   {&__pyx_n_s_range, __pyx_k_range, sizeof(__pyx_k_range), 0, 0, 1, 1},
@@ -17223,12 +17694,17 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_unable_to_allocate_array_data, __pyx_k_unable_to_allocate_array_data, sizeof(__pyx_k_unable_to_allocate_array_data), 0, 0, 1, 0},
   {&__pyx_kp_s_unable_to_allocate_shape_and_str, __pyx_k_unable_to_allocate_shape_and_str, sizeof(__pyx_k_unable_to_allocate_shape_and_str), 0, 0, 1, 0},
   {&__pyx_n_s_unpack, __pyx_k_unpack, sizeof(__pyx_k_unpack), 0, 0, 1, 1},
+  {&__pyx_n_s_var_biases, __pyx_k_var_biases, sizeof(__pyx_k_var_biases), 0, 0, 1, 1},
+  {&__pyx_n_s_var_first_mom, __pyx_k_var_first_mom, sizeof(__pyx_k_var_first_mom), 0, 0, 1, 1},
+  {&__pyx_n_s_var_obj, __pyx_k_var_obj, sizeof(__pyx_k_var_obj), 0, 0, 1, 1},
+  {&__pyx_n_s_var_obj_and_grads_mean_field, __pyx_k_var_obj_and_grads_mean_field, sizeof(__pyx_k_var_obj_and_grads_mean_field), 0, 0, 1, 1},
+  {&__pyx_n_s_weights, __pyx_k_weights, sizeof(__pyx_k_weights), 0, 0, 1, 1},
   {&__pyx_n_s_weights_1, __pyx_k_weights_1, sizeof(__pyx_k_weights_1), 0, 0, 1, 1},
   {&__pyx_n_s_weights_2, __pyx_k_weights_2, sizeof(__pyx_k_weights_2), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 85, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 86, __pyx_L1_error)
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(1, 131, __pyx_L1_error)
   __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(1, 146, __pyx_L1_error)
   __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(1, 149, __pyx_L1_error)
@@ -17391,29 +17867,41 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__13);
   __Pyx_GIVEREF(__pyx_tuple__13);
 
-  /* "bmtools/exact/variational.pyx":23
+  /* "bmtools/exact/variational.pyx":24
  * 
  * 
  * def kl_divergence(             # <<<<<<<<<<<<<<
  *         double[:, :] weights_1, double[:] biases_1,
  *         double[:, :] weights_2, double[:] biases_2,
  */
-  __pyx_tuple__14 = PyTuple_Pack(16, __pyx_n_s_weights_1, __pyx_n_s_biases_1, __pyx_n_s_weights_2, __pyx_n_s_biases_2, __pyx_n_s_force, __pyx_n_s_num_threads, __pyx_n_s_num_units, __pyx_n_s_num_states, __pyx_n_s_intervals, __pyx_n_s_states, __pyx_n_s_kl_div_terms, __pyx_n_s_norm_const_1_terms, __pyx_n_s_norm_const_2_terms, __pyx_n_s_t, __pyx_n_s_log_norm_const_1, __pyx_n_s_log_norm_const_2); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 23, __pyx_L1_error)
+  __pyx_tuple__14 = PyTuple_Pack(16, __pyx_n_s_weights_1, __pyx_n_s_biases_1, __pyx_n_s_weights_2, __pyx_n_s_biases_2, __pyx_n_s_force, __pyx_n_s_num_threads, __pyx_n_s_num_units, __pyx_n_s_num_states, __pyx_n_s_intervals, __pyx_n_s_states, __pyx_n_s_kl_div_terms, __pyx_n_s_norm_const_1_terms, __pyx_n_s_norm_const_2_terms, __pyx_n_s_t, __pyx_n_s_log_norm_const_1, __pyx_n_s_log_norm_const_2); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__14);
   __Pyx_GIVEREF(__pyx_tuple__14);
-  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(6, 0, 16, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_matt_Projects_boltzmann_ma, __pyx_n_s_kl_divergence, 23, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 23, __pyx_L1_error)
+  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(6, 0, 16, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_matt_Projects_boltzmann_ma, __pyx_n_s_kl_divergence, 24, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 24, __pyx_L1_error)
 
-  /* "bmtools/exact/variational.pyx":96
+  /* "bmtools/exact/variational.pyx":97
  * 
  * 
  * def kl_divergence_and_gradients(             # <<<<<<<<<<<<<<
  *         double[:, :] weights_1, double[:] biases_1,
  *         double[:, :] weights_2, double[:] biases_2,
  */
-  __pyx_tuple__16 = PyTuple_Pack(22, __pyx_n_s_weights_1, __pyx_n_s_biases_1, __pyx_n_s_weights_2, __pyx_n_s_biases_2, __pyx_n_s_force, __pyx_n_s_num_threads, __pyx_n_s_num_units, __pyx_n_s_num_states, __pyx_n_s_intervals, __pyx_n_s_states, __pyx_n_s_kl_div_terms, __pyx_n_s_norm_const_1_terms, __pyx_n_s_norm_const_2_terms, __pyx_n_s_first_mom_1_terms, __pyx_n_s_second_mom_1_terms, __pyx_n_s_grads_wrt_biases_1, __pyx_n_s_grads_wrt_weights_1, __pyx_n_s_t, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_log_norm_const_1, __pyx_n_s_log_norm_const_2); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 96, __pyx_L1_error)
+  __pyx_tuple__16 = PyTuple_Pack(22, __pyx_n_s_weights_1, __pyx_n_s_biases_1, __pyx_n_s_weights_2, __pyx_n_s_biases_2, __pyx_n_s_force, __pyx_n_s_num_threads, __pyx_n_s_num_units, __pyx_n_s_num_states, __pyx_n_s_intervals, __pyx_n_s_states, __pyx_n_s_kl_div_terms, __pyx_n_s_norm_const_1_terms, __pyx_n_s_norm_const_2_terms, __pyx_n_s_first_mom_1_terms, __pyx_n_s_second_mom_1_terms, __pyx_n_s_grads_wrt_biases_1, __pyx_n_s_grads_wrt_weights_1, __pyx_n_s_t, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_log_norm_const_1, __pyx_n_s_log_norm_const_2); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 97, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__16);
   __Pyx_GIVEREF(__pyx_tuple__16);
-  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(6, 0, 22, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_matt_Projects_boltzmann_ma, __pyx_n_s_kl_divergence_and_gradients, 96, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 96, __pyx_L1_error)
+  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(6, 0, 22, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_matt_Projects_boltzmann_ma, __pyx_n_s_kl_divergence_and_gradients, 97, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 97, __pyx_L1_error)
+
+  /* "bmtools/exact/variational.pyx":267
+ * 
+ * 
+ * def var_obj_and_grads_mean_field(             # <<<<<<<<<<<<<<
+ *         double[:] var_biases, double[:, :] weights, double[:] biases):
+ *     """Calculate mean-field variational objective and gradients.
+ */
+  __pyx_tuple__18 = PyTuple_Pack(11, __pyx_n_s_var_biases, __pyx_n_s_weights, __pyx_n_s_biases, __pyx_n_s_num_units, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_var_first_mom, __pyx_n_s_grads_wrt_var_biases, __pyx_n_s_var_obj, __pyx_n_s_prob_p_i, __pyx_n_s_prob_m_i); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 267, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__18);
+  __Pyx_GIVEREF(__pyx_tuple__18);
+  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(3, 0, 11, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_matt_Projects_boltzmann_ma, __pyx_n_s_var_obj_and_grads_mean_field, 267, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(0, 267, __pyx_L1_error)
 
   /* "View.MemoryView":282
  *         return self.name
@@ -17422,9 +17910,9 @@ static int __Pyx_InitCachedConstants(void) {
  * cdef strided = Enum("<strided and direct>") # default
  * cdef indirect = Enum("<strided and indirect>")
  */
-  __pyx_tuple__18 = PyTuple_Pack(1, __pyx_kp_s_strided_and_direct_or_indirect); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(1, 282, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__18);
-  __Pyx_GIVEREF(__pyx_tuple__18);
+  __pyx_tuple__20 = PyTuple_Pack(1, __pyx_kp_s_strided_and_direct_or_indirect); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(1, 282, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__20);
+  __Pyx_GIVEREF(__pyx_tuple__20);
 
   /* "View.MemoryView":283
  * 
@@ -17433,9 +17921,9 @@ static int __Pyx_InitCachedConstants(void) {
  * cdef indirect = Enum("<strided and indirect>")
  * 
  */
-  __pyx_tuple__19 = PyTuple_Pack(1, __pyx_kp_s_strided_and_direct); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(1, 283, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__19);
-  __Pyx_GIVEREF(__pyx_tuple__19);
+  __pyx_tuple__21 = PyTuple_Pack(1, __pyx_kp_s_strided_and_direct); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(1, 283, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__21);
+  __Pyx_GIVEREF(__pyx_tuple__21);
 
   /* "View.MemoryView":284
  * cdef generic = Enum("<strided and direct or indirect>")
@@ -17444,9 +17932,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  * 
  */
-  __pyx_tuple__20 = PyTuple_Pack(1, __pyx_kp_s_strided_and_indirect); if (unlikely(!__pyx_tuple__20)) __PYX_ERR(1, 284, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__20);
-  __Pyx_GIVEREF(__pyx_tuple__20);
+  __pyx_tuple__22 = PyTuple_Pack(1, __pyx_kp_s_strided_and_indirect); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(1, 284, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__22);
+  __Pyx_GIVEREF(__pyx_tuple__22);
 
   /* "View.MemoryView":287
  * 
@@ -17455,9 +17943,9 @@ static int __Pyx_InitCachedConstants(void) {
  * cdef indirect_contiguous = Enum("<contiguous and indirect>")
  * 
  */
-  __pyx_tuple__21 = PyTuple_Pack(1, __pyx_kp_s_contiguous_and_direct); if (unlikely(!__pyx_tuple__21)) __PYX_ERR(1, 287, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__21);
-  __Pyx_GIVEREF(__pyx_tuple__21);
+  __pyx_tuple__23 = PyTuple_Pack(1, __pyx_kp_s_contiguous_and_direct); if (unlikely(!__pyx_tuple__23)) __PYX_ERR(1, 287, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__23);
+  __Pyx_GIVEREF(__pyx_tuple__23);
 
   /* "View.MemoryView":288
  * 
@@ -17466,9 +17954,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  * 
  */
-  __pyx_tuple__22 = PyTuple_Pack(1, __pyx_kp_s_contiguous_and_indirect); if (unlikely(!__pyx_tuple__22)) __PYX_ERR(1, 288, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__22);
-  __Pyx_GIVEREF(__pyx_tuple__22);
+  __pyx_tuple__24 = PyTuple_Pack(1, __pyx_kp_s_contiguous_and_indirect); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(1, 288, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__24);
+  __Pyx_GIVEREF(__pyx_tuple__24);
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -17625,7 +18113,7 @@ PyMODINIT_FUNC PyInit_variational(void)
   if (__Pyx_ImportFunction(__pyx_t_2, "neg_energy", (void (**)(void))&__pyx_f_7bmtools_5exact_7helpers_neg_energy, "double (__Pyx_memviewslice, __Pyx_memviewslice, __Pyx_memviewslice)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   if (__Pyx_ImportFunction(__pyx_t_2, "check_state_space_size", (void (**)(void))&__pyx_f_7bmtools_5exact_7helpers_check_state_space_size, "void (int, int, int __pyx_skip_dispatch)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   if (__Pyx_ImportFunction(__pyx_t_2, "partition_state_space", (void (**)(void))&__pyx_f_7bmtools_5exact_7helpers_partition_state_space, "__Pyx_memviewslice (int, int)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (__Pyx_ImportFunction(__pyx_t_2, "index_to_state", (void (**)(void))&__pyx_f_7bmtools_5exact_7helpers_index_to_state, "void (int, __Pyx_memviewslice)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (__Pyx_ImportFunction(__pyx_t_2, "index_to_state", (void (**)(void))&__pyx_f_7bmtools_5exact_7helpers_index_to_state, "void (int, __Pyx_memviewslice, int __pyx_skip_dispatch)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   if (__Pyx_ImportFunction(__pyx_t_2, "next_state", (void (**)(void))&__pyx_f_7bmtools_5exact_7helpers_next_state, "void (__Pyx_memviewslice, int)") < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   Py_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   /*--- Execution code ---*/
@@ -17633,28 +18121,40 @@ PyMODINIT_FUNC PyInit_variational(void)
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "bmtools/exact/variational.pyx":23
+  /* "bmtools/exact/variational.pyx":24
  * 
  * 
  * def kl_divergence(             # <<<<<<<<<<<<<<
  *         double[:, :] weights_1, double[:] biases_1,
  *         double[:, :] weights_2, double[:] biases_2,
  */
-  __pyx_t_3 = PyCFunction_NewEx(&__pyx_mdef_7bmtools_5exact_11variational_1kl_divergence, NULL, __pyx_n_s_bmtools_exact_variational); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 23, __pyx_L1_error)
+  __pyx_t_3 = PyCFunction_NewEx(&__pyx_mdef_7bmtools_5exact_11variational_1kl_divergence, NULL, __pyx_n_s_bmtools_exact_variational); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_kl_divergence, __pyx_t_3) < 0) __PYX_ERR(0, 23, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_kl_divergence, __pyx_t_3) < 0) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "bmtools/exact/variational.pyx":96
+  /* "bmtools/exact/variational.pyx":97
  * 
  * 
  * def kl_divergence_and_gradients(             # <<<<<<<<<<<<<<
  *         double[:, :] weights_1, double[:] biases_1,
  *         double[:, :] weights_2, double[:] biases_2,
  */
-  __pyx_t_3 = PyCFunction_NewEx(&__pyx_mdef_7bmtools_5exact_11variational_3kl_divergence_and_gradients, NULL, __pyx_n_s_bmtools_exact_variational); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 96, __pyx_L1_error)
+  __pyx_t_3 = PyCFunction_NewEx(&__pyx_mdef_7bmtools_5exact_11variational_3kl_divergence_and_gradients, NULL, __pyx_n_s_bmtools_exact_variational); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 97, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_kl_divergence_and_gradients, __pyx_t_3) < 0) __PYX_ERR(0, 96, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_kl_divergence_and_gradients, __pyx_t_3) < 0) __PYX_ERR(0, 97, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "bmtools/exact/variational.pyx":267
+ * 
+ * 
+ * def var_obj_and_grads_mean_field(             # <<<<<<<<<<<<<<
+ *         double[:] var_biases, double[:, :] weights, double[:] biases):
+ *     """Calculate mean-field variational objective and gradients.
+ */
+  __pyx_t_3 = PyCFunction_NewEx(&__pyx_mdef_7bmtools_5exact_11variational_5var_obj_and_grads_mean_field, NULL, __pyx_n_s_bmtools_exact_variational); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 267, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_var_obj_and_grads_mean_field, __pyx_t_3) < 0) __PYX_ERR(0, 267, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /* "bmtools/exact/variational.pyx":1
@@ -17687,7 +18187,7 @@ PyMODINIT_FUNC PyInit_variational(void)
  * cdef strided = Enum("<strided and direct>") # default
  * cdef indirect = Enum("<strided and indirect>")
  */
-  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__18, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 282, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__20, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 282, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_XGOTREF(generic);
   __Pyx_DECREF_SET(generic, __pyx_t_3);
@@ -17701,7 +18201,7 @@ PyMODINIT_FUNC PyInit_variational(void)
  * cdef indirect = Enum("<strided and indirect>")
  * 
  */
-  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__19, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 283, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__21, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 283, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_XGOTREF(strided);
   __Pyx_DECREF_SET(strided, __pyx_t_3);
@@ -17715,7 +18215,7 @@ PyMODINIT_FUNC PyInit_variational(void)
  * 
  * 
  */
-  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__20, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 284, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__22, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 284, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_XGOTREF(indirect);
   __Pyx_DECREF_SET(indirect, __pyx_t_3);
@@ -17729,7 +18229,7 @@ PyMODINIT_FUNC PyInit_variational(void)
  * cdef indirect_contiguous = Enum("<contiguous and indirect>")
  * 
  */
-  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__21, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 287, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__23, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 287, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_XGOTREF(contiguous);
   __Pyx_DECREF_SET(contiguous, __pyx_t_3);
@@ -17743,7 +18243,7 @@ PyMODINIT_FUNC PyInit_variational(void)
  * 
  * 
  */
-  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__22, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 288, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(((PyObject *)__pyx_MemviewEnum_type), __pyx_tuple__24, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 288, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_XGOTREF(indirect_contiguous);
   __Pyx_DECREF_SET(indirect_contiguous, __pyx_t_3);

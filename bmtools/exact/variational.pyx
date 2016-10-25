@@ -18,6 +18,7 @@ from bmtools.exact.helpers cimport (
 cdef extern from 'math.h':
     double exp(double x) nogil
     double log(double x) nogil
+    double tanh(double x) nogil
 
 
 def kl_divergence(
@@ -256,3 +257,66 @@ cdef void accum_kl_and_grad_terms_for_state_range(
                     state[i] * state[j]
                 )
         next_state(state, start_state_index + index_offset + 1)
+
+
+cdef double logistic_sigmoid(double x) nogil:
+    """Calculates the logistic sigmoid function."""
+    return 1. / (1. + exp(-x))
+
+
+def var_obj_and_grads_mean_field(
+        double[:] var_biases, double[:, :] weights, double[:] biases):
+    """Calculate mean-field variational objective and gradients.
+
+    Calculates the variational free-energy for a mean-field / full-factorised
+    variational approximation for a Boltzmann machine distribution and its
+    gradients with respect to the variational bias parameters. The form of the
+    approximating distribution is
+
+    ```
+    def var_approx_prob(s):
+        return prod(logistic_sigmoid(2 * s * var_biases))
+    ```
+
+    The variational free-energy corresponds to the KL divergence from the
+    target distribution to the approximating distribution minus the logarithm
+    of the normalising constant of the target distribution. As the KL
+    divergence is bounded from below by zero, the negative variational
+    objective is therefore a lower bound on the log normalisation constant of the target distribution with equality if and only if the target and
+    approximating distribution are equal across all states.
+
+    Args:
+        var_biases (double[:]): Parameters of approximate distribution.
+        weights (double[:, :]): Weight parameters of target distribution.
+        biases (double[:]): Bias parameters of target distribution.
+
+    Returns:
+        var_obj (double): Value of variational objective.
+        grads_wrt_var_biases (double[:]): Gradient of objective with respect
+            to variational bias parameters.
+        var_first_mom (double[:]): First moments of variational distribution.
+    """
+    cdef int num_units = var_biases.shape[0]
+    cdef int i, j
+    cdef double[:] var_first_mom = array(
+        shape=(num_units,), itemsize=sizeof(double), format='d')
+    cdef double[:] grads_wrt_var_biases = array(
+        shape=(num_units,), itemsize=sizeof(double), format='d')
+    cdef double var_obj = 0.
+    cdef double prob_p_i, prob_m_i
+    for i in range(num_units):
+        var_first_mom[i] = tanh(var_biases[i])
+    for i in range(num_units):
+        grads_wrt_var_biases[i] = 0.
+        for j in range(num_units):
+            grads_wrt_var_biases[i] -= weights[i, j] * var_first_mom[j]
+        prob_p_i = logistic_sigmoid(2 * var_biases[i])
+        prob_m_i = 1. - prob_p_i
+        var_obj += (
+            0.5 * var_first_mom[i] * grads_wrt_var_biases[i] -
+            var_first_mom[i] * biases[i]
+            + prob_p_i * log(prob_p_i) + prob_m_i * log(prob_m_i)
+        )
+        grads_wrt_var_biases[i] += var_biases[i] - biases[i]
+        grads_wrt_var_biases[i] *= 4. * prob_p_i * prob_m_i
+    return var_obj, grads_wrt_var_biases, var_first_mom
