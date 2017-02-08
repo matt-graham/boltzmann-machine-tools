@@ -164,8 +164,10 @@ class IsotropicCovarianceGMRelaxation(BaseGMRelaxation):
             0.5 * self.D.diagonal().sum() + np.log(norm_const_s)
         )
         expc_x = self.Q.T.dot(expc_s)
-        covar_x = (self.Q.T.dot(expc_ss - np.outer(expc_s, expc_s)).dot(self.Q)
-                   + np.eye(self.n_dim_r))
+        covar_x = (
+            self.Q.T.dot(expc_ss - np.outer(expc_s, expc_s)).dot(self.Q) +
+            np.eye(self.n_dim_r)
+        )
         return log_norm_const_x, expc_x, covar_x
 
 
@@ -209,6 +211,8 @@ class IsotropicCoshGMRelaxation(BaseGMRelaxation):
             0.5 * self.e_r.sum()
         )
         expc_x = self.b + self.V.dot(expc_s)
-        covar_x = (self.V.dot(expc_ss - np.outer(expc_s, expc_s)).dot(self.V)
-                   + self.V)
+        covar_x = (
+            self.V.dot(expc_ss - np.outer(expc_s, expc_s)).dot(self.V) +
+            self.V
+        )
         return log_norm_const_x, expc_x, covar_x
