@@ -23,23 +23,23 @@ cdef double neg_energy(
     return neg_energy
 
 
-cdef int[:] partition_state_space(int num_states, int num_threads):
+cdef long[:] partition_state_space(long num_states, int num_threads):
     """Partition state space in to equal sized intervals.
 
     Used to allocate state space range to different parallel threads.
 
     Args:
-        num_state (int): Total number of states (2 ** num_units).
+        num_state (long): Total number of states (2 ** num_units).
         num_threads (int): Number of parallel threads being used.
 
     Returns:
         Memory view of integer array of state space index intervals.
     """
     cdef int t
-    cdef int[:] intervals = array(
-            shape=(num_threads + 1,), itemsize=sizeof(int), format='i')
+    cdef long[:] intervals = array(
+            shape=(num_threads + 1,), itemsize=sizeof(long), format='l')
     for t in range(num_threads):
-        intervals[t] = <int>(t * <float>(num_states) / num_threads)
+        intervals[t] = <long>(t * <float>(num_states) / num_threads)
     intervals[num_threads] = num_states
     return intervals
 
@@ -52,7 +52,7 @@ cpdef void check_state_space_size(int num_units, bint force):
                          .format(2**num_units))
 
 
-cdef void next_state(state_t[:] state, int next_state_index) nogil:
+cdef void next_state(state_t[:] state, long next_state_index) nogil:
     """
     Update state vector to proceed to next state in state space (for a
     fixed ordering of states determined by mapping them to integer indices).
@@ -68,14 +68,14 @@ cdef void next_state(state_t[:] state, int next_state_index) nogil:
         unit_index += 1
 
 
-cpdef void index_to_state(int index, state_t[:] state) nogil:
+cpdef void index_to_state(long index, state_t[:] state) nogil:
     """Update signed binary state vector to correspond to a state space index.
 
     The encoding is big-endian, that is the most significant bit of the
     integer index determines the first element of the binary state.
 
     Args:
-        index (int): Integer state space enumeration index.
+        index (long): Integer state space enumeration index.
         state (state_t[:]): Binary state vector to update.
     """
     cdef int i

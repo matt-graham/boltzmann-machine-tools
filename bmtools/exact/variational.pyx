@@ -61,8 +61,8 @@ def kl_divergence(
     """
     cdef int num_units = weights_1.shape[0]
     check_state_space_size(num_units, force)
-    cdef int num_states = 2**num_units
-    cdef int[:] intervals = partition_state_space(num_states, num_threads)
+    cdef long num_states = 2**num_units
+    cdef long[:] intervals = partition_state_space(num_states, num_threads)
     cdef state_t[:, :] states = array(
         shape=(num_threads, num_units), itemsize=sizeof(state_t),
         format=state_t_code)
@@ -125,8 +125,8 @@ def kl_divergence_and_gradients(
     """
     cdef int num_units = weights_1.shape[0]
     check_state_space_size(num_units, force)
-    cdef int num_states = 2**num_units
-    cdef int[:] intervals = partition_state_space(num_states, num_threads)
+    cdef long num_states = 2**num_units
+    cdef long[:] intervals = partition_state_space(num_states, num_threads)
     cdef state_t[:, :] states = array(
         shape=(num_threads, num_units), itemsize=sizeof(state_t),
         format=state_t_code)
@@ -202,9 +202,9 @@ cdef void accum_kl_terms_for_state_range(
         double[:, :] weights_2, double[:] biases_2,
         state_t[:] state, double* kl_div_term,
         double* norm_const_1_term, double* norm_const_2_term,
-        int start_state_index, int end_state_index) nogil:
+        long start_state_index, long end_state_index) nogil:
     """Accumulates KL divergence terms for a subset of states."""
-    cdef int index_offset
+    cdef long index_offset
     cdef double neg_energy_1, neg_energy_2, unrm_prob_1, unrm_prob_2
     index_to_state(start_state_index, state)
     for index_offset in range(end_state_index - start_state_index):
@@ -225,9 +225,10 @@ cdef void accum_kl_and_grad_terms_for_state_range(
         double* norm_const_1_term, double* norm_const_2_term,
         double[:] first_mom_1, double[:, :] second_mom_1,
         double[:] grads_wrt_biases_1, double[:, :] grads_wrt_weights_1,
-        int start_state_index, int end_state_index) nogil:
+        long start_state_index, long end_state_index) nogil:
     """Accumulates KL divergence and gradient terms for a subset of states."""
-    cdef int i, j, index_offset
+    cdef int i, j
+    cdef long index_offset
     cdef double neg_energy_1, neg_energy_2, unrm_prob_1, unrm_prob_2
     index_to_state(start_state_index, state)
     # Initialise terms to zero

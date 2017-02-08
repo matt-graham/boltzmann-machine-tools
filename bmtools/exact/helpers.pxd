@@ -12,8 +12,8 @@ cdef double neg_energy(
 
 cpdef void check_state_space_size(int num_unit, bint force)
 
-cdef int[:] partition_state_space(int num_states, int num_threads)
+cdef long[:] partition_state_space(long num_states, int num_threads)
 
-cpdef void index_to_state(int index, state_t[:] state) nogil
+cpdef void index_to_state(long index, state_t[:] state) nogil
 
-cdef void next_state(state_t[:] state, int next_state_index) nogil
+cdef void next_state(state_t[:] state, long next_state_index) nogil

@@ -16,7 +16,8 @@ from bmtools.exact.helpers cimport state_t
 cdef void calc_unnormed_probs_for_state_range(
         double[:, :] weights, double[:] biases, state_t[:] state,
         double* norm_const, double[:] probs,
-        int start_state_index, int end_state_index) nogil
+        long start_state_index, long end_state_index) nogil
+
 
 cdef void normalise_probabilities(double[:] probs, double norm_const) nogil
 
@@ -24,12 +25,12 @@ cdef void normalise_probabilities(double[:] probs, double norm_const) nogil
 cdef void accum_moments_for_state_range(
         double[:, :] weights, double[:] biases, state_t[:] state,
         double* norm_const, double[:] first_mom, double[:, :] second_mom,
-        int start_state_index, int end_state_index) nogil
+        long start_state_index, long end_state_index) nogil
 
 
 cdef double calc_norm_const(double[:,:] weights, double[:] biases,
-                            state_t[:] state, int start_state_index=?,
-                            int end_state_index=?) nogil
+                            state_t[:] state, long start_state_index=?,
+                            long end_state_index=?) nogil
 
 
 cdef void normalise_first_moment(

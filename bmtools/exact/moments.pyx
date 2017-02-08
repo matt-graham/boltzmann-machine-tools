@@ -51,11 +51,12 @@ def calculate_moments_sequential(double[:, :] weights, double[:] biases,
         Expectation of outer product of state vectors with respect to
         distribution.
     """
-    cdef int state_index, i, j
+    cdef long state_index
+    cdef int i, j
     cdef int num_units = weights.shape[0]
     cdef double prob = 0.
     cdef double norm_const = 0.
-    cdef int num_states = 2**num_units
+    cdef long num_states = 2**num_units
     check_state_space_size(num_units, force)
     cdef state_t[:] state = array(
             shape=(num_units,), itemsize=sizeof(state_t), format=state_t_code)
@@ -127,7 +128,7 @@ def calculate_moments_parallel(double[:, :] weights, double[:] biases,
     cdef int t
     cdef int num_units = weights.shape[0]
     cdef double prob = 0.
-    cdef int num_states = 2**num_units
+    cdef long num_states = 2**num_units
     if num_threads <= 0:
         raise ValueError('Number of threads must be > 0')
     check_state_space_size(num_units, force)
@@ -151,7 +152,7 @@ def calculate_moments_parallel(double[:, :] weights, double[:] biases,
                             itemsize=sizeof(double), format='d')
     # partition state space in to equal sized sections to allocate to
     # different parallel threads
-    cdef int[:] intervals = partition_state_space(num_states, num_threads)
+    cdef long[:] intervals = partition_state_space(num_states, num_threads)
     # parallel loop over partitions of state space, with each thread
     # accumulating moments for its assigned states into thread-specific
     # arrays
@@ -213,7 +214,7 @@ def calculate_probs_parallel(
     """
     cdef int t
     cdef int num_units = weights.shape[0]
-    cdef int num_states = 2 ** num_units
+    cdef long num_states = 2 ** num_units
     if num_threads <= 0:
         raise ValueError('Number of threads must be > 0')
     check_state_space_size(num_units, force)
@@ -226,11 +227,7 @@ def calculate_probs_parallel(
     )
     # partition state space in to equal sized sections to allocate to
     # different parallel threads
-    cdef int[:] intervals = array(
-            shape=(num_threads+1,), itemsize=sizeof(int), format='i')
-    for t in range(num_threads):
-        intervals[t] = <int>(t * <float>(num_states) / num_threads)
-    intervals[num_threads] = num_states
+    cdef long[:] intervals = partition_state_space(num_states, num_threads)
     # parallel loop over partitions of state space, with each thread
     # calculating probabilities for its assigned states into thread-specific
     # slice of probs array
@@ -257,12 +254,12 @@ def calculate_probs_parallel(
 cdef void calc_unnormed_probs_for_state_range(
         double[:, :] weights, double[:] biases, state_t[:] state,
         double* norm_const, double[:] probs,
-        int start_state_index, int end_state_index) nogil:
+        long start_state_index, long end_state_index) nogil:
     """
     Calculates the unnormalised probabilities for a portion of the state space
     corresponding to a contiguous range of state integer indices.
     """
-    cdef int i
+    cdef long i
     index_to_state(start_state_index, state)
     for i in range(end_state_index - start_state_index):
         probs[i] = exp(neg_energy(state, weights, biases))
@@ -272,7 +269,7 @@ cdef void calc_unnormed_probs_for_state_range(
 
 cdef void normalise_probabilities(double[:] probs, double norm_const) nogil:
     """Divides an array of probabilities by a normalisation constant."""
-    cdef int i
+    cdef long i
     for i in range(probs.shape[0]):
         probs[i] /= norm_const
 
@@ -280,13 +277,14 @@ cdef void normalise_probabilities(double[:] probs, double norm_const) nogil:
 cdef void accum_moments_for_state_range(
         double[:, :] weights, double[:] biases, state_t[:] state,
         double* norm_const, double[:] first_mom, double[:, :] second_mom,
-        int start_state_index, int end_state_index) nogil:
+        long start_state_index, long end_state_index) nogil:
     """
     Accumulate the moment values for a portion of the state space
     corresponding to a contiguous range of state integer indices.
     """
     cdef double prob = 0.
-    cdef int state_index, i, j
+    cdef long state_index
+    cdef int i, j
     index_to_state(start_state_index, state)
     for i in range(weights.shape[0]):
         first_mom[i] = 0.
@@ -303,15 +301,15 @@ cdef void accum_moments_for_state_range(
 
 
 cdef double calc_norm_const(double[:,:] weights, double[:] biases,
-                            state_t[:] state, int start_state_index=0,
-                            int end_state_index=-1) nogil:
+                            state_t[:] state, long start_state_index=0,
+                            long end_state_index=-1) nogil:
     """
     Calculate the normalisation constant (i.e. sum of unnormalised
     probability terms) for distribution with specified parameters, only
     including probabilities of states with indices in specified range.
     """
     cdef double norm_const = 0.
-    cdef int state_index
+    cdef long state_index
     index_to_state(start_state_index, state)
     if end_state_index == -1:
         end_state_index = 2**weights.shape[0]
