@@ -11,7 +11,7 @@ References
 > Phys. Rev. Lett., 58(2):86–88.
 """
 
-cimport samplers.randomkit_wrapper as rk
+cimport bmtools.mcmc.randomkit_wrapper as rk
 from bmtools.exact.helpers cimport state_t
 
 
